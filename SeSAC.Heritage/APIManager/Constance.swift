@@ -6,7 +6,7 @@ struct APIkey {
 
 struct Endpoint {
     //문화재목록 검색
-    static let Heritage_List = "http://www.cha.go.kr/cha/SearchKindOpenapiList.do?pageIndex=1&pageUnit=20"
+    static let Heritage_List = "http://www.cha.go.kr/cha/SearchKindOpenapiList.do?"
     
     //문화재검색 상세
     //필수 파라미터 ccbaKdcd: 종목코드, ccbaAsno: 지정번호, ccbaCtcd: 시도코드

@@ -12,5 +12,6 @@ struct City {
     let code: String
     let city: String
     let image: String
+    let category: String
     
 }

@@ -12,5 +12,6 @@ struct StockCode {
     let code: Int
     let text: String
     let image: String
+    let category: String
     
 }

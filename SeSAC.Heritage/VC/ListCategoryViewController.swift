@@ -72,7 +72,7 @@ extension ListCategoryViewController: UICollectionViewDelegate, UICollectionView
             item.listCategoryLabel.text = cityInformation.city[indexPath.row].city.lowercased()
         } else {
             item.listCategoryImage.backgroundColor = .customBlack
-            item.listCategoryLabel.text = "서비스 준비중입니다."
+            item.listCategoryLabel.text = "서비스 준비중입니다.".localized()
         }
         
         item.listCategoryImage.layer.borderWidth = 6
@@ -87,11 +87,11 @@ extension ListCategoryViewController: UICollectionViewDelegate, UICollectionView
         let sb = UIStoryboard(name: "ListTable", bundle: nil)
         let vc = sb.instantiateViewController(withIdentifier: "ListTableViewController") as! ListTableViewController
         if listInformation == "종류별 문화재" {
-            let row = stockCodeInformation.stockCode[indexPath.row].text
-            vc.category = row
+            let row = stockCodeInformation.stockCode[indexPath.row]
+            vc.stockCodeData = row
         } else if listInformation == "지역별 문화재" {
-            let row = cityInformation.city[indexPath.row].city
-            vc.category = row
+            let row = cityInformation.city[indexPath.row]
+            vc.cityData = row
         } else {
             let row = "준비중"
             vc.category = row

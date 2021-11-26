@@ -43,7 +43,7 @@ class ListViewController: UIViewController {
         let width = listCollectionView.frame.width - (spacing * 3)
         let height = listCollectionView.frame.height - (spacing * 3)
         
-        layout.itemSize = CGSize(width: width / 2 , height: height / 2  )
+        layout.itemSize = CGSize(width: width / 2, height: height / 2  )
         layout.sectionInset = UIEdgeInsets(top: spacing, left: spacing, bottom: spacing, right: spacing)
         layout.minimumInteritemSpacing = spacing
         layout.minimumLineSpacing = spacing
@@ -108,10 +108,6 @@ extension ListViewController: XMLParserDelegate {
         if elementName == "sn" || elementName == "no" || elementName == "ccmaName" || elementName == "crltsnoNm" || elementName == "ccbaMnm1" || elementName == "ccbaMnm2" || elementName == "ccbaCtcdNm" || elementName == "ccsiName" || elementName == "ccbaAdmin" || elementName == "ccbaKdcd"  || elementName == "ccbaCtcd"  || elementName == "ccbaAsno"  || elementName == "ccbaCncl"  || elementName == "ccbaCpno"  || elementName == "longitude"  || elementName == "latitude" {
             self.key = elementName
         }
-        
-        if elementName == "totalCnt" {
-            self.totalCnt = elementName
-        }
     }
     
     // 태그의 Data가 String으로 들어옴
@@ -124,7 +120,7 @@ extension ListViewController: XMLParserDelegate {
                 self.items[ct][key] = string
             }
         }
-        if key == "6" {
+        if key == "0" {
             ct = ct + 1
         }
         //items는 Key : Value로 구성된 값인데 이걸 Realm에 어떻게 저장하지??
