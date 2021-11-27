@@ -1,19 +1,22 @@
 import UIKit
+import SwiftUI
 
 class ListTableViewCell: UITableViewCell {
     
     static let identifier = "ListTableViewCell"
-
-    @IBOutlet weak var listTableImage: UIImageView!
     
-    @IBOutlet weak var listTableTilte: UILabel!
-    @IBOutlet weak var listTableText1: UILabel!
-    @IBOutlet weak var listTableText2: UILabel!
-    @IBOutlet weak var listTableText3: UILabel!
-    @IBOutlet weak var listTableText4: UILabel!
+    @IBOutlet weak var countLabel: UILabel!
+    @IBOutlet weak var categoryLabel: UILabel!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var cityLabel: UILabel!
+    @IBOutlet weak var locationLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        countLabel.textAlignment = .center
+        cityLabel.textAlignment = .center
+        locationLabel.textAlignment = .center
         // Initialization code
     }
 

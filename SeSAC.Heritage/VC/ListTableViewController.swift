@@ -16,9 +16,10 @@ class ListTableViewController: UIViewController {
     var listInformation: String = ""
     var stockCodeData: StockCode?
     var cityData: City?
-    var category = ""
+    var category: String = ""
     
-    var searchTarget = ""
+    var pageCount: Int = 1
+    var searchTarget: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,20 +30,22 @@ class ListTableViewController: UIViewController {
         listTable.delegate = self
         listTable.dataSource = self
         
-        fetcMediaData()
+        fetcHeritageData()
         // Do any additional setup after loading the view.
     }
     
-    func fetcMediaData() {
+    func fetcHeritageData() {
         //검색할대상 설정
         if stockCodeData != nil {
             searchTarget = "\(stockCodeData!.category)=\(stockCodeData!.code)"
         }else if cityData != nil {
             searchTarget = "\(cityData!.category)=\(cityData!.code)"
         }else {
-            searchTarget = "\(category)\(category)"
+            //searchTarget = "\(category)\(category)"
         }
-        let url = "\(Endpoint.Heritage_List)\(searchTarget)"
+        let pageIndex = "pageIndex=\(pageCount)"
+        
+        let url = "\(Endpoint.Heritage_List)\(searchTarget)&\(pageIndex)"
         
         let parser = XMLParser(contentsOf: URL(string: url)!)
         parser?.delegate = self
@@ -50,7 +53,8 @@ class ListTableViewController: UIViewController {
     }
 }
 
-extension ListTableViewController: UITableViewDelegate, UITableViewDataSource {
+extension ListTableViewController: UITableViewDelegate, UITableViewDataSource, UITableViewDataSourcePrefetching {
+        
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if stockCodeData != nil {
             return items.count
@@ -64,25 +68,41 @@ extension ListTableViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ListTableViewCell.identifier, for: indexPath) as? ListTableViewCell else { return UITableViewCell() }
         
-        cell.listTableImage.backgroundColor = .customBlack
-        cell.listTableTilte.text = "제목이 들어갈곳 입니다".localized()
-        cell.listTableText1.text = "첫번째 내용이 들어갈 곳".localized()
-        cell.listTableText2.text = "두번째 내용이 들어갈 곳".localized()
-        cell.listTableText3.text = "세번째 내용이 들어갈 곳".localized()
-        cell.listTableText4.text = "네번째 내용이 들어갈 곳".localized()
+        let row = items[indexPath.row]
+        
+        cell.countLabel.text = row["sn"]!.localized()
+        cell.categoryLabel.text = row["ccmaName"]!.localized()
+        cell.categoryLabel.frame.size = cell.categoryLabel.intrinsicContentSize
+        cell.titleLabel.text = row["ccbaMnm1"]!.localized()
+        cell.cityLabel.text = row["ccbaCtcdNm"]!.localized()
+        cell.locationLabel.text = row["ccsiName"]!.localized()
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 180
+        return 100
     }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let sb = UIStoryboard(name: "ListDetail", bundle: nil)
         let vc = sb.instantiateViewController(withIdentifier: "ListDetailViewController") as! ListDetailViewController
+        
+        let row = items[indexPath.row]
+        vc.items = row
+        
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
+    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
+        for indexPath in indexPaths {
+            if items.count == indexPath.row {
+                pageCount += 1
+                fetcHeritageData()
+                listTable.reloadData()
+            }
+        }
+    }
 }
 
 extension ListTableViewController: XMLParserDelegate {
@@ -112,9 +132,5 @@ extension ListTableViewController: XMLParserDelegate {
     //XMLParser가 종료 태그를 만나면 호출됨
     func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
         self.key = nil
-    }
-    
-    func parserDidEndDocument(_ parser: XMLParser) {
-        print(items[0])
     }
 }
