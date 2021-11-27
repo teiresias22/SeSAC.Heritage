@@ -1,24 +1,30 @@
 import UIKit
+import RealmSwift
 
 class ListTableViewController: UIViewController {
     
     @IBOutlet weak var listTable: UITableView!
     
-    var stockCodeData: StockCode?
-    var cityData: City?
-    var category = ""
+    let localRealm = try! Realm()
+    var tasks: Results<Heritage_List>!
     
     var elementName = "" //현재 Element
     var items: Array = [[String: String]]()
     var key: String!
     var ct: Int = 0
     
-    var url = ""
+    var listInformation: String = ""
+    var stockCodeData: StockCode?
+    var cityData: City?
+    var category = ""
     
+    var searchTarget = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "문화유산 목록".localized()
+        self.title = listInformation.localized()
+        
+        print("Realm is located at:", localRealm.configuration.fileURL!)
         
         listTable.delegate = self
         listTable.dataSource = self
@@ -28,29 +34,30 @@ class ListTableViewController: UIViewController {
     }
     
     func fetcMediaData() {
+        //검색할대상 설정
         if stockCodeData != nil {
-            url = Endpoint.Heritage_List + "ccbaKdcd=\(stockCodeData!.code)"
+            searchTarget = "\(stockCodeData!.category)=\(stockCodeData!.code)"
         }else if cityData != nil {
-            url = Endpoint.Heritage_List + "ccbaCtcd=\(cityData!.code)"
+            searchTarget = "\(cityData!.category)=\(cityData!.code)"
         }else {
-            url = Endpoint.Heritage_List
+            searchTarget = "\(category)\(category)"
         }
+        let url = "\(Endpoint.Heritage_List)\(searchTarget)"
+        
         let parser = XMLParser(contentsOf: URL(string: url)!)
         parser?.delegate = self
         parser?.parse()
     }
-    
-    
 }
 
 extension ListTableViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if stockCodeData != nil {
-            return 1
+            return items.count
         }else if cityData != nil {
-            return 2
+            return items.count
         }else {
-            return 3
+            return items.count
         }
     }
     
@@ -79,7 +86,6 @@ extension ListTableViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension ListTableViewController: XMLParserDelegate {
-    
     //XMLParser가 시작 태그를 만나면 호출됨
     func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String] = [:]) {
         
@@ -98,14 +104,17 @@ extension ListTableViewController: XMLParserDelegate {
                 self.items[ct][key] = string
             }
         }
-        if key == "0" {
+        if key == "latitude" {
             ct = ct + 1
         }
-        //items는 Key : Value로 구성된 값인데 이걸 Realm에 어떻게 저장하지??
     }
     
     //XMLParser가 종료 태그를 만나면 호출됨
     func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
         self.key = nil
+    }
+    
+    func parserDidEndDocument(_ parser: XMLParser) {
+        print(items[0])
     }
 }

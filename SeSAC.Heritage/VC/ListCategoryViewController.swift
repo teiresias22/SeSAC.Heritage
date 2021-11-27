@@ -75,7 +75,7 @@ extension ListCategoryViewController: UICollectionViewDelegate, UICollectionView
             item.listCategoryLabel.text = "서비스 준비중입니다.".localized()
         }
         
-        item.listCategoryImage.layer.borderWidth = 6
+        item.listCategoryImage.layer.borderWidth = 2
         item.listCategoryImage.layer.borderColor = UIColor.customRed?.cgColor
         let width = item.frame.width
         item.listCategoryImage.layer.cornerRadius = width/2
@@ -96,6 +96,7 @@ extension ListCategoryViewController: UICollectionViewDelegate, UICollectionView
             let row = "준비중"
             vc.category = row
         }
+        vc.listInformation = listInformation
          self.navigationController?.pushViewController(vc, animated: true)
     }
     
