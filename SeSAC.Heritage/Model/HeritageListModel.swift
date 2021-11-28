@@ -30,8 +30,7 @@ class Heritage_List: Object {
     
     @Persisted(primaryKey: true) var _id: ObjectId
     
-    convenience init(sn: String, no: String, ccmaName: String, crltsnoNm: String, ccbaMnm1: String, ccbaMnm2: String, ccbaCtcdNm: String, ccsiName: String, ccbaAdmin: String, ccbaKdcd: String, ccbaCtcd: String, ccbaAsno: String, ccbaCncl: String, ccbaCpno: String, longitude: String, latitude: String)
-    {
+    convenience init(sn: String, no: String, ccmaName: String, crltsnoNm: String, ccbaMnm1: String, ccbaMnm2: String, ccbaCtcdNm: String, ccsiName: String, ccbaAdmin: String, ccbaKdcd: String, ccbaCtcd: String, ccbaAsno: String, ccbaCncl: String, ccbaCpno: String, longitude: String, latitude: String){
         self.init()
         self.sn = sn
         self.no = no
@@ -51,7 +50,6 @@ class Heritage_List: Object {
         self.latitude = latitude
         self.visited = false
         self.wantvisit = false
+        
     }
-    
-    
 }

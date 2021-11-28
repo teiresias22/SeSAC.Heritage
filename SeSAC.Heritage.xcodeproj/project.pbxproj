@@ -13,7 +13,6 @@
 		753E85282747AF85007469D2 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 753E852A2747AF85007469D2 /* Localizable.strings */; };
 		753E852F2747B0B4007469D2 /* Localizable + Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753E852E2747B0B4007469D2 /* Localizable + Extention.swift */; };
 		753E85322747B2C9007469D2 /* Constance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753E85312747B2C9007469D2 /* Constance.swift */; };
-		753E85342747D848007469D2 /* SearchListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753E85332747D848007469D2 /* SearchListModel.swift */; };
 		75649718274CAD14000AD0CB /* HeritageListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75649717274CAD14000AD0CB /* HeritageListModel.swift */; };
 		7564971B274CAD50000AD0CB /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 7564971A274CAD50000AD0CB /* Alamofire */; };
 		7564971E274D4553000AD0CB /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 7564971D274D4553000AD0CB /* Realm */; };
@@ -82,7 +81,6 @@
 		753E852D2747AFAC007469D2 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		753E852E2747B0B4007469D2 /* Localizable + Extention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Localizable + Extention.swift"; sourceTree = "<group>"; };
 		753E85312747B2C9007469D2 /* Constance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constance.swift; sourceTree = "<group>"; };
-		753E85332747D848007469D2 /* SearchListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchListModel.swift; sourceTree = "<group>"; };
 		75649717274CAD14000AD0CB /* HeritageListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeritageListModel.swift; sourceTree = "<group>"; };
 		75AEBF5A274631E900A5661D /* SeSAC.Heritage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SeSAC.Heritage.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		75AEBF5D274631E900A5661D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -156,14 +154,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		752A5E5727514EB00059114B /* Old */ = {
-			isa = PBXGroup;
-			children = (
-				753E85332747D848007469D2 /* SearchListModel.swift */,
-			);
-			path = Old;
-			sourceTree = "<group>";
-		};
 		753E85192747851D007469D2 /* Localization */ = {
 			isa = PBXGroup;
 			children = (
@@ -208,7 +198,6 @@
 				75AEBF732746343700A5661D /* Cell */,
 				75AEBF72274633F800A5661D /* VC */,
 				75AEBF71274633F000A5661D /* SB */,
-				752A5E5727514EB00059114B /* Old */,
 				75AEBF5D274631E900A5661D /* AppDelegate.swift */,
 				75AEBFB32746833900A5661D /* SideMenuVC.swift */,
 				75AEBF5F274631E900A5661D /* SceneDelegate.swift */,
@@ -438,7 +427,6 @@
 				75C11167274FFC0200ADFA78 /* StockCode.swift in Sources */,
 				75AEBF96274638D800A5661D /* EventDetailViewController.swift in Sources */,
 				75AEBF5E274631E900A5661D /* AppDelegate.swift in Sources */,
-				753E85342747D848007469D2 /* SearchListModel.swift in Sources */,
 				753E85322747B2C9007469D2 /* Constance.swift in Sources */,
 				75AEBFB42746833900A5661D /* SideMenuVC.swift in Sources */,
 				75FB9849274942B200A3A28C /* ListTableViewCell.swift in Sources */,

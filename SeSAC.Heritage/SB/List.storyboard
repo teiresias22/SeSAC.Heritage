@@ -20,7 +20,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="CVE-6V-adM">
-                                <rect key="frame" x="41.5" y="172" width="331" height="552"/>
+                                <rect key="frame" x="20.5" y="137.5" width="373" height="621"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="CVE-6V-adM" secondAttribute="height" multiplier="3:5" id="MTm-R4-Fxo"/>
@@ -48,7 +48,7 @@
                         <color key="backgroundColor" name="customYellow"/>
                         <constraints>
                             <constraint firstItem="CVE-6V-adM" firstAttribute="centerY" secondItem="5EZ-qb-Rvc" secondAttribute="centerY" id="8cT-vO-8UN"/>
-                            <constraint firstItem="CVE-6V-adM" firstAttribute="width" secondItem="5EZ-qb-Rvc" secondAttribute="width" multiplier="0.8" id="ZU6-0E-NnT"/>
+                            <constraint firstItem="CVE-6V-adM" firstAttribute="width" secondItem="5EZ-qb-Rvc" secondAttribute="width" multiplier="0.9" id="ZU6-0E-NnT"/>
                             <constraint firstItem="CVE-6V-adM" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="qMl-c5-Zmv"/>
                         </constraints>
                     </view>
