@@ -52,6 +52,7 @@
                             <constraint firstItem="CVE-6V-adM" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="qMl-c5-Zmv"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="Lmk-PM-95V"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="listCollectionView" destination="CVE-6V-adM" id="yRc-xb-DbY"/>
@@ -59,7 +60,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="137.68115942028987" y="137.94642857142856"/>
+            <point key="canvasLocation" x="1047.8260869565217" y="137.94642857142856"/>
         </scene>
     </scenes>
     <resources>
