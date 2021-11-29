@@ -24,7 +24,7 @@ class ListDetailViewController: UIViewController {
     @IBOutlet weak var heritageLocationLabel: UILabel!
     @IBOutlet weak var heritageContentLabel: UILabel!
     
-    var items = [String:String]()
+    var tasks = Heritage_List()
     
     var elementName = ""
     var item = [[String:String]]()
@@ -69,7 +69,7 @@ class ListDetailViewController: UIViewController {
     
     func fetcHeritageData() {
         //필수 파라미터 ccbaKdcd: 종목코드, ccbaAsno: 지정번호, ccbaCtcd: 시도코드
-        let url = "\(Endpoint.Heritage_Detail)ccbaKdcd=\(items["ccbaKdcd"]!)&ccbaAsno=\(items["ccbaAsno"]!)&ccbaCtcd=\(items["ccbaCtcd"]!)"
+        let url = "\(Endpoint.Heritage_Detail)ccbaKdcd=\(tasks.ccbaKdcd)&ccbaAsno=\(tasks.ccbaAsno)&ccbaCtcd=\(tasks.ccbaCtcd)"
         
         let parser = XMLParser(contentsOf: URL(string: url)!)
         parser?.delegate = self

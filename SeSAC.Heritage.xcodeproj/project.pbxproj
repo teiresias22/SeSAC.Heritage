@@ -17,6 +17,7 @@
 		7564971B274CAD50000AD0CB /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 7564971A274CAD50000AD0CB /* Alamofire */; };
 		7564971E274D4553000AD0CB /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 7564971D274D4553000AD0CB /* Realm */; };
 		75649720274D4553000AD0CB /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 7564971F274D4553000AD0CB /* RealmSwift */; };
+		75876562275541EE0025022E /* HeritageList.xml in Resources */ = {isa = PBXBuildFile; fileRef = 75876561275541EE0025022E /* HeritageList.xml */; };
 		75A0492227550A0E00BA6214 /* FistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A0492127550A0E00BA6214 /* FistViewController.swift */; };
 		75AEBF5E274631E900A5661D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75AEBF5D274631E900A5661D /* AppDelegate.swift */; };
 		75AEBF60274631E900A5661D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75AEBF5F274631E900A5661D /* SceneDelegate.swift */; };
@@ -82,6 +83,7 @@
 		753E852E2747B0B4007469D2 /* Localizable + Extention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Localizable + Extention.swift"; sourceTree = "<group>"; };
 		753E85312747B2C9007469D2 /* Constance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constance.swift; sourceTree = "<group>"; };
 		75649717274CAD14000AD0CB /* HeritageListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeritageListModel.swift; sourceTree = "<group>"; };
+		75876561275541EE0025022E /* HeritageList.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = HeritageList.xml; path = SeSAC.Heritage/HeritageList.xml; sourceTree = SOURCE_ROOT; };
 		75A0492127550A0E00BA6214 /* FistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FistViewController.swift; sourceTree = "<group>"; };
 		75AEBF5A274631E900A5661D /* SeSAC.Heritage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SeSAC.Heritage.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		75AEBF5D274631E900A5661D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -203,6 +205,7 @@
 				75AEBF5F274631E900A5661D /* SceneDelegate.swift */,
 				75AEBF61274631E900A5661D /* ViewController.swift */,
 				75AEBF63274631E900A5661D /* Main.storyboard */,
+				75876561275541EE0025022E /* HeritageList.xml */,
 				75AEBF66274631E900A5661D /* Assets.xcassets */,
 				75AEBF68274631E900A5661D /* LaunchScreen.storyboard */,
 				75AEBF6B274631E900A5661D /* Info.plist */,
@@ -395,6 +398,7 @@
 				75AEBFA527464BE500A5661D /* MapoGoldenPier.otf in Resources */,
 				75AEBFAF27465BFA00A5661D /* SideMenu.storyboard in Resources */,
 				753E851527476657007469D2 /* ListCategoryCollectionViewCell.xib in Resources */,
+				75876562275541EE0025022E /* HeritageList.xml in Resources */,
 				75AEBF67274631E900A5661D /* Assets.xcassets in Resources */,
 				75F01E9E274A7C60008C6951 /* MypageVistedPointCollectionViewCell.xib in Resources */,
 				75AEBF78274634FA00A5661D /* List.storyboard in Resources */,

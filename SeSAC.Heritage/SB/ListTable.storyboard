@@ -37,16 +37,16 @@
                                                             <rect key="frame" x="8" y="12" width="374" height="20.5"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bao-qW-FXJ">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="30" height="20.5"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="60" height="20.5"/>
                                                                     <constraints>
-                                                                        <constraint firstAttribute="width" constant="30" id="UTo-zG-Ksj"/>
+                                                                        <constraint firstAttribute="width" constant="60" id="UTo-zG-Ksj"/>
                                                                     </constraints>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g8V-i1-7Qg">
-                                                                    <rect key="frame" x="34" y="0.0" width="340" height="20.5"/>
+                                                                    <rect key="frame" x="64" y="0.0" width="310" height="20.5"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
