@@ -46,8 +46,11 @@ class ListDetailViewController: UIViewController {
         setButton(findWayButton, "walking", (.customYellow ?? .black))
         
         setLabel(visitedCheckLabel, "방문했어요")
+        visitedCheckLabel.textAlignment = .center
         setLabel(wannavisitCheckLabel, "방문하고싶어요")
+        wannavisitCheckLabel.textAlignment = .center
         setLabel(findWayLabel, "길찾기")
+        findWayLabel.textAlignment = .center
         
         fetcHeritageData()
         // Do any additional setup after loading the view.

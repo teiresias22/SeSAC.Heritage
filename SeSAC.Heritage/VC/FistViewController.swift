@@ -25,7 +25,7 @@ class FistViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        titleLabel.text = "Heritage".localized()
+        titleLabel.text = "JHeritage".localized()
         titleLabel.textAlignment = .center
         titleLabel.font = UIFont(name: "MapoFlowerIsland", size: 40)!
         titleLabel.textColor = .customYellow
