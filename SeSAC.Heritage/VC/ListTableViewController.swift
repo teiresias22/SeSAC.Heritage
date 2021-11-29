@@ -132,7 +132,6 @@ extension ListTableViewController: XMLParserDelegate {
     //XMLParser가 종료 태그를 만나면 호출됨
     func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
         self.key = nil
-        saveRealm()
     }
     
     func parser(_ parser: XMLParser, parseErrorOccurred parseError: Error) {
@@ -145,15 +144,13 @@ extension ListTableViewController: XMLParserDelegate {
     }
     
     func parserDidEndDocument(_ parser: XMLParser) {
-        
+        saveRealm()
     }
     
     func saveRealm() {
         
         let haritage = items
         
-        
-        /*
         var sn: String = ""//순번
         var no: String = "" //고유 키값
         var ccmaName: String = "" //문화재종목
@@ -171,6 +168,7 @@ extension ListTableViewController: XMLParserDelegate {
         var longitude: String = "" //경도
         var latitude: String = "" //위도
         
+        
         for i in 0..<items.count {
             for (key, value) in items[i] {
                 if key == "sn" {
@@ -179,60 +177,40 @@ extension ListTableViewController: XMLParserDelegate {
                     no = value
                 } else if key == "ccmaName" {
                     ccmaName = value
+                } else if key == "crltsnoNm" {
+                    crltsnoNm = value
+                } else if key == "ccbaMnm1" {
+                    ccbaMnm1 = value
+                } else if key == "ccbaMnm2" {
+                    ccbaMnm2 = value
+                } else if key == "ccbaCtcdNm" {
+                    ccbaCtcdNm = value
+                } else if key == "ccsiName" {
+                    ccsiName = value
+                } else if key == "ccbaAdmin" {
+                    ccbaAdmin = value
+                } else if key == "ccbaKdcd" {
+                    ccbaKdcd = value
+                } else if key == "ccbaCtcd" {
+                    ccbaCtcd = value
+                } else if key == "ccbaAsno" {
+                    ccbaAsno = value
+                } else if key == "ccbaCncl" {
+                    ccbaCncl = value
+                } else if key == "ccbaCpno" {
+                    ccbaCpno = value
+                } else if key == "longitude" {
+                    longitude = value
+                } else if key == "latitude" {
+                    latitude = value
                 }
-                
-                
             }
-            
+            let heritage = Heritage_List(sn: sn, no: no, ccmaName: ccmaName, crltsnoNm: crltsnoNm, ccbaMnm1: ccbaMnm1, ccbaMnm2: ccbaMnm2, ccbaCtcdNm: ccbaCtcdNm, ccsiName: ccsiName, ccbaAdmin: ccbaAdmin, ccbaKdcd: ccbaKdcd, ccbaCtcd: ccbaCtcd, ccbaAsno: ccbaAsno, ccbaCncl: ccbaCncl, ccbaCpno: ccbaCpno, longitude: longitude, latitude: latitude)
+            try! localRealm.write {
+                localRealm.add(heritage)
+            }
         }
-        print(sn, no, ccmaName)
-        */
         
         
     }
 }
-
-
-
-
-/*
-var sn: String = ""//순번
-var no: String = "" //고유 키값
-var ccmaName: String = "" //문화재종목
-var crltsnoNm: String = "" //지정호수
-var ccbaMnm1: String = "" //문화재명(국문)
-var ccbaMnm2: String = "" //문화재명(영문)
-var ccbaCtcdNm: String = "" //시도명
-var ccsiName: String = "" //시군구명
-var ccbaAdmin : String = "" //관리자
-var ccbaKdcd: String = "" //종목코드(필수)
-var ccbaCtcd: String = "" //시도코드(필수)
-var ccbaAsno: String = "" //지정번호(필수)
-var ccbaCncl: String = "" //지정해제여부
-var ccbaCpno: String = "" //문화재연계번호
-var longitude: String = "" //경도
-var latitude: String = "" //위도
-
-for i in 0..<items.count {
-    for (key, value) in items[i] {
-        
-        if key == "sn" {
-            sn = value
-        } else {
-            
-        }
-            
-        print(sn)
-        let heritage = Heritage_List(sn: sn, no: no, ccmaName: ccmaName, crltsnoNm: crltsnoNm, ccbaMnm1: ccbaMnm1, ccbaMnm2: ccbaMnm2, ccbaCtcdNm: ccbaCtcdNm, ccsiName: ccsiName, ccbaAdmin: ccbaAdmin, ccbaKdcd: ccbaKdcd, ccbaCtcd: ccbaCtcd, ccbaAsno: ccbaAsno, ccbaCncl: ccbaCncl, ccbaCpno: ccbaCpno, longitude: longitude, latitude: latitude)
-        try! localRealm.write {
-            localRealm.add(heritage)
-        }
-    }
-}
- let task = UserMemo(title: textInputArea.text,
-                     text: textInputArea.text,
-                     date: value)
- try! localRealm.write {
-     localRealm.add(task)
- }
- */
