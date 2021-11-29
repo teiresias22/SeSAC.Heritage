@@ -11,6 +11,7 @@ class ListCategoryViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = listInformation.localized()
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "MapoFlowerIsland", size: 20)!]
         
         let nibName = UINib(nibName: ListCategoryCollectionViewCell.identifier, bundle: nil)
         listCategoryCollectionView.register(nibName, forCellWithReuseIdentifier: ListCategoryCollectionViewCell.identifier)
@@ -62,6 +63,8 @@ extension ListCategoryViewController: UICollectionViewDelegate, UICollectionView
                 item.listCategoryImage.backgroundColor = .customYellow
             }
             item.listCategoryLabel.text = stockCodeInformation.stockCode[indexPath.row].text.lowercased()
+            item.listCategoryImage.layer.borderWidth = 2
+            item.listCategoryImage.layer.borderColor = UIColor.customRed?.cgColor
         } else if listInformation == "지역별 문화재" {
             if let url = URL(string: cityInformation.city[indexPath.row].image){
                 item.listCategoryImage.kf.setImage(with: url)
@@ -70,13 +73,16 @@ extension ListCategoryViewController: UICollectionViewDelegate, UICollectionView
                 item.listCategoryImage.backgroundColor = .customBlue
             }
             item.listCategoryLabel.text = cityInformation.city[indexPath.row].city.lowercased()
+            item.listCategoryImage.layer.borderWidth = 2
+            item.listCategoryImage.layer.borderColor = UIColor.customBlue?.cgColor
         } else {
             item.listCategoryImage.backgroundColor = .customBlack
             item.listCategoryLabel.text = "서비스 준비중입니다.".localized()
+            item.listCategoryImage.layer.borderWidth = 2
+            item.listCategoryImage.layer.borderColor = UIColor.customBlack?.cgColor
         }
+        item.listCategoryLabel.font = UIFont().MapoFlowerIsland14
         
-        item.listCategoryImage.layer.borderWidth = 2
-        item.listCategoryImage.layer.borderColor = UIColor.customRed?.cgColor
         let width = item.frame.width
         item.listCategoryImage.layer.cornerRadius = width/2
         

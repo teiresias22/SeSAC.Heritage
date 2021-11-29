@@ -3,23 +3,26 @@ import Kingfisher
 
 class ListDetailViewController: UIViewController {
     
+    @IBOutlet weak var scrollView: UIView!
+    @IBOutlet weak var detailImage: UIImageView!
+    
+    @IBOutlet weak var visitedView: UIView!
     @IBOutlet weak var visitedCheckButton: UIButton!
     @IBOutlet weak var visitedCheckLabel: UILabel!
     
+    @IBOutlet weak var wannavisitView: UIView!
     @IBOutlet weak var wannavisitCheckButton: UIButton!
     @IBOutlet weak var wannavisitCheckLabel: UILabel!
     
+    @IBOutlet weak var findWayView: UIView!
     @IBOutlet weak var findWayButton: UIButton!
     @IBOutlet weak var findWayLabel: UILabel!
     
-    @IBOutlet weak var detailSmallLabel1: UILabel!
-    @IBOutlet weak var detailSmallLable2: UILabel!
-    
-    @IBOutlet weak var detailBigLabel1: UILabel!
-    @IBOutlet weak var detailBigLabel2: UILabel!
-    
-    @IBOutlet weak var detailImage: UIImageView!
-    @IBOutlet weak var detailTextView: UITextView!
+    @IBOutlet weak var heritageTypeLabel: UILabel!
+    @IBOutlet weak var heritageTitleLabel: UILabel!
+    @IBOutlet weak var heritageCityLabel: UILabel!
+    @IBOutlet weak var heritageLocationLabel: UILabel!
+    @IBOutlet weak var heritageContentLabel: UILabel!
     
     var items = [String:String]()
     
@@ -28,20 +31,22 @@ class ListDetailViewController: UIViewController {
     var key: String!
     var ct: Int = 0
     
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "문화유산 상세".localized()
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "MapoFlowerIsland", size: 20)!]
         
-        print(items)
+        scrollView.backgroundColor = .clear
+        visitedView.backgroundColor = .clear
+        wannavisitView.backgroundColor = .clear
+        findWayView.backgroundColor = .clear
         
         setButton(visitedCheckButton, "landmark", (.customRed ?? .black))
         setButton(wannavisitCheckButton, "plus", (.customBlue ?? .black))
         setButton(findWayButton, "walking", (.customYellow ?? .black))
         
         setLabel(visitedCheckLabel, "방문했어요")
-        setLabel(wannavisitCheckLabel, "방문하고 싶어요")
+        setLabel(wannavisitCheckLabel, "방문하고싶어요")
         setLabel(findWayLabel, "길찾기")
         
         fetcHeritageData()
@@ -59,6 +64,7 @@ class ListDetailViewController: UIViewController {
     
     func setLabel(_ target: UILabel, _ text: String){
         target.text = text.localized()
+        target.font = UIFont().MapoFlowerIsland14
     }
     
     func fetcHeritageData() {
@@ -69,9 +75,6 @@ class ListDetailViewController: UIViewController {
         parser?.delegate = self
         parser?.parse()
     }
-
-    
-
 }
 extension ListDetailViewController: XMLParserDelegate {
     //XMLParser가 시작 태그를 만나면 호출됨
@@ -103,16 +106,18 @@ extension ListDetailViewController: XMLParserDelegate {
 
         let row = item[0]
     
-        setLabel(detailSmallLabel1, row["ccmaName"]!)
-        setLabel(detailSmallLable2, row["ccceName"]!)
+        setLabel(heritageTypeLabel, row["ccmaName"]!)
+        setLabel(heritageTitleLabel, row["ccbaMnm1"]!)
         
-        setLabel(detailBigLabel1, row["ccbaMnm1"]!)
-        setLabel(detailBigLabel2, row["ccbaLcad"]!)
+        setLabel(heritageCityLabel, row["ccbaCtcdNm"]!)
+        setLabel(heritageLocationLabel, row["ccceName"]!)
         
-        let url = URL(string: row["imageUrl"]!)
+        let url = URL(string: row["imageUrl"] ?? "")
         detailImage.kf.setImage(with: url)
+        detailImage.backgroundColor = .customBlack
         detailImage.contentMode = .scaleAspectFill
         
-        detailTextView.text = row["content"]!
+        heritageContentLabel.text = row["content"]!
+        heritageContentLabel.font = UIFont().MapoFlowerIsland14
     }
 }

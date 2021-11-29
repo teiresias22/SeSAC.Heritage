@@ -24,13 +24,16 @@ class ListTableViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = listInformation.localized()
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "MapoFlowerIsland", size: 20)!]
         
-        print("Realm is located at:", localRealm.configuration.fileURL!)
+        listTable.separatorStyle = UITableViewCell.SeparatorStyle.none
         
         listTable.delegate = self
         listTable.dataSource = self
         
         fetcHeritageData()
+        
+        //print("Realm is located at:", localRealm.configuration.fileURL!)
         // Do any additional setup after loading the view.
     }
     
@@ -71,11 +74,17 @@ extension ListTableViewController: UITableViewDelegate, UITableViewDataSource, U
         let row = items[indexPath.row]
         
         cell.countLabel.text = row["sn"]!.localized()
-        cell.categoryLabel.text = row["ccmaName"]!.localized()
-        cell.categoryLabel.frame.size = cell.categoryLabel.intrinsicContentSize
+        cell.countLabel.font = UIFont().MapoFlowerIsland16
         cell.titleLabel.text = row["ccbaMnm1"]!.localized()
+        cell.titleLabel.font = UIFont().MapoFlowerIsland16
+        
+        cell.categoryLabel.text = row["ccmaName"]!.localized()
+        cell.categoryLabel.font = UIFont().MapoFlowerIsland14
+        cell.categoryLabel.frame.size = cell.categoryLabel.intrinsicContentSize
         cell.cityLabel.text = row["ccbaCtcdNm"]!.localized()
+        cell.cityLabel.font = UIFont().MapoFlowerIsland14
         cell.locationLabel.text = row["ccsiName"]!.localized()
+        cell.locationLabel.font = UIFont().MapoFlowerIsland14
         
         return cell
     }

@@ -9,6 +9,7 @@ class ListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "문화유산 목록".localized()
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "MapoFlowerIsland", size: 20)!]
         
         let nibName = UINib(nibName: ListCollectionViewCell.identifier, bundle: nil)
         listCollectionView.register(nibName, forCellWithReuseIdentifier: ListCollectionViewCell.identifier)
@@ -66,7 +67,9 @@ extension ListViewController: UICollectionViewDelegate, UICollectionViewDataSour
         cell.layer.cornerRadius = 8
         
         cell.listTitle.text = listInformation.list[indexPath.row].title.localized()
+        cell.listTitle.font = UIFont(name: "MapoFlowerIsland", size: 18)!
         cell.listText.text = listInformation.list[indexPath.row].text.localized()
+        cell.listText.font = UIFont().MapoFlowerIsland16
         
         return cell
         
