@@ -13,7 +13,9 @@ class ListCollectionViewCell: UICollectionViewCell {
         // Initialization code
         
         listTitle.font = .boldSystemFont(ofSize: 16)
+        listTitle.textColor = .customBlack
         listText.font = .systemFont(ofSize: 14)
+        listText.textColor = .customBlack
         listText.numberOfLines = 5
         
         cellView.backgroundColor = .clear

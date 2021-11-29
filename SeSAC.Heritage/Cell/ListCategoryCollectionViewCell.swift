@@ -12,6 +12,7 @@ class ListCategoryCollectionViewCell: UICollectionViewCell {
         // Initialization code
         
         listCategoryLabel.textAlignment = .center
+        listCategoryLabel.textColor = .customBlack
         listCategoryLabel.font = UIFont.systemFont(ofSize: 12)
     }
 

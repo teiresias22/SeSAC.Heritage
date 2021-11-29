@@ -1,6 +1,5 @@
 import UIKit
 import RealmSwift
-import Kingfisher
 
 class ListViewController: UIViewController {
     @IBOutlet weak var listCollectionView: UICollectionView!
@@ -19,18 +18,34 @@ class ListViewController: UIViewController {
         listCollectionView.dataSource = self
         
         collectionViewSet()
+        
+        //print(">>\(UserDefaults.standard.object(forKey: "AppleLanguages"))<<")
     }
     
     func collectionViewSet() {
+        let screenScale = UIScreen.main.bounds.size.width
         let layout = UICollectionViewFlowLayout()
-        let spacing: CGFloat = 8
-        let width = listCollectionView.frame.width - (spacing * 3)
-        let height = listCollectionView.frame.height - (spacing * 3)
         
-        layout.itemSize = CGSize(width: width / 2, height: height / 2  )
-        layout.sectionInset = UIEdgeInsets(top: spacing, left: spacing, bottom: spacing, right: spacing)
-        layout.minimumInteritemSpacing = spacing
-        layout.minimumLineSpacing = spacing
+        if screenScale <= 400 {
+            let spacing: CGFloat = 4
+            let width = listCollectionView.frame.width - (spacing * 3)
+            let height = listCollectionView.frame.height - (spacing * 3)
+            layout.itemSize = CGSize(width: width / 2.25 , height: height / 2.4)
+            
+            layout.sectionInset = UIEdgeInsets(top: spacing, left: spacing, bottom: spacing, right: spacing)
+            layout.minimumInteritemSpacing = spacing
+            layout.minimumLineSpacing = spacing
+            
+        } else {
+            let spacing: CGFloat = 8
+            let width = listCollectionView.frame.width - (spacing * 3)
+            let height = listCollectionView.frame.height - (spacing * 3)
+            layout.itemSize = CGSize(width: width / 2, height: height / 2)
+            
+            layout.sectionInset = UIEdgeInsets(top: spacing, left: spacing, bottom: spacing, right: spacing)
+            layout.minimumInteritemSpacing = spacing
+            layout.minimumLineSpacing = spacing
+        }
         layout.scrollDirection = .vertical
         
         listCollectionView.collectionViewLayout = layout

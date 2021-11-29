@@ -14,6 +14,13 @@ class ListTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        countLabel.textColor = .customBlack
+        categoryLabel.textColor = .customBlack
+        titleLabel.textColor = .customBlack
+        cityLabel.textColor = .customBlack
+        locationLabel.textColor = .customBlack
+        
+        
         countLabel.textAlignment = .center
         cityLabel.textAlignment = .center
         locationLabel.textAlignment = .center
