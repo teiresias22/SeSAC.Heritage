@@ -1,4 +1,5 @@
 import UIKit
+import RealmSwift
 import Kingfisher
 
 class ListDetailViewController: UIViewController {
@@ -24,7 +25,10 @@ class ListDetailViewController: UIViewController {
     @IBOutlet weak var heritageLocationLabel: UILabel!
     @IBOutlet weak var heritageContentLabel: UILabel!
     
-    var tasks = Heritage_List()
+    let localRealm = try! Realm()
+    var tasks: Results<Heritage_List>!
+    
+    var items = Heritage_List()
     
     var elementName = ""
     var item = [[String:String]]()
@@ -41,9 +45,21 @@ class ListDetailViewController: UIViewController {
         wannavisitView.backgroundColor = .clear
         findWayView.backgroundColor = .clear
         
-        setButton(visitedCheckButton, "landmark", (.customRed ?? .black))
-        setButton(wannavisitCheckButton, "plus", (.customBlue ?? .black))
-        setButton(findWayButton, "walking", (.customYellow ?? .black))
+        defaultPageSetup()
+        fetcHeritageData()
+        // Do any additional setup after loading the view.
+    }
+    
+    func defaultPageSetup() {
+        
+        setButton(visitedCheckButton, "landmark")
+        setVisitedButtonColor()
+        
+        setButton(wannavisitCheckButton, "plus")
+        setWannavisitButtonColor()
+        
+        setButton(findWayButton, "walking")
+        findWayButton.tintColor = .customBlue
         
         setLabel(visitedCheckLabel, "방문했어요")
         visitedCheckLabel.textAlignment = .center
@@ -51,16 +67,12 @@ class ListDetailViewController: UIViewController {
         wannavisitCheckLabel.textAlignment = .center
         setLabel(findWayLabel, "길찾기")
         findWayLabel.textAlignment = .center
-        
-        fetcHeritageData()
-        // Do any additional setup after loading the view.
     }
     
-    func setButton( _ target: UIButton, _ name: String , _ color: UIColor){
+    func setButton( _ target: UIButton, _ name: String){
         target.setImage(UIImage(named: name), for: .normal)
         target.contentMode = .scaleToFill
         target.setTitle("", for: .normal)
-        target.tintColor = color
         target.contentVerticalAlignment = .fill
         target.contentHorizontalAlignment = .fill
     }
@@ -72,11 +84,42 @@ class ListDetailViewController: UIViewController {
     
     func fetcHeritageData() {
         //필수 파라미터 ccbaKdcd: 종목코드, ccbaAsno: 지정번호, ccbaCtcd: 시도코드
-        let url = "\(Endpoint.Heritage_Detail)ccbaKdcd=\(tasks.ccbaKdcd)&ccbaAsno=\(tasks.ccbaAsno)&ccbaCtcd=\(tasks.ccbaCtcd)"
+        let url = "\(Endpoint.Heritage_Detail)ccbaKdcd=\(items.ccbaKdcd)&ccbaAsno=\(items.ccbaAsno)&ccbaCtcd=\(items.ccbaCtcd)"
         
         let parser = XMLParser(contentsOf: URL(string: url)!)
         parser?.delegate = self
         parser?.parse()
+    }
+    
+    func setVisitedButtonColor() {
+        if items.visited == false {
+            visitedCheckButton.tintColor = .customBlack
+        } else {
+            visitedCheckButton.tintColor = .customRed
+        }
+    }
+    
+    func setWannavisitButtonColor() {
+        if items.wantvisit == false {
+            wannavisitCheckButton.tintColor = .customBlack
+        } else {
+            wannavisitCheckButton.tintColor = .customYellow
+        }
+    }
+    
+    
+    @IBAction func visitedButtonClicked(_ sender: UIButton) {
+        try! localRealm.write{
+            items.visited = !items.visited
+        }
+        setVisitedButtonColor()
+    }
+    
+    @IBAction func wannaVisitedButtonClicked(_ sender: UIButton) {
+        try! localRealm.write{
+            items.wantvisit = !items.wantvisit
+        }
+        setWannavisitButtonColor()
     }
 }
 extension ListDetailViewController: XMLParserDelegate {

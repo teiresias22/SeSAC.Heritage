@@ -10,9 +10,6 @@ class ListTableViewController: UIViewController {
 
     var listInformation: String = ""
     
-    var elementName = "" //현재 Element
-    var items: Array = [[String: String]]()
-    
     var stockCodeData: StockCode?
     var cityData: City?
     var category: String = ""
@@ -81,7 +78,7 @@ extension ListTableViewController: UITableViewDelegate, UITableViewDataSource {
         let vc = sb.instantiateViewController(withIdentifier: "ListDetailViewController") as! ListDetailViewController
         
         let row = tasks[indexPath.row]        
-        vc.tasks = row
+        vc.items = row
         
         self.navigationController?.pushViewController(vc, animated: true)
     }
