@@ -67,8 +67,10 @@ extension ListViewController: UICollectionViewDelegate, UICollectionViewDataSour
         cell.layer.cornerRadius = 8
         
         cell.listTitle.text = listInformation.list[indexPath.row].title.localized()
+        cell.listImage.image = UIGraphicsImageRenderer(size: CGSize(width: 50, height: 50)).image { _ in
+            UIImage(named: "\(listInformation.list[indexPath.row].image)")?.withTintColor(.white).draw(in: CGRect(x: 0, y: 0, width: 50, height: 50))
+        }
         cell.listText.text = listInformation.list[indexPath.row].text.localized()
-        
         return cell
         
     }

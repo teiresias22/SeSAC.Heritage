@@ -6,6 +6,7 @@ class ListCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet weak var listTitle: UILabel!
     @IBOutlet weak var listText: UILabel!
+    @IBOutlet weak var listImage: UIImageView!
     @IBOutlet weak var cellView: UIView!
     
     override func awakeFromNib() {

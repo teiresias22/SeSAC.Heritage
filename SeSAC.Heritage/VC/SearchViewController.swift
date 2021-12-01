@@ -117,4 +117,38 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         
         self.navigationController?.pushViewController(vc, animated: true)
     }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let wanavisit = UIContextualAction(style: .destructive, title: "WanaVist") { (UIContextualAction, UIView, success:@escaping (Bool) -> Void) in
+            let taskToUpdate = self.tasks[indexPath.row]
+            try! self.localRealm.write {
+                taskToUpdate.wantvisit = !taskToUpdate.wantvisit
+            }
+            tableView.reloadData()
+            success (true)
+        }
+        wanavisit.image = UIGraphicsImageRenderer(size: CGSize(width: 30, height: 30)).image { _ in
+            UIImage(named: "plus")?.withTintColor(.customWhite ?? .white).draw(in: CGRect(x: 0, y: 0, width: 30, height: 30))
+        }
+        wanavisit.backgroundColor = .customBlue
+        
+        let visit = UIContextualAction(style: .destructive, title: "Visited") { (UIContextualAction, UIView, success:@escaping (Bool) -> Void) in
+            let taskToUpdate = self.tasks[indexPath.row]
+            try! self.localRealm.write {
+                taskToUpdate.visited = !taskToUpdate.visited
+            }
+            tableView.reloadData()
+            success (true)
+        }
+        visit.image = UIGraphicsImageRenderer(size: CGSize(width: 30, height: 30)).image { _ in
+            UIImage(named: "landmark")?.withTintColor(.customWhite ?? .white).draw(in: CGRect(x: 0, y: 0, width: 30, height: 30))
+        }
+        visit.backgroundColor = .customBlue
+        return UISwipeActionsConfiguration(actions: [wanavisit, visit])
+    }
+    
 }
