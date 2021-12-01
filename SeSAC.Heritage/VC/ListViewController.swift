@@ -63,14 +63,11 @@ extension ListViewController: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ListCollectionViewCell.identifier, for: indexPath) as? ListCollectionViewCell else { return UICollectionViewCell() }
         
-        
         cell.backgroundColor = .customBlue
         cell.layer.cornerRadius = 8
         
         cell.listTitle.text = listInformation.list[indexPath.row].title.localized()
-        cell.listTitle.font = UIFont(name: "MapoFlowerIsland", size: 18)!
         cell.listText.text = listInformation.list[indexPath.row].text.localized()
-        cell.listText.font = UIFont().MapoFlowerIsland16
         
         return cell
         
@@ -78,11 +75,17 @@ extension ListViewController: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let targetSB = listInformation.list[indexPath.row].target
         
-        if targetSB == "Map" {
-            let sb = UIStoryboard(name: "Map", bundle: nil)
-            let vc = sb.instantiateViewController(withIdentifier: "MapViewController") as! MapViewController
+        if targetSB == "Search" {
+            let sb = UIStoryboard(name: "Search", bundle: nil)
+            let vc = sb.instantiateViewController(withIdentifier: "SearchViewController") as! SearchViewController
             
             self.navigationController?.pushViewController(vc, animated: true)
+        } else if targetSB == "ListUp"{
+            let sb = UIStoryboard(name: "ListUp", bundle: nil)
+            let vc = sb.instantiateViewController(withIdentifier: "ListUpViewController") as! ListUpViewController
+            
+            self.navigationController?.pushViewController(vc, animated: true)
+            
         } else {
             let sb = UIStoryboard(name: "ListCategory", bundle: nil)
             let vc = sb.instantiateViewController(withIdentifier: "ListCategoryViewController") as! ListCategoryViewController

@@ -12,10 +12,13 @@ class ListCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
         // Initialization code
         
-        listTitle.font = .boldSystemFont(ofSize: 16)
-        listTitle.textColor = .customBlack
-        listText.font = .systemFont(ofSize: 14)
-        listText.textColor = .customBlack
+        listTitle.font = UIFont(name: "MapoFlowerIsland", size: 20)!
+        listTitle.textColor = .white
+        listTitle.textAlignment = .center
+        
+        listText.font = UIFont().MapoFlowerIsland16
+        listText.textColor = .white
+        listText.textAlignment = .center
         listText.numberOfLines = 5
         
         cellView.backgroundColor = .clear
@@ -23,5 +26,4 @@ class ListCollectionViewCell: UICollectionViewCell {
         cellView.layer.shadowOpacity = 0.5
         cellView.layer.shadowRadius = 10
     }
-
 }

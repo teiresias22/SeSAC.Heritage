@@ -55,13 +55,17 @@ extension ListTableViewController: UITableViewDelegate, UITableViewDataSource {
         
         cell.countLabel.text = row.no.localized()
         cell.countLabel.font = UIFont().MapoFlowerIsland16
+        
         cell.titleLabel.text = row.ccbaMnm1.localized()
         cell.titleLabel.font = UIFont().MapoFlowerIsland16
+        
         cell.categoryLabel.text = row.ccmaName.localized()
         cell.categoryLabel.font = UIFont().MapoFlowerIsland14
         cell.categoryLabel.frame.size = cell.categoryLabel.intrinsicContentSize
+        
         cell.cityLabel.text = row.ccbaCtcdNm.localized()
         cell.cityLabel.font = UIFont().MapoFlowerIsland14
+        
         cell.locationLabel.text = row.ccsiName.localized()
         cell.locationLabel.font = UIFont().MapoFlowerIsland14
         
@@ -70,7 +74,7 @@ extension ListTableViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
+        return 80
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

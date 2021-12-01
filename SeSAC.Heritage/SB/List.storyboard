@@ -45,7 +45,7 @@
                             </collectionView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
-                        <color key="backgroundColor" name="customYellow"/>
+                        <color key="backgroundColor" name="customWhite"/>
                         <constraints>
                             <constraint firstItem="CVE-6V-adM" firstAttribute="centerY" secondItem="5EZ-qb-Rvc" secondAttribute="centerY" id="8cT-vO-8UN"/>
                             <constraint firstItem="CVE-6V-adM" firstAttribute="width" secondItem="5EZ-qb-Rvc" secondAttribute="width" multiplier="0.9" id="ZU6-0E-NnT"/>
@@ -64,8 +64,8 @@
         </scene>
     </scenes>
     <resources>
-        <namedColor name="customYellow">
-            <color red="1" green="0.77647058823529413" blue="0.35686274509803922" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <namedColor name="customWhite">
+            <color red="0.97647058823529409" green="0.97647058823529409" blue="0.97647058823529409" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
