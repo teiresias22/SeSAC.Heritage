@@ -64,6 +64,7 @@
 		75BB0498275646FC005F4A44 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75BB0497275646FC005F4A44 /* SearchViewController.swift */; };
 		75BB049A27564706005F4A44 /* ListUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75BB049927564706005F4A44 /* ListUpViewController.swift */; };
 		75BB049C275656A2005F4A44 /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75BB049B275656A2005F4A44 /* SearchTableViewCell.swift */; };
+		75BB049E27575EA7005F4A44 /* ListUpTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75BB049D27575EA7005F4A44 /* ListUpTableViewCell.swift */; };
 		75C11167274FFC0200ADFA78 /* StockCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C11166274FFC0200ADFA78 /* StockCode.swift */; };
 		75C11169274FFFAA00ADFA78 /* StockCodeInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C11168274FFFAA00ADFA78 /* StockCodeInformation.swift */; };
 		75C1116B275001B300ADFA78 /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C1116A275001B300ADFA78 /* City.swift */; };
@@ -136,6 +137,7 @@
 		75BB0497275646FC005F4A44 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		75BB049927564706005F4A44 /* ListUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListUpViewController.swift; sourceTree = "<group>"; };
 		75BB049B275656A2005F4A44 /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SearchTableViewCell.swift; path = SeSAC.Heritage/APIManager/SearchTableViewCell.swift; sourceTree = SOURCE_ROOT; };
+		75BB049D27575EA7005F4A44 /* ListUpTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListUpTableViewCell.swift; sourceTree = "<group>"; };
 		75C11166274FFC0200ADFA78 /* StockCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockCode.swift; sourceTree = "<group>"; };
 		75C11168274FFFAA00ADFA78 /* StockCodeInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockCodeInformation.swift; sourceTree = "<group>"; };
 		75C1116A275001B300ADFA78 /* City.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
@@ -273,6 +275,7 @@
 				753E851327476657007469D2 /* ListCategoryCollectionViewCell.xib */,
 				75FB9848274942B200A3A28C /* ListTableViewCell.swift */,
 				75BB049B275656A2005F4A44 /* SearchTableViewCell.swift */,
+				75BB049D27575EA7005F4A44 /* ListUpTableViewCell.swift */,
 				75F01E99274A28EE008C6951 /* EventTableViewCell.swift */,
 				75F01E9B274A7C60008C6951 /* MypageVistedPointCollectionViewCell.swift */,
 				75F01E9C274A7C60008C6951 /* MypageVistedPointCollectionViewCell.xib */,
@@ -467,6 +470,7 @@
 				75AEBFBB2746D89C00A5661D /* ListInformation.swift in Sources */,
 				75C11169274FFFAA00ADFA78 /* StockCodeInformation.swift in Sources */,
 				75AEBF9A2746394B00A5661D /* NoticeViewController.swift in Sources */,
+				75BB049E27575EA7005F4A44 /* ListUpTableViewCell.swift in Sources */,
 				75AEBF8C2746389900A5661D /* ListViewController.swift in Sources */,
 				75C1116B275001B300ADFA78 /* City.swift in Sources */,
 				75AEBFA2274641B900A5661D /* Font + Extention.swift in Sources */,
