@@ -19,16 +19,21 @@ class ListTableViewCell: UITableViewCell {
         listTabelCellView.backgroundColor = .customYellow
         
         countLabel.textColor = .customBlack
+        countLabel.font = UIFont().MapoFlowerIsland16
         countLabel.textAlignment = .center
         
         categoryLabel.textColor = .customBlack
+        categoryLabel.font = UIFont().MapoFlowerIsland14
         
         titleLabel.textColor = .customBlack
+        titleLabel.font = UIFont().MapoFlowerIsland16
         
         cityLabel.textColor = .customBlack
+        cityLabel.font = UIFont().MapoFlowerIsland14
         cityLabel.textAlignment = .center
         
         locationLabel.textColor = .customBlack
+        locationLabel.font = UIFont().MapoFlowerIsland14
         locationLabel.textAlignment = .center
         
         // Initialization code

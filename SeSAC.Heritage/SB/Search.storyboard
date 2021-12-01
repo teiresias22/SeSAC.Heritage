@@ -108,7 +108,7 @@
                                             <outlet property="cityLabel" destination="nt2-yO-TCH" id="LbM-w3-vdO"/>
                                             <outlet property="countLabel" destination="owz-rB-jvx" id="GL8-lp-fJd"/>
                                             <outlet property="locationLabel" destination="ThG-Za-8kU" id="Fmh-Um-rfd"/>
-                                            <outlet property="searchCellView" destination="bGU-uc-9HH" id="xy0-aF-ZNv"/>
+                                            <outlet property="searchCellView" destination="bGU-uc-9HH" id="ltD-hR-ghD"/>
                                             <outlet property="titleLabel" destination="5hR-dz-h20" id="2eP-xe-6Au"/>
                                         </connections>
                                     </tableViewCell>

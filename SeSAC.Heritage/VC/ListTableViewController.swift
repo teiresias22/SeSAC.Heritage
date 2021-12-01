@@ -2,7 +2,6 @@ import UIKit
 import RealmSwift
 
 class ListTableViewController: UIViewController {
-    
     @IBOutlet weak var listTable: UITableView!
     
     let localRealm = try! Realm()
@@ -35,9 +34,8 @@ extension ListTableViewController: UITableViewDelegate, UITableViewDataSource {
             tasks = localRealm.objects(Heritage_List.self).filter("ccbaKdcd='\(stockCodeData!.code)'")
         }else if cityData != nil {
             tasks = localRealm.objects(Heritage_List.self).filter("ccbaCtcd='\(cityData!.code)'")
-        }else {
-            //유네스코 문화재 테이블
         }
+        
         return tasks.count
     }
     
@@ -54,33 +52,58 @@ extension ListTableViewController: UITableViewDelegate, UITableViewDataSource {
         cell.selectionStyle = .none
         
         cell.countLabel.text = row.no.localized()
-        cell.countLabel.font = UIFont().MapoFlowerIsland16
-        
         cell.titleLabel.text = row.ccbaMnm1.localized()
-        cell.titleLabel.font = UIFont().MapoFlowerIsland16
-        
         cell.categoryLabel.text = row.ccmaName.localized()
-        cell.categoryLabel.font = UIFont().MapoFlowerIsland14
         cell.categoryLabel.frame.size = cell.categoryLabel.intrinsicContentSize
-        
         cell.cityLabel.text = row.ccbaCtcdNm.localized()
-        cell.cityLabel.font = UIFont().MapoFlowerIsland14
-        
         cell.locationLabel.text = row.ccsiName.localized()
-        cell.locationLabel.font = UIFont().MapoFlowerIsland14
         
         return cell
-        
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 80
     }
     
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let wanavisit = UIContextualAction(style: .destructive, title: "WanaVist") { (UIContextualAction, UIView, success:@escaping (Bool) -> Void) in
+            let taskToUpdate = self.tasks[indexPath.row]
+            try! self.localRealm.write {
+                taskToUpdate.wantvisit = !taskToUpdate.wantvisit
+            }
+            tableView.reloadData()
+            success (true)
+        }
+        wanavisit.image = UIGraphicsImageRenderer(size: CGSize(width: 30, height: 30)).image { _ in
+            UIImage(named: "plus")?.withTintColor(.customWhite ?? .white).draw(in: CGRect(x: 0, y: 0, width: 30, height: 30))
+        }
+        wanavisit.backgroundColor = .customBlue
+        return UISwipeActionsConfiguration(actions: [wanavisit])
+    }
+    
+    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let visit = UIContextualAction(style: .destructive, title: "Visited") { (UIContextualAction, UIView, success:@escaping (Bool) -> Void) in
+            let taskToUpdate = self.tasks[indexPath.row]
+            try! self.localRealm.write {
+                taskToUpdate.visited = !taskToUpdate.visited
+            }
+            tableView.reloadData()
+            success (true)
+        }
+        visit.image = UIGraphicsImageRenderer(size: CGSize(width: 30, height: 30)).image { _ in
+            UIImage(named: "landmark")?.withTintColor(.customWhite ?? .white).draw(in: CGRect(x: 0, y: 0, width: 30, height: 30))
+        }
+        visit.backgroundColor = .customBlue
+        return UISwipeActionsConfiguration(actions: [visit])
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let sb = UIStoryboard(name: "ListDetail", bundle: nil)
         let vc = sb.instantiateViewController(withIdentifier: "ListDetailViewController") as! ListDetailViewController
-        
         let row = tasks[indexPath.row]        
         vc.items = row
         

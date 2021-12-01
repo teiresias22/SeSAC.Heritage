@@ -47,12 +47,10 @@ class SearchViewController: UIViewController {
     }
     
     func searchBarIsEmpty() -> Bool {
-        print("3")
         return searchController.searchBar.text?.isEmpty ?? true
     }
     
     func isFiltering() -> Bool {
-        print("4")
         return searchController.isActive && !searchBarIsEmpty()
     }
 }
@@ -60,10 +58,8 @@ class SearchViewController: UIViewController {
 extension SearchViewController: UISearchResultsUpdating, UISearchBarDelegate {
     func updateSearchResults(for searchController: UISearchController) {
         guard let text = searchController.searchBar.text else { return }
-        print("resultsUpdating searchText : ",text)
         let predicate = NSPredicate(format: "ccbaMnm1 CONTAINS[c] %@ OR ccbaMnm2 CONTAINS[c]  %@",searchController.searchBar.text!,searchController.searchBar.text as! CVarArg)
         searchHeritage = localRealm.objects(Heritage_List.self).filter(predicate)
-        print("searchHeritage : ",searchHeritage!)
     }
 }
 
