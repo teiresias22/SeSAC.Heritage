@@ -25,10 +25,15 @@ class ListUpViewController: UIViewController {
         segmentedControl.backgroundColor = .customBlue
         segmentedControl.setTitle("방문했어요", forSegmentAt: 0)
         segmentedControl.setTitle("방문하고싶어요", forSegmentAt: 1)
-                
+        
         setListUpTable()
         // Do any additional setup after loading the view.
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        listUpTable.reloadData()
+        }
     
     func setListUpTable() {
         listUpTable.separatorStyle = UITableViewCell.SeparatorStyle.none
@@ -40,15 +45,11 @@ class ListUpViewController: UIViewController {
         switch segmentedControl.selectedSegmentIndex {
         case 0 : segmentValue = true
             listUpTable.reloadData()
-            print("firstClicked", segmentValue)
-
         case 1 : segmentValue = false
             listUpTable.reloadData()
-            print("secondClicked", segmentValue)
         default : break
         }
     }
-    
 }
 
 extension ListUpViewController: UITableViewDelegate, UITableViewDataSource {
@@ -66,10 +67,19 @@ extension ListUpViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ListUpTableViewCell.identifier, for: indexPath) as? ListUpTableViewCell else { return UITableViewCell() }
         let row = self.tasks[indexPath.row]
-        
+        cell.selectionStyle = .none
+                
         cell.titleLabel.text = row.ccbaMnm1.localized()
+        cell.titleLabel.textColor = .customWhite
+        cell.titleLabel.font = UIFont().MapoFlowerIsland16
+        
         cell.cityLabel.text = row.ccbaCtcdNm.localized()
+        cell.cityLabel.textColor = .customWhite
+        cell.titleLabel.font = UIFont().MapoFlowerIsland14
+        
         cell.locationLabel.text = row.ccsiName.localized()
+        cell.locationLabel.textColor = .customWhite
+        cell.titleLabel.font = UIFont().MapoFlowerIsland14
         
         return cell
         
@@ -82,10 +92,8 @@ extension ListUpViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let sb = UIStoryboard(name: "ListDetail", bundle: nil)
         let vc = sb.instantiateViewController(withIdentifier: "ListDetailViewController") as! ListDetailViewController
-        
         let row = tasks[indexPath.row]
         vc.items = row
-        
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }

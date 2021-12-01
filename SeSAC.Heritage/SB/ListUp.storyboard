@@ -31,7 +31,7 @@
                                 </connections>
                             </segmentedControl>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="q4Q-fr-Swu">
-                                <rect key="frame" x="0.0" y="74" width="414" height="788"/>
+                                <rect key="frame" x="0.0" y="86" width="414" height="776"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ListUpTableViewCell" rowHeight="100" id="fQa-or-tyS" customClass="ListUpTableViewCell" customModule="SeSAC_Heritage" customModuleProvider="target">
@@ -97,8 +97,8 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="ListUpCellView" destination="54x-S9-jkB" id="a08-ea-TK7"/>
                                             <outlet property="cityLabel" destination="CEq-hz-TS0" id="Tos-uA-Cge"/>
+                                            <outlet property="listUpCellView" destination="54x-S9-jkB" id="s6R-bY-0gU"/>
                                             <outlet property="locationLabel" destination="UZF-Og-KOC" id="1mm-hR-hZf"/>
                                             <outlet property="titleLabel" destination="VeD-5V-4mz" id="ETc-CX-yWG"/>
                                         </connections>
@@ -115,7 +115,7 @@
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="q4Q-fr-Swu" secondAttribute="trailing" id="QiQ-Gw-buD"/>
                             <constraint firstItem="mCI-f0-dEc" firstAttribute="width" secondItem="5EZ-qb-Rvc" secondAttribute="width" multiplier="0.8" id="iz1-DX-uUC"/>
                             <constraint firstItem="mCI-f0-dEc" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="rQa-7c-Zok"/>
-                            <constraint firstItem="q4Q-fr-Swu" firstAttribute="top" secondItem="mCI-f0-dEc" secondAttribute="bottom" id="yRJ-Gc-bsZ"/>
+                            <constraint firstItem="q4Q-fr-Swu" firstAttribute="top" secondItem="mCI-f0-dEc" secondAttribute="bottom" constant="12" id="yRJ-Gc-bsZ"/>
                         </constraints>
                     </view>
                     <connections>

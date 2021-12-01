@@ -80,6 +80,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: SearchTableViewCell.identifier, for: indexPath) as? SearchTableViewCell else { return UITableViewCell() }
         
         let row = self.searchHeritage[indexPath.row]
+        cell.selectionStyle = .none
         
         cell.searchCellView.backgroundColor = .customBlue
         

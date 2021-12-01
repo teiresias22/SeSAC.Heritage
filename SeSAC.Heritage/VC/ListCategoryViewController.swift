@@ -42,9 +42,9 @@ class ListCategoryViewController: UIViewController {
 
 extension ListCategoryViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if listInformation == "종류별 문화재" {
+        if listInformation == "종류별 문화유산" {
             return stockCodeInformation.stockCode.count
-        } else if listInformation == "지역별 문화재" {
+        } else if listInformation == "지역별 문화유산" {
             return cityInformation.city.count
         } else {
             return 1
@@ -55,7 +55,7 @@ extension ListCategoryViewController: UICollectionViewDelegate, UICollectionView
         guard let item = collectionView.dequeueReusableCell(withReuseIdentifier: ListCategoryCollectionViewCell.identifier, for: indexPath) as? ListCategoryCollectionViewCell else { return UICollectionViewCell() }
         item.backgroundColor = .clear
         
-        if listInformation == "종류별 문화재" {
+        if listInformation == "종류별 문화유산" {
             if let url = URL(string: stockCodeInformation.stockCode[indexPath.row].image){
                 item.listCategoryImage.kf.setImage(with: url)
             } else {
@@ -65,7 +65,7 @@ extension ListCategoryViewController: UICollectionViewDelegate, UICollectionView
             item.listCategoryLabel.text = stockCodeInformation.stockCode[indexPath.row].text.lowercased()
             item.listCategoryImage.layer.borderWidth = 2
             item.listCategoryImage.layer.borderColor = UIColor.customRed?.cgColor
-        } else if listInformation == "지역별 문화재" {
+        } else if listInformation == "지역별 문화유산" {
             if let url = URL(string: cityInformation.city[indexPath.row].image){
                 item.listCategoryImage.kf.setImage(with: url)
             } else {
@@ -75,11 +75,6 @@ extension ListCategoryViewController: UICollectionViewDelegate, UICollectionView
             item.listCategoryLabel.text = cityInformation.city[indexPath.row].city.lowercased()
             item.listCategoryImage.layer.borderWidth = 2
             item.listCategoryImage.layer.borderColor = UIColor.customBlue?.cgColor
-        } else {
-            item.listCategoryImage.backgroundColor = .customBlack
-            item.listCategoryLabel.text = "서비스 준비중입니다.".localized()
-            item.listCategoryImage.layer.borderWidth = 2
-            item.listCategoryImage.layer.borderColor = UIColor.customBlack?.cgColor
         }
         item.listCategoryLabel.font = UIFont().MapoFlowerIsland14
         
@@ -92,15 +87,12 @@ extension ListCategoryViewController: UICollectionViewDelegate, UICollectionView
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let sb = UIStoryboard(name: "ListTable", bundle: nil)
         let vc = sb.instantiateViewController(withIdentifier: "ListTableViewController") as! ListTableViewController
-        if listInformation == "종류별 문화재" {
+        if listInformation == "종류별 문화유산" {
             let row = stockCodeInformation.stockCode[indexPath.row]
             vc.stockCodeData = row
-        } else if listInformation == "지역별 문화재" {
+        } else if listInformation == "지역별 문화유산" {
             let row = cityInformation.city[indexPath.row]
             vc.cityData = row
-        } else {
-            let row = "준비중"
-            vc.category = row
         }
         vc.listInformation = listInformation
          self.navigationController?.pushViewController(vc, animated: true)

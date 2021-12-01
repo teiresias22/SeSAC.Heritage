@@ -9,7 +9,7 @@ class ListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = "문화유산 목록".localized()
+        self.title = "JHeritage".localized()
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "MapoFlowerIsland", size: 20)!]
         
         let nibName = UINib(nibName: ListCollectionViewCell.identifier, bundle: nil)
@@ -78,12 +78,11 @@ extension ListViewController: UICollectionViewDelegate, UICollectionViewDataSour
         if targetSB == "Search" {
             let sb = UIStoryboard(name: "Search", bundle: nil)
             let vc = sb.instantiateViewController(withIdentifier: "SearchViewController") as! SearchViewController
-            
             self.navigationController?.pushViewController(vc, animated: true)
+            
         } else if targetSB == "ListUp"{
             let sb = UIStoryboard(name: "ListUp", bundle: nil)
             let vc = sb.instantiateViewController(withIdentifier: "ListUpViewController") as! ListUpViewController
-            
             self.navigationController?.pushViewController(vc, animated: true)
             
         } else {

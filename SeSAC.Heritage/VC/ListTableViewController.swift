@@ -50,8 +50,8 @@ extension ListTableViewController: UITableViewDelegate, UITableViewDataSource {
         } else if cityData != nil {
             tasks = localRealm.objects(Heritage_List.self).filter("ccbaCtcd='\(cityData!.code)'")
         }
-        
         let row = tasks[indexPath.row]
+        cell.selectionStyle = .none
         
         cell.countLabel.text = row.no.localized()
         cell.countLabel.font = UIFont().MapoFlowerIsland16
