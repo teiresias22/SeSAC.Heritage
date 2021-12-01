@@ -55,10 +55,10 @@ extension ListUpViewController: UITableViewDelegate, UITableViewDataSource {
         
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        if tasks != nil {
-            return tasks.count
-        } else {
+        if tasks.count == 0 {
             return 1
+        } else {
+            return tasks.count
         }
     }
     
@@ -66,16 +66,16 @@ extension ListUpViewController: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ListUpTableViewCell.identifier, for: indexPath) as? ListUpTableViewCell else { return UITableViewCell() }
         cell.selectionStyle = .none
         
-        if tasks != nil {
+        if tasks.count == 0 {
+            cell.titleLabel.text = "선택된 문화유산 목록이 없습니다."
+            cell.titleLabel.numberOfLines = 0
+            cell.cityLabel.text = ""
+            cell.locationLabel.text = ""
+        } else {
             let row = self.tasks[indexPath.row]
             cell.titleLabel.text = row.ccbaMnm1.localized()
             cell.cityLabel.text = row.ccbaCtcdNm.localized()
             cell.locationLabel.text = row.ccsiName.localized()
-        } else {
-            cell.titleLabel.text = "마크한 문화유산이 아직 없습니다. \n문화유산을 둘러보시는게 어떨까요?"
-            cell.titleLabel.numberOfLines = 0
-            cell.cityLabel.text = ""
-            cell.locationLabel.text = ""
         }
         return cell
     }
@@ -86,15 +86,15 @@ extension ListUpViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if tasks != nil {
+        if tasks.count == 0 {
+            let sb = UIStoryboard(name: "List", bundle: nil)
+            let vc = sb.instantiateViewController(withIdentifier: "ListViewController") as! ListViewController
+            self.navigationController?.pushViewController(vc, animated: true)
+        } else {
             let sb = UIStoryboard(name: "ListDetail", bundle: nil)
             let vc = sb.instantiateViewController(withIdentifier: "ListDetailViewController") as! ListDetailViewController
             let row = tasks[indexPath.row]
             vc.items = row
-            self.navigationController?.pushViewController(vc, animated: true)
-        } else {
-            let sb = UIStoryboard(name: "List", bundle: nil)
-            let vc = sb.instantiateViewController(withIdentifier: "ListViewController") as! ListViewController
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }
@@ -104,7 +104,9 @@ extension ListUpViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        if tasks != nil {
+        if tasks.count == 0 {
+            return UISwipeActionsConfiguration(actions: [])
+        } else {
             let wanavisit = UIContextualAction(style: .destructive, title: "WanaVist") { (UIContextualAction, UIView, success:@escaping (Bool) -> Void) in
                 let taskToUpdate = self.tasks[indexPath.row]
                 try! self.localRealm.write {
@@ -130,8 +132,6 @@ extension ListUpViewController: UITableViewDelegate, UITableViewDataSource {
             }
             visit.backgroundColor = .customYellow
             return UISwipeActionsConfiguration(actions: [visit, wanavisit])
-        } else {
-            return UISwipeActionsConfiguration(actions: [])
         }
     }
 

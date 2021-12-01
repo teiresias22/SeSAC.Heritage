@@ -35,7 +35,7 @@ class FistViewController: UIViewController {
         noticeLabel.font = UIFont().MapoFlowerIsland16
         noticeLabel.textColor = .customRed
         
-        print("Realm is located at:", localRealm.configuration.fileURL!)
+        //print("Realm is located at:", localRealm.configuration.fileURL!)
         // Do any additional setup after loading the view.
     }
     
@@ -43,7 +43,7 @@ class FistViewController: UIViewController {
         super.viewDidAppear(true)
         
         let heritage = localRealm.objects(Heritage_List.self).count
-        print(heritage)
+        //print(heritage)
         if heritage == 0 {
             fetcHeritageData()
             presentNextPage()
