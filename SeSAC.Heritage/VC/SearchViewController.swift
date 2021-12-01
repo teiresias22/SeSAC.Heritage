@@ -78,28 +78,11 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         let row = self.searchHeritage[indexPath.row]
         cell.selectionStyle = .none
         
-        cell.searchCellView.backgroundColor = .customBlue
-        
         cell.countLabel.text = row.no.localized()
-        cell.countLabel.textColor = .customBlack
-        cell.countLabel.textAlignment = .center
-        cell.countLabel.font = UIFont(name: "MapoFlowerIsland", size: 32)!
-        
         cell.titleLabel.text = row.ccbaMnm1.localized()
-        cell.titleLabel.textColor = .customBlack
-        cell.titleLabel.font = UIFont().MapoFlowerIsland16
-        
         cell.cityLabel.text = row.ccbaCtcdNm.localized()
-        cell.cityLabel.textColor = .customBlack
-        cell.cityLabel.font = UIFont().MapoFlowerIsland14
-        
         cell.locationLabel.text = row.ccsiName.localized()
-        cell.locationLabel.textColor = .customBlack
-        cell.locationLabel.font = UIFont().MapoFlowerIsland14
-        
         cell.categoryLabel.text = row.ccmaName.localized()
-        cell.categoryLabel.textColor = .customBlack
-        cell.categoryLabel.font = UIFont().MapoFlowerIsland14
         
         return cell
     }
@@ -147,8 +130,13 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         visit.image = UIGraphicsImageRenderer(size: CGSize(width: 30, height: 30)).image { _ in
             UIImage(named: "landmark")?.withTintColor(.customWhite ?? .white).draw(in: CGRect(x: 0, y: 0, width: 30, height: 30))
         }
-        visit.backgroundColor = .customBlue
+        visit.backgroundColor = .customYellow
         return UISwipeActionsConfiguration(actions: [wanavisit, visit])
     }
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        searchController.searchBar.endEditing(true)
+    }
+    
     
 }

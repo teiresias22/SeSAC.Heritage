@@ -64,7 +64,7 @@ extension ListCategoryViewController: UICollectionViewDelegate, UICollectionView
             }
             item.listCategoryLabel.text = stockCodeInformation.stockCode[indexPath.row].text.lowercased()
             item.listCategoryImage.layer.borderWidth = 2
-            item.listCategoryImage.layer.borderColor = UIColor.customRed?.cgColor
+            item.listCategoryImage.layer.borderColor = UIColor.customYellow?.cgColor
         } else if listInformation == "지역별 문화유산" {
             if let url = URL(string: cityInformation.city[indexPath.row].image){
                 item.listCategoryImage.kf.setImage(with: url)

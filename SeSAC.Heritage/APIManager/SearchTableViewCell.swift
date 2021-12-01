@@ -22,6 +22,24 @@ class SearchTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         
+        searchCellView.backgroundColor = .customYellow
+        searchCellView.layer.cornerRadius = 8
+        
+        countLabel.textColor = .customBlack
+        countLabel.textAlignment = .center
+        countLabel.font = UIFont(name: "MapoFlowerIsland", size: 32)!
+        
+        titleLabel.textColor = .customBlack
+        titleLabel.font = UIFont().MapoFlowerIsland16
+        
+        cityLabel.textColor = .customBlack
+        cityLabel.font = UIFont().MapoFlowerIsland14
+        
+        locationLabel.textColor = .customBlack
+        locationLabel.font = UIFont().MapoFlowerIsland14
+        
+        categoryLabel.textColor = .customBlack
+        categoryLabel.font = UIFont().MapoFlowerIsland14
         
     }
 

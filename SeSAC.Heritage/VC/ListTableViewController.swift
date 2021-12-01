@@ -97,7 +97,7 @@ extension ListTableViewController: UITableViewDelegate, UITableViewDataSource {
         visit.image = UIGraphicsImageRenderer(size: CGSize(width: 30, height: 30)).image { _ in
             UIImage(named: "landmark")?.withTintColor(.customWhite ?? .white).draw(in: CGRect(x: 0, y: 0, width: 30, height: 30))
         }
-        visit.backgroundColor = .customBlue
+        visit.backgroundColor = .customYellow
         return UISwipeActionsConfiguration(actions: [visit])
     }
     

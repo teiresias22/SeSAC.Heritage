@@ -55,10 +55,10 @@ extension ListUpViewController: UITableViewDelegate, UITableViewDataSource {
         
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        if tasks.count == 0 {
-            return 1
-        } else {
+        if tasks != nil {
             return tasks.count
+        } else {
+            return 1
         }
     }
     
@@ -66,17 +66,17 @@ extension ListUpViewController: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ListUpTableViewCell.identifier, for: indexPath) as? ListUpTableViewCell else { return UITableViewCell() }
         cell.selectionStyle = .none
         
-        if tasks.count == 0 {
-            cell.titleLabel.text = "마크한 여행지가 아직 없습니다."
-            cell.cityLabel.text = ""
-            cell.locationLabel.text = ""
-        } else {
+        if tasks != nil {
             let row = self.tasks[indexPath.row]
             cell.titleLabel.text = row.ccbaMnm1.localized()
             cell.cityLabel.text = row.ccbaCtcdNm.localized()
             cell.locationLabel.text = row.ccsiName.localized()
+        } else {
+            cell.titleLabel.text = "마크한 문화유산이 아직 없습니다. \n문화유산을 둘러보시는게 어떨까요?"
+            cell.titleLabel.numberOfLines = 0
+            cell.cityLabel.text = ""
+            cell.locationLabel.text = ""
         }
-         
         return cell
     }
     
@@ -85,16 +85,16 @@ extension ListUpViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if tasks.count == 0 {
-            let sb = UIStoryboard(name: "List", bundle: nil)
-            let vc = sb.instantiateViewController(withIdentifier: "ListViewController") as! ListViewController
-            self.navigationController?.pushViewController(vc, animated: true)
-            
-        } else {
+        
+        if tasks != nil {
             let sb = UIStoryboard(name: "ListDetail", bundle: nil)
             let vc = sb.instantiateViewController(withIdentifier: "ListDetailViewController") as! ListDetailViewController
             let row = tasks[indexPath.row]
             vc.items = row
+            self.navigationController?.pushViewController(vc, animated: true)
+        } else {
+            let sb = UIStoryboard(name: "List", bundle: nil)
+            let vc = sb.instantiateViewController(withIdentifier: "ListViewController") as! ListViewController
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }
@@ -104,32 +104,35 @@ extension ListUpViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let wanavisit = UIContextualAction(style: .destructive, title: "WanaVist") { (UIContextualAction, UIView, success:@escaping (Bool) -> Void) in
-            let taskToUpdate = self.tasks[indexPath.row]
-            try! self.localRealm.write {
-                taskToUpdate.wantvisit = !taskToUpdate.wantvisit
+        if tasks != nil {
+            let wanavisit = UIContextualAction(style: .destructive, title: "WanaVist") { (UIContextualAction, UIView, success:@escaping (Bool) -> Void) in
+                let taskToUpdate = self.tasks[indexPath.row]
+                try! self.localRealm.write {
+                    taskToUpdate.wantvisit = !taskToUpdate.wantvisit
+                }
+                tableView.reloadData()
+                success (true)
             }
-            tableView.reloadData()
-            success (true)
-        }
-        wanavisit.image = UIGraphicsImageRenderer(size: CGSize(width: 30, height: 30)).image { _ in
-            UIImage(named: "plus")?.withTintColor(.customWhite ?? .white).draw(in: CGRect(x: 0, y: 0, width: 30, height: 30))
-        }
-        wanavisit.backgroundColor = .customBlue
-        
-        let visit = UIContextualAction(style: .destructive, title: "Visited") { (UIContextualAction, UIView, success:@escaping (Bool) -> Void) in
-            let taskToUpdate = self.tasks[indexPath.row]
-            try! self.localRealm.write {
-                taskToUpdate.visited = !taskToUpdate.visited
+            wanavisit.image = UIGraphicsImageRenderer(size: CGSize(width: 30, height: 30)).image { _ in
+                UIImage(named: "plus")?.withTintColor(.customWhite ?? .white).draw(in: CGRect(x: 0, y: 0, width: 30, height: 30))
             }
-            tableView.reloadData()
-            success (true)
+            wanavisit.backgroundColor = .customBlue
+            let visit = UIContextualAction(style: .destructive, title: "Visited") { (UIContextualAction, UIView, success:@escaping (Bool) -> Void) in
+                let taskToUpdate = self.tasks[indexPath.row]
+                try! self.localRealm.write {
+                    taskToUpdate.visited = !taskToUpdate.visited
+                }
+                tableView.reloadData()
+                success (true)
+            }
+            visit.image = UIGraphicsImageRenderer(size: CGSize(width: 30, height: 30)).image { _ in
+                UIImage(named: "landmark")?.withTintColor(.customWhite ?? .white).draw(in: CGRect(x: 0, y: 0, width: 30, height: 30))
+            }
+            visit.backgroundColor = .customYellow
+            return UISwipeActionsConfiguration(actions: [visit, wanavisit])
+        } else {
+            return UISwipeActionsConfiguration(actions: [])
         }
-        visit.image = UIGraphicsImageRenderer(size: CGSize(width: 30, height: 30)).image { _ in
-            UIImage(named: "landmark")?.withTintColor(.customWhite ?? .white).draw(in: CGRect(x: 0, y: 0, width: 30, height: 30))
-        }
-        visit.backgroundColor = .customBlue
-        return UISwipeActionsConfiguration(actions: [visit, wanavisit])
     }
 
 }

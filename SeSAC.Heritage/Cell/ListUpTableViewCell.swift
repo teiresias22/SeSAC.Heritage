@@ -18,20 +18,20 @@ class ListUpTableViewCell: UITableViewCell{
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
-        /*
-        listUpCellView.backgroundColor = .customRed
+        
+        listUpCellView.backgroundColor = .customYellow
         listUpCellView.layer.cornerRadius = 8
         
-        titleLabel.textColor = .customWhite
-        titleLabel.font = UIFont().MapoFlowerIsland16
+        titleLabel.textColor = .customBlack
+        titleLabel.font = UIFont(name: "MapoFlowerIsland", size: 18)!
         
-        cityLabel.textColor = .customWhite
-        cityLabel.font = UIFont().MapoFlowerIsland12
+        cityLabel.textColor = .customBlack
+        cityLabel.font = UIFont().MapoFlowerIsland14
         
-        locationLabel.textColor = .customWhite
-        locationLabel.font = UIFont().MapoFlowerIsland12
-         */
+        locationLabel.textColor = .customBlack
+        locationLabel.font = UIFont().MapoFlowerIsland14
+        
+        // Initialization code
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
