@@ -63,8 +63,12 @@ class ListDetailViewController: UIViewController {
         
         setLabel(visitedCheckLabel, "방문했어요")
         visitedCheckLabel.textAlignment = .center
+        
         setLabel(wannavisitCheckLabel, "방문하고싶어요")
         wannavisitCheckLabel.textAlignment = .center
+        
+        //길찾기는 아직 미구현이라 숨겨둠
+        findWayView.isHidden = true
         setLabel(findWayLabel, "길찾기")
         findWayLabel.textAlignment = .center
     }

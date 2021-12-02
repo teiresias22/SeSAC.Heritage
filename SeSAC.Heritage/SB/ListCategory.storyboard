@@ -20,11 +20,8 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="NQI-5F-GdM">
-                                <rect key="frame" x="0.0" y="137.5" width="414" height="621"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="769"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="NQI-5F-GdM" secondAttribute="height" multiplier="3:4.5" id="MkV-kk-ZNP"/>
-                                </constraints>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="jHH-8u-1fO">
                                     <size key="itemSize" width="128" height="128"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -46,9 +43,10 @@
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" name="customWhite"/>
                         <constraints>
-                            <constraint firstItem="NQI-5F-GdM" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="0Xs-CW-vxa"/>
-                            <constraint firstItem="NQI-5F-GdM" firstAttribute="width" secondItem="5EZ-qb-Rvc" secondAttribute="width" id="K7g-Ui-x2m"/>
-                            <constraint firstItem="NQI-5F-GdM" firstAttribute="centerY" secondItem="5EZ-qb-Rvc" secondAttribute="centerY" id="fgW-Iy-Ai9"/>
+                            <constraint firstItem="NQI-5F-GdM" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="BAS-Dc-otO"/>
+                            <constraint firstItem="NQI-5F-GdM" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="Fgc-6x-7XQ"/>
+                            <constraint firstItem="NQI-5F-GdM" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="dNn-oC-iSS"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="NQI-5F-GdM" secondAttribute="bottom" id="iqt-7Z-iak"/>
                         </constraints>
                     </view>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
