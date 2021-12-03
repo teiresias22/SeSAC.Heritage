@@ -27,6 +27,7 @@ class SearchViewController: UIViewController {
         self.title = "문화유산 검색".localized()
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "MapoFlowerIsland", size: 20)!]
         
+        searchTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         searchTableView.delegate = self
         searchTableView.dataSource = self
         

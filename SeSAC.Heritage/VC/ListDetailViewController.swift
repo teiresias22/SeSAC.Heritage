@@ -67,8 +67,6 @@ class ListDetailViewController: UIViewController {
         setLabel(wannavisitCheckLabel, "방문하고싶어요")
         wannavisitCheckLabel.textAlignment = .center
         
-        //길찾기는 아직 미구현이라 숨겨둠
-        findWayView.isHidden = true
         setLabel(findWayLabel, "길찾기")
         findWayLabel.textAlignment = .center
     }
@@ -125,6 +123,13 @@ class ListDetailViewController: UIViewController {
         }
         setWannavisitButtonColor()
     }
+    
+    @IBAction func findWayButtonClicked(_ sender: UIButton) {
+        let sb = UIStoryboard(name: "Map", bundle: nil)
+        let vc = sb.instantiateViewController(withIdentifier: "MapViewController") as! MapViewController
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
 }
 extension ListDetailViewController: XMLParserDelegate {
     //XMLParser가 시작 태그를 만나면 호출됨

@@ -14,7 +14,6 @@
 		753E852F2747B0B4007469D2 /* Localizable + Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753E852E2747B0B4007469D2 /* Localizable + Extention.swift */; };
 		753E85322747B2C9007469D2 /* Constance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753E85312747B2C9007469D2 /* Constance.swift */; };
 		75649718274CAD14000AD0CB /* HeritageListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75649717274CAD14000AD0CB /* HeritageListModel.swift */; };
-		7564971B274CAD50000AD0CB /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 7564971A274CAD50000AD0CB /* Alamofire */; };
 		7564971E274D4553000AD0CB /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 7564971D274D4553000AD0CB /* Realm */; };
 		75649720274D4553000AD0CB /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 7564971F274D4553000AD0CB /* RealmSwift */; };
 		75876562275541EE0025022E /* HeritageList.xml in Resources */ = {isa = PBXBuildFile; fileRef = 75876561275541EE0025022E /* HeritageList.xml */; };
@@ -76,7 +75,6 @@
 		75F01EA2274A7C79008C6951 /* MypageWantVisitedPointCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 75F01EA0274A7C79008C6951 /* MypageWantVisitedPointCollectionViewCell.xib */; };
 		75FB9849274942B200A3A28C /* ListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FB9848274942B200A3A28C /* ListTableViewCell.swift */; };
 		75FB985427495E7E00A3A28C /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 75FB985327495E7E00A3A28C /* Kingfisher */; };
-		75FB98572749602400A3A28C /* TextFieldEffects in Frameworks */ = {isa = PBXBuildFile; productRef = 75FB98562749602400A3A28C /* TextFieldEffects */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -156,10 +154,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				7564971E274D4553000AD0CB /* Realm in Frameworks */,
-				7564971B274CAD50000AD0CB /* Alamofire in Frameworks */,
 				75649720274D4553000AD0CB /* RealmSwift in Frameworks */,
 				752A5E562750E3A20059114B /* SwiftyXMLParser in Frameworks */,
-				75FB98572749602400A3A28C /* TextFieldEffects in Frameworks */,
 				75AEBFAD27465BC400A5661D /* SideMenu in Frameworks */,
 				75FB985427495E7E00A3A28C /* Kingfisher in Frameworks */,
 			);
@@ -346,8 +342,6 @@
 			packageProductDependencies = (
 				75AEBFAC27465BC400A5661D /* SideMenu */,
 				75FB985327495E7E00A3A28C /* Kingfisher */,
-				75FB98562749602400A3A28C /* TextFieldEffects */,
-				7564971A274CAD50000AD0CB /* Alamofire */,
 				7564971D274D4553000AD0CB /* Realm */,
 				7564971F274D4553000AD0CB /* RealmSwift */,
 				752A5E552750E3A20059114B /* SwiftyXMLParser */,
@@ -386,8 +380,6 @@
 			packageReferences = (
 				75AEBFAB27465BC400A5661D /* XCRemoteSwiftPackageReference "SideMenu" */,
 				75FB985227495E7E00A3A28C /* XCRemoteSwiftPackageReference "Kingfisher" */,
-				75FB98552749602400A3A28C /* XCRemoteSwiftPackageReference "TextFieldEffects" */,
-				75649719274CAD50000AD0CB /* XCRemoteSwiftPackageReference "Alamofire" */,
 				7564971C274D4553000AD0CB /* XCRemoteSwiftPackageReference "realm-cocoa" */,
 				752A5E542750E3A20059114B /* XCRemoteSwiftPackageReference "SwiftyXMLParser" */,
 			);
@@ -724,14 +716,6 @@
 				minimumVersion = 5.0.0;
 			};
 		};
-		75649719274CAD50000AD0CB /* XCRemoteSwiftPackageReference "Alamofire" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
-			requirement = {
-				branch = master;
-				kind = branch;
-			};
-		};
 		7564971C274D4553000AD0CB /* XCRemoteSwiftPackageReference "realm-cocoa" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/realm-cocoa.git";
@@ -756,14 +740,6 @@
 				kind = branch;
 			};
 		};
-		75FB98552749602400A3A28C /* XCRemoteSwiftPackageReference "TextFieldEffects" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/raulriera/TextFieldEffects.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -771,11 +747,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 752A5E542750E3A20059114B /* XCRemoteSwiftPackageReference "SwiftyXMLParser" */;
 			productName = SwiftyXMLParser;
-		};
-		7564971A274CAD50000AD0CB /* Alamofire */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 75649719274CAD50000AD0CB /* XCRemoteSwiftPackageReference "Alamofire" */;
-			productName = Alamofire;
 		};
 		7564971D274D4553000AD0CB /* Realm */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -796,11 +767,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 75FB985227495E7E00A3A28C /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
-		};
-		75FB98562749602400A3A28C /* TextFieldEffects */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 75FB98552749602400A3A28C /* XCRemoteSwiftPackageReference "TextFieldEffects" */;
-			productName = TextFieldEffects;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

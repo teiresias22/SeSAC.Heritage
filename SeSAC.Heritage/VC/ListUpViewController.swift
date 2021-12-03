@@ -88,8 +88,10 @@ extension ListUpViewController: UITableViewDelegate, UITableViewDataSource {
         
         if tasks.count == 0 {
             let sb = UIStoryboard(name: "List", bundle: nil)
-            let vc = sb.instantiateViewController(withIdentifier: "ListViewController") as! ListViewController
-            self.navigationController?.pushViewController(vc, animated: true)
+            guard let vc = sb.instantiateViewController(withIdentifier: "ListViewController") as? ListViewController else { return }
+            let nav = UINavigationController(rootViewController: vc)
+            nav.modalPresentationStyle = .overCurrentContext
+            self.present(nav, animated: true, completion: nil)
         } else {
             let sb = UIStoryboard(name: "ListDetail", bundle: nil)
             let vc = sb.instantiateViewController(withIdentifier: "ListDetailViewController") as! ListDetailViewController
