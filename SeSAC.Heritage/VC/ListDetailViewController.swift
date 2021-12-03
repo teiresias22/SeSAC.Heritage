@@ -59,7 +59,7 @@ class ListDetailViewController: UIViewController {
         setWannavisitButtonColor()
         
         setButton(findWayButton, "walking")
-        findWayButton.tintColor = .customBlue
+        findWayButton.tintColor = .white
         
         setLabel(visitedCheckLabel, "방문했어요")
         visitedCheckLabel.textAlignment = .center
@@ -127,6 +127,7 @@ class ListDetailViewController: UIViewController {
     @IBAction func findWayButtonClicked(_ sender: UIButton) {
         let sb = UIStoryboard(name: "Map", bundle: nil)
         let vc = sb.instantiateViewController(withIdentifier: "MapViewController") as! MapViewController
+        vc.item = items
         self.navigationController?.pushViewController(vc, animated: true)
     }
     

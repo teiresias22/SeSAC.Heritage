@@ -23,10 +23,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LaunchScreen" translatesAutoresizingMaskIntoConstraints="NO" id="hWp-1d-cGW">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="JHeritage" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qLF-bM-1Ss">
-                                <rect key="frame" x="0.0" y="568" width="414" height="60"/>
+                                <rect key="frame" x="127" y="568" width="160.5" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="gkd-ch-Ahq"/>
                                 </constraints>
@@ -38,13 +38,12 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" name="customWhite"/>
                         <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="hWp-1d-cGW" secondAttribute="bottom" id="3FP-Bx-gg8"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="hWp-1d-cGW" secondAttribute="trailing" id="4Sa-fW-UhC"/>
                             <constraint firstItem="qLF-bM-1Ss" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="E79-qF-3tb"/>
+                            <constraint firstAttribute="bottom" secondItem="hWp-1d-cGW" secondAttribute="bottom" id="Q9q-e4-UkX"/>
                             <constraint firstItem="qLF-bM-1Ss" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" constant="150" id="Rg7-fQ-186"/>
-                            <constraint firstItem="hWp-1d-cGW" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="WDu-2J-OMV"/>
-                            <constraint firstItem="qLF-bM-1Ss" firstAttribute="width" secondItem="hWp-1d-cGW" secondAttribute="width" id="q4l-VL-6oc"/>
-                            <constraint firstItem="hWp-1d-cGW" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="wEG-qG-ESL"/>
+                            <constraint firstItem="hWp-1d-cGW" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="hee-zG-KTW"/>
+                            <constraint firstItem="hWp-1d-cGW" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="jzs-T9-sMd"/>
+                            <constraint firstItem="hWp-1d-cGW" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="wUC-Af-X99"/>
                         </constraints>
                     </view>
                 </viewController>

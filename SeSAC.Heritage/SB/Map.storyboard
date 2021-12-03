@@ -6,7 +6,6 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
-        <capability name="UIMenu" message="Requires Xcode 11 or later." minToolsVersion="11.0" requiredIntegratedClassName="UICommandDiff"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -19,50 +18,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="X8d-Gu-0yD">
-                                <rect key="frame" x="0.0" y="106" width="414" height="756"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="852"/>
                             </mapView>
-                            <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="mFa-Yd-hTI">
-                                <rect key="frame" x="290" y="60" width="108" height="30"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" showsMenuAsPrimaryAction="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cuk-8Q-gdr">
-                                        <rect key="frame" x="0.0" y="0.0" width="46" height="30"/>
-                                        <menu key="menu" id="Rsa-AP-iTe">
-                                            <children>
-                                                <command title="Item 1" id="edh-re-KQq"/>
-                                                <command title="Item 2" id="Sb6-gl-rgm"/>
-                                            </children>
-                                        </menu>
-                                        <state key="normal" title="Button"/>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" showsMenuAsPrimaryAction="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R34-5U-dvu">
-                                        <rect key="frame" x="62" y="0.0" width="46" height="30"/>
-                                        <menu key="menu" id="TV0-LS-YF7">
-                                            <children>
-                                                <command title="Item 1" id="aOp-yY-yiS"/>
-                                                <command title="Item 2" id="bKC-oN-oaB"/>
-                                            </children>
-                                        </menu>
-                                        <state key="normal" title="Button"/>
-                                    </button>
-                                </subviews>
-                            </stackView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jU5-lv-ee9">
-                                <rect key="frame" x="20" y="65" width="42" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="mFa-Yd-hTI" secondAttribute="trailing" constant="16" id="7AV-f7-Ii9"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="X8d-Gu-0yD" secondAttribute="trailing" id="Cdh-1r-4f6"/>
-                            <constraint firstItem="X8d-Gu-0yD" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="M64-hK-jdS"/>
-                            <constraint firstItem="X8d-Gu-0yD" firstAttribute="top" secondItem="mFa-Yd-hTI" secondAttribute="bottom" constant="16" id="ZCd-vy-3Qr"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="X8d-Gu-0yD" secondAttribute="bottom" id="mrO-4d-M1J"/>
-                            <constraint firstItem="mFa-Yd-hTI" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="16" id="ojg-0s-Spq"/>
+                            <constraint firstItem="X8d-Gu-0yD" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="0yZ-8c-LOl"/>
+                            <constraint firstItem="X8d-Gu-0yD" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="Rce-S7-6mp"/>
+                            <constraint firstItem="X8d-Gu-0yD" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="Ze4-oJ-4N9"/>
+                            <constraint firstAttribute="bottom" secondItem="X8d-Gu-0yD" secondAttribute="bottom" id="t3o-HZ-RyV"/>
                         </constraints>
                     </view>
                     <connections>

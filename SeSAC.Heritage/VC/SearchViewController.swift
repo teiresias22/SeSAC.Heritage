@@ -58,7 +58,6 @@ class SearchViewController: UIViewController {
 
 extension SearchViewController: UISearchResultsUpdating, UISearchBarDelegate {
     func updateSearchResults(for searchController: UISearchController) {
-        guard let text = searchController.searchBar.text else { return }
         let predicate = NSPredicate(format: "ccbaMnm1 CONTAINS[c] %@ OR ccbaMnm2 CONTAINS[c]  %@",searchController.searchBar.text!,searchController.searchBar.text as! CVarArg)
         searchHeritage = localRealm.objects(Heritage_List.self).filter(predicate)
     }
