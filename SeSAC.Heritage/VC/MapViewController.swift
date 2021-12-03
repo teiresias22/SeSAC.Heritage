@@ -15,6 +15,7 @@ class MapViewController: UIViewController {
     var previousLocation: CLLocation?
     
     var item = Heritage_List()
+    var items = Heritage_List()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +31,7 @@ class MapViewController: UIViewController {
     }
     
     //MapSetting
-    //1. 위치 서비스 확인, 14이전 버전 확인
+    //1. 위치 서비스 확인
     func checkUserLocationServicesAithorization() {
         let authorizationStatus: CLAuthorizationStatus
         
@@ -49,11 +50,6 @@ class MapViewController: UIViewController {
         }
     }
     
-    func showAlert(alertTitle: String, alertMessage: String) {
-        let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
-        
-    }
-    
     //2. 위치 확인
     func setupLocationManager() {
         locationManager.delegate = self
@@ -62,7 +58,7 @@ class MapViewController: UIViewController {
         locationManager.startUpdatingLocation()
     }
     
-    //3. 권환 확인, 사용자가 위치를 허용했는지, 안했는지, 거부한건지 권한 확인! (단, iOS 위치 서비스가 가능한지 확인)
+    //3. 권환 확인, 사용자가 위치를 허용했는지, 안했는지, 거부한건지 권한 확인!
     func checkLocationAuthorization(_ authorizationStatus: CLAuthorizationStatus) {
         switch authorizationStatus {
         case .authorizedAlways, .authorizedWhenInUse:
@@ -98,7 +94,7 @@ class MapViewController: UIViewController {
     
     //권한 비허용시 기본화면
     func defaultLocation() {
-        let latitude = Double(item.latitude) // Optional(123456)
+        let latitude = Double(item.latitude)
         let longitude = Double(item.longitude)
         
         let location = CLLocationCoordinate2D(latitude: latitude ?? 37.57606059397734, longitude: longitude ?? 126.9766761117934)
@@ -134,28 +130,54 @@ class MapViewController: UIViewController {
         let latitude = mapView.centerCoordinate.latitude
         let longitude = mapView.centerCoordinate.longitude
         
-        getCurrentAddress(CLLocation(latitude: latitude, longitude: longitude))
         return CLLocation(latitude: latitude, longitude: longitude)
     }
     
-    //현재 위치 주소
-    func getCurrentAddress(_ location: CLLocation) {
-        let geoCoder: CLGeocoder = CLGeocoder()
-        let location: CLLocation = location
-        //한국어 주소 설정
-        let locale = Locale(identifier: "KO-kr")
-        
-        //위경도를 통해 주소 변환
-        geoCoder.reverseGeocodeLocation(location, preferredLocale: locale) { placemarks, error in
-            guard error == nil, let placemark = placemarks?.first else {
-                print("주소 설정 불가능")
-                return
-            }
-            DispatchQueue.main.async {
-                let address = "\(placemark.administrativeArea ?? "") \(placemark.locality ?? "") \(placemark.subThoroughfare ?? "") \(placemark.thoroughfare ?? "")"
-            }
+    //비허용시 알림창 띄우기
+    func showAlert(alertTitle: String, alertMessage: String) {
+        let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
+        let allTheater = UIAlertAction(title: "확인", style: .cancel) { _ in
         }
+        alert.addAction(allTheater)
+        present(alert, animated: true)
     }
+    
+    /*
+     realm의 string data들을 가져와서 Double로 만들어서 입력해줘야 하는데 for문은
+     //핀정보 지역별 모든 문화재
+    func allHeritageAnnotations() {
+        let annotiations = MKMapView.annotations
+        MKMapView.removeAnnotations(annotiations)
+        
+        for location in items {
+            let latitude = Double(item.latitude)
+            let longitude = Double(item.longitude)
+            
+            let heritageCoordinate = CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitudr)
+            let heritageAnnotaion = MKPointAnnotation()
+            
+            heritageAnnotaion.title = location.location
+            heritageAnnotaion.coordinate = heritageCoordinate
+            MKMapView.addAnnotation(heritageAnnotaion)
+        }
+    }*/
+    
+    //핀정보 디테일 페이지의 문화제
+    func heritageAnnotations() {
+        let annotiations = MKMapView.annotations
+        MKMapView.removeAnnotations(annotiations)
+        
+        let latitude = Double(item.latitude)
+        let longitude = Double(item.longitude)
+        
+        let heritageCoordinate = CLLocationCoordinate2D(latitude: latitude ?? 37.472768797381, longitude: longitude ?? 127.10614430956028)
+        let heritageAnnotation = MKPointAnnotation()
+        
+        heritageAnnotation.title = item.ccbaMnm1
+        heritageAnnotation.coordinate = heritageCoordinate
+        MKMapView.addAnnotation(heritageAnnotation)
+    }
+
 }
 
 extension MapViewController: CLLocationManagerDelegate{
@@ -167,7 +189,7 @@ extension MapViewController: CLLocationManagerDelegate{
         let region = MKCoordinateRegion.init(center: center, latitudinalMeters: 1000, longitudinalMeters: 1000)
         
         MKMapView.setRegion(region, animated: true)
-        //allAnnotations()
+        heritageAnnotations()
     }
     
     //5. 위치 접근이 실패했을 경우
@@ -175,12 +197,7 @@ extension MapViewController: CLLocationManagerDelegate{
         print(error)
     }
     
-    //6. iOS14 미만: 앱이 위치 관리자를 생성하고,  승인 상태가 변경이 될 때 대리자에게 승인 상채를 알려줌
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        print(#function)
-    }
-    
-    //7. iOS14 이상: 앱이 위치 관리자를 생성하고,  승인 상태가 변경이 될 때 대리자에게 승인 상채를 알려줌
+    //7. 앱이 위치 관리자를 생성하고, 승인 상태가 변경이 될 때 대리자에게 승인 상채를 알려줌
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         print(#function)
     }
