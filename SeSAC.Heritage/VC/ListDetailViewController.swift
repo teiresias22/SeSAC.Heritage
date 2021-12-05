@@ -5,6 +5,9 @@ import Kingfisher
 class ListDetailViewController: UIViewController {
     
     @IBOutlet weak var scrollView: UIView!
+    @IBOutlet weak var heritageTypeLabel: UILabel!
+    @IBOutlet weak var heritageTitleLabel: UILabel!
+    @IBOutlet weak var heritageCityLabel: UILabel!
     @IBOutlet weak var detailImage: UIImageView!
     
     @IBOutlet weak var visitedView: UIView!
@@ -19,10 +22,6 @@ class ListDetailViewController: UIViewController {
     @IBOutlet weak var findWayButton: UIButton!
     @IBOutlet weak var findWayLabel: UILabel!
     
-    @IBOutlet weak var heritageTypeLabel: UILabel!
-    @IBOutlet weak var heritageTitleLabel: UILabel!
-    @IBOutlet weak var heritageCityLabel: UILabel!
-    @IBOutlet weak var heritageLocationLabel: UILabel!
     @IBOutlet weak var heritageContentLabel: UILabel!
     
     let localRealm = try! Realm()
@@ -53,21 +52,18 @@ class ListDetailViewController: UIViewController {
     func defaultPageSetup() {
         
         setButton(visitedCheckButton, "landmark")
-        setVisitedButtonColor()
         
         setButton(wannavisitCheckButton, "plus")
-        setWannavisitButtonColor()
         
         setButton(findWayButton, "walking")
-        findWayButton.tintColor = .white
         
-        setLabel(visitedCheckLabel, "방문했어요")
+        setLabel(visitedCheckLabel, "방문")
         visitedCheckLabel.textAlignment = .center
         
-        setLabel(wannavisitCheckLabel, "방문하고싶어요")
+        setLabel(wannavisitCheckLabel, "즐겨찾기")
         wannavisitCheckLabel.textAlignment = .center
         
-        setLabel(findWayLabel, "길찾기")
+        setLabel(findWayLabel, "지도")
         findWayLabel.textAlignment = .center
     }
     
@@ -77,6 +73,21 @@ class ListDetailViewController: UIViewController {
         target.setTitle("", for: .normal)
         target.contentVerticalAlignment = .fill
         target.contentHorizontalAlignment = .fill
+        
+        if items.visited == true {
+            visitedCheckButton.tintColor = .customBlue
+        } else if items.wantvisit == true {
+            wannavisitCheckButton.tintColor = .customYellow
+        } else {
+            target.tintColor = .customBlack
+        }
+    }
+    
+    func setTitle(_ target: UILabel, _ text: String) {
+        target.text = text.localized()
+        target.font = UIFont(name: "MapoFlowerIsland", size: 20)!
+        target.adjustsFontSizeToFitWidth = true
+        target.textAlignment = .center
     }
     
     func setLabel(_ target: UILabel, _ text: String){
@@ -91,24 +102,7 @@ class ListDetailViewController: UIViewController {
         let parser = XMLParser(contentsOf: URL(string: url)!)
         parser?.delegate = self
         parser?.parse()
-    }
-    
-    func setVisitedButtonColor() {
-        if items.visited == false {
-            visitedCheckButton.tintColor = .customBlack
-        } else {
-            visitedCheckButton.tintColor = .customRed
-        }
-    }
-    
-    func setWannavisitButtonColor() {
-        if items.wantvisit == false {
-            wannavisitCheckButton.tintColor = .customBlack
-        } else {
-            wannavisitCheckButton.tintColor = .customYellow
-        }
-    }
-    
+    }    
     
     @IBAction func visitedButtonClicked(_ sender: UIButton) {
         try! localRealm.write{
@@ -161,12 +155,11 @@ extension ListDetailViewController: XMLParserDelegate {
     func parserDidEndDocument(_ parser: XMLParser) {
 
         let row = item[0]
-    
-        setLabel(heritageTypeLabel, row["ccmaName"]!)
-        setLabel(heritageTitleLabel, row["ccbaMnm1"]!)
         
-        setLabel(heritageCityLabel, row["ccbaCtcdNm"]!)
-        setLabel(heritageLocationLabel, row["ccceName"]!)
+        setTitle(heritageTitleLabel, row["ccbaMnm1"]!)
+        
+        setLabel(heritageTypeLabel, "\(row["ccmaName"]!) 제\(items.sn)호")
+        setLabel(heritageCityLabel, "\(row["ccbaCtcdNm"]!) \(row["ccsiName"]!)")
         
         let url = URL(string: row["imageUrl"] ?? "")
         detailImage.kf.setImage(with: url)

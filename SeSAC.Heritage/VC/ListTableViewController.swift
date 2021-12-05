@@ -51,10 +51,7 @@ extension ListTableViewController: UITableViewDelegate, UITableViewDataSource {
         let row = tasks[indexPath.row]
         cell.selectionStyle = .none
         
-        cell.countLabel.text = row.no.localized()
         cell.titleLabel.text = row.ccbaMnm1.localized()
-        cell.categoryLabel.text = row.ccmaName.localized()
-        cell.categoryLabel.frame.size = cell.categoryLabel.intrinsicContentSize
         cell.cityLabel.text = row.ccbaCtcdNm.localized()
         cell.locationLabel.text = row.ccsiName.localized()
         
@@ -82,10 +79,7 @@ extension ListTableViewController: UITableViewDelegate, UITableViewDataSource {
             UIImage(named: "plus")?.withTintColor(.customWhite ?? .white).draw(in: CGRect(x: 0, y: 0, width: 30, height: 30))
         }
         wanavisit.backgroundColor = .customBlue
-        return UISwipeActionsConfiguration(actions: [wanavisit])
-    }
-    
-    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
         let visit = UIContextualAction(style: .destructive, title: "Visited") { (UIContextualAction, UIView, success:@escaping (Bool) -> Void) in
             let taskToUpdate = self.tasks[indexPath.row]
             try! self.localRealm.write {
@@ -98,7 +92,7 @@ extension ListTableViewController: UITableViewDelegate, UITableViewDataSource {
             UIImage(named: "landmark")?.withTintColor(.customWhite ?? .white).draw(in: CGRect(x: 0, y: 0, width: 30, height: 30))
         }
         visit.backgroundColor = .customYellow
-        return UISwipeActionsConfiguration(actions: [visit])
+        return UISwipeActionsConfiguration(actions: [wanavisit, visit])
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

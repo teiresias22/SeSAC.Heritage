@@ -78,11 +78,9 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         let row = self.searchHeritage[indexPath.row]
         cell.selectionStyle = .none
         
-        cell.countLabel.text = row.no.localized()
         cell.titleLabel.text = row.ccbaMnm1.localized()
         cell.cityLabel.text = row.ccbaCtcdNm.localized()
         cell.locationLabel.text = row.ccsiName.localized()
-        cell.categoryLabel.text = row.ccmaName.localized()
         
         return cell
     }

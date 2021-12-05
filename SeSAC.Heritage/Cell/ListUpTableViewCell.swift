@@ -24,6 +24,7 @@ class ListUpTableViewCell: UITableViewCell{
         
         titleLabel.textColor = .customBlack
         titleLabel.font = UIFont(name: "MapoFlowerIsland", size: 18)!
+        titleLabel.numberOfLines = 0
         
         cityLabel.textColor = .customBlack
         cityLabel.font = UIFont().MapoFlowerIsland14

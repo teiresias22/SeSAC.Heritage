@@ -105,36 +105,33 @@ extension ListUpViewController: UITableViewDelegate, UITableViewDataSource {
         return true
     }
     
-    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        if tasks.count == 0 {
-            return UISwipeActionsConfiguration(actions: [])
-        } else {
-            let wanavisit = UIContextualAction(style: .destructive, title: "WanaVist") { (UIContextualAction, UIView, success:@escaping (Bool) -> Void) in
-                let taskToUpdate = self.tasks[indexPath.row]
-                try! self.localRealm.write {
-                    taskToUpdate.wantvisit = !taskToUpdate.wantvisit
-                }
-                tableView.reloadData()
-                success (true)
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let wanavisit = UIContextualAction(style: .destructive, title: "WanaVist") { (UIContextualAction, UIView, success:@escaping (Bool) -> Void) in
+            let taskToUpdate = self.tasks[indexPath.row]
+            try! self.localRealm.write {
+                taskToUpdate.wantvisit = !taskToUpdate.wantvisit
             }
-            wanavisit.image = UIGraphicsImageRenderer(size: CGSize(width: 30, height: 30)).image { _ in
-                UIImage(named: "plus")?.withTintColor(.customWhite ?? .white).draw(in: CGRect(x: 0, y: 0, width: 30, height: 30))
-            }
-            wanavisit.backgroundColor = .customBlue
-            let visit = UIContextualAction(style: .destructive, title: "Visited") { (UIContextualAction, UIView, success:@escaping (Bool) -> Void) in
-                let taskToUpdate = self.tasks[indexPath.row]
-                try! self.localRealm.write {
-                    taskToUpdate.visited = !taskToUpdate.visited
-                }
-                tableView.reloadData()
-                success (true)
-            }
-            visit.image = UIGraphicsImageRenderer(size: CGSize(width: 30, height: 30)).image { _ in
-                UIImage(named: "landmark")?.withTintColor(.customWhite ?? .white).draw(in: CGRect(x: 0, y: 0, width: 30, height: 30))
-            }
-            visit.backgroundColor = .customYellow
-            return UISwipeActionsConfiguration(actions: [visit, wanavisit])
+            tableView.reloadData()
+            success (true)
         }
+        wanavisit.image = UIGraphicsImageRenderer(size: CGSize(width: 30, height: 30)).image { _ in
+            UIImage(named: "plus")?.withTintColor(.customWhite ?? .white).draw(in: CGRect(x: 0, y: 0, width: 30, height: 30))
+        }
+        wanavisit.backgroundColor = .customBlue
+        
+        let visit = UIContextualAction(style: .destructive, title: "Visited") { (UIContextualAction, UIView, success:@escaping (Bool) -> Void) in
+            let taskToUpdate = self.tasks[indexPath.row]
+            try! self.localRealm.write {
+                taskToUpdate.visited = !taskToUpdate.visited
+            }
+            tableView.reloadData()
+            success (true)
+        }
+        visit.image = UIGraphicsImageRenderer(size: CGSize(width: 30, height: 30)).image { _ in
+            UIImage(named: "landmark")?.withTintColor(.customWhite ?? .white).draw(in: CGRect(x: 0, y: 0, width: 30, height: 30))
+        }
+        visit.backgroundColor = .customYellow
+        return UISwipeActionsConfiguration(actions: [wanavisit, visit])
     }
 
 }
