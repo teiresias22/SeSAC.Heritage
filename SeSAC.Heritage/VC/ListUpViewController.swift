@@ -23,9 +23,10 @@ class ListUpViewController: UIViewController {
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "MapoFlowerIsland", size: 20)!]
         tasks = localRealm.objects(Heritage_List.self).filter("visited=true")
         
-        segmentedControl.backgroundColor = .customBlue
-        segmentedControl.setTitle("방문했어요", forSegmentAt: 0)
-        segmentedControl.setTitle("방문하고싶어요", forSegmentAt: 1)
+        segmentedControl.selectedSegmentTintColor = .customRed
+        segmentedControl.backgroundColor = .clear
+        segmentedControl.setTitle("방문", forSegmentAt: 0)
+        segmentedControl.setTitle("즐겨찾기", forSegmentAt: 1)
         
         listUpTable.separatorStyle = UITableViewCell.SeparatorStyle.none
         listUpTable.delegate = self

@@ -26,7 +26,6 @@ class ListDetailViewController: UIViewController {
     
     let localRealm = try! Realm()
     var tasks: Results<Heritage_List>!
-    
     var items = Heritage_List()
     
     var elementName = ""
@@ -50,12 +49,14 @@ class ListDetailViewController: UIViewController {
     }
     
     func defaultPageSetup() {
-        
         setButton(visitedCheckButton, "landmark")
+        setVisitedButtonColor()
         
         setButton(wannavisitCheckButton, "plus")
+        setWannavisitButtonColor()
         
         setButton(findWayButton, "walking")
+        findWayButton.tintColor = .customBlack
         
         setLabel(visitedCheckLabel, "방문")
         visitedCheckLabel.textAlignment = .center
@@ -69,18 +70,11 @@ class ListDetailViewController: UIViewController {
     
     func setButton( _ target: UIButton, _ name: String){
         target.setImage(UIImage(named: name), for: .normal)
+        target.imageEdgeInsets = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
         target.contentMode = .scaleToFill
         target.setTitle("", for: .normal)
         target.contentVerticalAlignment = .fill
         target.contentHorizontalAlignment = .fill
-        
-        if items.visited == true {
-            visitedCheckButton.tintColor = .customBlue
-        } else if items.wantvisit == true {
-            wannavisitCheckButton.tintColor = .customYellow
-        } else {
-            target.tintColor = .customBlack
-        }
     }
     
     func setTitle(_ target: UILabel, _ text: String) {
@@ -93,6 +87,7 @@ class ListDetailViewController: UIViewController {
     func setLabel(_ target: UILabel, _ text: String){
         target.text = text.localized()
         target.font = UIFont().MapoFlowerIsland14
+        target.textAlignment = .center
     }
     
     func fetcHeritageData() {
@@ -102,7 +97,23 @@ class ListDetailViewController: UIViewController {
         let parser = XMLParser(contentsOf: URL(string: url)!)
         parser?.delegate = self
         parser?.parse()
-    }    
+    }
+    
+    func setVisitedButtonColor() {
+        if items.visited == false {
+            visitedCheckButton.tintColor = .customBlack
+        } else {
+            visitedCheckButton.tintColor = .customBlue
+        }
+    }
+    
+    func setWannavisitButtonColor() {
+        if items.wantvisit == false {
+            wannavisitCheckButton.tintColor = .customBlack
+        } else {
+            wannavisitCheckButton.tintColor = .customYellow
+        }
+    }
     
     @IBAction func visitedButtonClicked(_ sender: UIButton) {
         try! localRealm.write{
@@ -153,11 +164,8 @@ extension ListDetailViewController: XMLParserDelegate {
     }
     
     func parserDidEndDocument(_ parser: XMLParser) {
-
         let row = item[0]
-        
         setTitle(heritageTitleLabel, row["ccbaMnm1"]!)
-        
         setLabel(heritageTypeLabel, "\(row["ccmaName"]!) 제\(items.sn)호")
         setLabel(heritageCityLabel, "\(row["ccbaCtcdNm"]!) \(row["ccsiName"]!)")
         
@@ -168,5 +176,6 @@ extension ListDetailViewController: XMLParserDelegate {
         
         heritageContentLabel.text = row["content"]!
         heritageContentLabel.font = UIFont().MapoFlowerIsland14
+        heritageContentLabel.addInterlineSpacing(spacingValue: 2)
     }
 }

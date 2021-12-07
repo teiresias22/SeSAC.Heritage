@@ -20,18 +20,89 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="X8d-Gu-0yD">
                                 <rect key="frame" x="0.0" y="44" width="414" height="852"/>
                             </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OQF-JT-Qrh">
+                                <rect key="frame" x="80" y="64" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="OQF-JT-Qrh" secondAttribute="height" id="FO7-cf-kA7"/>
+                                    <constraint firstAttribute="width" constant="40" id="r2N-TN-Qyz"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="myLocationClicked:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="Isb-Xw-Er4"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LBg-Lt-es1">
+                                <rect key="frame" x="20" y="64" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="AZw-6E-TDT"/>
+                                    <constraint firstAttribute="width" secondItem="LBg-Lt-es1" secondAttribute="height" id="ZSt-6X-XOB"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="heritageLocationClicked:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="nmq-nb-OLG"/>
+                                </connections>
+                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="AJP-xi-Kpn">
+                                <rect key="frame" x="354" y="408" width="40" height="80"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="24m-hX-pXp">
+                                        <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="40" id="3Tv-mh-r4R"/>
+                                            <constraint firstAttribute="width" secondItem="24m-hX-pXp" secondAttribute="height" id="e7Y-p5-0NB"/>
+                                        </constraints>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="Button"/>
+                                        <connections>
+                                            <action selector="zoomInButtonClicked:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="bYN-w3-rO3"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2jv-9p-cRm">
+                                        <rect key="frame" x="0.0" y="40" width="40" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="40" id="Dgj-yD-6HA"/>
+                                            <constraint firstAttribute="width" secondItem="2jv-9p-cRm" secondAttribute="height" id="zhv-fp-3Io"/>
+                                        </constraints>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="Button"/>
+                                        <connections>
+                                            <action selector="zoomOutButtonClicked:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="u5u-ti-GRS"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="2jv-9p-cRm" firstAttribute="leading" secondItem="AJP-xi-Kpn" secondAttribute="leading" id="3wY-Wy-IUZ"/>
+                                    <constraint firstAttribute="trailing" secondItem="2jv-9p-cRm" secondAttribute="trailing" id="58q-sF-ZaC"/>
+                                    <constraint firstItem="24m-hX-pXp" firstAttribute="leading" secondItem="AJP-xi-Kpn" secondAttribute="leading" id="E0a-Dg-oSf"/>
+                                    <constraint firstItem="24m-hX-pXp" firstAttribute="top" secondItem="AJP-xi-Kpn" secondAttribute="top" id="Gfo-bi-8km"/>
+                                    <constraint firstAttribute="trailing" secondItem="24m-hX-pXp" secondAttribute="trailing" id="KmU-s9-1Z9"/>
+                                    <constraint firstAttribute="bottom" secondItem="2jv-9p-cRm" secondAttribute="bottom" id="Tm5-1c-fpt"/>
+                                </constraints>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="X8d-Gu-0yD" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="0yZ-8c-LOl"/>
+                            <constraint firstItem="OQF-JT-Qrh" firstAttribute="leading" secondItem="LBg-Lt-es1" secondAttribute="trailing" constant="20" id="7yR-Vu-CRd"/>
                             <constraint firstItem="X8d-Gu-0yD" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="Rce-S7-6mp"/>
                             <constraint firstItem="X8d-Gu-0yD" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="Ze4-oJ-4N9"/>
+                            <constraint firstItem="LBg-Lt-es1" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="bsx-0l-Pvj"/>
+                            <constraint firstItem="LBg-Lt-es1" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="20" id="gRb-my-vz1"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="AJP-xi-Kpn" secondAttribute="trailing" constant="20" id="lbb-aq-cOv"/>
                             <constraint firstAttribute="bottom" secondItem="X8d-Gu-0yD" secondAttribute="bottom" id="t3o-HZ-RyV"/>
+                            <constraint firstItem="OQF-JT-Qrh" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="20" id="v7I-kH-Jzg"/>
+                            <constraint firstItem="AJP-xi-Kpn" firstAttribute="centerY" secondItem="5EZ-qb-Rvc" secondAttribute="centerY" id="xWh-OO-OFc"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="MKMapView" destination="X8d-Gu-0yD" id="Jbx-7X-bOS"/>
+                        <outlet property="heritageLocation" destination="LBg-Lt-es1" id="gJj-kv-Lfu"/>
+                        <outlet property="myLocation" destination="OQF-JT-Qrh" id="yux-0J-hti"/>
+                        <outlet property="zoomIn" destination="24m-hX-pXp" id="bSt-sP-DcL"/>
+                        <outlet property="zoomOut" destination="2jv-9p-cRm" id="DvF-tM-lIM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

@@ -17,14 +17,13 @@ class ListCollectionViewCell: UICollectionViewCell {
         listTitle.textColor = .white
         listTitle.textAlignment = .center
         
-        listText.font = UIFont().MapoFlowerIsland16
+        listText.font = UIFont().MapoFlowerIsland14
         listText.textColor = .white
         listText.textAlignment = .center
-        listText.numberOfLines = 5
+        listText.numberOfLines = 3
         
         cellView.backgroundColor = .clear
         cellView.layer.shadowColor = UIColor.white.cgColor
-        cellView.layer.shadowOpacity = 0.5
         cellView.layer.shadowRadius = 10
     }
 }

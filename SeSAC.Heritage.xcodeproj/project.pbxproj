@@ -73,6 +73,7 @@
 		75F01E9E274A7C60008C6951 /* MypageVistedPointCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 75F01E9C274A7C60008C6951 /* MypageVistedPointCollectionViewCell.xib */; };
 		75F01EA1274A7C79008C6951 /* MypageWantVisitedPointCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F01E9F274A7C79008C6951 /* MypageWantVisitedPointCollectionViewCell.swift */; };
 		75F01EA2274A7C79008C6951 /* MypageWantVisitedPointCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 75F01EA0274A7C79008C6951 /* MypageWantVisitedPointCollectionViewCell.xib */; };
+		75F9BA1C275D27530012E7B0 /* Label + Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F9BA1B275D27530012E7B0 /* Label + Extention.swift */; };
 		75FB9849274942B200A3A28C /* ListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FB9848274942B200A3A28C /* ListTableViewCell.swift */; };
 		75FB985427495E7E00A3A28C /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 75FB985327495E7E00A3A28C /* Kingfisher */; };
 /* End PBXBuildFile section */
@@ -145,6 +146,7 @@
 		75F01E9C274A7C60008C6951 /* MypageVistedPointCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MypageVistedPointCollectionViewCell.xib; sourceTree = "<group>"; };
 		75F01E9F274A7C79008C6951 /* MypageWantVisitedPointCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageWantVisitedPointCollectionViewCell.swift; sourceTree = "<group>"; };
 		75F01EA0274A7C79008C6951 /* MypageWantVisitedPointCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MypageWantVisitedPointCollectionViewCell.xib; sourceTree = "<group>"; };
+		75F9BA1B275D27530012E7B0 /* Label + Extention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Label + Extention.swift"; sourceTree = "<group>"; };
 		75FB9848274942B200A3A28C /* ListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -296,6 +298,7 @@
 				75AEBFA1274641B900A5661D /* Font + Extention.swift */,
 				75AEBFA9274651DC00A5661D /* Sidemenu + Extention.swift */,
 				753E852E2747B0B4007469D2 /* Localizable + Extention.swift */,
+				75F9BA1B275D27530012E7B0 /* Label + Extention.swift */,
 			);
 			path = Extention;
 			sourceTree = "<group>";
@@ -435,6 +438,7 @@
 				753E851427476657007469D2 /* ListCategoryCollectionViewCell.swift in Sources */,
 				753E852F2747B0B4007469D2 /* Localizable + Extention.swift in Sources */,
 				75AEBF62274631E900A5661D /* ViewController.swift in Sources */,
+				75F9BA1C275D27530012E7B0 /* Label + Extention.swift in Sources */,
 				75AEBF92274638B500A5661D /* ListDetailViewController.swift in Sources */,
 				75AEBFBD2746D91900A5661D /* List.swift in Sources */,
 				75F01EA1274A7C79008C6951 /* MypageWantVisitedPointCollectionViewCell.swift in Sources */,
@@ -635,6 +639,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SeSAC.Heritage/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = JHeritage;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "현재 위치를 알기 위해 이 권한이 필요합니다.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -645,7 +650,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.SSAC.SeSAC-Heritage";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -665,6 +670,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SeSAC.Heritage/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = JHeritage;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "현재 위치를 알기 위해 이 권한이 필요합니다.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -675,7 +681,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.SSAC.SeSAC-Heritage";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
