@@ -43,7 +43,6 @@ class FistViewController: UIViewController {
         super.viewDidAppear(true)
         
         let heritage = localRealm.objects(Heritage_List.self).count
-        //print(heritage)
         if heritage == 0 {
             fetcHeritageData()
             presentNextPage()
