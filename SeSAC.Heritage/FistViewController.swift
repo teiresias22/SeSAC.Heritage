@@ -48,17 +48,15 @@ class FistViewController: UIViewController {
             presentNextPage()
             //totalCnt와 맞지 않으면 행동이 필요함.
         }
-        
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             self.presentNextPage()
         }
     }
     
     func presentNextPage() {
-        let sb = UIStoryboard(name: "List", bundle: nil)
-        guard let vc = sb.instantiateViewController(withIdentifier: "ListViewController") as? ListViewController else { return }
+        guard let vc = UIStoryboard(name: "List", bundle: nil).instantiateViewController(withIdentifier: "ListViewController") as? ListViewController else { return }
         let nav = UINavigationController(rootViewController: vc)
-        nav.modalPresentationStyle = .overCurrentContext
+        nav.modalPresentationStyle = .overFullScreen
         self.present(nav, animated: true, completion: nil)
     }
     
@@ -175,3 +173,20 @@ extension FistViewController: XMLParserDelegate {
         }
     }
 }
+
+/*
+ func checkDeviceNetworkStatus() {
+         if(DeviceManager.shared.networkStatus) {
+             let firstVC = UIStoryboard(name: "First", bundle: nil).instantiateViewController(withIdentifier: "FirstViewController")
+             present(firstVC, animated: true, completion: nil)
+             
+         } else {
+             let alert: UIAlertController = UIAlertController(title: "네트워크 상태 확인", message: "네트워크가 불안정 합니다.", preferredStyle: .alert)
+             let action: UIAlertAction = UIAlertAction(title: "다시 시도", style: .default, handler: { (ACTION) in
+                 self.checkDeviceNetworkStatus()
+             })
+             alert.addAction(action)
+             present(alert, animated: true, completion: nil)
+         }
+     }
+ */

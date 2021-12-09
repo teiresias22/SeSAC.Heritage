@@ -4,6 +4,10 @@ import RealmSwift
 class ListViewController: UIViewController {
     @IBOutlet weak var listCollectionView: UICollectionView!
     
+    @IBOutlet weak var myPageButton: UIButton!
+    @IBOutlet weak var mapButton: UIButton!
+    @IBOutlet weak var listPageButton: UIButton!
+    
     let listInformation = ListInformation()
     
     override func viewDidLoad() {
@@ -18,6 +22,10 @@ class ListViewController: UIViewController {
          // Do any additional setup after loading the view.
         listCollectionView.delegate = self
         listCollectionView.dataSource = self
+        
+        setTabBarButton(myPageButton, "나의")
+        setTabBarButton(mapButton, "지도")
+        setTabBarButton(listPageButton, "목록")
         
         collectionViewSet()
         
@@ -53,6 +61,22 @@ class ListViewController: UIViewController {
         listCollectionView.collectionViewLayout = layout
         listCollectionView.backgroundColor = .clear
     }
+    
+    func setTabBarButton( _ target: UIButton, _ name: String){
+        target.translatesAutoresizingMaskIntoConstraints = false
+        target.titleLabel?.adjustsFontForContentSizeCategory = true
+        //target.setImage(UIImage(systemName: name), for: .normal)
+        //target.tintColor = .customBlack
+        target.setTitle(name, for: .normal)
+        target.setTitleColor(.customBlack, for: .normal)
+        target.semanticContentAttribute = .forceLeftToRight
+        target.contentVerticalAlignment = .center
+        target.contentHorizontalAlignment = .leading
+    }
+    
+    
+    
+    
 }
 
 extension ListViewController: UICollectionViewDelegate, UICollectionViewDataSource {

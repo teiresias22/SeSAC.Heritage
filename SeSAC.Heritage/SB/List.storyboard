@@ -43,24 +43,86 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="X8W-Wz-tLa">
+                                <rect key="frame" x="0.0" y="836" width="414" height="60"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eqe-gM-jHN">
+                                        <rect key="frame" x="0.0" y="0.0" width="138" height="60"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RtL-kU-vvr">
+                                                <rect key="frame" x="46" y="0.0" width="46" height="60"/>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <state key="normal" title="Button"/>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="RtL-kU-vvr" firstAttribute="centerY" secondItem="eqe-gM-jHN" secondAttribute="centerY" id="7cn-rP-SNU"/>
+                                            <constraint firstItem="RtL-kU-vvr" firstAttribute="centerX" secondItem="eqe-gM-jHN" secondAttribute="centerX" id="IZM-Oh-5wW"/>
+                                            <constraint firstItem="RtL-kU-vvr" firstAttribute="top" secondItem="eqe-gM-jHN" secondAttribute="top" id="LMO-is-WGR"/>
+                                            <constraint firstAttribute="bottom" secondItem="RtL-kU-vvr" secondAttribute="bottom" id="XQd-MH-Uei"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DKj-g9-zam">
+                                        <rect key="frame" x="138" y="0.0" width="138" height="60"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M6E-37-PBE">
+                                                <rect key="frame" x="46" y="0.0" width="46" height="60"/>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <state key="normal" title="Button"/>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="M6E-37-PBE" firstAttribute="centerY" secondItem="DKj-g9-zam" secondAttribute="centerY" id="Jma-QM-byy"/>
+                                            <constraint firstAttribute="bottom" secondItem="M6E-37-PBE" secondAttribute="bottom" id="RbD-6q-wgK"/>
+                                            <constraint firstItem="M6E-37-PBE" firstAttribute="top" secondItem="DKj-g9-zam" secondAttribute="top" id="Rdg-1m-KYJ"/>
+                                            <constraint firstItem="M6E-37-PBE" firstAttribute="centerX" secondItem="DKj-g9-zam" secondAttribute="centerX" id="gvx-0D-fF8"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="efW-uN-0Zu">
+                                        <rect key="frame" x="276" y="0.0" width="138" height="60"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EYt-0x-aee">
+                                                <rect key="frame" x="46" y="0.0" width="46" height="60"/>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <state key="normal" title="Button"/>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="EYt-0x-aee" firstAttribute="centerY" secondItem="efW-uN-0Zu" secondAttribute="centerY" id="5Hw-GV-t74"/>
+                                            <constraint firstAttribute="bottom" secondItem="EYt-0x-aee" secondAttribute="bottom" id="6rM-dx-v21"/>
+                                            <constraint firstItem="EYt-0x-aee" firstAttribute="centerX" secondItem="efW-uN-0Zu" secondAttribute="centerX" id="O5b-EL-MSB"/>
+                                            <constraint firstItem="EYt-0x-aee" firstAttribute="top" secondItem="efW-uN-0Zu" secondAttribute="top" id="dyq-Rv-sfw"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="Vjz-i7-7g7"/>
+                                </constraints>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" name="customWhite"/>
                         <constraints>
                             <constraint firstItem="CVE-6V-adM" firstAttribute="centerY" secondItem="5EZ-qb-Rvc" secondAttribute="centerY" id="8cT-vO-8UN"/>
+                            <constraint firstAttribute="bottom" secondItem="X8W-Wz-tLa" secondAttribute="bottom" id="TxW-bQ-eW4"/>
                             <constraint firstItem="CVE-6V-adM" firstAttribute="width" secondItem="5EZ-qb-Rvc" secondAttribute="width" multiplier="0.9" id="ZU6-0E-NnT"/>
+                            <constraint firstAttribute="trailing" secondItem="X8W-Wz-tLa" secondAttribute="trailing" id="ajS-fK-hTo"/>
                             <constraint firstItem="CVE-6V-adM" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="qMl-c5-Zmv"/>
+                            <constraint firstItem="X8W-Wz-tLa" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" id="w2Z-HX-MF1"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="Lmk-PM-95V"/>
+                    <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="listCollectionView" destination="CVE-6V-adM" id="yRc-xb-DbY"/>
+                        <outlet property="listPageButton" destination="EYt-0x-aee" id="JV1-xV-R2m"/>
+                        <outlet property="mapButton" destination="M6E-37-PBE" id="MIx-8N-KL5"/>
+                        <outlet property="myPageButton" destination="RtL-kU-vvr" id="fDY-rU-96S"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1047.8260869565217" y="137.94642857142856"/>
+            <point key="canvasLocation" x="7740.579710144928" y="137.94642857142856"/>
         </scene>
     </scenes>
     <resources>

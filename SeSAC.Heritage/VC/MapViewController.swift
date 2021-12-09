@@ -64,7 +64,7 @@ class MapViewController: UIViewController {
         
         if latitude == 0.0 && longitude == 0.0 {
             location = CLLocationCoordinate2D(latitude: 37.57606059397734, longitude: 126.9766761117934)
-            annotation.title = "위치를 불러올수 없습니다."
+            annotation.title = "위치가 기록되지 않았습니다."
         } else {
             location = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
             annotation.title = item.ccbaMnm1.localized()
