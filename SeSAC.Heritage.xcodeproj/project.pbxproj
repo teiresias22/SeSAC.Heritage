@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		750CDE7827638C3F0057390E /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 750CDE7727638C3F0057390E /* TabBar.swift */; };
 		752A5E562750E3A20059114B /* SwiftyXMLParser in Frameworks */ = {isa = PBXBuildFile; productRef = 752A5E552750E3A20059114B /* SwiftyXMLParser */; };
 		753E851427476657007469D2 /* ListCategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753E851227476657007469D2 /* ListCategoryCollectionViewCell.swift */; };
 		753E851527476657007469D2 /* ListCategoryCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 753E851327476657007469D2 /* ListCategoryCollectionViewCell.xib */; };
@@ -71,6 +72,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		750CDE7727638C3F0057390E /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		753E851227476657007469D2 /* ListCategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCategoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		753E851327476657007469D2 /* ListCategoryCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListCategoryCollectionViewCell.xib; sourceTree = "<group>"; };
 		753E85292747AF85007469D2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -298,6 +300,7 @@
 				75C11168274FFFAA00ADFA78 /* StockCodeInformation.swift */,
 				75C1116A275001B300ADFA78 /* City.swift */,
 				75C1116C275001DF00ADFA78 /* CityInformation.swift */,
+				750CDE7727638C3F0057390E /* TabBar.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -421,6 +424,7 @@
 				75AEBFB42746833900A5661D /* SideMenuVC.swift in Sources */,
 				75FB9849274942B200A3A28C /* ListTableViewCell.swift in Sources */,
 				75AEBF9E2746395E00A5661D /* MapViewController.swift in Sources */,
+				750CDE7827638C3F0057390E /* TabBar.swift in Sources */,
 				75BB0498275646FC005F4A44 /* SearchViewController.swift in Sources */,
 				75649718274CAD14000AD0CB /* HeritageListModel.swift in Sources */,
 				75BB049A27564706005F4A44 /* ListUpViewController.swift in Sources */,
