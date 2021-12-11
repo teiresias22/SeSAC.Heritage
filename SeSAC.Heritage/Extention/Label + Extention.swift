@@ -2,7 +2,7 @@
 //  Label + Extention.swift
 //  SeSAC.Heritage
 //
-//  Created by Joonhwan Jeon on 2021/12/06.
+//  Created by Joonhwan Jeon on 2021/12/11.
 //
 
 import UIKit

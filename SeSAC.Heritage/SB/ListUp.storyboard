@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Item-->
+        <!--List Up View Controller-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
                 <viewController storyboardIdentifier="ListUpViewController" id="Y6W-OH-hqX" customClass="ListUpViewController" customModule="SeSAC_Heritage" customModuleProvider="target" sceneMemberID="viewController">
@@ -31,7 +31,7 @@
                                 </connections>
                             </segmentedControl>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="yaq-tR-r3u">
-                                <rect key="frame" x="0.0" y="74" width="414" height="788"/>
+                                <rect key="frame" x="0.0" y="74" width="414" height="739"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ListUpTableViewCell" rowHeight="125" id="fkv-hB-D7s" customClass="ListUpTableViewCell" customModule="SeSAC_Heritage" customModuleProvider="target">
@@ -105,14 +105,18 @@
                         <constraints>
                             <constraint firstItem="yaq-tR-r3u" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="1kW-IX-uEk"/>
                             <constraint firstItem="mCI-f0-dEc" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="6R5-gh-Nmq"/>
+                            <constraint firstItem="yaq-tR-r3u" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="GkZ-FR-CfZ"/>
                             <constraint firstItem="yaq-tR-r3u" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="PQt-Gq-xFO"/>
+                            <constraint firstItem="yaq-tR-r3u" firstAttribute="bottom" secondItem="vDu-zF-Fre" secondAttribute="bottom" id="cEL-iz-4as"/>
+                            <constraint firstItem="yaq-tR-r3u" firstAttribute="top" secondItem="mCI-f0-dEc" secondAttribute="bottom" id="hM4-h7-rNy"/>
                             <constraint firstItem="mCI-f0-dEc" firstAttribute="width" secondItem="5EZ-qb-Rvc" secondAttribute="width" multiplier="0.8" id="iz1-DX-uUC"/>
                             <constraint firstItem="yaq-tR-r3u" firstAttribute="top" secondItem="mCI-f0-dEc" secondAttribute="bottom" id="nLB-Pz-NfN"/>
                             <constraint firstItem="mCI-f0-dEc" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="rQa-7c-Zok"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="yaq-tR-r3u" secondAttribute="bottom" id="yiY-Cs-ZXN"/>
+                            <constraint firstItem="yaq-tR-r3u" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="zGt-zZ-Fc2"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" image="person.fill" catalog="system" id="Fju-Xh-441"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="listUpTable" destination="yaq-tR-r3u" id="ePu-IA-l3p"/>
                         <outlet property="segmentedControl" destination="mCI-f0-dEc" id="tqQ-cl-fvb"/>
@@ -124,7 +128,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="person.fill" catalog="system" width="128" height="120"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

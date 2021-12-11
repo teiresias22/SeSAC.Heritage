@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		750CDE7827638C3F0057390E /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 750CDE7727638C3F0057390E /* TabBar.swift */; };
 		752A5E562750E3A20059114B /* SwiftyXMLParser in Frameworks */ = {isa = PBXBuildFile; productRef = 752A5E552750E3A20059114B /* SwiftyXMLParser */; };
 		753E851427476657007469D2 /* ListCategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753E851227476657007469D2 /* ListCategoryCollectionViewCell.swift */; };
 		753E851527476657007469D2 /* ListCategoryCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 753E851327476657007469D2 /* ListCategoryCollectionViewCell.xib */; };
@@ -44,8 +43,6 @@
 		75AEBFA827464C0900A5661D /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 75AEBFA727464C0900A5661D /* Montserrat-Regular.ttf */; };
 		75AEBFAA274651DC00A5661D /* Sidemenu + Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75AEBFA9274651DC00A5661D /* Sidemenu + Extention.swift */; };
 		75AEBFAD27465BC400A5661D /* SideMenu in Frameworks */ = {isa = PBXBuildFile; productRef = 75AEBFAC27465BC400A5661D /* SideMenu */; };
-		75AEBFAF27465BFA00A5661D /* SideMenu.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75AEBFAE27465BFA00A5661D /* SideMenu.storyboard */; };
-		75AEBFB127465C0A00A5661D /* SideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75AEBFB027465C0A00A5661D /* SideMenuViewController.swift */; };
 		75AEBFB42746833900A5661D /* SideMenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75AEBFB32746833900A5661D /* SideMenuVC.swift */; };
 		75AEBFB72746CE1400A5661D /* ListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75AEBFB52746CE1400A5661D /* ListCollectionViewCell.swift */; };
 		75AEBFB82746CE1400A5661D /* ListCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 75AEBFB62746CE1400A5661D /* ListCollectionViewCell.xib */; };
@@ -61,18 +58,17 @@
 		75C11169274FFFAA00ADFA78 /* StockCodeInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C11168274FFFAA00ADFA78 /* StockCodeInformation.swift */; };
 		75C1116B275001B300ADFA78 /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C1116A275001B300ADFA78 /* City.swift */; };
 		75C1116D275001DF00ADFA78 /* CityInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C1116C275001DF00ADFA78 /* CityInformation.swift */; };
+		75E1110A27645CFE00BA2C8D /* Label + Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E1110927645CFE00BA2C8D /* Label + Extention.swift */; };
 		75F01E9A274A28EE008C6951 /* EventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F01E99274A28EE008C6951 /* EventTableViewCell.swift */; };
 		75F01E9D274A7C60008C6951 /* MypageVistedPointCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F01E9B274A7C60008C6951 /* MypageVistedPointCollectionViewCell.swift */; };
 		75F01E9E274A7C60008C6951 /* MypageVistedPointCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 75F01E9C274A7C60008C6951 /* MypageVistedPointCollectionViewCell.xib */; };
 		75F01EA1274A7C79008C6951 /* MypageWantVisitedPointCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F01E9F274A7C79008C6951 /* MypageWantVisitedPointCollectionViewCell.swift */; };
 		75F01EA2274A7C79008C6951 /* MypageWantVisitedPointCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 75F01EA0274A7C79008C6951 /* MypageWantVisitedPointCollectionViewCell.xib */; };
-		75F9BA1C275D27530012E7B0 /* Label + Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F9BA1B275D27530012E7B0 /* Label + Extention.swift */; };
 		75FB9849274942B200A3A28C /* ListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FB9848274942B200A3A28C /* ListTableViewCell.swift */; };
 		75FB985427495E7E00A3A28C /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 75FB985327495E7E00A3A28C /* Kingfisher */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		750CDE7727638C3F0057390E /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		753E851227476657007469D2 /* ListCategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCategoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		753E851327476657007469D2 /* ListCategoryCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListCategoryCollectionViewCell.xib; sourceTree = "<group>"; };
 		753E85292747AF85007469D2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -110,8 +106,6 @@
 		75AEBFA427464BE500A5661D /* MapoFlowerIsland.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MapoFlowerIsland.otf; sourceTree = "<group>"; };
 		75AEBFA727464C0900A5661D /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Regular.ttf"; sourceTree = "<group>"; };
 		75AEBFA9274651DC00A5661D /* Sidemenu + Extention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sidemenu + Extention.swift"; sourceTree = "<group>"; };
-		75AEBFAE27465BFA00A5661D /* SideMenu.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SideMenu.storyboard; sourceTree = "<group>"; };
-		75AEBFB027465C0A00A5661D /* SideMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuViewController.swift; sourceTree = "<group>"; };
 		75AEBFB32746833900A5661D /* SideMenuVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuVC.swift; sourceTree = "<group>"; };
 		75AEBFB52746CE1400A5661D /* ListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCollectionViewCell.swift; sourceTree = "<group>"; };
 		75AEBFB62746CE1400A5661D /* ListCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -127,12 +121,12 @@
 		75C11168274FFFAA00ADFA78 /* StockCodeInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockCodeInformation.swift; sourceTree = "<group>"; };
 		75C1116A275001B300ADFA78 /* City.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
 		75C1116C275001DF00ADFA78 /* CityInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityInformation.swift; sourceTree = "<group>"; };
+		75E1110927645CFE00BA2C8D /* Label + Extention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Label + Extention.swift"; sourceTree = "<group>"; };
 		75F01E99274A28EE008C6951 /* EventTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTableViewCell.swift; sourceTree = "<group>"; };
 		75F01E9B274A7C60008C6951 /* MypageVistedPointCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageVistedPointCollectionViewCell.swift; sourceTree = "<group>"; };
 		75F01E9C274A7C60008C6951 /* MypageVistedPointCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MypageVistedPointCollectionViewCell.xib; sourceTree = "<group>"; };
 		75F01E9F274A7C79008C6951 /* MypageWantVisitedPointCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageWantVisitedPointCollectionViewCell.swift; sourceTree = "<group>"; };
 		75F01EA0274A7C79008C6951 /* MypageWantVisitedPointCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MypageWantVisitedPointCollectionViewCell.xib; sourceTree = "<group>"; };
-		75F9BA1B275D27530012E7B0 /* Label + Extention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Label + Extention.swift"; sourceTree = "<group>"; };
 		75FB9848274942B200A3A28C /* ListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -197,9 +191,9 @@
 				75AEBF72274633F800A5661D /* VC */,
 				75AEBF71274633F000A5661D /* SB */,
 				75AEBF5D274631E900A5661D /* AppDelegate.swift */,
-				75AEBFB32746833900A5661D /* SideMenuVC.swift */,
 				75AEBF5F274631E900A5661D /* SceneDelegate.swift */,
 				75AEBF61274631E900A5661D /* ViewController.swift */,
+				75AEBFB32746833900A5661D /* SideMenuVC.swift */,
 				75A0492127550A0E00BA6214 /* FistViewController.swift */,
 				75AEBF63274631E900A5661D /* Main.storyboard */,
 				75876561275541EE0025022E /* HeritageList.xml */,
@@ -221,7 +215,6 @@
 				75BB04952756451D005F4A44 /* ListUp.storyboard */,
 				75AEBF85274637A900A5661D /* Notice.storyboard */,
 				75AEBF892746385700A5661D /* Map.storyboard */,
-				75AEBFAE27465BFA00A5661D /* SideMenu.storyboard */,
 			);
 			path = SB;
 			sourceTree = "<group>";
@@ -237,7 +230,6 @@
 				75BB049927564706005F4A44 /* ListUpViewController.swift */,
 				75AEBF992746394B00A5661D /* NoticeViewController.swift */,
 				75AEBF9D2746395E00A5661D /* MapViewController.swift */,
-				75AEBFB027465C0A00A5661D /* SideMenuViewController.swift */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -276,7 +268,7 @@
 				75AEBFA1274641B900A5661D /* Font + Extention.swift */,
 				75AEBFA9274651DC00A5661D /* Sidemenu + Extention.swift */,
 				753E852E2747B0B4007469D2 /* Localizable + Extention.swift */,
-				75F9BA1B275D27530012E7B0 /* Label + Extention.swift */,
+				75E1110927645CFE00BA2C8D /* Label + Extention.swift */,
 			);
 			path = Extention;
 			sourceTree = "<group>";
@@ -300,7 +292,6 @@
 				75C11168274FFFAA00ADFA78 /* StockCodeInformation.swift */,
 				75C1116A275001B300ADFA78 /* City.swift */,
 				75C1116C275001DF00ADFA78 /* CityInformation.swift */,
-				750CDE7727638C3F0057390E /* TabBar.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -385,7 +376,6 @@
 				75AEBFA627464BE500A5661D /* MapoFlowerIsland.otf in Resources */,
 				753E85282747AF85007469D2 /* Localizable.strings in Resources */,
 				75AEBFA527464BE500A5661D /* MapoGoldenPier.otf in Resources */,
-				75AEBFAF27465BFA00A5661D /* SideMenu.storyboard in Resources */,
 				753E851527476657007469D2 /* ListCategoryCollectionViewCell.xib in Resources */,
 				75876562275541EE0025022E /* HeritageList.xml in Resources */,
 				75AEBF67274631E900A5661D /* Assets.xcassets in Resources */,
@@ -413,7 +403,6 @@
 				753E851427476657007469D2 /* ListCategoryCollectionViewCell.swift in Sources */,
 				753E852F2747B0B4007469D2 /* Localizable + Extention.swift in Sources */,
 				75AEBF62274631E900A5661D /* ViewController.swift in Sources */,
-				75F9BA1C275D27530012E7B0 /* Label + Extention.swift in Sources */,
 				75AEBF92274638B500A5661D /* ListDetailViewController.swift in Sources */,
 				75AEBFBD2746D91900A5661D /* List.swift in Sources */,
 				75F01EA1274A7C79008C6951 /* MypageWantVisitedPointCollectionViewCell.swift in Sources */,
@@ -424,13 +413,12 @@
 				75AEBFB42746833900A5661D /* SideMenuVC.swift in Sources */,
 				75FB9849274942B200A3A28C /* ListTableViewCell.swift in Sources */,
 				75AEBF9E2746395E00A5661D /* MapViewController.swift in Sources */,
-				750CDE7827638C3F0057390E /* TabBar.swift in Sources */,
 				75BB0498275646FC005F4A44 /* SearchViewController.swift in Sources */,
 				75649718274CAD14000AD0CB /* HeritageListModel.swift in Sources */,
+				75E1110A27645CFE00BA2C8D /* Label + Extention.swift in Sources */,
 				75BB049A27564706005F4A44 /* ListUpViewController.swift in Sources */,
 				75AEBF90274638AD00A5661D /* ListTableViewController.swift in Sources */,
 				75AEBFAA274651DC00A5661D /* Sidemenu + Extention.swift in Sources */,
-				75AEBFB127465C0A00A5661D /* SideMenuViewController.swift in Sources */,
 				75F01E9A274A28EE008C6951 /* EventTableViewCell.swift in Sources */,
 				75F01E9D274A7C60008C6951 /* MypageVistedPointCollectionViewCell.swift in Sources */,
 				75A0492227550A0E00BA6214 /* FistViewController.swift in Sources */,
