@@ -15,7 +15,12 @@ class ListTableViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = listInformation.localized()
+        if listInformation == "StockCode" {
+            self.title = "종류별 문화유산".localized()
+        } else {
+            self.title = "지역별 문화유산".localized()
+        }
+        
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "MapoFlowerIsland", size: 20)!]
                 
         listTable.separatorStyle = UITableViewCell.SeparatorStyle.none

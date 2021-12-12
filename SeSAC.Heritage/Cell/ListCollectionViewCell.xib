@@ -18,27 +18,33 @@
                 <rect key="frame" x="0.0" y="0.0" width="175" height="42"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UNX-dX-UDh">
+                        <rect key="frame" x="4" y="8" width="167" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="S1F-VG-zMA"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jkI-m1-F9y">
-                        <rect key="frame" x="0.0" y="0.0" width="175" height="42"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UNX-dX-UDh">
-                                <rect key="frame" x="8" y="5" width="159" height="20.5"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
+                        <rect key="frame" x="0.0" y="32" width="175" height="6"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="6" id="Zcj-vg-TRf"/>
+                        </constraints>
                     </view>
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <constraints>
-                <constraint firstItem="jkI-m1-F9y" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="Kwg-LN-Cvd"/>
-                <constraint firstAttribute="trailing" secondItem="jkI-m1-F9y" secondAttribute="trailing" id="PSW-VW-59K"/>
-                <constraint firstAttribute="bottom" secondItem="jkI-m1-F9y" secondAttribute="bottom" id="wXS-bO-32F"/>
-                <constraint firstItem="jkI-m1-F9y" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="xg9-g5-yg9"/>
+                <constraint firstAttribute="bottom" secondItem="jkI-m1-F9y" secondAttribute="bottom" constant="4" id="BDH-z1-KBj"/>
+                <constraint firstItem="UNX-dX-UDh" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="8" id="Mzv-2y-Z6N"/>
+                <constraint firstItem="UNX-dX-UDh" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="4" id="TQG-Uo-csD"/>
+                <constraint firstItem="jkI-m1-F9y" firstAttribute="top" secondItem="UNX-dX-UDh" secondAttribute="bottom" constant="4" id="Vfi-LS-2lo"/>
+                <constraint firstItem="jkI-m1-F9y" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="YDr-K1-dmh"/>
+                <constraint firstAttribute="trailing" secondItem="jkI-m1-F9y" secondAttribute="trailing" id="gI0-Uw-Vup"/>
+                <constraint firstAttribute="trailing" secondItem="UNX-dX-UDh" secondAttribute="trailing" constant="4" id="phX-Ll-kPz"/>
             </constraints>
             <size key="customSize" width="175" height="42"/>
             <connections>

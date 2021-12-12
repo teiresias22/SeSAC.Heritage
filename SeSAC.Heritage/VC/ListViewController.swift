@@ -20,6 +20,8 @@ class ListViewController: UIViewController {
         
         let nibName2 = UINib(nibName: ListCategoryCollectionViewCell.identifier, bundle: nil)
         listCollectionView.register(nibName2, forCellWithReuseIdentifier: ListCategoryCollectionViewCell.identifier)
+        
+        TabBarButtonCollection.allowsMultipleSelection = false
 
          // Do any additional setup after loading the view.
         listCollectionView.delegate = self
@@ -36,9 +38,9 @@ class ListViewController: UIViewController {
     func TabBarButtonCollectionViewSet() {
         let layout = UICollectionViewFlowLayout()
         let spacing: CGFloat = 4
-        let width = listCollectionView.frame.width - (spacing * 3)
+        let width = TabBarButtonCollection.frame.width - (spacing * 3)
         
-        layout.itemSize = CGSize(width: width / 2, height: 42)
+        layout.itemSize = CGSize(width: width / 2.2, height: 42)
         layout.sectionInset = UIEdgeInsets(top: spacing, left: spacing, bottom: spacing, right: spacing)
         layout.minimumInteritemSpacing = spacing
         layout.minimumLineSpacing = spacing
@@ -81,8 +83,15 @@ extension ListViewController: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == TabBarButtonCollection {
             guard let item = collectionView.dequeueReusableCell(withReuseIdentifier: ListCollectionViewCell.identifier, for: indexPath) as? ListCollectionViewCell else { return UICollectionViewCell() }
+            item.backgroundColor = .customBlue
+            
+            item.listTitle.font = UIFont().MapoFlowerIsland14
+            item.listTitle.textAlignment = .center
+            item.listTitle.textColor = .customBlack
             item.listTitle.text = listInformation.list[indexPath.row].title.localized()
-                        
+            
+            item.cellView.backgroundColor = .clear
+            
             return item
         } else {
             guard let item = collectionView.dequeueReusableCell(withReuseIdentifier: ListCategoryCollectionViewCell.identifier, for: indexPath) as? ListCategoryCollectionViewCell else { return UICollectionViewCell() }
@@ -119,7 +128,7 @@ extension ListViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+
         if collectionView == TabBarButtonCollection {
             target = listInformation.list[indexPath.row].target
             
