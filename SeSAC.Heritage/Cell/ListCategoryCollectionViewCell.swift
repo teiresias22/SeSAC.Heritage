@@ -15,5 +15,4 @@ class ListCategoryCollectionViewCell: UICollectionViewCell {
         listCategoryLabel.textColor = .customBlack
         listCategoryLabel.font = UIFont.systemFont(ofSize: 12)
     }
-
 }

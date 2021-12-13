@@ -8,6 +8,8 @@
 import UIKit
 import RealmSwift
 import Kingfisher
+import Firebase
+import FirebaseAnalytics
 
 class FistViewController: UIViewController {
     @IBOutlet weak var imageView: UIImageView!
@@ -51,6 +53,22 @@ class FistViewController: UIViewController {
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             self.presentNextPage()
         }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        /*
+        Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
+          AnalyticsParameterItemID: "id-\(title!)",
+          AnalyticsParameterItemName: title!,
+          AnalyticsParameterContentType: "cont",
+        ])
+        */
+        
+        Analytics.logEvent("share_image", parameters: [
+          "name": "Joon" as NSObject,
+          "full_text": "Test" as NSObject,
+        ])
     }
     
     func presentNextPage() {

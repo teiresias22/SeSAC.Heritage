@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		752A5E562750E3A20059114B /* SwiftyXMLParser in Frameworks */ = {isa = PBXBuildFile; productRef = 752A5E552750E3A20059114B /* SwiftyXMLParser */; };
+		7534D50E27677D37009A4952 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7534D50D27677D36009A4952 /* GoogleService-Info.plist */; };
+		7534D51127677E42009A4952 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 7534D51027677E42009A4952 /* FirebaseAnalytics */; };
+		7534D51327677E42009A4952 /* FirebaseAnalyticsSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = 7534D51227677E42009A4952 /* FirebaseAnalyticsSwift-Beta */; };
+		7534D51527677E42009A4952 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = 7534D51427677E42009A4952 /* FirebaseAnalyticsWithoutAdIdSupport */; };
+		7534D51727677E42009A4952 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 7534D51627677E42009A4952 /* FirebaseCrashlytics */; };
 		753E851427476657007469D2 /* ListCategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753E851227476657007469D2 /* ListCategoryCollectionViewCell.swift */; };
 		753E851527476657007469D2 /* ListCategoryCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 753E851327476657007469D2 /* ListCategoryCollectionViewCell.xib */; };
 		753E85282747AF85007469D2 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 753E852A2747AF85007469D2 /* Localizable.strings */; };
@@ -42,7 +47,6 @@
 		75AEBFA827464C0900A5661D /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 75AEBFA727464C0900A5661D /* Montserrat-Regular.ttf */; };
 		75AEBFAA274651DC00A5661D /* Sidemenu + Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75AEBFA9274651DC00A5661D /* Sidemenu + Extention.swift */; };
 		75AEBFAD27465BC400A5661D /* SideMenu in Frameworks */ = {isa = PBXBuildFile; productRef = 75AEBFAC27465BC400A5661D /* SideMenu */; };
-		75AEBFB42746833900A5661D /* SideMenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75AEBFB32746833900A5661D /* SideMenuVC.swift */; };
 		75AEBFBB2746D89C00A5661D /* ListInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75AEBFBA2746D89C00A5661D /* ListInformation.swift */; };
 		75AEBFBD2746D91900A5661D /* List.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75AEBFBC2746D91900A5661D /* List.swift */; };
 		75BB049427564308005F4A44 /* Search.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75BB049327564308005F4A44 /* Search.storyboard */; };
@@ -66,6 +70,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7534D50D27677D36009A4952 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		753E851227476657007469D2 /* ListCategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCategoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		753E851327476657007469D2 /* ListCategoryCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListCategoryCollectionViewCell.xib; sourceTree = "<group>"; };
 		753E85292747AF85007469D2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -102,7 +107,6 @@
 		75AEBFA427464BE500A5661D /* MapoFlowerIsland.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MapoFlowerIsland.otf; sourceTree = "<group>"; };
 		75AEBFA727464C0900A5661D /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Regular.ttf"; sourceTree = "<group>"; };
 		75AEBFA9274651DC00A5661D /* Sidemenu + Extention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sidemenu + Extention.swift"; sourceTree = "<group>"; };
-		75AEBFB32746833900A5661D /* SideMenuVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuVC.swift; sourceTree = "<group>"; };
 		75AEBFBA2746D89C00A5661D /* ListInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListInformation.swift; sourceTree = "<group>"; };
 		75AEBFBC2746D91900A5661D /* List.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = List.swift; sourceTree = "<group>"; };
 		75BB049327564308005F4A44 /* Search.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Search.storyboard; sourceTree = "<group>"; };
@@ -131,9 +135,13 @@
 			files = (
 				7564971E274D4553000AD0CB /* Realm in Frameworks */,
 				75649720274D4553000AD0CB /* RealmSwift in Frameworks */,
+				7534D51127677E42009A4952 /* FirebaseAnalytics in Frameworks */,
 				752A5E562750E3A20059114B /* SwiftyXMLParser in Frameworks */,
+				7534D51327677E42009A4952 /* FirebaseAnalyticsSwift-Beta in Frameworks */,
 				75AEBFAD27465BC400A5661D /* SideMenu in Frameworks */,
+				7534D51727677E42009A4952 /* FirebaseCrashlytics in Frameworks */,
 				75FB985427495E7E00A3A28C /* Kingfisher in Frameworks */,
+				7534D51527677E42009A4952 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -187,12 +195,12 @@
 				75AEBF5D274631E900A5661D /* AppDelegate.swift */,
 				75AEBF5F274631E900A5661D /* SceneDelegate.swift */,
 				75AEBF61274631E900A5661D /* ViewController.swift */,
-				75AEBFB32746833900A5661D /* SideMenuVC.swift */,
 				75A0492127550A0E00BA6214 /* FistViewController.swift */,
 				75AEBF63274631E900A5661D /* Main.storyboard */,
 				75876561275541EE0025022E /* HeritageList.xml */,
 				75AEBF66274631E900A5661D /* Assets.xcassets */,
 				75AEBF68274631E900A5661D /* LaunchScreen.storyboard */,
+				7534D50D27677D36009A4952 /* GoogleService-Info.plist */,
 				75AEBF6B274631E900A5661D /* Info.plist */,
 			);
 			path = SeSAC.Heritage;
@@ -297,6 +305,7 @@
 				75AEBF56274631E900A5661D /* Sources */,
 				75AEBF57274631E900A5661D /* Frameworks */,
 				75AEBF58274631E900A5661D /* Resources */,
+				7534D5182767AE5C009A4952 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -309,6 +318,10 @@
 				7564971D274D4553000AD0CB /* Realm */,
 				7564971F274D4553000AD0CB /* RealmSwift */,
 				752A5E552750E3A20059114B /* SwiftyXMLParser */,
+				7534D51027677E42009A4952 /* FirebaseAnalytics */,
+				7534D51227677E42009A4952 /* FirebaseAnalyticsSwift-Beta */,
+				7534D51427677E42009A4952 /* FirebaseAnalyticsWithoutAdIdSupport */,
+				7534D51627677E42009A4952 /* FirebaseCrashlytics */,
 			);
 			productName = SeSAC.Heritage;
 			productReference = 75AEBF5A274631E900A5661D /* SeSAC.Heritage.app */;
@@ -346,6 +359,7 @@
 				75FB985227495E7E00A3A28C /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				7564971C274D4553000AD0CB /* XCRemoteSwiftPackageReference "realm-cocoa" */,
 				752A5E542750E3A20059114B /* XCRemoteSwiftPackageReference "SwiftyXMLParser" */,
+				7534D50F27677E42009A4952 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = 75AEBF5B274631E900A5661D /* Products */;
 			projectDirPath = "";
@@ -378,12 +392,35 @@
 				75BB04962756451D005F4A44 /* ListUp.storyboard in Resources */,
 				75AEBF7A274636BE00A5661D /* ListCategory.storyboard in Resources */,
 				75AEBF65274631E900A5661D /* Main.storyboard in Resources */,
+				7534D50E27677D37009A4952 /* GoogleService-Info.plist in Resources */,
 				75BB049427564308005F4A44 /* Search.storyboard in Resources */,
 				75AEBF8A2746385700A5661D /* Map.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		7534D5182767AE5C009A4952 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${TARGET_NAME}",
+				"$(SRCROOT)/$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		75AEBF56274631E900A5661D /* Sources */ = {
@@ -399,7 +436,6 @@
 				75C11167274FFC0200ADFA78 /* StockCode.swift in Sources */,
 				75AEBF5E274631E900A5661D /* AppDelegate.swift in Sources */,
 				753E85322747B2C9007469D2 /* Constance.swift in Sources */,
-				75AEBFB42746833900A5661D /* SideMenuVC.swift in Sources */,
 				75FB9849274942B200A3A28C /* ListTableViewCell.swift in Sources */,
 				75AEBF9E2746395E00A5661D /* MapViewController.swift in Sources */,
 				75BB0498275646FC005F4A44 /* SearchViewController.swift in Sources */,
@@ -583,6 +619,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 83R5US8PK8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SeSAC.Heritage/Info.plist;
@@ -670,6 +707,14 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		7534D50F27677E42009A4952 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.0.0;
+			};
+		};
 		7564971C274D4553000AD0CB /* XCRemoteSwiftPackageReference "realm-cocoa" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/realm-cocoa.git";
@@ -701,6 +746,26 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 752A5E542750E3A20059114B /* XCRemoteSwiftPackageReference "SwiftyXMLParser" */;
 			productName = SwiftyXMLParser;
+		};
+		7534D51027677E42009A4952 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7534D50F27677E42009A4952 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		7534D51227677E42009A4952 /* FirebaseAnalyticsSwift-Beta */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7534D50F27677E42009A4952 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = "FirebaseAnalyticsSwift-Beta";
+		};
+		7534D51427677E42009A4952 /* FirebaseAnalyticsWithoutAdIdSupport */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7534D50F27677E42009A4952 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsWithoutAdIdSupport;
+		};
+		7534D51627677E42009A4952 /* FirebaseCrashlytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7534D50F27677E42009A4952 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCrashlytics;
 		};
 		7564971D274D4553000AD0CB /* Realm */ = {
 			isa = XCSwiftPackageProductDependency;
