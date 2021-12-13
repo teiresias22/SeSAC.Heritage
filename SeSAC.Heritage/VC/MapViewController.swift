@@ -22,7 +22,7 @@ class MapViewController: UIViewController {
         self.title = item.ccbaMnm1.localized()
         
         setTopButton(heritageLocation, "landmark")
-        setTopButton(myLocation, "plus")
+        setTopButton(myLocation, "street")
         
         //위치정보 사용권한 요청 - 실행중일때만 권한을 사용
         locationManager.requestWhenInUseAuthorization()

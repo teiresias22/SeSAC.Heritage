@@ -55,7 +55,7 @@ class ListDetailViewController: UIViewController {
         setButton(wannavisitCheckButton, "plus")
         setWannavisitButtonColor()
         
-        setButton(findWayButton, "walking")
+        setButton(findWayButton, "hiking")
         findWayButton.tintColor = .customBlack
         
         setLabel(visitedCheckLabel, "방문")

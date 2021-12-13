@@ -11,6 +11,10 @@ class ListViewController: UIViewController {
     @IBOutlet weak var topRightUnderBarView: UIView!
     @IBOutlet weak var topRightBackground: UIView!
     
+    @IBOutlet weak var listBarButton: TabBarButton!
+    @IBOutlet weak var mapBarButton: TabBarButton!
+    @IBOutlet weak var myBarButton: TabBarButton!
+    
     @IBOutlet weak var listCollectionView: UICollectionView!
     
     let listInformation = ListInformation()
@@ -37,6 +41,10 @@ class ListViewController: UIViewController {
         
         topButtonView.backgroundColor = .clear
         listCollectionViewSet()
+        
+        setBarButton(listBarButton, "list.dash", "목록")
+        setBarButton(mapBarButton, "map", "지도")
+        setBarButton(myBarButton, "person", "내핀")
         
         //print(">>\(UserDefaults.standard.object(forKey: "AppleLanguages"))<<")
     }
@@ -91,6 +99,12 @@ class ListViewController: UIViewController {
         topLeftButtonSet()
     }
     
+    func setBarButton(_ target: TabBarButton, _ image: String, _ text: String){
+        target.barText.text = text.lowercased()
+        target.activeBar.backgroundColor = .customBlue
+        target.imageView.image = UIImage(systemName: image)
+        target.tintColor = .customBlack
+    }
     
     func listCollectionViewSet() {
         let layout = UICollectionViewFlowLayout()

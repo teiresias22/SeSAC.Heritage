@@ -19,26 +19,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="U9e-gj-DRh">
-                                <rect key="frame" x="0.0" y="94" width="414" height="802"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="EWP-Pi-frx">
-                                    <size key="itemSize" width="128" height="128"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                </collectionViewFlowLayout>
-                                <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="6Zy-mQ-e7H">
-                                        <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="o0q-ig-Jo1">
-                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </collectionViewCellContentView>
-                                    </collectionViewCell>
-                                </cells>
-                            </collectionView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nyD-2C-dCR">
                                 <rect key="frame" x="0.0" y="44" width="414" height="42"/>
                                 <subviews>
@@ -146,25 +126,72 @@
                                     <constraint firstAttribute="trailing" secondItem="pRq-2d-XWl" secondAttribute="trailing" id="vmB-Bm-Xrs"/>
                                 </constraints>
                             </view>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="U9e-gj-DRh">
+                                <rect key="frame" x="0.0" y="94" width="414" height="719"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="EWP-Pi-frx">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="6Zy-mQ-e7H">
+                                        <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="o0q-ig-Jo1">
+                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </collectionViewCellContentView>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="2tl-aH-aFP">
+                                <rect key="frame" x="0.0" y="836" width="414" height="60"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Bx-49-rzr" customClass="TabBarButton" customModule="SeSAC_Heritage" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="138" height="60"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EQD-e5-PoB" customClass="TabBarButton" customModule="SeSAC_Heritage" customModuleProvider="target">
+                                        <rect key="frame" x="138" y="0.0" width="138" height="60"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8mk-AA-QUa" customClass="TabBarButton" customModule="SeSAC_Heritage" customModuleProvider="target">
+                                        <rect key="frame" x="276" y="0.0" width="138" height="60"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="44f-Da-iwK"/>
+                                </constraints>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" name="customWhite"/>
                         <constraints>
                             <constraint firstItem="nyD-2C-dCR" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="1yM-qu-NNU"/>
+                            <constraint firstItem="U9e-gj-DRh" firstAttribute="top" secondItem="nyD-2C-dCR" secondAttribute="bottom" constant="8" id="4pu-AV-7Us"/>
                             <constraint firstItem="YII-ze-SN5" firstAttribute="width" secondItem="5EZ-qb-Rvc" secondAttribute="width" multiplier="0.5" id="5Lb-hp-PRG"/>
                             <constraint firstItem="pRq-2d-XWl" firstAttribute="width" secondItem="5EZ-qb-Rvc" secondAttribute="width" multiplier="0.5" id="7NT-oK-NPS"/>
-                            <constraint firstItem="U9e-gj-DRh" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="AN9-mh-hG1"/>
-                            <constraint firstAttribute="bottom" secondItem="U9e-gj-DRh" secondAttribute="bottom" id="BKT-yJ-QuH"/>
-                            <constraint firstItem="U9e-gj-DRh" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="Bn2-aK-Upo"/>
+                            <constraint firstItem="U9e-gj-DRh" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="A2P-mo-XQ8"/>
                             <constraint firstItem="nyD-2C-dCR" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="FUK-aq-iPL"/>
                             <constraint firstItem="nyD-2C-dCR" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="H0s-hj-wOF"/>
-                            <constraint firstItem="U9e-gj-DRh" firstAttribute="top" secondItem="nyD-2C-dCR" secondAttribute="bottom" constant="8" id="tpX-QG-dDa"/>
+                            <constraint firstItem="2tl-aH-aFP" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="RBK-6A-TVK"/>
+                            <constraint firstItem="U9e-gj-DRh" firstAttribute="bottom" secondItem="vDu-zF-Fre" secondAttribute="bottom" id="c52-Ii-lZm"/>
+                            <constraint firstItem="U9e-gj-DRh" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="idM-Vz-5yU"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="2tl-aH-aFP" secondAttribute="trailing" id="pJs-Lj-MpX"/>
+                            <constraint firstAttribute="bottom" secondItem="2tl-aH-aFP" secondAttribute="bottom" id="snq-ZV-gyM"/>
                         </constraints>
                     </view>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="listBarButton" destination="2Bx-49-rzr" id="XSL-Tn-cv3"/>
+                        <outlet property="listBarButtonClicked" destination="2Bx-49-rzr" id="pGl-uE-4GG"/>
                         <outlet property="listCollectionView" destination="U9e-gj-DRh" id="dIr-b3-hKH"/>
+                        <outlet property="mapBarButton" destination="EQD-e5-PoB" id="Ngj-Vu-Qrf"/>
+                        <outlet property="myBarButton" destination="8mk-AA-QUa" id="MoK-ok-3B2"/>
                         <outlet property="topButtonView" destination="nyD-2C-dCR" id="VUc-aX-wUA"/>
                         <outlet property="topLeftBackground" destination="YII-ze-SN5" id="1t5-pQ-62q"/>
                         <outlet property="topLeftButton" destination="HE1-Km-jXJ" id="EKq-uG-Sek"/>
