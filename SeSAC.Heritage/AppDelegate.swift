@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FirebaseApp.configure()
         
         //Crashlytics
-        Crashlytics.crashlytics().setCustomValue(100, forKey: "nickname")
+        //Crashlytics.crashlytics().setCustomValue(100, forKey: "nickname")
         
         // Override point for customization after application launch.
         return true

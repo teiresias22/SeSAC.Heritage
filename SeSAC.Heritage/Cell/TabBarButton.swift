@@ -9,9 +9,8 @@ import UIKit
 
 class TabBarButton: UIView {
     
-    @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var activeBar: UIView!
-    @IBOutlet weak var barText: UILabel!
+    @IBOutlet weak var tabBarButton: UIButton!
+    @IBOutlet weak var tabBarActiveView: UIView!
     
     
     required init?(coder: NSCoder) {
@@ -28,11 +27,7 @@ class TabBarButton: UIView {
     }
     
     func loadUI() {
-        barText.font = UIFont().MapoFlowerIsland12
-        barText.textColor = .customBlack
-        barText.textAlignment = .center
+        tabBarButton.tintColor = .customBlue
+        tabBarActiveView.layer.cornerRadius = 3
     }
-    
-    
-    
 }

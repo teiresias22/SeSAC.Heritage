@@ -12,6 +12,7 @@ class ListViewController: UIViewController {
     @IBOutlet weak var topRightBackground: UIView!
     
     @IBOutlet weak var listBarButton: TabBarButton!
+    @IBOutlet weak var SearchBarButton: TabBarButton!
     @IBOutlet weak var mapBarButton: TabBarButton!
     @IBOutlet weak var myBarButton: TabBarButton!
     
@@ -43,8 +44,16 @@ class ListViewController: UIViewController {
         listCollectionViewSet()
         
         setBarButton(listBarButton, "list.dash", "목록")
+        listBarButton.tabBarButton.addTarget(self, action: #selector(listButtonClicked), for: .touchUpInside)
+        
+        setBarButton(SearchBarButton, "magnifyingglass", "검색")
+        SearchBarButton.tabBarButton.addTarget(self, action: #selector(searchButtonClicked), for: .touchUpInside)
+        
         setBarButton(mapBarButton, "map", "지도")
+        mapBarButton.tabBarButton.addTarget(self, action: #selector(mapButtonClicked), for: .touchUpInside)
+        
         setBarButton(myBarButton, "person", "내핀")
+        myBarButton.tabBarButton.addTarget(self, action: #selector(mypageButtonClicked), for: .touchUpInside)
         
         //print(">>\(UserDefaults.standard.object(forKey: "AppleLanguages"))<<")
     }
@@ -99,11 +108,32 @@ class ListViewController: UIViewController {
         topLeftButtonSet()
     }
     
+    @objc func listButtonClicked() {
+            print("listButtonClicked")
+    }
+    
+    @objc func searchButtonClicked() {
+            print("searchButtonClicked")
+    }
+    
+    @objc func mapButtonClicked() {
+            print("mapButtonClicked")
+    }
+    
+    @objc func mypageButtonClicked() {
+            print("mypageButtonClicked")
+    }
+    
+    
     func setBarButton(_ target: TabBarButton, _ image: String, _ text: String){
-        target.barText.text = text.lowercased()
-        target.activeBar.backgroundColor = .customBlue
-        target.imageView.image = UIImage(systemName: image)
-        target.tintColor = .customBlack
+        target.tabBarButton.setImage(UIImage(systemName: image), for: .normal)
+        target.tabBarButton.imageEdgeInsets = UIEdgeInsets(top: 16, left: 36, bottom: 28, right: 36)
+        target.tabBarButton.contentMode = .scaleToFill
+        target.tabBarButton.setTitle("", for: .normal)
+        target.tabBarButton.contentVerticalAlignment = .fill
+        target.tabBarButton.contentHorizontalAlignment = .fill
+        listBarButton.tabBarActiveView.backgroundColor = .customBlue
+        
     }
     
     func listCollectionViewSet() {
@@ -111,7 +141,7 @@ class ListViewController: UIViewController {
         let spacing: CGFloat = 8
         let width = listCollectionView.frame.width - (spacing * 5)
         
-        layout.itemSize = CGSize(width: width / 4 , height: width / 2.5  )
+        layout.itemSize = CGSize(width: width / 4 , height: width / 2.2)
         layout.sectionInset = UIEdgeInsets(top: spacing, left: spacing, bottom: spacing * 2, right: spacing)
         layout.minimumInteritemSpacing = spacing
         layout.minimumLineSpacing = spacing

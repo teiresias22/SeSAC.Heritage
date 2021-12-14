@@ -22,7 +22,9 @@ class MapViewController: UIViewController {
         self.title = item.ccbaMnm1.localized()
         
         setTopButton(heritageLocation, "landmark")
+        heritageLocation.backgroundColor = .customYellow
         setTopButton(myLocation, "street")
+        myLocation.backgroundColor = .customBlue
         
         //위치정보 사용권한 요청 - 실행중일때만 권한을 사용
         locationManager.requestWhenInUseAuthorization()
@@ -41,7 +43,6 @@ class MapViewController: UIViewController {
         target.setTitle("", for: .normal)
         target.contentVerticalAlignment = .fill
         target.contentHorizontalAlignment = .fill
-        target.backgroundColor = .customWhite
         target.layer.cornerRadius = 20
         target.tintColor = .customBlack
     }
