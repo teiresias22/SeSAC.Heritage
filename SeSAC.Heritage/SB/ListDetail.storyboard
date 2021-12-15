@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BE4-2E-hYM">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="792"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Q3-F1-R5A">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="1400"/>
@@ -203,18 +203,46 @@
                                 <viewLayoutGuide key="contentLayoutGuide" id="jP4-fv-8mV"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="Rue-G9-nlE"/>
                             </scrollView>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="HPn-Q4-JQX">
+                                <rect key="frame" x="0.0" y="836" width="414" height="60"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mn2-PB-DUU" customClass="TabBarButton" customModule="SeSAC_Heritage" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="103.5" height="60"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V8A-gP-qHv" customClass="TabBarButton" customModule="SeSAC_Heritage" customModuleProvider="target">
+                                        <rect key="frame" x="103.5" y="0.0" width="103.5" height="60"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BKb-v4-UeG" customClass="TabBarButton" customModule="SeSAC_Heritage" customModuleProvider="target">
+                                        <rect key="frame" x="207" y="0.0" width="103.5" height="60"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r9p-o6-0WF" customClass="TabBarButton" customModule="SeSAC_Heritage" customModuleProvider="target">
+                                        <rect key="frame" x="310.5" y="0.0" width="103.5" height="60"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="Ork-Nb-WEI"/>
+                                </constraints>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" name="customWhite"/>
                         <constraints>
                             <constraint firstItem="BE4-2E-hYM" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="34U-gN-KE0"/>
+                            <constraint firstAttribute="trailing" secondItem="HPn-Q4-JQX" secondAttribute="trailing" id="CP3-gK-vcT"/>
+                            <constraint firstAttribute="bottom" secondItem="HPn-Q4-JQX" secondAttribute="bottom" id="M0f-yr-OlN"/>
                             <constraint firstItem="5Q3-F1-R5A" firstAttribute="width" secondItem="5EZ-qb-Rvc" secondAttribute="width" id="ObF-4Q-6DS"/>
-                            <constraint firstItem="BE4-2E-hYM" firstAttribute="bottom" secondItem="vDu-zF-Fre" secondAttribute="bottom" id="ct4-HQ-Y54"/>
                             <constraint firstItem="BE4-2E-hYM" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="g4L-R3-VPE"/>
+                            <constraint firstItem="HPn-Q4-JQX" firstAttribute="top" secondItem="BE4-2E-hYM" secondAttribute="bottom" id="mbd-kU-7PU"/>
                             <constraint firstItem="BE4-2E-hYM" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="nFn-WT-UJN"/>
+                            <constraint firstItem="HPn-Q4-JQX" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="yWo-mP-MbQ"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="SearchBarButton" destination="V8A-gP-qHv" id="EV7-Th-EJV"/>
                         <outlet property="detailImage" destination="IIw-do-ks0" id="6hr-fW-iR8"/>
                         <outlet property="findWayButton" destination="roB-7q-Kt4" id="WhA-Nx-p7t"/>
                         <outlet property="findWayLabel" destination="VAZ-66-piz" id="STV-bB-r3q"/>
@@ -223,6 +251,9 @@
                         <outlet property="heritageContentLabel" destination="45f-Y1-A0y" id="M7z-VI-gHy"/>
                         <outlet property="heritageTitleLabel" destination="VYB-GY-kZP" id="djT-XE-Taz"/>
                         <outlet property="heritageTypeLabel" destination="C7O-wT-gcJ" id="kRX-PI-pWD"/>
+                        <outlet property="listBarButton" destination="Mn2-PB-DUU" id="iqs-cD-xL5"/>
+                        <outlet property="mapBarButton" destination="BKb-v4-UeG" id="nn5-fH-dg4"/>
+                        <outlet property="myBarButton" destination="r9p-o6-0WF" id="Tmf-Vl-rcz"/>
                         <outlet property="scrollView" destination="5Q3-F1-R5A" id="OnE-84-y8g"/>
                         <outlet property="visitedCheckButton" destination="kdY-Nl-6Ao" id="nXE-iG-Jct"/>
                         <outlet property="visitedCheckLabel" destination="ZDa-GK-QbW" id="8kN-RR-Eoo"/>

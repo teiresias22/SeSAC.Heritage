@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		752A5E562750E3A20059114B /* SwiftyXMLParser in Frameworks */ = {isa = PBXBuildFile; productRef = 752A5E552750E3A20059114B /* SwiftyXMLParser */; };
+		7532D4AF27699927000FB585 /* TabBarButton + Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7532D4AE27699927000FB585 /* TabBarButton + Extention.swift */; };
+		7532D4B1276A47B4000FB585 /* ListMap.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7532D4B0276A47B4000FB585 /* ListMap.storyboard */; };
+		7532D4B3276A4810000FB585 /* ListMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7532D4B2276A4810000FB585 /* ListMapViewController.swift */; };
 		7534D50E27677D37009A4952 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7534D50D27677D36009A4952 /* GoogleService-Info.plist */; };
 		7534D51127677E42009A4952 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 7534D51027677E42009A4952 /* FirebaseAnalytics */; };
 		7534D51327677E42009A4952 /* FirebaseAnalyticsSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = 7534D51227677E42009A4952 /* FirebaseAnalyticsSwift-Beta */; };
@@ -63,6 +66,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7532D4AE27699927000FB585 /* TabBarButton + Extention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TabBarButton + Extention.swift"; sourceTree = "<group>"; };
+		7532D4B0276A47B4000FB585 /* ListMap.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ListMap.storyboard; sourceTree = "<group>"; };
+		7532D4B2276A4810000FB585 /* ListMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListMapViewController.swift; sourceTree = "<group>"; };
 		7534D50D27677D36009A4952 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7534D5192767C007009A4952 /* TabBarButton.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TabBarButton.xib; sourceTree = "<group>"; };
 		7534D51B2767C041009A4952 /* TabBarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarButton.swift; sourceTree = "<group>"; };
@@ -198,6 +204,7 @@
 				75AEBF77274634FA00A5661D /* List.storyboard */,
 				75AEBF7B2746375600A5661D /* ListTable.storyboard */,
 				75AEBF7D2746375C00A5661D /* ListDetail.storyboard */,
+				7532D4B0276A47B4000FB585 /* ListMap.storyboard */,
 				75BB049327564308005F4A44 /* Search.storyboard */,
 				75BB04952756451D005F4A44 /* ListUp.storyboard */,
 				75AEBF892746385700A5661D /* Map.storyboard */,
@@ -211,6 +218,7 @@
 				75AEBF8B2746389900A5661D /* ListViewController.swift */,
 				75AEBF8F274638AD00A5661D /* ListTableViewController.swift */,
 				75AEBF91274638B500A5661D /* ListDetailViewController.swift */,
+				7532D4B2276A4810000FB585 /* ListMapViewController.swift */,
 				75BB0497275646FC005F4A44 /* SearchViewController.swift */,
 				75BB049927564706005F4A44 /* ListUpViewController.swift */,
 				75AEBF9D2746395E00A5661D /* MapViewController.swift */,
@@ -247,6 +255,7 @@
 				75AEBFA1274641B900A5661D /* Font + Extention.swift */,
 				753E852E2747B0B4007469D2 /* Localizable + Extention.swift */,
 				75E1110927645CFE00BA2C8D /* Label + Extention.swift */,
+				7532D4AE27699927000FB585 /* TabBarButton + Extention.swift */,
 			);
 			path = Extention;
 			sourceTree = "<group>";
@@ -355,6 +364,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				75AEBFA827464C0900A5661D /* Montserrat-Regular.ttf in Resources */,
+				7532D4B1276A47B4000FB585 /* ListMap.storyboard in Resources */,
 				75AEBF6A274631E900A5661D /* LaunchScreen.storyboard in Resources */,
 				75AEBFA627464BE500A5661D /* MapoFlowerIsland.otf in Resources */,
 				753E85282747AF85007469D2 /* Localizable.strings in Resources */,
@@ -413,8 +423,10 @@
 				753E85322747B2C9007469D2 /* Constance.swift in Sources */,
 				75FB9849274942B200A3A28C /* ListTableViewCell.swift in Sources */,
 				75AEBF9E2746395E00A5661D /* MapViewController.swift in Sources */,
+				7532D4AF27699927000FB585 /* TabBarButton + Extention.swift in Sources */,
 				75BB0498275646FC005F4A44 /* SearchViewController.swift in Sources */,
 				75649718274CAD14000AD0CB /* HeritageListModel.swift in Sources */,
+				7532D4B3276A4810000FB585 /* ListMapViewController.swift in Sources */,
 				75E1110A27645CFE00BA2C8D /* Label + Extention.swift in Sources */,
 				75BB049A27564706005F4A44 /* ListUpViewController.swift in Sources */,
 				75AEBF90274638AD00A5661D /* ListTableViewController.swift in Sources */,

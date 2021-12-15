@@ -43,16 +43,16 @@ class ListViewController: UIViewController {
         topButtonView.backgroundColor = .clear
         listCollectionViewSet()
         
-        setBarButton(listBarButton, "list.dash", "목록")
+        setBarButton(listBarButton, "list.dash")
         listBarButton.tabBarButton.addTarget(self, action: #selector(listButtonClicked), for: .touchUpInside)
         
-        setBarButton(SearchBarButton, "magnifyingglass", "검색")
+        setBarButton(SearchBarButton, "magnifyingglass")
         SearchBarButton.tabBarButton.addTarget(self, action: #selector(searchButtonClicked), for: .touchUpInside)
         
-        setBarButton(mapBarButton, "map", "지도")
+        setBarButton(mapBarButton, "map")
         mapBarButton.tabBarButton.addTarget(self, action: #selector(mapButtonClicked), for: .touchUpInside)
         
-        setBarButton(myBarButton, "person", "내핀")
+        setBarButton(myBarButton, "person")
         myBarButton.tabBarButton.addTarget(self, action: #selector(mypageButtonClicked), for: .touchUpInside)
         
         //print(">>\(UserDefaults.standard.object(forKey: "AppleLanguages"))<<")
@@ -109,23 +109,34 @@ class ListViewController: UIViewController {
     }
     
     @objc func listButtonClicked() {
-            print("listButtonClicked")
+        guard let vc = UIStoryboard(name: "List", bundle: nil).instantiateViewController(withIdentifier: "ListViewController") as? ListViewController else { return }
+        let nav = UINavigationController(rootViewController: vc)
+        nav.modalPresentationStyle = .overFullScreen
+        self.present(nav, animated: true, completion: nil)
     }
     
     @objc func searchButtonClicked() {
-            print("searchButtonClicked")
+        guard let vc = UIStoryboard(name: "Search", bundle: nil).instantiateViewController(withIdentifier: "SearchViewController") as? SearchViewController else { return }
+        let nav = UINavigationController(rootViewController: vc)
+        nav.modalPresentationStyle = .overFullScreen
+        self.present(nav, animated: true, completion: nil)
     }
     
     @objc func mapButtonClicked() {
-            print("mapButtonClicked")
+        guard let vc = UIStoryboard(name: "Map", bundle: nil).instantiateViewController(withIdentifier: "MapViewController") as? MapViewController else { return }
+        let nav = UINavigationController(rootViewController: vc)
+        nav.modalPresentationStyle = .overFullScreen
+        self.present(nav, animated: true, completion: nil)
     }
     
     @objc func mypageButtonClicked() {
-            print("mypageButtonClicked")
+        guard let vc = UIStoryboard(name: "ListUp", bundle: nil).instantiateViewController(withIdentifier: "ListUpViewController") as? ListUpViewController else { return }
+        let nav = UINavigationController(rootViewController: vc)
+        nav.modalPresentationStyle = .overFullScreen
+        self.present(nav, animated: true, completion: nil)
     }
     
-    
-    func setBarButton(_ target: TabBarButton, _ image: String, _ text: String){
+    func setBarButton(_ target: TabBarButton, _ image: String){
         target.tabBarButton.setImage(UIImage(systemName: image), for: .normal)
         target.tabBarButton.imageEdgeInsets = UIEdgeInsets(top: 16, left: 36, bottom: 28, right: 36)
         target.tabBarButton.contentMode = .scaleToFill
@@ -133,7 +144,6 @@ class ListViewController: UIViewController {
         target.tabBarButton.contentVerticalAlignment = .fill
         target.tabBarButton.contentHorizontalAlignment = .fill
         listBarButton.tabBarActiveView.backgroundColor = .customBlue
-        
     }
     
     func listCollectionViewSet() {

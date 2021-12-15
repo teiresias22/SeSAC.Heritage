@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -21,7 +21,7 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="769"/>
                             </mapView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OQF-JT-Qrh">
-                                <rect key="frame" x="80" y="64" width="40" height="40"/>
+                                <rect key="frame" x="20" y="64" width="40" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="OQF-JT-Qrh" secondAttribute="height" id="FO7-cf-kA7"/>
                                     <constraint firstAttribute="width" constant="40" id="r2N-TN-Qyz"/>
@@ -32,36 +32,53 @@
                                     <action selector="myLocationClicked:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="Isb-Xw-Er4"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LBg-Lt-es1">
-                                <rect key="frame" x="20" y="64" width="40" height="40"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="XJU-dD-apk">
+                                <rect key="frame" x="0.0" y="836" width="414" height="60"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IP5-rU-Mbi" customClass="TabBarButton" customModule="SeSAC_Heritage" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="103.5" height="60"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N07-st-vsi" customClass="TabBarButton" customModule="SeSAC_Heritage" customModuleProvider="target">
+                                        <rect key="frame" x="103.5" y="0.0" width="103.5" height="60"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kKA-Na-B5L" customClass="TabBarButton" customModule="SeSAC_Heritage" customModuleProvider="target">
+                                        <rect key="frame" x="207" y="0.0" width="103.5" height="60"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="78C-Xj-ECw" customClass="TabBarButton" customModule="SeSAC_Heritage" customModuleProvider="target">
+                                        <rect key="frame" x="310.5" y="0.0" width="103.5" height="60"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    </view>
+                                </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="40" id="AZw-6E-TDT"/>
-                                    <constraint firstAttribute="width" secondItem="LBg-Lt-es1" secondAttribute="height" id="ZSt-6X-XOB"/>
+                                    <constraint firstAttribute="height" constant="60" id="Yjb-Be-1Zj"/>
                                 </constraints>
-                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" title="Button"/>
-                                <connections>
-                                    <action selector="heritageLocationClicked:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="nmq-nb-OLG"/>
-                                </connections>
-                            </button>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="OQF-JT-Qrh" firstAttribute="leading" secondItem="LBg-Lt-es1" secondAttribute="trailing" constant="20" id="7yR-Vu-CRd"/>
+                            <constraint firstItem="OQF-JT-Qrh" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="1Ne-nQ-153"/>
+                            <constraint firstItem="XJU-dD-apk" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="5G3-xl-wBx"/>
+                            <constraint firstAttribute="trailing" secondItem="XJU-dD-apk" secondAttribute="trailing" id="D03-5M-1yu"/>
                             <constraint firstItem="X8d-Gu-0yD" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="HVL-Vy-4JB"/>
                             <constraint firstItem="X8d-Gu-0yD" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="KVg-zN-Y27"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="X8d-Gu-0yD" secondAttribute="bottom" id="Nkr-91-mbl"/>
+                            <constraint firstAttribute="bottom" secondItem="XJU-dD-apk" secondAttribute="bottom" id="R2Y-ON-LDw"/>
                             <constraint firstItem="X8d-Gu-0yD" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="Sc0-Nw-YkP"/>
-                            <constraint firstItem="LBg-Lt-es1" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="bsx-0l-Pvj"/>
-                            <constraint firstItem="LBg-Lt-es1" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="20" id="gRb-my-vz1"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="X8d-Gu-0yD" secondAttribute="bottom" id="VR1-fv-ZFc"/>
                             <constraint firstItem="OQF-JT-Qrh" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="20" id="v7I-kH-Jzg"/>
                         </constraints>
                     </view>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="heritageLocation" destination="LBg-Lt-es1" id="gJj-kv-Lfu"/>
+                        <outlet property="SearchBarButton" destination="N07-st-vsi" id="YKw-K1-KqP"/>
+                        <outlet property="listBarButton" destination="IP5-rU-Mbi" id="i6u-if-Gp3"/>
+                        <outlet property="mapBarButton" destination="kKA-Na-B5L" id="lGM-RT-4MH"/>
                         <outlet property="mapView" destination="X8d-Gu-0yD" id="wfN-VI-8rf"/>
+                        <outlet property="myBarButton" destination="78C-Xj-ECw" id="ZTU-wT-pJW"/>
                         <outlet property="myLocation" destination="OQF-JT-Qrh" id="yux-0J-hti"/>
                     </connections>
                 </viewController>

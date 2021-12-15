@@ -1,18 +1,26 @@
+//
+//  ListMapViewController.swift
+//  SeSAC.Heritage
+//
+//  Created by Joonhwan Jeon on 2021/12/16.
+//
+
 import UIKit
 import MapKit
 import CoreLocation
 import CoreLocationUI
 import RealmSwift
 
-class MapViewController: UIViewController {
+
+class ListMapViewController: UIViewController {
     @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var heritageLocation: UIButton!
     @IBOutlet weak var myLocation: UIButton!
     
     @IBOutlet weak var listBarButton: TabBarButton!
     @IBOutlet weak var SearchBarButton: TabBarButton!
     @IBOutlet weak var mapBarButton: TabBarButton!
     @IBOutlet weak var myBarButton: TabBarButton!
-    
     
     let localRealm = try! Realm()
     var tasks: Results<Heritage_List>!
@@ -26,6 +34,8 @@ class MapViewController: UIViewController {
         super.viewDidLoad()
         self.title = item.ccbaMnm1.localized()
         
+        setTopButton(heritageLocation, "landmark")
+        heritageLocation.backgroundColor = .customYellow
         setTopButton(myLocation, "street")
         myLocation.backgroundColor = .customBlue
         
@@ -59,14 +69,6 @@ class MapViewController: UIViewController {
         target.contentHorizontalAlignment = .fill
         target.layer.cornerRadius = 20
         target.tintColor = .customBlack
-    }
-    
-    @IBAction func heritageLocationClicked(_ sender: UIButton) {
-        defaultLocation()
-    }
-    
-    @IBAction func myLocationClicked(_ sender: UIButton) {
-        checkUserLocationServicesAithorization()
     }
     
     @objc func listButtonClicked() {
@@ -104,13 +106,21 @@ class MapViewController: UIViewController {
         target.tabBarButton.setTitle("", for: .normal)
         target.tabBarButton.contentVerticalAlignment = .fill
         target.tabBarButton.contentHorizontalAlignment = .fill
-        mapBarButton.tabBarActiveView.backgroundColor = .customBlue
+        listBarButton.tabBarActiveView.backgroundColor = .customBlue
+    }
+    
+    @IBAction func heritageLocationClicked(_ sender: UIButton) {
+        defaultLocation()
+    }
+    
+    @IBAction func myLocationClicked(_ sender: UIButton) {
+        checkUserLocationServicesAithorization()
     }
     
     //권한 비허용시 기본화면
     func defaultLocation() {
-        let latitude = Double(item.latitude) ?? 0.0
-        let longitude = Double(item.longitude) ?? 0.0
+        let latitude = Double(item.latitude)!
+        let longitude = Double(item.longitude)!
         var location = CLLocationCoordinate2D()
         let annotation = MKPointAnnotation()
         let span = MKCoordinateSpan(latitudeDelta: 0.03, longitudeDelta: 0.03)
@@ -183,7 +193,7 @@ class MapViewController: UIViewController {
     
 }
     
-extension MapViewController: CLLocationManagerDelegate{
+extension ListMapViewController: CLLocationManagerDelegate{
     //사용자가 위치 허용을 한 경우
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
@@ -209,3 +219,4 @@ extension MapViewController: CLLocationManagerDelegate{
         print(#function)
     }
 }
+

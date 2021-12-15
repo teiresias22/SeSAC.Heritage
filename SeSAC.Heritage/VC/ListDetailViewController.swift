@@ -24,6 +24,11 @@ class ListDetailViewController: UIViewController {
     
     @IBOutlet weak var heritageContentLabel: UILabel!
     
+    @IBOutlet weak var listBarButton: TabBarButton!
+    @IBOutlet weak var SearchBarButton: TabBarButton!
+    @IBOutlet weak var mapBarButton: TabBarButton!
+    @IBOutlet weak var myBarButton: TabBarButton!
+    
     let localRealm = try! Realm()
     var tasks: Results<Heritage_List>!
     var items = Heritage_List()
@@ -46,6 +51,18 @@ class ListDetailViewController: UIViewController {
         defaultPageSetup()
         fetcHeritageData()
         // Do any additional setup after loading the view.
+        
+        setBarButton(listBarButton, "list.dash")
+        listBarButton.tabBarButton.addTarget(self, action: #selector(listButtonClicked), for: .touchUpInside)
+        
+        setBarButton(SearchBarButton, "magnifyingglass")
+        SearchBarButton.tabBarButton.addTarget(self, action: #selector(searchButtonClicked), for: .touchUpInside)
+        
+        setBarButton(mapBarButton, "map")
+        mapBarButton.tabBarButton.addTarget(self, action: #selector(mapButtonClicked), for: .touchUpInside)
+        
+        setBarButton(myBarButton, "person")
+        myBarButton.tabBarButton.addTarget(self, action: #selector(mypageButtonClicked), for: .touchUpInside)
     }
     
     func defaultPageSetup() {
@@ -130,10 +147,48 @@ class ListDetailViewController: UIViewController {
     }
     
     @IBAction func findWayButtonClicked(_ sender: UIButton) {
-        let sb = UIStoryboard(name: "Map", bundle: nil)
-        let vc = sb.instantiateViewController(withIdentifier: "MapViewController") as! MapViewController
+        let sb = UIStoryboard(name: "ListMap", bundle: nil)
+        let vc = sb.instantiateViewController(withIdentifier: "ListMapViewController") as! ListMapViewController
         vc.item = items
         self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @objc func listButtonClicked() {
+        guard let vc = UIStoryboard(name: "List", bundle: nil).instantiateViewController(withIdentifier: "ListViewController") as? ListViewController else { return }
+        let nav = UINavigationController(rootViewController: vc)
+        nav.modalPresentationStyle = .overFullScreen
+        self.present(nav, animated: true, completion: nil)
+    }
+    
+    @objc func searchButtonClicked() {
+        guard let vc = UIStoryboard(name: "Search", bundle: nil).instantiateViewController(withIdentifier: "SearchViewController") as? SearchViewController else { return }
+        let nav = UINavigationController(rootViewController: vc)
+        nav.modalPresentationStyle = .overFullScreen
+        self.present(nav, animated: true, completion: nil)
+    }
+    
+    @objc func mapButtonClicked() {
+        guard let vc = UIStoryboard(name: "Map", bundle: nil).instantiateViewController(withIdentifier: "MapViewController") as? MapViewController else { return }
+        let nav = UINavigationController(rootViewController: vc)
+        nav.modalPresentationStyle = .overFullScreen
+        self.present(nav, animated: true, completion: nil)
+    }
+    
+    @objc func mypageButtonClicked() {
+        guard let vc = UIStoryboard(name: "ListUp", bundle: nil).instantiateViewController(withIdentifier: "ListUpViewController") as? ListUpViewController else { return }
+        let nav = UINavigationController(rootViewController: vc)
+        nav.modalPresentationStyle = .overFullScreen
+        self.present(nav, animated: true, completion: nil)
+    }
+    
+    func setBarButton(_ target: TabBarButton, _ image: String){
+        target.tabBarButton.setImage(UIImage(systemName: image), for: .normal)
+        target.tabBarButton.imageEdgeInsets = UIEdgeInsets(top: 16, left: 36, bottom: 28, right: 36)
+        target.tabBarButton.contentMode = .scaleToFill
+        target.tabBarButton.setTitle("", for: .normal)
+        target.tabBarButton.contentVerticalAlignment = .fill
+        target.tabBarButton.contentHorizontalAlignment = .fill
+        listBarButton.tabBarActiveView.backgroundColor = .customBlue
     }
     
 }
