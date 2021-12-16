@@ -47,7 +47,6 @@ extension ListTableViewController: UITableViewDelegate, UITableViewDataSource {
         }else if cityData != nil {
             tasks = localRealm.objects(Heritage_List.self).filter("ccbaCtcd='\(cityData!.code)'")
         }
-        
         return tasks.count
     }
     

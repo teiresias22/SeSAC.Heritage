@@ -13,7 +13,6 @@ class MapViewController: UIViewController {
     @IBOutlet weak var mapBarButton: TabBarButton!
     @IBOutlet weak var myBarButton: TabBarButton!
     
-    
     let localRealm = try! Realm()
     var tasks: Results<Heritage_List>!
     
@@ -23,37 +22,41 @@ class MapViewController: UIViewController {
     var items = Heritage_List()
     
     var runTimeInterval: TimeInterval? // 마지막 작업을 설정할 시간
-    //let mTimer: Selector = #selector(Tick_TimeConsole) // 위치 확인 타이머
+    let mTimer: Selector = #selector(Tick_TimeConsole) // 위치 확인 타이머
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "문화유산 지도"
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "MapoFlowerIsland", size: 14)!]
         
-        setTopButton(myLocation, "street")
-        myLocation.backgroundColor = .customBlue
+        setTopButton()
         secTabBarButtons()
         
+        mapView.delegate = self
+        locationManager.delegate = self
+        //정확도 설정 - 최고 높은 정확도
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
         //위치정보 사용권한 요청 - 실행중일때만 권한을 사용
         locationManager.requestWhenInUseAuthorization()
-        //현재 위치를 지도에 표시하도록 설정
+        //위치 업데이트 시작
+        locationManager.startUpdatingLocation()
+        //사용자 위치 보기 설정
         mapView.showsUserLocation = true
-        
-        locationManager.delegate = self
-        
         // Do any additional setup after loading the view.
         
+        Timer.scheduledTimer(timeInterval: 0.25, target: self, selector: mTimer, userInfo: nil, repeats: true)
     }
     
     //Setting My Location Button
-    func setTopButton( _ target: UIButton, _ name: String){
-        target.setImage(UIImage(named: name), for: .normal)
-        target.imageEdgeInsets = UIEdgeInsets(top: 12, left: 12, bottom: 12, right: 12)
-        target.contentMode = .scaleToFill
-        target.setTitle("", for: .normal)
-        target.contentVerticalAlignment = .fill
-        target.contentHorizontalAlignment = .fill
-        target.layer.cornerRadius = 20
-        target.tintColor = .customBlack
+    func setTopButton(){
+        myLocation.setImage(UIImage(named: "street"), for: .normal)
+        myLocation.imageEdgeInsets = UIEdgeInsets(top: 12, left: 12, bottom: 12, right: 12)
+        myLocation.contentMode = .scaleToFill
+        myLocation.setTitle("", for: .normal)
+        myLocation.contentVerticalAlignment = .fill
+        myLocation.contentHorizontalAlignment = .fill
+        myLocation.layer.cornerRadius = 20
+        myLocation.tintColor = .customBlack
+        myLocation.backgroundColor = .customBlue
     }
     
     //My Location Button Clicked
@@ -76,6 +79,12 @@ class MapViewController: UIViewController {
         mapView.setRegion(region, animated: true)
         annotation.coordinate = location
         mapView.addAnnotation(annotation)
+    }
+    
+    func allAnnotations() {
+        var location = CLLocationCoordinate2D()
+        let annotation = MKPointAnnotation()
+        
     }
     
     //위치 권한 허용 확인
@@ -128,19 +137,29 @@ class MapViewController: UIViewController {
         alert.addAction(allTheater)
         present(alert, animated: true)
     }
-    
 }
     
 extension MapViewController: CLLocationManagerDelegate{
     //사용자가 위치 허용을 한 경우
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        
         guard let location = locations.last else { return }
-        let center = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
-        let region = MKCoordinateRegion.init(center: center, latitudinalMeters: 10000, longitudinalMeters: 10000)
+        moveLocation(latitudeValue: (location.coordinate.latitude), longtudeValue: (location.coordinate.longitude), delta: 0.01)
         
-        mapView.setRegion(region, animated: true)
+        CLGeocoder().reverseGeocodeLocation(location, completionHandler: { (placemarks, error) -> Void in
+            if let pm: CLPlacemark = placemarks?.first {
+                let address: String = "\(pm.locality ?? "") \(pm.name ?? "")"
+                print("locationManager", address)
+            }
+        })
+        locationManager.stopUpdatingLocation()
     }
+    
+    func moveLocation(latitudeValue: CLLocationDegrees, longtudeValue: CLLocationDegrees, delta span: Double) {
+         let pLocation = CLLocationCoordinate2DMake(latitudeValue, longtudeValue)
+         let pSpanValue = MKCoordinateSpan(latitudeDelta: span, longitudeDelta: span)
+         let pRegion = MKCoordinateRegion(center: pLocation, span: pSpanValue)
+         mapView.setRegion(pRegion, animated: true)
+     }
     
     //5. 위치 접근이 실패했을 경우
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
@@ -161,6 +180,23 @@ extension MapViewController: CLLocationManagerDelegate{
 extension MapViewController: MKMapViewDelegate {
     func mapViewDidChangeVisibleRegion(_ mapView: MKMapView) {
         runTimeInterval = Date().timeIntervalSinceReferenceDate
+    }
+    
+    @objc func Tick_TimeConsole() {
+        guard let timeInterval = runTimeInterval else { return }
+        let interval = Date().timeIntervalSinceReferenceDate - timeInterval
+        if interval < 0.25 { return }
+        let coordinate = mapView.centerCoordinate
+        let location = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
+
+        // 지정된 위치의 지오 코드 요청
+        CLGeocoder().reverseGeocodeLocation(location) { (placemarks, error) in
+            if let pm: CLPlacemark = placemarks?.first {
+                let address: String = "\(pm.country ?? "") \(pm.administrativeArea ?? "") \(pm.locality ?? "") \(pm.subLocality ?? "") \(pm.name ?? "")"
+                self.title = address.localized()
+            }
+        }
+        runTimeInterval = nil
     }
 }
 
