@@ -52,17 +52,7 @@ class ListDetailViewController: UIViewController {
         fetcHeritageData()
         // Do any additional setup after loading the view.
         
-        setBarButton(listBarButton, "list.dash")
-        listBarButton.tabBarButton.addTarget(self, action: #selector(listButtonClicked), for: .touchUpInside)
-        
-        setBarButton(SearchBarButton, "magnifyingglass")
-        SearchBarButton.tabBarButton.addTarget(self, action: #selector(searchButtonClicked), for: .touchUpInside)
-        
-        setBarButton(mapBarButton, "map")
-        mapBarButton.tabBarButton.addTarget(self, action: #selector(mapButtonClicked), for: .touchUpInside)
-        
-        setBarButton(myBarButton, "person")
-        myBarButton.tabBarButton.addTarget(self, action: #selector(mypageButtonClicked), for: .touchUpInside)
+        secTabBarButtons()
     }
     
     func defaultPageSetup() {
@@ -145,6 +135,64 @@ class ListDetailViewController: UIViewController {
         }
         setWannavisitButtonColor()
     }
+}
+extension ListDetailViewController: XMLParserDelegate {
+    //XMLParser가 시작 태그를 만나면 호출됨
+    func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String] = [:]) {
+        
+        if elementName == "ccmaName" || elementName == "ccbaMnm1" || elementName == "ccbaMnm2" || elementName == "gcodeName" || elementName == "bcodeName" || elementName == "mcodeName" || elementName == "scodeName" || elementName == "ccbaQuan" || elementName == "ccbaAsdt" || elementName == "ccbaCtcdNm"  || elementName == "ccsiName"  || elementName == "ccbaLcad"  || elementName == "ccceName"  || elementName == "ccbaPoss"  || elementName == "ccbaAdmin"  || elementName == "ccbaCncl"  || elementName == "imageUrl"  || elementName == "content"{
+            self.key = elementName
+        }
+    }
+    
+    // 태그의 Data가 String으로 들어옴
+    func parser(_ parser: XMLParser, foundCharacters string: String) {
+        
+        if self.key != nil {
+            if self.key == "ccmaName" {
+                self.item.append([key : string])
+            } else {
+                self.item[ct][key] = string
+            }
+        }
+    }
+    
+    //XMLParser가 종료 태그를 만나면 호출됨
+    func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
+        self.key = nil
+    }
+    
+    func parserDidEndDocument(_ parser: XMLParser) {
+        let row = item[0]
+        setTitle(heritageTitleLabel, row["ccbaMnm1"]!)
+        setLabel(heritageTypeLabel, "\(row["ccmaName"]!) 제\(items.sn)호")
+        setLabel(heritageCityLabel, "\(row["ccbaCtcdNm"]!) \(row["ccsiName"]!)")
+        
+        let url = URL(string: row["imageUrl"] ?? "")
+        detailImage.kf.setImage(with: url)
+        detailImage.backgroundColor = .customBlack
+        detailImage.contentMode = .scaleAspectFill
+        
+        heritageContentLabel.text = row["content"]!
+        heritageContentLabel.font = UIFont().MapoFlowerIsland14
+        heritageContentLabel.addInterlineSpacing(spacingValue: 2)
+    }
+}
+
+extension ListDetailViewController {
+    func secTabBarButtons() {
+        setBarButton(listBarButton, "list.dash")
+        listBarButton.tabBarButton.addTarget(self, action: #selector(listButtonClicked), for: .touchUpInside)
+        
+        setBarButton(SearchBarButton, "magnifyingglass")
+        SearchBarButton.tabBarButton.addTarget(self, action: #selector(searchButtonClicked), for: .touchUpInside)
+        
+        setBarButton(mapBarButton, "map")
+        mapBarButton.tabBarButton.addTarget(self, action: #selector(mapButtonClicked), for: .touchUpInside)
+        
+        setBarButton(myBarButton, "person")
+        myBarButton.tabBarButton.addTarget(self, action: #selector(mypageButtonClicked), for: .touchUpInside)
+    }
     
     @IBAction func findWayButtonClicked(_ sender: UIButton) {
         let sb = UIStoryboard(name: "ListMap", bundle: nil)
@@ -191,46 +239,4 @@ class ListDetailViewController: UIViewController {
         listBarButton.tabBarActiveView.backgroundColor = .customBlue
     }
     
-}
-extension ListDetailViewController: XMLParserDelegate {
-    //XMLParser가 시작 태그를 만나면 호출됨
-    func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String] = [:]) {
-        
-        if elementName == "ccmaName" || elementName == "ccbaMnm1" || elementName == "ccbaMnm2" || elementName == "gcodeName" || elementName == "bcodeName" || elementName == "mcodeName" || elementName == "scodeName" || elementName == "ccbaQuan" || elementName == "ccbaAsdt" || elementName == "ccbaCtcdNm"  || elementName == "ccsiName"  || elementName == "ccbaLcad"  || elementName == "ccceName"  || elementName == "ccbaPoss"  || elementName == "ccbaAdmin"  || elementName == "ccbaCncl"  || elementName == "imageUrl"  || elementName == "content"{
-            self.key = elementName
-        }
-    }
-    
-    // 태그의 Data가 String으로 들어옴
-    func parser(_ parser: XMLParser, foundCharacters string: String) {
-        
-        if self.key != nil {
-            if self.key == "ccmaName" {
-                self.item.append([key : string])
-            } else {
-                self.item[ct][key] = string
-            }
-        }
-    }
-    
-    //XMLParser가 종료 태그를 만나면 호출됨
-    func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
-        self.key = nil
-    }
-    
-    func parserDidEndDocument(_ parser: XMLParser) {
-        let row = item[0]
-        setTitle(heritageTitleLabel, row["ccbaMnm1"]!)
-        setLabel(heritageTypeLabel, "\(row["ccmaName"]!) 제\(items.sn)호")
-        setLabel(heritageCityLabel, "\(row["ccbaCtcdNm"]!) \(row["ccsiName"]!)")
-        
-        let url = URL(string: row["imageUrl"] ?? "")
-        detailImage.kf.setImage(with: url)
-        detailImage.backgroundColor = .customBlack
-        detailImage.contentMode = .scaleAspectFill
-        
-        heritageContentLabel.text = row["content"]!
-        heritageContentLabel.font = UIFont().MapoFlowerIsland14
-        heritageContentLabel.addInterlineSpacing(spacingValue: 2)
-    }
 }

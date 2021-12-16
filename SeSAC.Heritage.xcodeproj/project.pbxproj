@@ -8,14 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		752A5E562750E3A20059114B /* SwiftyXMLParser in Frameworks */ = {isa = PBXBuildFile; productRef = 752A5E552750E3A20059114B /* SwiftyXMLParser */; };
-		7532D4AF27699927000FB585 /* TabBarButton + Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7532D4AE27699927000FB585 /* TabBarButton + Extention.swift */; };
 		7532D4B1276A47B4000FB585 /* ListMap.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7532D4B0276A47B4000FB585 /* ListMap.storyboard */; };
 		7532D4B3276A4810000FB585 /* ListMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7532D4B2276A4810000FB585 /* ListMapViewController.swift */; };
 		7534D50E27677D37009A4952 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7534D50D27677D36009A4952 /* GoogleService-Info.plist */; };
-		7534D51127677E42009A4952 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 7534D51027677E42009A4952 /* FirebaseAnalytics */; };
-		7534D51327677E42009A4952 /* FirebaseAnalyticsSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = 7534D51227677E42009A4952 /* FirebaseAnalyticsSwift-Beta */; };
-		7534D51527677E42009A4952 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = 7534D51427677E42009A4952 /* FirebaseAnalyticsWithoutAdIdSupport */; };
-		7534D51727677E42009A4952 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 7534D51627677E42009A4952 /* FirebaseCrashlytics */; };
 		7534D51A2767C007009A4952 /* TabBarButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7534D5192767C007009A4952 /* TabBarButton.xib */; };
 		7534D51C2767C041009A4952 /* TabBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7534D51B2767C041009A4952 /* TabBarButton.swift */; };
 		753E851427476657007469D2 /* ListCategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753E851227476657007469D2 /* ListCategoryCollectionViewCell.swift */; };
@@ -61,12 +56,16 @@
 		75C1116B275001B300ADFA78 /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C1116A275001B300ADFA78 /* City.swift */; };
 		75C1116D275001DF00ADFA78 /* CityInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C1116C275001DF00ADFA78 /* CityInformation.swift */; };
 		75E1110A27645CFE00BA2C8D /* Label + Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E1110927645CFE00BA2C8D /* Label + Extention.swift */; };
+		75E18E31276ACB4B0046B0F6 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 75E18E30276ACB4B0046B0F6 /* FirebaseAnalytics */; };
+		75E18E33276ACB4B0046B0F6 /* FirebaseAnalyticsSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = 75E18E32276ACB4B0046B0F6 /* FirebaseAnalyticsSwift-Beta */; };
+		75E18E35276ACB4B0046B0F6 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = 75E18E34276ACB4B0046B0F6 /* FirebaseAnalyticsWithoutAdIdSupport */; };
+		75E18E37276ACB4B0046B0F6 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 75E18E36276ACB4B0046B0F6 /* FirebaseCrashlytics */; };
+		75E18E39276ACB4B0046B0F6 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 75E18E38276ACB4B0046B0F6 /* FirebaseMessaging */; };
 		75FB9849274942B200A3A28C /* ListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FB9848274942B200A3A28C /* ListTableViewCell.swift */; };
 		75FB985427495E7E00A3A28C /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 75FB985327495E7E00A3A28C /* Kingfisher */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		7532D4AE27699927000FB585 /* TabBarButton + Extention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TabBarButton + Extention.swift"; sourceTree = "<group>"; };
 		7532D4B0276A47B4000FB585 /* ListMap.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ListMap.storyboard; sourceTree = "<group>"; };
 		7532D4B2276A4810000FB585 /* ListMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListMapViewController.swift; sourceTree = "<group>"; };
 		7534D50D27677D36009A4952 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -117,6 +116,7 @@
 		75C1116A275001B300ADFA78 /* City.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
 		75C1116C275001DF00ADFA78 /* CityInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityInformation.swift; sourceTree = "<group>"; };
 		75E1110927645CFE00BA2C8D /* Label + Extention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Label + Extention.swift"; sourceTree = "<group>"; };
+		75E18E2E276AC5A10046B0F6 /* SeSAC.Heritage.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SeSAC.Heritage.entitlements; sourceTree = "<group>"; };
 		75FB9848274942B200A3A28C /* ListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -127,13 +127,14 @@
 			files = (
 				7564971E274D4553000AD0CB /* Realm in Frameworks */,
 				75649720274D4553000AD0CB /* RealmSwift in Frameworks */,
-				7534D51127677E42009A4952 /* FirebaseAnalytics in Frameworks */,
+				75E18E39276ACB4B0046B0F6 /* FirebaseMessaging in Frameworks */,
+				75E18E31276ACB4B0046B0F6 /* FirebaseAnalytics in Frameworks */,
 				752A5E562750E3A20059114B /* SwiftyXMLParser in Frameworks */,
-				7534D51327677E42009A4952 /* FirebaseAnalyticsSwift-Beta in Frameworks */,
+				75E18E33276ACB4B0046B0F6 /* FirebaseAnalyticsSwift-Beta in Frameworks */,
 				75AEBFAD27465BC400A5661D /* SideMenu in Frameworks */,
-				7534D51727677E42009A4952 /* FirebaseCrashlytics in Frameworks */,
+				75E18E37276ACB4B0046B0F6 /* FirebaseCrashlytics in Frameworks */,
 				75FB985427495E7E00A3A28C /* Kingfisher in Frameworks */,
-				7534D51527677E42009A4952 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
+				75E18E35276ACB4B0046B0F6 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -175,6 +176,7 @@
 		75AEBF5C274631E900A5661D /* SeSAC.Heritage */ = {
 			isa = PBXGroup;
 			children = (
+				75E18E2E276AC5A10046B0F6 /* SeSAC.Heritage.entitlements */,
 				753E85192747851D007469D2 /* Localization */,
 				75AEBFB92746D7A800A5661D /* Data */,
 				75AEBF762746347F00A5661D /* Font */,
@@ -255,7 +257,6 @@
 				75AEBFA1274641B900A5661D /* Font + Extention.swift */,
 				753E852E2747B0B4007469D2 /* Localizable + Extention.swift */,
 				75E1110927645CFE00BA2C8D /* Label + Extention.swift */,
-				7532D4AE27699927000FB585 /* TabBarButton + Extention.swift */,
 			);
 			path = Extention;
 			sourceTree = "<group>";
@@ -306,10 +307,11 @@
 				7564971D274D4553000AD0CB /* Realm */,
 				7564971F274D4553000AD0CB /* RealmSwift */,
 				752A5E552750E3A20059114B /* SwiftyXMLParser */,
-				7534D51027677E42009A4952 /* FirebaseAnalytics */,
-				7534D51227677E42009A4952 /* FirebaseAnalyticsSwift-Beta */,
-				7534D51427677E42009A4952 /* FirebaseAnalyticsWithoutAdIdSupport */,
-				7534D51627677E42009A4952 /* FirebaseCrashlytics */,
+				75E18E30276ACB4B0046B0F6 /* FirebaseAnalytics */,
+				75E18E32276ACB4B0046B0F6 /* FirebaseAnalyticsSwift-Beta */,
+				75E18E34276ACB4B0046B0F6 /* FirebaseAnalyticsWithoutAdIdSupport */,
+				75E18E36276ACB4B0046B0F6 /* FirebaseCrashlytics */,
+				75E18E38276ACB4B0046B0F6 /* FirebaseMessaging */,
 			);
 			productName = SeSAC.Heritage;
 			productReference = 75AEBF5A274631E900A5661D /* SeSAC.Heritage.app */;
@@ -347,7 +349,7 @@
 				75FB985227495E7E00A3A28C /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				7564971C274D4553000AD0CB /* XCRemoteSwiftPackageReference "realm-cocoa" */,
 				752A5E542750E3A20059114B /* XCRemoteSwiftPackageReference "SwiftyXMLParser" */,
-				7534D50F27677E42009A4952 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				75E18E2F276ACB4B0046B0F6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = 75AEBF5B274631E900A5661D /* Products */;
 			projectDirPath = "";
@@ -423,7 +425,6 @@
 				753E85322747B2C9007469D2 /* Constance.swift in Sources */,
 				75FB9849274942B200A3A28C /* ListTableViewCell.swift in Sources */,
 				75AEBF9E2746395E00A5661D /* MapViewController.swift in Sources */,
-				7532D4AF27699927000FB585 /* TabBarButton + Extention.swift in Sources */,
 				75BB0498275646FC005F4A44 /* SearchViewController.swift in Sources */,
 				75649718274CAD14000AD0CB /* HeritageListModel.swift in Sources */,
 				7532D4B3276A4810000FB585 /* ListMapViewController.swift in Sources */,
@@ -601,6 +602,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = SeSAC.Heritage/SeSAC.Heritage.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -608,7 +610,9 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SeSAC.Heritage/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = JHeritage;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "사용자의 위치 확인을 위해 허용해주세요.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "현재 위치를 알기 위해 이 권한이 필요합니다.";
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "앱의 안전성 및 최적화 활동을 확인하기 위해 확인해주세요.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -633,13 +637,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = SeSAC.Heritage/SeSAC.Heritage.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 83R5US8PK8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SeSAC.Heritage/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = JHeritage;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "사용자의 위치 확인을 위해 허용해주세요.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "현재 위치를 알기 위해 이 권한이 필요합니다.";
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "앱의 안전성 및 최적화 활동을 확인하기 위해 확인해주세요.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -691,14 +698,6 @@
 				minimumVersion = 5.0.0;
 			};
 		};
-		7534D50F27677E42009A4952 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 8.0.0;
-			};
-		};
 		7564971C274D4553000AD0CB /* XCRemoteSwiftPackageReference "realm-cocoa" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/realm-cocoa.git";
@@ -713,6 +712,14 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 6.0.0;
+			};
+		};
+		75E18E2F276ACB4B0046B0F6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				branch = master;
+				kind = branch;
 			};
 		};
 		75FB985227495E7E00A3A28C /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
@@ -731,26 +738,6 @@
 			package = 752A5E542750E3A20059114B /* XCRemoteSwiftPackageReference "SwiftyXMLParser" */;
 			productName = SwiftyXMLParser;
 		};
-		7534D51027677E42009A4952 /* FirebaseAnalytics */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 7534D50F27677E42009A4952 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseAnalytics;
-		};
-		7534D51227677E42009A4952 /* FirebaseAnalyticsSwift-Beta */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 7534D50F27677E42009A4952 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = "FirebaseAnalyticsSwift-Beta";
-		};
-		7534D51427677E42009A4952 /* FirebaseAnalyticsWithoutAdIdSupport */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 7534D50F27677E42009A4952 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseAnalyticsWithoutAdIdSupport;
-		};
-		7534D51627677E42009A4952 /* FirebaseCrashlytics */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 7534D50F27677E42009A4952 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseCrashlytics;
-		};
 		7564971D274D4553000AD0CB /* Realm */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 7564971C274D4553000AD0CB /* XCRemoteSwiftPackageReference "realm-cocoa" */;
@@ -765,6 +752,31 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 75AEBFAB27465BC400A5661D /* XCRemoteSwiftPackageReference "SideMenu" */;
 			productName = SideMenu;
+		};
+		75E18E30276ACB4B0046B0F6 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 75E18E2F276ACB4B0046B0F6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		75E18E32276ACB4B0046B0F6 /* FirebaseAnalyticsSwift-Beta */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 75E18E2F276ACB4B0046B0F6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = "FirebaseAnalyticsSwift-Beta";
+		};
+		75E18E34276ACB4B0046B0F6 /* FirebaseAnalyticsWithoutAdIdSupport */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 75E18E2F276ACB4B0046B0F6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsWithoutAdIdSupport;
+		};
+		75E18E36276ACB4B0046B0F6 /* FirebaseCrashlytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 75E18E2F276ACB4B0046B0F6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCrashlytics;
+		};
+		75E18E38276ACB4B0046B0F6 /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 75E18E2F276ACB4B0046B0F6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
 		};
 		75FB985327495E7E00A3A28C /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;

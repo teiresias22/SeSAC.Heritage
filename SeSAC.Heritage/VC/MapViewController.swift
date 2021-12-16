@@ -22,12 +22,16 @@ class MapViewController: UIViewController {
     var item = Heritage_List()
     var items = Heritage_List()
     
+    var runTimeInterval: TimeInterval? // 마지막 작업을 설정할 시간
+    //let mTimer: Selector = #selector(Tick_TimeConsole) // 위치 확인 타이머
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = item.ccbaMnm1.localized()
+        self.title = "문화유산 지도"
         
         setTopButton(myLocation, "street")
         myLocation.backgroundColor = .customBlue
+        secTabBarButtons()
         
         //위치정보 사용권한 요청 - 실행중일때만 권한을 사용
         locationManager.requestWhenInUseAuthorization()
@@ -35,21 +39,12 @@ class MapViewController: UIViewController {
         mapView.showsUserLocation = true
         
         locationManager.delegate = self
-        defaultLocation()
+        
         // Do any additional setup after loading the view.
-        setBarButton(listBarButton, "list.dash")
-        listBarButton.tabBarButton.addTarget(self, action: #selector(listButtonClicked), for: .touchUpInside)
         
-        setBarButton(SearchBarButton, "magnifyingglass")
-        SearchBarButton.tabBarButton.addTarget(self, action: #selector(searchButtonClicked), for: .touchUpInside)
-        
-        setBarButton(mapBarButton, "map")
-        mapBarButton.tabBarButton.addTarget(self, action: #selector(mapButtonClicked), for: .touchUpInside)
-        
-        setBarButton(myBarButton, "person")
-        myBarButton.tabBarButton.addTarget(self, action: #selector(mypageButtonClicked), for: .touchUpInside)
     }
     
+    //Setting My Location Button
     func setTopButton( _ target: UIButton, _ name: String){
         target.setImage(UIImage(named: name), for: .normal)
         target.imageEdgeInsets = UIEdgeInsets(top: 12, left: 12, bottom: 12, right: 12)
@@ -61,67 +56,20 @@ class MapViewController: UIViewController {
         target.tintColor = .customBlack
     }
     
-    @IBAction func heritageLocationClicked(_ sender: UIButton) {
-        defaultLocation()
-    }
-    
+    //My Location Button Clicked
     @IBAction func myLocationClicked(_ sender: UIButton) {
         checkUserLocationServicesAithorization()
     }
     
-    @objc func listButtonClicked() {
-        guard let vc = UIStoryboard(name: "List", bundle: nil).instantiateViewController(withIdentifier: "ListViewController") as? ListViewController else { return }
-        let nav = UINavigationController(rootViewController: vc)
-        nav.modalPresentationStyle = .overFullScreen
-        self.present(nav, animated: true, completion: nil)
-    }
-    
-    @objc func searchButtonClicked() {
-        guard let vc = UIStoryboard(name: "Search", bundle: nil).instantiateViewController(withIdentifier: "SearchViewController") as? SearchViewController else { return }
-        let nav = UINavigationController(rootViewController: vc)
-        nav.modalPresentationStyle = .overFullScreen
-        self.present(nav, animated: true, completion: nil)
-    }
-    
-    @objc func mapButtonClicked() {
-        guard let vc = UIStoryboard(name: "Map", bundle: nil).instantiateViewController(withIdentifier: "MapViewController") as? MapViewController else { return }
-        let nav = UINavigationController(rootViewController: vc)
-        nav.modalPresentationStyle = .overFullScreen
-        self.present(nav, animated: true, completion: nil)
-    }
-    
-    @objc func mypageButtonClicked() {
-        guard let vc = UIStoryboard(name: "ListUp", bundle: nil).instantiateViewController(withIdentifier: "ListUpViewController") as? ListUpViewController else { return }
-        let nav = UINavigationController(rootViewController: vc)
-        nav.modalPresentationStyle = .overFullScreen
-        self.present(nav, animated: true, completion: nil)
-    }
-    
-    func setBarButton(_ target: TabBarButton, _ image: String){
-        target.tabBarButton.setImage(UIImage(systemName: image), for: .normal)
-        target.tabBarButton.imageEdgeInsets = UIEdgeInsets(top: 16, left: 36, bottom: 28, right: 36)
-        target.tabBarButton.contentMode = .scaleToFill
-        target.tabBarButton.setTitle("", for: .normal)
-        target.tabBarButton.contentVerticalAlignment = .fill
-        target.tabBarButton.contentHorizontalAlignment = .fill
-        mapBarButton.tabBarActiveView.backgroundColor = .customBlue
-    }
-    
     //권한 비허용시 기본화면
     func defaultLocation() {
-        let latitude = Double(item.latitude) ?? 0.0
-        let longitude = Double(item.longitude) ?? 0.0
         var location = CLLocationCoordinate2D()
         let annotation = MKPointAnnotation()
         let span = MKCoordinateSpan(latitudeDelta: 0.03, longitudeDelta: 0.03)
         
-        if latitude == 0.0 && longitude == 0.0 {
-            location = CLLocationCoordinate2D(latitude: 37.57606059397734, longitude: 126.9766761117934)
-            annotation.title = "위치가 기록되지 않았습니다."
-        } else {
-            location = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-            annotation.title = item.ccbaMnm1.localized()
-        }
+        location = CLLocationCoordinate2D(latitude: 37.52413651649104, longitude: 126.98001340101837)
+        
+        annotation.title = "사용자의 위치를 확인할수 없습니다."
         
         let region = MKCoordinateRegion(center: location, span: span)
         
@@ -208,4 +156,66 @@ extension MapViewController: CLLocationManagerDelegate{
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         print(#function)
     }
+}
+
+extension MapViewController: MKMapViewDelegate {
+    func mapViewDidChangeVisibleRegion(_ mapView: MKMapView) {
+        runTimeInterval = Date().timeIntervalSinceReferenceDate
+    }
+}
+
+extension MapViewController {
+    func secTabBarButtons() {
+        setBarButton(listBarButton, "list.dash")
+        listBarButton.tabBarButton.addTarget(self, action: #selector(listButtonClicked), for: .touchUpInside)
+        
+        setBarButton(SearchBarButton, "magnifyingglass")
+        SearchBarButton.tabBarButton.addTarget(self, action: #selector(searchButtonClicked), for: .touchUpInside)
+        
+        setBarButton(mapBarButton, "map")
+        mapBarButton.tabBarButton.addTarget(self, action: #selector(mapButtonClicked), for: .touchUpInside)
+        
+        setBarButton(myBarButton, "person")
+        myBarButton.tabBarButton.addTarget(self, action: #selector(mypageButtonClicked), for: .touchUpInside)
+    }
+    
+    //TabBar Button Set
+    func setBarButton(_ target: TabBarButton, _ image: String){
+        target.tabBarButton.setImage(UIImage(systemName: image), for: .normal)
+        target.tabBarButton.imageEdgeInsets = UIEdgeInsets(top: 16, left: 36, bottom: 28, right: 36)
+        target.tabBarButton.contentMode = .scaleToFill
+        target.tabBarButton.setTitle("", for: .normal)
+        target.tabBarButton.contentVerticalAlignment = .fill
+        target.tabBarButton.contentHorizontalAlignment = .fill
+        mapBarButton.tabBarActiveView.backgroundColor = .customBlue
+    }
+    
+    @objc func listButtonClicked() {
+        guard let vc = UIStoryboard(name: "List", bundle: nil).instantiateViewController(withIdentifier: "ListViewController") as? ListViewController else { return }
+        let nav = UINavigationController(rootViewController: vc)
+        nav.modalPresentationStyle = .overFullScreen
+        self.present(nav, animated: true, completion: nil)
+    }
+    
+    @objc func searchButtonClicked() {
+        guard let vc = UIStoryboard(name: "Search", bundle: nil).instantiateViewController(withIdentifier: "SearchViewController") as? SearchViewController else { return }
+        let nav = UINavigationController(rootViewController: vc)
+        nav.modalPresentationStyle = .overFullScreen
+        self.present(nav, animated: true, completion: nil)
+    }
+    
+    @objc func mapButtonClicked() {
+        guard let vc = UIStoryboard(name: "Map", bundle: nil).instantiateViewController(withIdentifier: "MapViewController") as? MapViewController else { return }
+        let nav = UINavigationController(rootViewController: vc)
+        nav.modalPresentationStyle = .overFullScreen
+        self.present(nav, animated: true, completion: nil)
+    }
+    
+    @objc func mypageButtonClicked() {
+        guard let vc = UIStoryboard(name: "ListUp", bundle: nil).instantiateViewController(withIdentifier: "ListUpViewController") as? ListUpViewController else { return }
+        let nav = UINavigationController(rootViewController: vc)
+        nav.modalPresentationStyle = .overFullScreen
+        self.present(nav, animated: true, completion: nil)
+    }
+    
 }

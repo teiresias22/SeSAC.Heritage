@@ -39,19 +39,8 @@ class SearchViewController: UIViewController {
         tasks = localRealm.objects(Heritage_List.self)
         
         setSearchBar()
+        secTabBarButtons()
         // Do any additional setup after loading the view.
-        
-        setBarButton(listBarButton, "list.dash")
-        listBarButton.tabBarButton.addTarget(self, action: #selector(listButtonClicked), for: .touchUpInside)
-        
-        setBarButton(SearchBarButton, "magnifyingglass")
-        SearchBarButton.tabBarButton.addTarget(self, action: #selector(searchButtonClicked), for: .touchUpInside)
-        
-        setBarButton(mapBarButton, "map")
-        mapBarButton.tabBarButton.addTarget(self, action: #selector(mapButtonClicked), for: .touchUpInside)
-        
-        setBarButton(myBarButton, "person")
-        myBarButton.tabBarButton.addTarget(self, action: #selector(mypageButtonClicked), for: .touchUpInside)
     }
     
     func setSearchBar() {
@@ -70,44 +59,6 @@ class SearchViewController: UIViewController {
     
     func isFiltering() -> Bool {
         return searchController.isActive && !searchBarIsEmpty()
-    }
-    
-    @objc func listButtonClicked() {
-        guard let vc = UIStoryboard(name: "List", bundle: nil).instantiateViewController(withIdentifier: "ListViewController") as? ListViewController else { return }
-        let nav = UINavigationController(rootViewController: vc)
-        nav.modalPresentationStyle = .overFullScreen
-        self.present(nav, animated: true, completion: nil)
-    }
-    
-    @objc func searchButtonClicked() {
-        guard let vc = UIStoryboard(name: "Search", bundle: nil).instantiateViewController(withIdentifier: "SearchViewController") as? SearchViewController else { return }
-        let nav = UINavigationController(rootViewController: vc)
-        nav.modalPresentationStyle = .overFullScreen
-        self.present(nav, animated: true, completion: nil)
-    }
-    
-    @objc func mapButtonClicked() {
-        guard let vc = UIStoryboard(name: "Map", bundle: nil).instantiateViewController(withIdentifier: "MapViewController") as? MapViewController else { return }
-        let nav = UINavigationController(rootViewController: vc)
-        nav.modalPresentationStyle = .overFullScreen
-        self.present(nav, animated: true, completion: nil)
-    }
-    
-    @objc func mypageButtonClicked() {
-        guard let vc = UIStoryboard(name: "ListUp", bundle: nil).instantiateViewController(withIdentifier: "ListUpViewController") as? ListUpViewController else { return }
-        let nav = UINavigationController(rootViewController: vc)
-        nav.modalPresentationStyle = .overFullScreen
-        self.present(nav, animated: true, completion: nil)
-    }
-    
-    func setBarButton(_ target: TabBarButton, _ image: String){
-        target.tabBarButton.setImage(UIImage(systemName: image), for: .normal)
-        target.tabBarButton.imageEdgeInsets = UIEdgeInsets(top: 16, left: 36, bottom: 28, right: 36)
-        target.tabBarButton.contentMode = .scaleToFill
-        target.tabBarButton.setTitle("", for: .normal)
-        target.tabBarButton.contentVerticalAlignment = .fill
-        target.tabBarButton.contentHorizontalAlignment = .fill
-        SearchBarButton.tabBarActiveView.backgroundColor = .customBlue
     }
 }
 
@@ -190,6 +141,58 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         searchController.searchBar.endEditing(true)
     }
+}
+
+extension SearchViewController {
+    func secTabBarButtons() {
+        setBarButton(listBarButton, "list.dash")
+        listBarButton.tabBarButton.addTarget(self, action: #selector(listButtonClicked), for: .touchUpInside)
+        
+        setBarButton(SearchBarButton, "magnifyingglass")
+        SearchBarButton.tabBarButton.addTarget(self, action: #selector(searchButtonClicked), for: .touchUpInside)
+        
+        setBarButton(mapBarButton, "map")
+        mapBarButton.tabBarButton.addTarget(self, action: #selector(mapButtonClicked), for: .touchUpInside)
+        
+        setBarButton(myBarButton, "person")
+        myBarButton.tabBarButton.addTarget(self, action: #selector(mypageButtonClicked), for: .touchUpInside)
+    }
     
+    @objc func listButtonClicked() {
+        guard let vc = UIStoryboard(name: "List", bundle: nil).instantiateViewController(withIdentifier: "ListViewController") as? ListViewController else { return }
+        let nav = UINavigationController(rootViewController: vc)
+        nav.modalPresentationStyle = .overFullScreen
+        self.present(nav, animated: true, completion: nil)
+    }
     
+    @objc func searchButtonClicked() {
+        guard let vc = UIStoryboard(name: "Search", bundle: nil).instantiateViewController(withIdentifier: "SearchViewController") as? SearchViewController else { return }
+        let nav = UINavigationController(rootViewController: vc)
+        nav.modalPresentationStyle = .overFullScreen
+        self.present(nav, animated: true, completion: nil)
+    }
+    
+    @objc func mapButtonClicked() {
+        guard let vc = UIStoryboard(name: "Map", bundle: nil).instantiateViewController(withIdentifier: "MapViewController") as? MapViewController else { return }
+        let nav = UINavigationController(rootViewController: vc)
+        nav.modalPresentationStyle = .overFullScreen
+        self.present(nav, animated: true, completion: nil)
+    }
+    
+    @objc func mypageButtonClicked() {
+        guard let vc = UIStoryboard(name: "ListUp", bundle: nil).instantiateViewController(withIdentifier: "ListUpViewController") as? ListUpViewController else { return }
+        let nav = UINavigationController(rootViewController: vc)
+        nav.modalPresentationStyle = .overFullScreen
+        self.present(nav, animated: true, completion: nil)
+    }
+    
+    func setBarButton(_ target: TabBarButton, _ image: String){
+        target.tabBarButton.setImage(UIImage(systemName: image), for: .normal)
+        target.tabBarButton.imageEdgeInsets = UIEdgeInsets(top: 16, left: 36, bottom: 28, right: 36)
+        target.tabBarButton.contentMode = .scaleToFill
+        target.tabBarButton.setTitle("", for: .normal)
+        target.tabBarButton.contentVerticalAlignment = .fill
+        target.tabBarButton.contentHorizontalAlignment = .fill
+        SearchBarButton.tabBarActiveView.backgroundColor = .customBlue
+    }
 }
