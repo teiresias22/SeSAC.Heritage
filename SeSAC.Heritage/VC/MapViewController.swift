@@ -3,33 +3,40 @@ import MapKit
 import CoreLocation
 import CoreLocationUI
 import RealmSwift
+import SwiftUI
 
 class MapViewController: UIViewController {
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var myLocation: UIButton!
+    @IBOutlet weak var heritageFilter: UIButton!
     
     @IBOutlet weak var listBarButton: TabBarButton!
     @IBOutlet weak var SearchBarButton: TabBarButton!
     @IBOutlet weak var mapBarButton: TabBarButton!
     @IBOutlet weak var myBarButton: TabBarButton!
     
-    let localRealm = try! Realm()
-    var tasks: Results<Heritage_List>!
+    @IBOutlet weak var conteinerViewHeight: NSLayoutConstraint!
     
+    let localRealm = try! Realm()
+    var heritageData: Results<Heritage_List>!
     var locationManager = CLLocationManager()
     
-    var item = Heritage_List()
-    var items = Heritage_List()
+    var heightStatus = false
+    var city: String = ""
+    var code: String = ""
     
     var runTimeInterval: TimeInterval? // 마지막 작업을 설정할 시간
     let mTimer: Selector = #selector(Tick_TimeConsole) // 위치 확인 타이머
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "MapoFlowerIsland", size: 14)!]
         
-        setTopButton()
+        setTopButton(myLocation, "street", .customBlue!)
+        setTopButton(heritageFilter, "street", .customYellow!)
         secTabBarButtons()
+        setAllAnnotations()
+        
         
         mapView.delegate = self
         locationManager.delegate = self
@@ -47,21 +54,48 @@ class MapViewController: UIViewController {
     }
     
     //Setting My Location Button
-    func setTopButton(){
-        myLocation.setImage(UIImage(named: "street"), for: .normal)
-        myLocation.imageEdgeInsets = UIEdgeInsets(top: 12, left: 12, bottom: 12, right: 12)
-        myLocation.contentMode = .scaleToFill
-        myLocation.setTitle("", for: .normal)
-        myLocation.contentVerticalAlignment = .fill
-        myLocation.contentHorizontalAlignment = .fill
-        myLocation.layer.cornerRadius = 20
-        myLocation.tintColor = .customBlack
-        myLocation.backgroundColor = .customBlue
+    func setTopButton(_ target: UIButton, _ text: String, _ color: UIColor) {
+        target.setImage(UIImage(named: text), for: .normal)
+        target.imageEdgeInsets = UIEdgeInsets(top: 12, left: 12, bottom: 12, right: 12)
+        target.contentMode = .scaleToFill
+        target.setTitle("", for: .normal)
+        target.contentVerticalAlignment = .fill
+        target.contentHorizontalAlignment = .fill
+        target.layer.cornerRadius = 20
+        target.tintColor = .customBlack
+        target.backgroundColor = color
     }
     
     //My Location Button Clicked
     @IBAction func myLocationClicked(_ sender: UIButton) {
         checkUserLocationServicesAithorization()
+    }
+    
+    @IBAction func heritageFilterClicked(_ sender: UIButton) {
+        heightStatus = !heightStatus
+        
+        conteinerViewHeight.constant = heightStatus ? UIScreen.main.bounds.height * 0.35 : 0
+        UIView.animate(withDuration: 0.3) {
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+    func setAllAnnotations() {
+        let annotiations = mapView.annotations
+        mapView.removeAnnotations(annotiations)
+        heritageData = localRealm.objects(Heritage_List.self)
+        
+        for location in heritageData {
+            let heritageLatitude = Double(location.latitude)!
+            let heritageLongitude = Double(location.longitude)!
+            
+            let heritageCoordinate = CLLocationCoordinate2D(latitude: heritageLatitude, longitude: heritageLongitude)
+            let heritageAnnotaion = MKPointAnnotation()
+            
+            heritageAnnotaion.title = location.ccbaMnm1
+            heritageAnnotaion.coordinate = heritageCoordinate
+            mapView.addAnnotation(heritageAnnotaion)
+        }
     }
     
     //권한 비허용시 기본화면
@@ -79,12 +113,6 @@ class MapViewController: UIViewController {
         mapView.setRegion(region, animated: true)
         annotation.coordinate = location
         mapView.addAnnotation(annotation)
-    }
-    
-    func allAnnotations() {
-        var location = CLLocationCoordinate2D()
-        let annotation = MKPointAnnotation()
-        
     }
     
     //위치 권한 허용 확인
@@ -148,7 +176,7 @@ extension MapViewController: CLLocationManagerDelegate{
         CLGeocoder().reverseGeocodeLocation(location, completionHandler: { (placemarks, error) -> Void in
             if let pm: CLPlacemark = placemarks?.first {
                 let address: String = "\(pm.locality ?? "") \(pm.name ?? "")"
-                print("locationManager", address)
+                //print("locationManager", address)
             }
         })
         locationManager.stopUpdatingLocation()
@@ -197,6 +225,10 @@ extension MapViewController: MKMapViewDelegate {
             }
         }
         runTimeInterval = nil
+        
+        //지도 중앙 좌표
+        //var latitude = coordinate.latitude
+        //var longitude = coordinate.longitude
     }
 }
 
@@ -215,7 +247,34 @@ extension MapViewController {
         myBarButton.tabBarButton.addTarget(self, action: #selector(mypageButtonClicked), for: .touchUpInside)
     }
     
-    //TabBar Button Set
+    @objc func listButtonClicked() {
+        guard let vc = UIStoryboard(name: "List", bundle: nil).instantiateViewController(withIdentifier: "ListViewController") as? ListViewController else { return }
+        let nav = UINavigationController(rootViewController: vc)
+        nav.modalPresentationStyle = .overFullScreen
+        self.present(nav, animated: false, completion: nil)
+    }
+    
+    @objc func searchButtonClicked() {
+        guard let vc = UIStoryboard(name: "Search", bundle: nil).instantiateViewController(withIdentifier: "SearchViewController") as? SearchViewController else { return }
+        let nav = UINavigationController(rootViewController: vc)
+        nav.modalPresentationStyle = .overFullScreen
+        self.present(nav, animated: false, completion: nil)
+    }
+    
+    @objc func mapButtonClicked() {
+        guard let vc = UIStoryboard(name: "Map", bundle: nil).instantiateViewController(withIdentifier: "MapViewController") as? MapViewController else { return }
+        let nav = UINavigationController(rootViewController: vc)
+        nav.modalPresentationStyle = .overFullScreen
+        self.present(nav, animated: false, completion: nil)
+    }
+    
+    @objc func mypageButtonClicked() {
+        guard let vc = UIStoryboard(name: "ListUp", bundle: nil).instantiateViewController(withIdentifier: "ListUpViewController") as? ListUpViewController else { return }
+        let nav = UINavigationController(rootViewController: vc)
+        nav.modalPresentationStyle = .overFullScreen
+        self.present(nav, animated: false, completion: nil)
+    }
+    
     func setBarButton(_ target: TabBarButton, _ image: String){
         target.tabBarButton.setImage(UIImage(systemName: image), for: .normal)
         target.tabBarButton.imageEdgeInsets = UIEdgeInsets(top: 16, left: 36, bottom: 28, right: 36)
@@ -224,34 +283,6 @@ extension MapViewController {
         target.tabBarButton.contentVerticalAlignment = .fill
         target.tabBarButton.contentHorizontalAlignment = .fill
         mapBarButton.tabBarActiveView.backgroundColor = .customBlue
-    }
-    
-    @objc func listButtonClicked() {
-        guard let vc = UIStoryboard(name: "List", bundle: nil).instantiateViewController(withIdentifier: "ListViewController") as? ListViewController else { return }
-        let nav = UINavigationController(rootViewController: vc)
-        nav.modalPresentationStyle = .overFullScreen
-        self.present(nav, animated: true, completion: nil)
-    }
-    
-    @objc func searchButtonClicked() {
-        guard let vc = UIStoryboard(name: "Search", bundle: nil).instantiateViewController(withIdentifier: "SearchViewController") as? SearchViewController else { return }
-        let nav = UINavigationController(rootViewController: vc)
-        nav.modalPresentationStyle = .overFullScreen
-        self.present(nav, animated: true, completion: nil)
-    }
-    
-    @objc func mapButtonClicked() {
-        guard let vc = UIStoryboard(name: "Map", bundle: nil).instantiateViewController(withIdentifier: "MapViewController") as? MapViewController else { return }
-        let nav = UINavigationController(rootViewController: vc)
-        nav.modalPresentationStyle = .overFullScreen
-        self.present(nav, animated: true, completion: nil)
-    }
-    
-    @objc func mypageButtonClicked() {
-        guard let vc = UIStoryboard(name: "ListUp", bundle: nil).instantiateViewController(withIdentifier: "ListUpViewController") as? ListUpViewController else { return }
-        let nav = UINavigationController(rootViewController: vc)
-        nav.modalPresentationStyle = .overFullScreen
-        self.present(nav, animated: true, completion: nil)
     }
     
 }

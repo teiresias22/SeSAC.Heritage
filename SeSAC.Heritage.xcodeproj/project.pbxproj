@@ -10,7 +10,6 @@
 		752A5E562750E3A20059114B /* SwiftyXMLParser in Frameworks */ = {isa = PBXBuildFile; productRef = 752A5E552750E3A20059114B /* SwiftyXMLParser */; };
 		7532D4B1276A47B4000FB585 /* ListMap.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7532D4B0276A47B4000FB585 /* ListMap.storyboard */; };
 		7532D4B3276A4810000FB585 /* ListMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7532D4B2276A4810000FB585 /* ListMapViewController.swift */; };
-		7534D50E27677D37009A4952 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7534D50D27677D36009A4952 /* GoogleService-Info.plist */; };
 		7534D51A2767C007009A4952 /* TabBarButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7534D5192767C007009A4952 /* TabBarButton.xib */; };
 		7534D51C2767C041009A4952 /* TabBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7534D51B2767C041009A4952 /* TabBarButton.swift */; };
 		753E851427476657007469D2 /* ListCategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753E851227476657007469D2 /* ListCategoryCollectionViewCell.swift */; };
@@ -45,6 +44,8 @@
 		75AEBFAD27465BC400A5661D /* SideMenu in Frameworks */ = {isa = PBXBuildFile; productRef = 75AEBFAC27465BC400A5661D /* SideMenu */; };
 		75AEBFBB2746D89C00A5661D /* ListInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75AEBFBA2746D89C00A5661D /* ListInformation.swift */; };
 		75AEBFBD2746D91900A5661D /* List.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75AEBFBC2746D91900A5661D /* List.swift */; };
+		75B40B77276C23C20046266D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 75B40B76276C23C20046266D /* GoogleService-Info.plist */; };
+		75B40B79276CF2070046266D /* MapPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B40B78276CF2070046266D /* MapPickerViewController.swift */; };
 		75BB049427564308005F4A44 /* Search.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75BB049327564308005F4A44 /* Search.storyboard */; };
 		75BB04962756451D005F4A44 /* ListUp.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75BB04952756451D005F4A44 /* ListUp.storyboard */; };
 		75BB0498275646FC005F4A44 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75BB0497275646FC005F4A44 /* SearchViewController.swift */; };
@@ -68,7 +69,6 @@
 /* Begin PBXFileReference section */
 		7532D4B0276A47B4000FB585 /* ListMap.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ListMap.storyboard; sourceTree = "<group>"; };
 		7532D4B2276A4810000FB585 /* ListMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListMapViewController.swift; sourceTree = "<group>"; };
-		7534D50D27677D36009A4952 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7534D5192767C007009A4952 /* TabBarButton.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TabBarButton.xib; sourceTree = "<group>"; };
 		7534D51B2767C041009A4952 /* TabBarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarButton.swift; sourceTree = "<group>"; };
 		753E851227476657007469D2 /* ListCategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCategoryCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -105,6 +105,8 @@
 		75AEBFA727464C0900A5661D /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Regular.ttf"; sourceTree = "<group>"; };
 		75AEBFBA2746D89C00A5661D /* ListInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListInformation.swift; sourceTree = "<group>"; };
 		75AEBFBC2746D91900A5661D /* List.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = List.swift; sourceTree = "<group>"; };
+		75B40B76276C23C20046266D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		75B40B78276CF2070046266D /* MapPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapPickerViewController.swift; sourceTree = "<group>"; };
 		75BB049327564308005F4A44 /* Search.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Search.storyboard; sourceTree = "<group>"; };
 		75BB04952756451D005F4A44 /* ListUp.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ListUp.storyboard; sourceTree = "<group>"; };
 		75BB0497275646FC005F4A44 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
@@ -194,7 +196,7 @@
 				75876561275541EE0025022E /* HeritageList.xml */,
 				75AEBF66274631E900A5661D /* Assets.xcassets */,
 				75AEBF68274631E900A5661D /* LaunchScreen.storyboard */,
-				7534D50D27677D36009A4952 /* GoogleService-Info.plist */,
+				75B40B76276C23C20046266D /* GoogleService-Info.plist */,
 				75AEBF6B274631E900A5661D /* Info.plist */,
 			);
 			path = SeSAC.Heritage;
@@ -224,6 +226,7 @@
 				75BB0497275646FC005F4A44 /* SearchViewController.swift */,
 				75BB049927564706005F4A44 /* ListUpViewController.swift */,
 				75AEBF9D2746395E00A5661D /* MapViewController.swift */,
+				75B40B78276CF2070046266D /* MapPickerViewController.swift */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -376,11 +379,11 @@
 				75AEBF67274631E900A5661D /* Assets.xcassets in Resources */,
 				75AEBF78274634FA00A5661D /* List.storyboard in Resources */,
 				75AEBF7E2746375C00A5661D /* ListDetail.storyboard in Resources */,
+				75B40B77276C23C20046266D /* GoogleService-Info.plist in Resources */,
 				75AEBF7C2746375600A5661D /* ListTable.storyboard in Resources */,
 				7534D51A2767C007009A4952 /* TabBarButton.xib in Resources */,
 				75BB04962756451D005F4A44 /* ListUp.storyboard in Resources */,
 				75AEBF65274631E900A5661D /* Main.storyboard in Resources */,
-				7534D50E27677D37009A4952 /* GoogleService-Info.plist in Resources */,
 				75BB049427564308005F4A44 /* Search.storyboard in Resources */,
 				75AEBF8A2746385700A5661D /* Map.storyboard in Resources */,
 			);
@@ -421,6 +424,7 @@
 				75AEBF92274638B500A5661D /* ListDetailViewController.swift in Sources */,
 				75AEBFBD2746D91900A5661D /* List.swift in Sources */,
 				75C11167274FFC0200ADFA78 /* StockCode.swift in Sources */,
+				75B40B79276CF2070046266D /* MapPickerViewController.swift in Sources */,
 				75AEBF5E274631E900A5661D /* AppDelegate.swift in Sources */,
 				753E85322747B2C9007469D2 /* Constance.swift in Sources */,
 				75FB9849274942B200A3A28C /* ListTableViewCell.swift in Sources */,

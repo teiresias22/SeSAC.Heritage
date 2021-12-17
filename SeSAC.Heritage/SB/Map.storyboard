@@ -32,6 +32,19 @@
                                     <action selector="myLocationClicked:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="Isb-Xw-Er4"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jGd-zb-b66">
+                                <rect key="frame" x="80" y="64" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="17H-EC-S2e"/>
+                                    <constraint firstAttribute="width" secondItem="jGd-zb-b66" secondAttribute="height" id="j7l-tm-U0v"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="heritageFilterClicked:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="Kjx-XG-j2s"/>
+                                    <action selector="myLocationClicked:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="7qT-DZ-jab"/>
+                                </connections>
+                            </button>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="XJU-dD-apk">
                                 <rect key="frame" x="0.0" y="836" width="414" height="60"/>
                                 <subviews>
@@ -56,25 +69,41 @@
                                     <constraint firstAttribute="height" constant="60" id="Yjb-Be-1Zj"/>
                                 </constraints>
                             </stackView>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FWu-bS-QCZ">
+                                <rect key="frame" x="62" y="124" width="290" height="0.0"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" id="IiT-eN-YZq"/>
+                                </constraints>
+                                <connections>
+                                    <segue destination="Al6-E8-89d" kind="embed" id="uch-Mc-aWh"/>
+                                </connections>
+                            </containerView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="OQF-JT-Qrh" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="1Ne-nQ-153"/>
                             <constraint firstItem="XJU-dD-apk" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="5G3-xl-wBx"/>
+                            <constraint firstItem="jGd-zb-b66" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="20" id="7ql-Pq-A84"/>
                             <constraint firstAttribute="trailing" secondItem="XJU-dD-apk" secondAttribute="trailing" id="D03-5M-1yu"/>
+                            <constraint firstItem="FWu-bS-QCZ" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="DYN-UI-5w6"/>
                             <constraint firstItem="X8d-Gu-0yD" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="HVL-Vy-4JB"/>
                             <constraint firstItem="X8d-Gu-0yD" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="KVg-zN-Y27"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="X8d-Gu-0yD" secondAttribute="bottom" id="Nkr-91-mbl"/>
                             <constraint firstAttribute="bottom" secondItem="XJU-dD-apk" secondAttribute="bottom" id="R2Y-ON-LDw"/>
                             <constraint firstItem="X8d-Gu-0yD" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="Sc0-Nw-YkP"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="X8d-Gu-0yD" secondAttribute="bottom" id="VR1-fv-ZFc"/>
+                            <constraint firstItem="jGd-zb-b66" firstAttribute="leading" secondItem="OQF-JT-Qrh" secondAttribute="trailing" constant="20" id="bdF-hL-Tum"/>
+                            <constraint firstItem="FWu-bS-QCZ" firstAttribute="top" secondItem="jGd-zb-b66" secondAttribute="bottom" constant="20" id="doL-Tz-SBn"/>
                             <constraint firstItem="OQF-JT-Qrh" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="20" id="v7I-kH-Jzg"/>
+                            <constraint firstItem="FWu-bS-QCZ" firstAttribute="width" secondItem="X8d-Gu-0yD" secondAttribute="width" multiplier="0.7" id="vUO-mf-xvr"/>
                         </constraints>
                     </view>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="SearchBarButton" destination="N07-st-vsi" id="YKw-K1-KqP"/>
+                        <outlet property="conteinerViewHeight" destination="IiT-eN-YZq" id="J6I-QK-hZ8"/>
+                        <outlet property="heritageFilter" destination="jGd-zb-b66" id="efJ-P4-e7B"/>
                         <outlet property="listBarButton" destination="IP5-rU-Mbi" id="i6u-if-Gp3"/>
                         <outlet property="mapBarButton" destination="kKA-Na-B5L" id="lGM-RT-4MH"/>
                         <outlet property="mapView" destination="X8d-Gu-0yD" id="wfN-VI-8rf"/>
@@ -85,6 +114,50 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1047.8260869565217" y="137.94642857142856"/>
+        </scene>
+        <!--Map Picker View Controller-->
+        <scene sceneID="jDb-Bs-vPw">
+            <objects>
+                <viewController storyboardIdentifier="MapPickerViewController" id="Al6-E8-89d" customClass="MapPickerViewController" customModule="SeSAC_Heritage" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" ambiguous="YES" id="ncX-ah-olo">
+                        <rect key="frame" x="0.0" y="0.0" width="290" height="0.0"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SEl-pz-huO">
+                                <rect key="frame" x="0.0" y="0.0" width="290" height="162"/>
+                            </pickerView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tRw-mF-Hpf">
+                                <rect key="frame" x="8" y="170" width="274" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="ztS-ID-IHN"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                <connections>
+                                    <action selector="pickerViewSubmitButtonClicked:" destination="Al6-E8-89d" eventType="touchUpInside" id="RuR-GJ-aVQ"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="tNY-PX-1l6"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="SEl-pz-huO" firstAttribute="top" secondItem="ncX-ah-olo" secondAttribute="top" id="ADN-BK-EzF"/>
+                            <constraint firstItem="SEl-pz-huO" firstAttribute="leading" secondItem="ncX-ah-olo" secondAttribute="leading" id="Knm-w9-Raa"/>
+                            <constraint firstItem="tRw-mF-Hpf" firstAttribute="top" secondItem="SEl-pz-huO" secondAttribute="bottom" constant="8" id="gvg-gz-ADz"/>
+                            <constraint firstAttribute="bottom" secondItem="tRw-mF-Hpf" secondAttribute="bottom" constant="8" id="k7Y-Du-zja"/>
+                            <constraint firstItem="tRw-mF-Hpf" firstAttribute="leading" secondItem="ncX-ah-olo" secondAttribute="leading" constant="8" id="kme-qK-IFC"/>
+                            <constraint firstAttribute="trailing" secondItem="SEl-pz-huO" secondAttribute="trailing" id="qXu-WG-Scy"/>
+                            <constraint firstAttribute="trailing" secondItem="tRw-mF-Hpf" secondAttribute="trailing" constant="8" id="tVL-j4-cTp"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="pickerView" destination="SEl-pz-huO" id="5cp-pE-mqK"/>
+                        <outlet property="pickerViewSubmit" destination="tRw-mF-Hpf" id="XoX-E6-tmj"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bsj-cT-hks" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1924.6376811594205" y="65.625"/>
         </scene>
     </scenes>
     <resources>

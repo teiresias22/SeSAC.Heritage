@@ -162,28 +162,28 @@ extension SearchViewController {
         guard let vc = UIStoryboard(name: "List", bundle: nil).instantiateViewController(withIdentifier: "ListViewController") as? ListViewController else { return }
         let nav = UINavigationController(rootViewController: vc)
         nav.modalPresentationStyle = .overFullScreen
-        self.present(nav, animated: true, completion: nil)
+        self.present(nav, animated: false, completion: nil)
     }
     
     @objc func searchButtonClicked() {
         guard let vc = UIStoryboard(name: "Search", bundle: nil).instantiateViewController(withIdentifier: "SearchViewController") as? SearchViewController else { return }
         let nav = UINavigationController(rootViewController: vc)
         nav.modalPresentationStyle = .overFullScreen
-        self.present(nav, animated: true, completion: nil)
+        self.present(nav, animated: false, completion: nil)
     }
     
     @objc func mapButtonClicked() {
         guard let vc = UIStoryboard(name: "Map", bundle: nil).instantiateViewController(withIdentifier: "MapViewController") as? MapViewController else { return }
         let nav = UINavigationController(rootViewController: vc)
         nav.modalPresentationStyle = .overFullScreen
-        self.present(nav, animated: true, completion: nil)
+        self.present(nav, animated: false, completion: nil)
     }
     
     @objc func mypageButtonClicked() {
         guard let vc = UIStoryboard(name: "ListUp", bundle: nil).instantiateViewController(withIdentifier: "ListUpViewController") as? ListUpViewController else { return }
         let nav = UINavigationController(rootViewController: vc)
         nav.modalPresentationStyle = .overFullScreen
-        self.present(nav, animated: true, completion: nil)
+        self.present(nav, animated: false, completion: nil)
     }
     
     func setBarButton(_ target: TabBarButton, _ image: String){
