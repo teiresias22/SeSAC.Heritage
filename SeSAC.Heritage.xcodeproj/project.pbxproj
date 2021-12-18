@@ -45,7 +45,6 @@
 		75AEBFBB2746D89C00A5661D /* ListInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75AEBFBA2746D89C00A5661D /* ListInformation.swift */; };
 		75AEBFBD2746D91900A5661D /* List.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75AEBFBC2746D91900A5661D /* List.swift */; };
 		75B40B77276C23C20046266D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 75B40B76276C23C20046266D /* GoogleService-Info.plist */; };
-		75B40B79276CF2070046266D /* MapPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B40B78276CF2070046266D /* MapPickerViewController.swift */; };
 		75BB049427564308005F4A44 /* Search.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75BB049327564308005F4A44 /* Search.storyboard */; };
 		75BB04962756451D005F4A44 /* ListUp.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75BB04952756451D005F4A44 /* ListUp.storyboard */; };
 		75BB0498275646FC005F4A44 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75BB0497275646FC005F4A44 /* SearchViewController.swift */; };
@@ -56,6 +55,7 @@
 		75C11169274FFFAA00ADFA78 /* StockCodeInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C11168274FFFAA00ADFA78 /* StockCodeInformation.swift */; };
 		75C1116B275001B300ADFA78 /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C1116A275001B300ADFA78 /* City.swift */; };
 		75C1116D275001DF00ADFA78 /* CityInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C1116C275001DF00ADFA78 /* CityInformation.swift */; };
+		75C7A8C6276E5596009EAEE9 /* PickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C7A8C5276E5596009EAEE9 /* PickerViewController.swift */; };
 		75E1110A27645CFE00BA2C8D /* Label + Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E1110927645CFE00BA2C8D /* Label + Extention.swift */; };
 		75E18E31276ACB4B0046B0F6 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 75E18E30276ACB4B0046B0F6 /* FirebaseAnalytics */; };
 		75E18E33276ACB4B0046B0F6 /* FirebaseAnalyticsSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = 75E18E32276ACB4B0046B0F6 /* FirebaseAnalyticsSwift-Beta */; };
@@ -106,7 +106,6 @@
 		75AEBFBA2746D89C00A5661D /* ListInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListInformation.swift; sourceTree = "<group>"; };
 		75AEBFBC2746D91900A5661D /* List.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = List.swift; sourceTree = "<group>"; };
 		75B40B76276C23C20046266D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		75B40B78276CF2070046266D /* MapPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapPickerViewController.swift; sourceTree = "<group>"; };
 		75BB049327564308005F4A44 /* Search.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Search.storyboard; sourceTree = "<group>"; };
 		75BB04952756451D005F4A44 /* ListUp.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ListUp.storyboard; sourceTree = "<group>"; };
 		75BB0497275646FC005F4A44 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
@@ -117,6 +116,7 @@
 		75C11168274FFFAA00ADFA78 /* StockCodeInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockCodeInformation.swift; sourceTree = "<group>"; };
 		75C1116A275001B300ADFA78 /* City.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
 		75C1116C275001DF00ADFA78 /* CityInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityInformation.swift; sourceTree = "<group>"; };
+		75C7A8C5276E5596009EAEE9 /* PickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerViewController.swift; sourceTree = "<group>"; };
 		75E1110927645CFE00BA2C8D /* Label + Extention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Label + Extention.swift"; sourceTree = "<group>"; };
 		75E18E2E276AC5A10046B0F6 /* SeSAC.Heritage.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SeSAC.Heritage.entitlements; sourceTree = "<group>"; };
 		75FB9848274942B200A3A28C /* ListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewCell.swift; sourceTree = "<group>"; };
@@ -226,7 +226,7 @@
 				75BB0497275646FC005F4A44 /* SearchViewController.swift */,
 				75BB049927564706005F4A44 /* ListUpViewController.swift */,
 				75AEBF9D2746395E00A5661D /* MapViewController.swift */,
-				75B40B78276CF2070046266D /* MapPickerViewController.swift */,
+				75C7A8C5276E5596009EAEE9 /* PickerViewController.swift */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -424,8 +424,8 @@
 				75AEBF92274638B500A5661D /* ListDetailViewController.swift in Sources */,
 				75AEBFBD2746D91900A5661D /* List.swift in Sources */,
 				75C11167274FFC0200ADFA78 /* StockCode.swift in Sources */,
-				75B40B79276CF2070046266D /* MapPickerViewController.swift in Sources */,
 				75AEBF5E274631E900A5661D /* AppDelegate.swift in Sources */,
+				75C7A8C6276E5596009EAEE9 /* PickerViewController.swift in Sources */,
 				753E85322747B2C9007469D2 /* Constance.swift in Sources */,
 				75FB9849274942B200A3A28C /* ListTableViewCell.swift in Sources */,
 				75AEBF9E2746395E00A5661D /* MapViewController.swift in Sources */,

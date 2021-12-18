@@ -1,37 +1,46 @@
 //
-//  MapPickerViewController.swift
+//  PickerViewController.swift
 //  SeSAC.Heritage
 //
-//  Created by Joonhwan Jeon on 2021/12/18.
+//  Created by Joonhwan Jeon on 2021/12/19.
 //
 
 import UIKit
 
-class MapPickerViewController: UIViewController {
+class PickerViewController: UIViewController {
     @IBOutlet weak var pickerView: UIPickerView!
-    @IBOutlet weak var pickerViewSubmit: UIButton!
     
     let stockCodeInformation = StockCodeInformation()
     let cityInformation = CityInformation()
     
+    var stockCode = 0
+    var cityCode = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        
+        createPickerView()
+        
+        print("stockCode", stockCode)
+        print("cityCode", cityCode)
+        let sb = UIStoryboard(name: "Map", bundle: nil)
+        let vc = sb.instantiateViewController(withIdentifier: "MapViewController") as! MapViewController
+        vc.city = cityCode
+        vc.code = stockCode
+    }
+    
+    func createPickerView(){
         pickerView.delegate = self
         pickerView.dataSource = self
-        // Do any additional setup after loading the view.
     }
-    
-    @IBAction func pickerViewSubmitButtonClicked(_ sender: UIButton) {
-        pickerView.resignFirstResponder()
-        
-        
-    }
-    
-    
 }
 
-extension MapPickerViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+extension PickerViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 2
     }
@@ -53,9 +62,10 @@ extension MapPickerViewController: UIPickerViewDelegate, UIPickerViewDataSource 
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        
         switch component {
-        case 0:  stockCodeInformation.stockCode[row].code
-        case 1:  cityInformation.city[row].code
+        case 0: stockCode = stockCodeInformation.stockCode[row].code
+        case 1: cityCode = cityInformation.city[row].code
         default: break
         }
     }

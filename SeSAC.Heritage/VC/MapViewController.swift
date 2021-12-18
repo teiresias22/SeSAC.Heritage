@@ -18,12 +18,13 @@ class MapViewController: UIViewController {
     @IBOutlet weak var conteinerViewHeight: NSLayoutConstraint!
     
     let localRealm = try! Realm()
+    var tasks: Results<Heritage_List>!
     var heritageData: Results<Heritage_List>!
     var locationManager = CLLocationManager()
     
     var heightStatus = false
-    var city: String = ""
-    var code: String = ""
+    var city: String?
+    var code: Int?
     
     var runTimeInterval: TimeInterval? // 마지막 작업을 설정할 시간
     let mTimer: Selector = #selector(Tick_TimeConsole) // 위치 확인 타이머
@@ -35,8 +36,7 @@ class MapViewController: UIViewController {
         setTopButton(myLocation, "street", .customBlue!)
         setTopButton(heritageFilter, "street", .customYellow!)
         secTabBarButtons()
-        setAllAnnotations()
-        
+        //setAllAnnotations()
         
         mapView.delegate = self
         locationManager.delegate = self
@@ -52,6 +52,14 @@ class MapViewController: UIViewController {
         
         Timer.scheduledTimer(timeInterval: 0.25, target: self, selector: mTimer, userInfo: nil, repeats: true)
     }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        
+        print("city", city)
+        print("code", code)
+    }
+    
     
     //Setting My Location Button
     func setTopButton(_ target: UIButton, _ text: String, _ color: UIColor) {
@@ -73,8 +81,7 @@ class MapViewController: UIViewController {
     
     @IBAction func heritageFilterClicked(_ sender: UIButton) {
         heightStatus = !heightStatus
-        
-        conteinerViewHeight.constant = heightStatus ? UIScreen.main.bounds.height * 0.35 : 0
+        conteinerViewHeight.constant = heightStatus ? UIScreen.main.bounds.height * 0.3 : 0
         UIView.animate(withDuration: 0.3) {
             self.view.layoutIfNeeded()
         }
