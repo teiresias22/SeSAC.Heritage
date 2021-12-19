@@ -18,8 +18,6 @@ class MapViewController: UIViewController {
     @IBOutlet weak var conteinerViewHeight: NSLayoutConstraint!
     
     let localRealm = try! Realm()
-    var tasks: Results<Heritage_List>!
-    var heritageData: Results<Heritage_List>!
     var locationManager = CLLocationManager()
     
     var heightStatus = false
@@ -35,8 +33,7 @@ class MapViewController: UIViewController {
         
         setTopButton(myLocation, "street", .customBlue!)
         setTopButton(heritageFilter, "street", .customYellow!)
-        secTabBarButtons()
-        //setAllAnnotations()
+        setTabBarButtons()
         
         mapView.delegate = self
         locationManager.delegate = self
@@ -55,11 +52,28 @@ class MapViewController: UIViewController {
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        
-        print("city", city)
-        print("code", code)
+        filerAnnotations()
     }
     
+    func filerAnnotations(){
+        let firstFilter = localRealm.objects(Heritage_List.self).filter("ccbaCtcd='\(city ?? "11")'")
+        let secondFilter = firstFilter.filter("ccbaKdcd='\(code ?? 11)'")
+        
+        let annotiations = mapView.annotations
+        mapView.removeAnnotations(annotiations)
+        
+        for location in secondFilter {
+            let heritageLatitude = Double(location.latitude)!
+            let heritageLongitude = Double(location.longitude)!
+            
+            let heritageCoordinate = CLLocationCoordinate2D(latitude: heritageLatitude, longitude: heritageLongitude)
+            let heritageAnnotaion = MKPointAnnotation()
+            
+            heritageAnnotaion.title = location.ccbaMnm1
+            heritageAnnotaion.coordinate = heritageCoordinate
+            mapView.addAnnotation(heritageAnnotaion)
+        }
+    }
     
     //Setting My Location Button
     func setTopButton(_ target: UIButton, _ text: String, _ color: UIColor) {
@@ -87,36 +101,14 @@ class MapViewController: UIViewController {
         }
     }
     
-    func setAllAnnotations() {
-        let annotiations = mapView.annotations
-        mapView.removeAnnotations(annotiations)
-        heritageData = localRealm.objects(Heritage_List.self)
-        
-        for location in heritageData {
-            let heritageLatitude = Double(location.latitude)!
-            let heritageLongitude = Double(location.longitude)!
-            
-            let heritageCoordinate = CLLocationCoordinate2D(latitude: heritageLatitude, longitude: heritageLongitude)
-            let heritageAnnotaion = MKPointAnnotation()
-            
-            heritageAnnotaion.title = location.ccbaMnm1
-            heritageAnnotaion.coordinate = heritageCoordinate
-            mapView.addAnnotation(heritageAnnotaion)
-        }
-    }
-    
     //권한 비허용시 기본화면
     func defaultLocation() {
         var location = CLLocationCoordinate2D()
         let annotation = MKPointAnnotation()
         let span = MKCoordinateSpan(latitudeDelta: 0.03, longitudeDelta: 0.03)
-        
         location = CLLocationCoordinate2D(latitude: 37.52413651649104, longitude: 126.98001340101837)
-        
         annotation.title = "사용자의 위치를 확인할수 없습니다."
-        
         let region = MKCoordinateRegion(center: location, span: span)
-        
         mapView.setRegion(region, animated: true)
         annotation.coordinate = location
         mapView.addAnnotation(annotation)
@@ -240,7 +232,7 @@ extension MapViewController: MKMapViewDelegate {
 }
 
 extension MapViewController {
-    func secTabBarButtons() {
+    func setTabBarButtons() {
         setBarButton(listBarButton, "list.dash")
         listBarButton.tabBarButton.addTarget(self, action: #selector(listButtonClicked), for: .touchUpInside)
         

@@ -34,7 +34,7 @@ class ListTableViewController: UIViewController {
         listTable.delegate = self
         listTable.dataSource = self
         
-        secTabBarButtons()
+        setTabBarButtons()
         // Do any additional setup after loading the view.
     }
 }
@@ -117,7 +117,7 @@ extension ListTableViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension ListTableViewController {
-    func secTabBarButtons() {
+    func setTabBarButtons() {
         setBarButton(listBarButton, "list.dash")
         listBarButton.tabBarButton.addTarget(self, action: #selector(listButtonClicked), for: .touchUpInside)
         

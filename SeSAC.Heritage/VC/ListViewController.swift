@@ -42,13 +42,28 @@ class ListViewController: UIViewController {
         
         topButtonView.backgroundColor = .clear
         listCollectionViewSet()
-        secTabBarButtons()
+        setTabBarButtons()
         
         //print(">>\(UserDefaults.standard.object(forKey: "AppleLanguages"))<<")
     }
     
+    func topLeftButtonSet() {
+        topLeftButton.setTitle(listInformation.list[0].title, for: .normal)
+        if buttonActive {
+            topLeftButton.titleLabel?.font = UIFont(name: "MapoFlowerIsland", size: 16)
+            topLeftButton.tintColor = .customBlue
+            topLeftUnderBarView.backgroundColor = .customBlue
+            topLeftBackground.backgroundColor = .white
+        } else {
+            topLeftButton.titleLabel?.font = UIFont(name: "MapoFlowerIsland", size: 14)
+            topLeftButton.tintColor = .customBlack
+            topLeftUnderBarView.backgroundColor = .clear
+            topLeftBackground.backgroundColor = .clear
+        }
+    }
+    
     func topRightButtonSet(){
-        topRightButton.setTitle(listInformation.list[0].title, for: .normal)
+        topRightButton.setTitle(listInformation.list[1].title, for: .normal)
         if buttonActive {
             topRightButton.titleLabel?.font = UIFont(name: "MapoFlowerIsland", size: 14)
             topRightButton.tintColor = .customBlack
@@ -60,21 +75,6 @@ class ListViewController: UIViewController {
             topRightButton.tintColor = .customBlue
             topRightUnderBarView.backgroundColor = .customBlue
             topRightBackground.backgroundColor = .white
-        }
-    }
-    
-    func topLeftButtonSet() {
-        topLeftButton.setTitle(listInformation.list[1].title, for: .normal)
-        if buttonActive {
-            topLeftButton.titleLabel?.font = UIFont(name: "MapoFlowerIsland", size: 16)
-            topLeftButton.tintColor = .customBlue
-            topLeftUnderBarView.backgroundColor = .customBlue
-            topLeftBackground.backgroundColor = .white
-        } else {
-            topLeftButton.titleLabel?.font = UIFont(name: "MapoFlowerIsland", size: 14)
-            topLeftButton.tintColor = .customBlack
-            topLeftUnderBarView.backgroundColor = .clear
-            topLeftBackground.backgroundColor = .clear
         }
     }
     
@@ -173,7 +173,7 @@ extension ListViewController: UICollectionViewDelegate, UICollectionViewDataSour
 }
 
 extension ListViewController {
-    func secTabBarButtons() {
+    func setTabBarButtons() {
         setBarButton(listBarButton, "list.dash")
         listBarButton.tabBarButton.addTarget(self, action: #selector(listButtonClicked), for: .touchUpInside)
         

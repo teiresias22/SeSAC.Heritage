@@ -39,7 +39,7 @@ class SearchViewController: UIViewController {
         tasks = localRealm.objects(Heritage_List.self)
         
         setSearchBar()
-        secTabBarButtons()
+        setTabBarButtons()
         // Do any additional setup after loading the view.
     }
     
@@ -144,7 +144,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension SearchViewController {
-    func secTabBarButtons() {
+    func setTabBarButtons() {
         setBarButton(listBarButton, "list.dash")
         listBarButton.tabBarButton.addTarget(self, action: #selector(listButtonClicked), for: .touchUpInside)
         

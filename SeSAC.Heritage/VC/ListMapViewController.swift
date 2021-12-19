@@ -46,7 +46,7 @@ class ListMapViewController: UIViewController {
         
         locationManager.delegate = self
         defaultLocation()
-        secTabBarButtons()
+        setTabBarButtons()
         // Do any additional setup after loading the view.
     }
     
@@ -172,7 +172,7 @@ extension ListMapViewController: CLLocationManagerDelegate{
 }
 
 extension ListMapViewController {
-    func secTabBarButtons() {
+    func setTabBarButtons() {
         setBarButton(listBarButton, "list.dash")
         listBarButton.tabBarButton.addTarget(self, action: #selector(listButtonClicked), for: .touchUpInside)
         

@@ -52,7 +52,7 @@ class ListDetailViewController: UIViewController {
         fetcHeritageData()
         // Do any additional setup after loading the view.
         
-        secTabBarButtons()
+        setTabBarButtons()
     }
     
     func defaultPageSetup() {
@@ -180,7 +180,7 @@ extension ListDetailViewController: XMLParserDelegate {
 }
 
 extension ListDetailViewController {
-    func secTabBarButtons() {
+    func setTabBarButtons() {
         setBarButton(listBarButton, "list.dash")
         listBarButton.tabBarButton.addTarget(self, action: #selector(listButtonClicked), for: .touchUpInside)
         

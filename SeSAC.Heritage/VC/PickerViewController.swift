@@ -13,8 +13,8 @@ class PickerViewController: UIViewController {
     let stockCodeInformation = StockCodeInformation()
     let cityInformation = CityInformation()
     
-    var stockCode = 0
-    var cityCode = ""
+    var stockCode = 11
+    var cityCode = "11"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,13 +25,6 @@ class PickerViewController: UIViewController {
         super.viewWillLayoutSubviews()
         
         createPickerView()
-        
-        print("stockCode", stockCode)
-        print("cityCode", cityCode)
-        let sb = UIStoryboard(name: "Map", bundle: nil)
-        let vc = sb.instantiateViewController(withIdentifier: "MapViewController") as! MapViewController
-        vc.city = cityCode
-        vc.code = stockCode
     }
     
     func createPickerView(){
@@ -63,10 +56,17 @@ extension PickerViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         
+        
         switch component {
         case 0: stockCode = stockCodeInformation.stockCode[row].code
         case 1: cityCode = cityInformation.city[row].code
         default: break
         }
+        
+        if let MapViewController = self.parent as? MapViewController {
+            MapViewController.code = stockCode
+            MapViewController.city = cityCode
+        }
     }
+    
 }
