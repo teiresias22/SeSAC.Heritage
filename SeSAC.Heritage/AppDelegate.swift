@@ -87,10 +87,31 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         if userInfo[AnyHashable("key")] as? String == "1" {
             print("광고 푸시 입니다.")
         } else if userInfo[AnyHashable("key")] as? String == "2" {
-            print("홍보 푸시 입니다.")
+            print("알림 푸시 입니다.")
         } else {
             print("다른 푸시 입니다.")
         }
+        
+        //ScenDelegate의 Window 객체 가져오기
+        guard let rootViewController = (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.window?.rootViewController else { return }
+        print(rootViewController)
+        
+        /*특정 페이지일때 페이지 전환시키기
+        if rootViewController is SanpDetailViewController {
+            rootViewController.present(ListDetailViewController, animated: true, completion: nil)
+        }*/
+        /*
+        if rootViewController is ListDetailViewController {
+            /*특정 페이지일때 페이지 전환시키기
+            let nav = UINavigationController(rootViewController: ListViewController())
+            nav.modalPresentationStyle = .fullScreen
+            rootViewController.navigationController?.present(nav, animated: true, completion: nil)
+             */
+            
+            rootViewController.navigationController?.pushViewController(ListDetailViewController(), animated: true)
+        }
+        */
+        
         completionHandler()
     }
 }
@@ -105,5 +126,26 @@ extension AppDelegate: MessagingDelegate {
         object: nil,
         userInfo: dataDict
       )
+    }
+}
+
+//최상단 뷰 컨트롤러를 판단해주는 UIViewController Extention
+extension UIViewController {
+    var topViewController: UIViewController? {
+        return self.topViewController(currentViewController: self)
+    }
+    
+    func topViewController(currentViewController: UIViewController) -> UIViewController {
+        if let tabBarController = currentViewController as? UITabBarController,
+           let selectedViewController = tabBarController.selectedViewController {
+            return self.topViewController(currentViewController: selectedViewController)
+        } else if let navigationController = currentViewController as? UINavigationController,
+            let visibleViewController = navigationController.visibleViewController {
+            return self.topViewController(currentViewController: visibleViewController)
+        } else if let presentedViewController = currentViewController.presentedViewController {
+            return self.topViewController(currentViewController: presentedViewController)
+        } else {
+            return currentViewController
+        }
     }
 }

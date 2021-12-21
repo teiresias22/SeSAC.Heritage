@@ -1,5 +1,6 @@
 import UIKit
 import RealmSwift
+import FirebaseInstallations
 
 class ListViewController: UIViewController {
     
@@ -45,6 +46,18 @@ class ListViewController: UIViewController {
         setTabBarButtons()
         
         //print(">>\(UserDefaults.standard.object(forKey: "AppleLanguages"))<<")
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
+        Installations.installations().delete { error in
+            if let error = error {
+                print("Error deleting installations: \(error)")
+                return
+            }
+            print("Installation deleted");
+        }
     }
     
     func topLeftButtonSet() {

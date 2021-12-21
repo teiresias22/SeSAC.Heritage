@@ -33,16 +33,15 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jGd-zb-b66">
-                                <rect key="frame" x="80" y="64" width="40" height="40"/>
+                                <rect key="frame" x="68" y="64" width="100" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="17H-EC-S2e"/>
-                                    <constraint firstAttribute="width" secondItem="jGd-zb-b66" secondAttribute="height" id="j7l-tm-U0v"/>
+                                    <constraint firstAttribute="width" secondItem="jGd-zb-b66" secondAttribute="height" multiplier="2.5:1" id="j7l-tm-U0v"/>
                                 </constraints>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" title="Button"/>
                                 <connections>
                                     <action selector="heritageFilterClicked:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="Kjx-XG-j2s"/>
-                                    <action selector="myLocationClicked:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="7qT-DZ-jab"/>
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="XJU-dD-apk">
@@ -78,6 +77,17 @@
                                     <segue destination="6Vq-u7-lfb" kind="embed" id="zbv-HZ-r83"/>
                                 </connections>
                             </containerView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sez-0o-qHw">
+                                <rect key="frame" x="176" y="64" width="100" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="TFu-xw-Qu3"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="locationFilterClicked:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="yuP-No-Jah"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -94,9 +104,12 @@
                             <constraint firstAttribute="bottom" secondItem="XJU-dD-apk" secondAttribute="bottom" id="R2Y-ON-LDw"/>
                             <constraint firstItem="X8d-Gu-0yD" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="Sc0-Nw-YkP"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="X8d-Gu-0yD" secondAttribute="bottom" id="VR1-fv-ZFc"/>
-                            <constraint firstItem="jGd-zb-b66" firstAttribute="leading" secondItem="OQF-JT-Qrh" secondAttribute="trailing" constant="20" id="bdF-hL-Tum"/>
+                            <constraint firstItem="jGd-zb-b66" firstAttribute="leading" secondItem="OQF-JT-Qrh" secondAttribute="trailing" constant="8" id="bdF-hL-Tum"/>
                             <constraint firstItem="ZpN-Nf-xNQ" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="l54-dl-dt4"/>
+                            <constraint firstItem="sez-0o-qHw" firstAttribute="leading" secondItem="jGd-zb-b66" secondAttribute="trailing" constant="8" id="lAM-Wn-d1k"/>
+                            <constraint firstItem="sez-0o-qHw" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="20" id="rWg-k8-Zo1"/>
                             <constraint firstItem="OQF-JT-Qrh" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="20" id="v7I-kH-Jzg"/>
+                            <constraint firstItem="sez-0o-qHw" firstAttribute="width" secondItem="sez-0o-qHw" secondAttribute="height" multiplier="2.5:1" id="zZV-ua-XnL"/>
                         </constraints>
                     </view>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
@@ -105,6 +118,7 @@
                         <outlet property="conteinerViewHeight" destination="14P-Y2-sGS" id="FhQ-aj-7jn"/>
                         <outlet property="heritageFilter" destination="jGd-zb-b66" id="efJ-P4-e7B"/>
                         <outlet property="listBarButton" destination="IP5-rU-Mbi" id="i6u-if-Gp3"/>
+                        <outlet property="locationFilter" destination="sez-0o-qHw" id="3XW-8O-bcc"/>
                         <outlet property="mapBarButton" destination="kKA-Na-B5L" id="lGM-RT-4MH"/>
                         <outlet property="mapView" destination="X8d-Gu-0yD" id="wfN-VI-8rf"/>
                         <outlet property="myBarButton" destination="78C-Xj-ECw" id="ZTU-wT-pJW"/>
@@ -127,6 +141,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="290" height="300"/>
                             </pickerView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="aNa-pO-u30"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="Mmd-7t-up7" secondAttribute="trailing" id="0H2-m3-a6G"/>

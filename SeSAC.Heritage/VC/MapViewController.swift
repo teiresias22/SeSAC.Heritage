@@ -9,6 +9,7 @@ class MapViewController: UIViewController {
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var myLocation: UIButton!
     @IBOutlet weak var heritageFilter: UIButton!
+    @IBOutlet weak var locationFilter: UIButton!
     
     @IBOutlet weak var listBarButton: TabBarButton!
     @IBOutlet weak var SearchBarButton: TabBarButton!
@@ -31,8 +32,10 @@ class MapViewController: UIViewController {
         super.viewDidLoad()
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "MapoFlowerIsland", size: 14)!]
         
-        setTopButton(myLocation, "street", .customBlue!)
-        setTopButton(heritageFilter, "street", .customYellow!)
+        setMyLocationButton()
+        setFilterButton(heritageFilter, .customYellow!, "종류별")
+        setFilterButton(locationFilter, .customBlue!, "지역별")
+        
         setTabBarButtons()
         
         mapView.delegate = self
@@ -76,13 +79,25 @@ class MapViewController: UIViewController {
     }
     
     //Setting My Location Button
-    func setTopButton(_ target: UIButton, _ text: String, _ color: UIColor) {
-        target.setImage(UIImage(named: text), for: .normal)
+    func setMyLocationButton() {
+        myLocation.setImage(UIImage(named: "street"), for: .normal)
+        myLocation.imageEdgeInsets = UIEdgeInsets(top: 12, left: 12, bottom: 12, right: 12)
+        myLocation.contentMode = .scaleToFill
+        myLocation.setTitle("", for: .normal)
+        myLocation.contentVerticalAlignment = .fill
+        myLocation.contentHorizontalAlignment = .fill
+        myLocation.layer.cornerRadius = 20
+        myLocation.tintColor = .customBlack
+        myLocation.backgroundColor = .customWhite
+    }
+    
+    //Setting Filter Button
+    func setFilterButton(_ target: UIButton, _ color: UIColor, _ title: String) {
+        target.setTitle(title, for: .normal)
+        target.setImage(UIImage(systemName: "text.chevron.right"), for: .normal)
         target.imageEdgeInsets = UIEdgeInsets(top: 12, left: 12, bottom: 12, right: 12)
-        target.contentMode = .scaleToFill
-        target.setTitle("", for: .normal)
-        target.contentVerticalAlignment = .fill
-        target.contentHorizontalAlignment = .fill
+        target.contentVerticalAlignment = .center
+        target.contentHorizontalAlignment = .center
         target.layer.cornerRadius = 20
         target.tintColor = .customBlack
         target.backgroundColor = color
@@ -94,12 +109,29 @@ class MapViewController: UIViewController {
     }
     
     @IBAction func heritageFilterClicked(_ sender: UIButton) {
+        let vc = children.first as! PickerViewController
+        vc.filterTag = "heritage"
+        
         heightStatus = !heightStatus
-        conteinerViewHeight.constant = heightStatus ? UIScreen.main.bounds.height * 0.3 : 0
+        conteinerViewHeight.constant = heightStatus ? UIScreen.main.bounds.height * 0.2 : 0
         UIView.animate(withDuration: 0.3) {
             self.view.layoutIfNeeded()
         }
     }
+    
+    @IBAction func locationFilterClicked(_ sender: UIButton) {
+        let vc = children.first as! PickerViewController
+        vc.filterTag = "city"
+        
+        heightStatus = !heightStatus
+        conteinerViewHeight.constant = heightStatus ? UIScreen.main.bounds.height * 0.2 : 0
+        UIView.animate(withDuration: 0.3) {
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+    
+    
     
     //권한 비허용시 기본화면
     func defaultLocation() {
