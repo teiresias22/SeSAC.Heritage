@@ -9,12 +9,10 @@ class ListTableViewController: UIViewController {
     @IBOutlet weak var mapBarButton: TabBarButton!
     @IBOutlet weak var myBarButton: TabBarButton!
     
-    
     let localRealm = try! Realm()
     var tasks: Results<Heritage_List>!
 
     var listInformation: String = ""
-    
     var stockCodeData: StockCode?
     var cityData: City?
     var category: String = ""
@@ -26,9 +24,7 @@ class ListTableViewController: UIViewController {
         } else {
             self.title = "지역별 문화유산".localized()
         }
-        
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "MapoFlowerIsland", size: 20)!]
-                
         listTable.separatorStyle = UITableViewCell.SeparatorStyle.none
         
         listTable.delegate = self
@@ -43,9 +39,17 @@ extension ListTableViewController: UITableViewDelegate, UITableViewDataSource {
         
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if stockCodeData != nil {
-            tasks = localRealm.objects(Heritage_List.self).filter("ccbaKdcd='\(stockCodeData!.code)'")
+            if stockCodeData!.code == 0 {
+                tasks = localRealm.objects(Heritage_List.self)
+            } else {
+                tasks = localRealm.objects(Heritage_List.self).filter("ccbaKdcd='\(stockCodeData!.code)'")
+            }
         }else if cityData != nil {
-            tasks = localRealm.objects(Heritage_List.self).filter("ccbaCtcd='\(cityData!.code)'")
+            if cityData!.code == "00" {
+                tasks = localRealm.objects(Heritage_List.self)
+            } else {
+                tasks = localRealm.objects(Heritage_List.self).filter("ccbaCtcd='\(cityData!.code)'")
+            }
         }
         return tasks.count
     }
@@ -54,10 +58,17 @@ extension ListTableViewController: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ListTableViewCell.identifier, for: indexPath) as? ListTableViewCell else { return UITableViewCell() }
         
         if stockCodeData != nil {
-            tasks = localRealm.objects(Heritage_List.self).filter("ccbaKdcd='\(stockCodeData!.code)'")
-            
+            if stockCodeData!.code == 0 {
+                tasks = localRealm.objects(Heritage_List.self)
+            } else {
+                tasks = localRealm.objects(Heritage_List.self).filter("ccbaKdcd='\(stockCodeData!.code)'")
+            }
         } else if cityData != nil {
-            tasks = localRealm.objects(Heritage_List.self).filter("ccbaCtcd='\(cityData!.code)'")
+            if cityData!.code == "00" {
+                tasks = localRealm.objects(Heritage_List.self)
+            } else {
+                tasks = localRealm.objects(Heritage_List.self).filter("ccbaCtcd='\(cityData!.code)'")
+            }
         }
         let row = tasks[indexPath.row]
         cell.selectionStyle = .none
@@ -168,5 +179,4 @@ extension ListTableViewController {
         target.tabBarButton.contentHorizontalAlignment = .fill
         listBarButton.tabBarActiveView.backgroundColor = .customBlue
     }
-    
 }

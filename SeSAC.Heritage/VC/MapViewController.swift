@@ -19,6 +19,7 @@ class MapViewController: UIViewController {
     @IBOutlet weak var conteinerViewHeight: NSLayoutConstraint!
     
     let localRealm = try! Realm()
+    var tasks: Results<Heritage_List>!
     var locationManager = CLLocationManager()
     
     var heightStatus = false
@@ -58,14 +59,47 @@ class MapViewController: UIViewController {
         filerAnnotations()
     }
     
+    //Map Pin Setting
     func filerAnnotations(){
-        let firstFilter = localRealm.objects(Heritage_List.self).filter("ccbaCtcd='\(city ?? "11")'")
-        let secondFilter = firstFilter.filter("ccbaKdcd='\(code ?? 11)'")
+        // MARK: - Conditional code cleanup required
+        //case 0 : 필터를 선택하지 않은 경우 > 둘다 nil인 경우
+        if code == nil && city == nil {
+            tasks = localRealm.objects(Heritage_List.self).filter("ccbaCtcd='11'")
+        }
+        //case 1 : 한종류의 필터만 선택한 경우 > 둘중 하나가 nil인 경우?
+        else if code != nil && city == nil {
+            if code! == 0 {
+                tasks = localRealm.objects(Heritage_List.self).filter("ccbaCtcd='11'")
+            } else {
+                tasks = localRealm.objects(Heritage_List.self).filter("ccbaKdcd='\(code!)'")
+            }
+        }
+        //case 1 : 한종류의 필터만 선택한 경우 > 둘중 하나가 nil인 경우?
+        else if code == nil && city != nil {
+            if city! == "00" {
+                tasks = localRealm.objects(Heritage_List.self).filter("ccbaKdcd='11'")
+            } else {
+                tasks = localRealm.objects(Heritage_List.self).filter("ccbaCtcd='\(city!)'")
+            }
+        }
+        //case 2 : 두종류의 필터를 선택한 경우 > 둘다 nil이 아닌 경우
+        else if code != nil && city != nil {
+            if code! == 0 && city! == "00" {
+                tasks = localRealm.objects(Heritage_List.self)
+            } else if code! != 0 && city! == "00" {
+                tasks = localRealm.objects(Heritage_List.self).filter("ccbaKdcd='\(code!)'")
+            } else if code! == 0 && city! != "00" {
+                tasks = localRealm.objects(Heritage_List.self).filter("ccbaCtcd='\(city!)'")
+            } else {
+                let firstTesk =  localRealm.objects(Heritage_List.self).filter("ccbaKdcd='\(code!)'")
+                tasks = firstTesk.filter("ccbaCtcd='\(city!)'")
+            }
+        }
         
         let annotiations = mapView.annotations
         mapView.removeAnnotations(annotiations)
         
-        for location in secondFilter {
+        for location in tasks {
             let heritageLatitude = Double(location.latitude)!
             let heritageLongitude = Double(location.longitude)!
             
@@ -111,27 +145,22 @@ class MapViewController: UIViewController {
     @IBAction func heritageFilterClicked(_ sender: UIButton) {
         let vc = children.first as! PickerViewController
         vc.filterTag = "heritage"
-        
-        heightStatus = !heightStatus
-        conteinerViewHeight.constant = heightStatus ? UIScreen.main.bounds.height * 0.2 : 0
-        UIView.animate(withDuration: 0.3) {
-            self.view.layoutIfNeeded()
-        }
+        setContenierView()
     }
     
     @IBAction func locationFilterClicked(_ sender: UIButton) {
         let vc = children.first as! PickerViewController
         vc.filterTag = "city"
-        
+        setContenierView()
+    }
+    
+    func setContenierView() {
         heightStatus = !heightStatus
         conteinerViewHeight.constant = heightStatus ? UIScreen.main.bounds.height * 0.2 : 0
         UIView.animate(withDuration: 0.3) {
             self.view.layoutIfNeeded()
         }
     }
-    
-    
-    
     
     //권한 비허용시 기본화면
     func defaultLocation() {
