@@ -19,6 +19,7 @@ class PickerViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .customWhite
     }
     
     override func viewWillLayoutSubviews() {
@@ -75,3 +76,4 @@ extension PickerViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     }
     
 }
+

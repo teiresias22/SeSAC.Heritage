@@ -1,11 +1,17 @@
-import UIKit
-import SwiftUI
+//
+//  ListUpTableViewCell.swift
+//  SeSAC.Heritage
+//
+//  Created by Joonhwan Jeon on 2021/12/01.
+//
 
-class ListTableViewCell: UITableViewCell {
+import UIKit
+
+class ListUpTableViewCell: UITableViewCell{
     
-    static let identifier = "ListTableViewCell"
-    
-    @IBOutlet weak var listTabelCellView: UIView!
+    static let identifier = "ListUpTableViewCell"
+
+    @IBOutlet weak var listUpCellView: UIView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var cityLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
@@ -13,18 +19,18 @@ class ListTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        listTabelCellView.layer.cornerRadius = 8
-        listTabelCellView.backgroundColor = .customYellow
+        listUpCellView.backgroundColor = .customYellow
+        listUpCellView.layer.cornerRadius = 8
         
         titleLabel.textColor = .customBlack
         titleLabel.font = UIFont(name: "MapoFlowerIsland", size: 18)!
         titleLabel.numberOfLines = 0
         
         cityLabel.textColor = .customBlack
-        cityLabel.font = UIFont().MapoFlowerIsland14
+        cityLabel.font = UIFont.MapoFlowerIsland14
         
         locationLabel.textColor = .customBlack
-        locationLabel.font = UIFont().MapoFlowerIsland14
+        locationLabel.font = .MapoFlowerIsland14
         
         // Initialization code
     }

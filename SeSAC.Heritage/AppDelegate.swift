@@ -135,6 +135,7 @@ extension UIViewController {
         return self.topViewController(currentViewController: self)
     }
     
+    //currentViewController
     func topViewController(currentViewController: UIViewController) -> UIViewController {
         if let tabBarController = currentViewController as? UITabBarController,
            let selectedViewController = tabBarController.selectedViewController {

@@ -1,17 +1,11 @@
-//
-//  SearchTableViewCell.swift
-//  SeSAC.Heritage
-//
-//  Created by Joonhwan Jeon on 2021/11/30.
-//
-
 import UIKit
+import SwiftUI
 
-class SearchTableViewCell: UITableViewCell {
+class ListTableViewCell: UITableViewCell {
     
-    static let identifier = "SearchTableViewCell"
-
-    @IBOutlet weak var searchCellView: UIView!
+    static let identifier = "ListTableViewCell"
+    
+    @IBOutlet weak var listTabelCellView: UIView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var cityLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
@@ -19,21 +13,20 @@ class SearchTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        searchCellView.backgroundColor = .customYellow
-        searchCellView.layer.cornerRadius = 8
+        listTabelCellView.layer.cornerRadius = 8
+        listTabelCellView.backgroundColor = .customYellow
         
         titleLabel.textColor = .customBlack
         titleLabel.font = UIFont(name: "MapoFlowerIsland", size: 18)!
         titleLabel.numberOfLines = 0
         
         cityLabel.textColor = .customBlack
-        cityLabel.font = UIFont().MapoFlowerIsland14
+        cityLabel.font = .MapoFlowerIsland14
         
         locationLabel.textColor = .customBlack
-        locationLabel.font = UIFont().MapoFlowerIsland14
+        locationLabel.font = .MapoFlowerIsland14
         
         // Initialization code
-        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

@@ -93,7 +93,7 @@ class ListDetailViewController: UIViewController {
     
     func setLabel(_ target: UILabel, _ text: String){
         target.text = text.localized()
-        target.font = UIFont().MapoFlowerIsland14
+        target.font = .MapoFlowerIsland14
         target.textAlignment = .center
     }
     
@@ -174,7 +174,7 @@ extension ListDetailViewController: XMLParserDelegate {
         detailImage.contentMode = .scaleAspectFill
         
         heritageContentLabel.text = row["content"]!
-        heritageContentLabel.font = UIFont().MapoFlowerIsland14
+        heritageContentLabel.font = .MapoFlowerIsland14
         heritageContentLabel.addInterlineSpacing(spacingValue: 2)
     }
 }

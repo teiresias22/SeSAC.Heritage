@@ -17,6 +17,7 @@ class MapViewController: UIViewController {
     @IBOutlet weak var myBarButton: TabBarButton!
     
     @IBOutlet weak var conteinerViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var pinConteinerViewHeight: NSLayoutConstraint!
     
     let localRealm = try! Realm()
     var tasks: Results<Heritage_List>!
@@ -26,8 +27,8 @@ class MapViewController: UIViewController {
     var city: String?
     var code: Int?
     
-    var runTimeInterval: TimeInterval? // 마지막 작업을 설정할 시간
-    let mTimer: Selector = #selector(Tick_TimeConsole) // 위치 확인 타이머
+    var runTimeInterval: TimeInterval?
+    let mTimer: Selector = #selector(Tick_TimeConsole)
         
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,15 +42,10 @@ class MapViewController: UIViewController {
         
         mapView.delegate = self
         locationManager.delegate = self
-        //정확도 설정 - 최고 높은 정확도
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        //위치정보 사용권한 요청 - 실행중일때만 권한을 사용
         locationManager.requestWhenInUseAuthorization()
-        //위치 업데이트 시작
         locationManager.startUpdatingLocation()
-        //사용자 위치 보기 설정
         mapView.showsUserLocation = true
-        // Do any additional setup after loading the view.
         
         Timer.scheduledTimer(timeInterval: 0.25, target: self, selector: mTimer, userInfo: nil, repeats: true)
     }
@@ -60,12 +56,13 @@ class MapViewController: UIViewController {
     }
     
     //Map Pin Setting
+    // MARK: - Conditional code cleanup required
     func filerAnnotations(){
-        // MARK: - Conditional code cleanup required
         //case 0 : 필터를 선택하지 않은 경우 > 둘다 nil인 경우
         if code == nil && city == nil {
             tasks = localRealm.objects(Heritage_List.self).filter("ccbaCtcd='11'")
         }
+        
         //case 1 : 한종류의 필터만 선택한 경우 > 둘중 하나가 nil인 경우?
         else if code != nil && city == nil {
             if code! == 0 {
@@ -82,6 +79,7 @@ class MapViewController: UIViewController {
                 tasks = localRealm.objects(Heritage_List.self).filter("ccbaCtcd='\(city!)'")
             }
         }
+        
         //case 2 : 두종류의 필터를 선택한 경우 > 둘다 nil이 아닌 경우
         else if code != nil && city != nil {
             if code! == 0 && city! == "00" {
@@ -226,7 +224,8 @@ class MapViewController: UIViewController {
         present(alert, animated: true)
     }
 }
-    
+
+// MARK: - CLLocationManagerDelegate
 extension MapViewController: CLLocationManagerDelegate{
     //사용자가 위치 허용을 한 경우
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -265,6 +264,7 @@ extension MapViewController: CLLocationManagerDelegate{
     }
 }
 
+// MARK: - MKMapViewDelegate
 extension MapViewController: MKMapViewDelegate {
     func mapViewDidChangeVisibleRegion(_ mapView: MKMapView) {
         runTimeInterval = Date().timeIntervalSinceReferenceDate
@@ -289,6 +289,22 @@ extension MapViewController: MKMapViewDelegate {
         //지도 중앙 좌표
         //var latitude = coordinate.latitude
         //var longitude = coordinate.longitude
+    }
+    
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        print(#function)
+        pinConteinerViewHeight.constant = UIScreen.main.bounds.height * 0.2
+        UIView.animate(withDuration: 0.3) {
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+    func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
+        print(#function)
+        pinConteinerViewHeight.constant = 0
+        UIView.animate(withDuration: 0.3) {
+            self.view.layoutIfNeeded()
+        }
     }
 }
 

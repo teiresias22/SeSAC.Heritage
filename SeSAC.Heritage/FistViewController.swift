@@ -34,7 +34,7 @@ class FistViewController: UIViewController {
         
         noticeLabel.text = "앱을 설정중에 있습니다.\n앱을 종료하지 마시고 잠시만 기다려주세요.".localized()
         noticeLabel.numberOfLines = 0
-        noticeLabel.font = UIFont().MapoFlowerIsland16
+        noticeLabel.font = .MapoFlowerIsland16
         noticeLabel.textColor = .customRed
         
         //print("Realm is located at:", localRealm.configuration.fileURL!)
@@ -69,6 +69,15 @@ class FistViewController: UIViewController {
           "name": "Joon" as NSObject,
           "full_text": "Test" as NSObject,
         ])
+        
+        //사용자의 토큰값 삭제
+        Installations.installations().delete { error in
+          if let error = error {
+            print("Error deleting installation: \(error)")
+            return
+          }
+          print("Installation deleted");
+        }
     }
     
     func presentNextPage() {

@@ -20,7 +20,11 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3B9-Ah-944">
-                    <rect key="frame" x="0.0" y="0.0" width="138" height="81"/>
+                    <rect key="frame" x="24" y="10.5" width="90" height="60"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="3B9-Ah-944" secondAttribute="height" multiplier="1.5:1" id="Kqo-XG-t3r"/>
+                        <constraint firstAttribute="height" constant="60" id="PWF-pS-ilG"/>
+                    </constraints>
                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                     <state key="normal" title="Button"/>
                 </button>
@@ -35,11 +39,9 @@
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="3B9-Ah-944" secondAttribute="trailing" id="1M2-3Z-732"/>
                 <constraint firstAttribute="bottom" secondItem="N3q-vz-n9J" secondAttribute="bottom" constant="8" id="hof-6f-9yk"/>
-                <constraint firstItem="3B9-Ah-944" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="n8Q-wk-XaL"/>
-                <constraint firstItem="3B9-Ah-944" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="nN3-hd-Pgj"/>
-                <constraint firstAttribute="bottom" secondItem="3B9-Ah-944" secondAttribute="bottom" id="qGA-V3-Hfm"/>
+                <constraint firstItem="3B9-Ah-944" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="inb-AQ-qbv"/>
+                <constraint firstItem="3B9-Ah-944" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="nqf-CC-0Sy"/>
                 <constraint firstItem="N3q-vz-n9J" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="xgE-TR-qIM"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

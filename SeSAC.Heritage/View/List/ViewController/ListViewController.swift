@@ -63,12 +63,12 @@ class ListViewController: UIViewController {
     func topLeftButtonSet() {
         topLeftButton.setTitle(listInformation.list[0].title, for: .normal)
         if buttonActive {
-            topLeftButton.titleLabel?.font = UIFont(name: "MapoFlowerIsland", size: 16)
+            topLeftButton.titleLabel?.font = .MapoGoldenPier16
             topLeftButton.tintColor = .customBlue
             topLeftUnderBarView.backgroundColor = .customBlue
             topLeftBackground.backgroundColor = .white
         } else {
-            topLeftButton.titleLabel?.font = UIFont(name: "MapoFlowerIsland", size: 14)
+            topLeftButton.titleLabel?.font = .MapoGoldenPier14
             topLeftButton.tintColor = .customBlack
             topLeftUnderBarView.backgroundColor = .clear
             topLeftBackground.backgroundColor = .clear
@@ -78,13 +78,13 @@ class ListViewController: UIViewController {
     func topRightButtonSet(){
         topRightButton.setTitle(listInformation.list[1].title, for: .normal)
         if buttonActive {
-            topRightButton.titleLabel?.font = UIFont(name: "MapoFlowerIsland", size: 14)
+            topRightButton.titleLabel?.font = .MapoGoldenPier14
             topRightButton.tintColor = .customBlack
             topRightUnderBarView.backgroundColor = .clear
             topRightBackground.backgroundColor = .clear
             
         } else {
-            topRightButton.titleLabel?.font = UIFont(name: "MapoFlowerIsland", size: 16)
+            topRightButton.titleLabel?.font = .MapoGoldenPier16
             topRightButton.tintColor = .customBlue
             topRightUnderBarView.backgroundColor = .customBlue
             topRightBackground.backgroundColor = .white
@@ -159,7 +159,7 @@ extension ListViewController: UICollectionViewDelegate, UICollectionViewDataSour
             item.listCategoryImage.layer.borderWidth = 2
             item.listCategoryImage.layer.borderColor = UIColor.customBlue?.cgColor
         }
-        item.listCategoryLabel.font = UIFont().MapoFlowerIsland14
+        item.listCategoryLabel.font = .MapoFlowerIsland14
         
         let width = item.frame.width
         item.listCategoryImage.layer.cornerRadius = width/2
