@@ -13,8 +13,8 @@ class TabBarViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tabBar.tintColor = .customBlue
-        tabBar.unselectedItemTintColor = .customBlack
+        tabBar.tintColor = .customBlack
+        tabBar.unselectedItemTintColor = .customBlue
         tabBar.backgroundColor = .customWhite
         
         let ListVC = UINavigationController(rootViewController: ListViewController())
@@ -34,6 +34,5 @@ class TabBarViewController: UITabBarController {
         ListUpVC.tabBarItem.title = "지도"
         
         viewControllers = [ListVC, SearchVC, MapVC, ListUpVC]
-        
     }
 }

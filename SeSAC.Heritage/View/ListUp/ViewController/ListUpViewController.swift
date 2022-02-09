@@ -12,11 +12,6 @@ class ListUpViewController: UIViewController {
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var listUpTable: UITableView!
     
-    @IBOutlet weak var listBarButton: TabBarButton!
-    @IBOutlet weak var SearchBarButton: TabBarButton!
-    @IBOutlet weak var mapBarButton: TabBarButton!
-    @IBOutlet weak var myBarButton: TabBarButton!
-    
     let localRealm = try! Realm()
     var tasks: Results<Heritage_List>!
     
@@ -37,7 +32,6 @@ class ListUpViewController: UIViewController {
         listUpTable.delegate = self
         listUpTable.dataSource = self
         // Do any additional setup after loading the view.
-        setTabBarButtons()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -139,59 +133,5 @@ extension ListUpViewController: UITableViewDelegate, UITableViewDataSource {
         }
         visit.backgroundColor = .customYellow
         return UISwipeActionsConfiguration(actions: [wanavisit, visit])
-    }
-}
-
-extension ListUpViewController {
-    func setTabBarButtons() {
-        setBarButton(listBarButton, "list.dash")
-        listBarButton.tabBarButton.addTarget(self, action: #selector(listButtonClicked), for: .touchUpInside)
-        
-        setBarButton(SearchBarButton, "magnifyingglass")
-        SearchBarButton.tabBarButton.addTarget(self, action: #selector(searchButtonClicked), for: .touchUpInside)
-        
-        setBarButton(mapBarButton, "map")
-        mapBarButton.tabBarButton.addTarget(self, action: #selector(mapButtonClicked), for: .touchUpInside)
-        
-        setBarButton(myBarButton, "person")
-        myBarButton.tabBarButton.addTarget(self, action: #selector(mypageButtonClicked), for: .touchUpInside)
-    }
-    
-    @objc func listButtonClicked() {
-        guard let vc = UIStoryboard(name: "List", bundle: nil).instantiateViewController(withIdentifier: "ListViewController") as? ListViewController else { return }
-        let nav = UINavigationController(rootViewController: vc)
-        nav.modalPresentationStyle = .overFullScreen
-        self.present(nav, animated: false, completion: nil)
-    }
-    
-    @objc func searchButtonClicked() {
-        guard let vc = UIStoryboard(name: "Search", bundle: nil).instantiateViewController(withIdentifier: "SearchViewController") as? SearchViewController else { return }
-        let nav = UINavigationController(rootViewController: vc)
-        nav.modalPresentationStyle = .overFullScreen
-        self.present(nav, animated: false, completion: nil)
-    }
-    
-    @objc func mapButtonClicked() {
-        guard let vc = UIStoryboard(name: "Map", bundle: nil).instantiateViewController(withIdentifier: "MapViewController") as? MapViewController else { return }
-        let nav = UINavigationController(rootViewController: vc)
-        nav.modalPresentationStyle = .overFullScreen
-        self.present(nav, animated: false, completion: nil)
-    }
-    
-    @objc func mypageButtonClicked() {
-        guard let vc = UIStoryboard(name: "ListUp", bundle: nil).instantiateViewController(withIdentifier: "ListUpViewController") as? ListUpViewController else { return }
-        let nav = UINavigationController(rootViewController: vc)
-        nav.modalPresentationStyle = .overFullScreen
-        self.present(nav, animated: false, completion: nil)
-    }
-    
-    func setBarButton(_ target: TabBarButton, _ image: String){
-        target.tabBarButton.setImage(UIImage(systemName: image), for: .normal)
-        target.tabBarButton.imageEdgeInsets = UIEdgeInsets(top: 16, left: 36, bottom: 28, right: 36)
-        target.tabBarButton.contentMode = .scaleToFill
-        target.tabBarButton.setTitle("", for: .normal)
-        target.tabBarButton.contentVerticalAlignment = .fill
-        target.tabBarButton.contentHorizontalAlignment = .fill
-        myBarButton.tabBarActiveView.backgroundColor = .customBlue
     }
 }

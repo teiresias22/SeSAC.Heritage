@@ -2,50 +2,32 @@ import UIKit
 import RealmSwift
 import FirebaseInstallations
 
-class ListViewController: UIViewController {
-    
-    @IBOutlet weak var topButtonView: UIView!
-    @IBOutlet weak var topLeftButton: UIButton!
-    @IBOutlet weak var topLeftUnderBarView: UIView!
-    @IBOutlet weak var topLeftBackground: UIView!
-    @IBOutlet weak var topRightButton: UIButton!
-    @IBOutlet weak var topRightUnderBarView: UIView!
-    @IBOutlet weak var topRightBackground: UIView!
-    
-    @IBOutlet weak var listBarButton: TabBarButton!
-    @IBOutlet weak var SearchBarButton: TabBarButton!
-    @IBOutlet weak var mapBarButton: TabBarButton!
-    @IBOutlet weak var myBarButton: TabBarButton!
-    
-    @IBOutlet weak var listCollectionView: UICollectionView!
+class ListViewController: BaseViewController {
+    let mainView = ListView()
+    var viewModel = ListViewModel()
     
     let listInformation = ListInformation()
     let stockCodeInformation = StockCodeInformation()
     let cityInformation = CityInformation()
     var target: String = "StockCode"
     
-    var buttonActive = true
+    private let ListViewCellId = "ListViewCellId"
+    
+    override func loadView() {
+        super.loadView()
+        self.view = mainView
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "JHeritage".localized()
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "MapoFlowerIsland", size: 20)!]
-                
-        let nibName = UINib(nibName: ListCategoryCollectionViewCell.identifier, bundle: nil)
-        listCollectionView.register(nibName, forCellWithReuseIdentifier: ListCategoryCollectionViewCell.identifier)
         
-         // Do any additional setup after loading the view.
-        listCollectionView.delegate = self
-        listCollectionView.dataSource = self
-        
-        topRightButtonSet()
-        topLeftButtonSet()
-        
-        topButtonView.backgroundColor = .clear
-        listCollectionViewSet()
-        setTabBarButtons()
-        
+        setCollectionView()
         //print(">>\(UserDefaults.standard.object(forKey: "AppleLanguages"))<<")
+        
+        mainView.rightButton.addTarget(self, action: #selector(rightButtonClicked), for: .touchUpInside)
+        mainView.leftButton.addTarget(self, action: #selector(leftButtonClicked), for: .touchUpInside)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -60,68 +42,39 @@ class ListViewController: UIViewController {
         }
     }
     
-    func topLeftButtonSet() {
-        topLeftButton.setTitle(listInformation.list[0].title, for: .normal)
-        if buttonActive {
-            topLeftButton.titleLabel?.font = .MapoGoldenPier16
-            topLeftButton.tintColor = .customBlue
-            topLeftUnderBarView.backgroundColor = .customBlue
-            topLeftBackground.backgroundColor = .white
-        } else {
-            topLeftButton.titleLabel?.font = .MapoGoldenPier14
-            topLeftButton.tintColor = .customBlack
-            topLeftUnderBarView.backgroundColor = .clear
-            topLeftBackground.backgroundColor = .clear
-        }
+    func setCollectionView(){
+        mainView.contentCollectionView.delegate = self
+        mainView.contentCollectionView.dataSource = self
+        
+        mainView.contentCollectionView.register(ListViewCell.self, forCellWithReuseIdentifier: ListViewCellId)
     }
     
-    func topRightButtonSet(){
-        topRightButton.setTitle(listInformation.list[1].title, for: .normal)
-        if buttonActive {
-            topRightButton.titleLabel?.font = .MapoGoldenPier14
-            topRightButton.tintColor = .customBlack
-            topRightUnderBarView.backgroundColor = .clear
-            topRightBackground.backgroundColor = .clear
-            
-        } else {
-            topRightButton.titleLabel?.font = .MapoGoldenPier16
-            topRightButton.tintColor = .customBlue
-            topRightUnderBarView.backgroundColor = .customBlue
-            topRightBackground.backgroundColor = .white
-        }
+    @objc func rightButtonClicked(){
+        setButtonActive(mainView.rightButton, mainView.rightUnderLine)
+        setButtonDeActive(mainView.leftButton, mainView.leftUnderLine)
+        target = "City"
+        mainView.contentCollectionView.reloadData()
     }
     
-    @IBAction func topLeftButtonClicked(_ sender: UIButton) {
-        buttonActive = true
-        target = listInformation.list[0].target
-        
-        listCollectionView.reloadData()
-        topRightButtonSet()
-        topLeftButtonSet()
+    @objc func leftButtonClicked(){
+        setButtonActive(mainView.leftButton, mainView.leftUnderLine)
+        setButtonDeActive(mainView.rightButton, mainView.rightUnderLine)
+        target = "StockCode"
+        mainView.contentCollectionView.reloadData()
     }
     
-    @IBAction func topRightButtonClicked(_ sender: UIButton) {
-        buttonActive = false
-        target = listInformation.list[1].target
-        
-        listCollectionView.reloadData()
-        topRightButtonSet()
-        topLeftButtonSet()
+    func setButtonActive(_ target: UIButton, _ line: UIView){
+        target.titleLabel?.font = .MapoFlowerIsland16
+        target.setTitleColor(.customWhite, for: .normal)
+        target.backgroundColor = .customBlack
+        line.backgroundColor = .customBlue
     }
     
-    func listCollectionViewSet() {
-        let layout = UICollectionViewFlowLayout()
-        let spacing: CGFloat = 8
-        let width = listCollectionView.frame.width - (spacing * 5)
-        
-        layout.itemSize = CGSize(width: width / 4 , height: width / 2.2)
-        layout.sectionInset = UIEdgeInsets(top: spacing, left: spacing, bottom: spacing * 2, right: spacing)
-        layout.minimumInteritemSpacing = spacing
-        layout.minimumLineSpacing = spacing
-        layout.scrollDirection = .vertical
-        
-        listCollectionView.collectionViewLayout = layout
-        listCollectionView.backgroundColor = .clear
+    func setButtonDeActive(_ target: UIButton, _ line: UIView){
+        target.titleLabel?.font = .MapoFlowerIsland14
+        target.setTitleColor(.customBlack, for: .normal)
+        target.backgroundColor = .customWhite
+        line.backgroundColor = .customBlack
     }
 }
 
@@ -135,34 +88,30 @@ extension ListViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let item = collectionView.dequeueReusableCell(withReuseIdentifier: ListCategoryCollectionViewCell.identifier, for: indexPath) as? ListCategoryCollectionViewCell else { return UICollectionViewCell() }
-        item.backgroundColor = .clear
+        guard let item = mainView.contentCollectionView.dequeueReusableCell(withReuseIdentifier: ListViewCellId, for: indexPath) as? ListViewCell else { return UICollectionViewCell() }
         
         if target == "StockCode" {
+            
             if let url = URL(string: stockCodeInformation.stockCode[indexPath.row].image){
-                item.listCategoryImage.kf.setImage(with: url)
+                item.imageView.kf.setImage(with: url)
             } else {
-                item.listCategoryImage.image = UIImage(systemName: "star")
-                item.listCategoryImage.backgroundColor = .customYellow
+                item.imageView.image = UIImage(systemName: "star")
+                item.imageView.backgroundColor = .customYellow
             }
-            item.listCategoryLabel.text = stockCodeInformation.stockCode[indexPath.row].text.lowercased()
-            item.listCategoryImage.layer.borderWidth = 2
-            item.listCategoryImage.layer.borderColor = UIColor.customYellow?.cgColor
+            item.label.text = stockCodeInformation.stockCode[indexPath.row].text.lowercased()
+            
         } else if target == "City" {
+            
             if let url = URL(string: cityInformation.city[indexPath.row].image){
-                item.listCategoryImage.kf.setImage(with: url)
+                item.imageView.kf.setImage(with: url)
             } else {
-                item.listCategoryImage.image = UIImage(systemName: "star")
-                item.listCategoryImage.backgroundColor = .customBlue
+                item.imageView.image = UIImage(systemName: "star")
+                item.imageView.backgroundColor = .customBlue
             }
-            item.listCategoryLabel.text = cityInformation.city[indexPath.row].city.lowercased()
-            item.listCategoryImage.layer.borderWidth = 2
-            item.listCategoryImage.layer.borderColor = UIColor.customBlue?.cgColor
+            item.label.text = cityInformation.city[indexPath.row].city.lowercased()
+            
         }
-        item.listCategoryLabel.font = .MapoFlowerIsland14
-        
-        let width = item.frame.width
-        item.listCategoryImage.layer.cornerRadius = width/2
+        item.backgroundColor = .clear
         
         return item
     }
@@ -183,58 +132,12 @@ extension ListViewController: UICollectionViewDelegate, UICollectionViewDataSour
          self.navigationController?.pushViewController(vc, animated: true)
     }
     
-}
-
-extension ListViewController {
-    func setTabBarButtons() {
-        setBarButton(listBarButton, "list.dash")
-        listBarButton.tabBarButton.addTarget(self, action: #selector(listButtonClicked), for: .touchUpInside)
-        
-        setBarButton(SearchBarButton, "magnifyingglass")
-        SearchBarButton.tabBarButton.addTarget(self, action: #selector(searchButtonClicked), for: .touchUpInside)
-        
-        setBarButton(mapBarButton, "map")
-        mapBarButton.tabBarButton.addTarget(self, action: #selector(mapButtonClicked), for: .touchUpInside)
-        
-        setBarButton(myBarButton, "person")
-        myBarButton.tabBarButton.addTarget(self, action: #selector(mypageButtonClicked), for: .touchUpInside)
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 8
     }
     
-    @objc func listButtonClicked() {
-        guard let vc = UIStoryboard(name: "List", bundle: nil).instantiateViewController(withIdentifier: "ListViewController") as? ListViewController else { return }
-        let nav = UINavigationController(rootViewController: vc)
-        nav.modalPresentationStyle = .overFullScreen
-        self.present(nav, animated: false, completion: nil)
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 8
     }
     
-    @objc func searchButtonClicked() {
-        guard let vc = UIStoryboard(name: "Search", bundle: nil).instantiateViewController(withIdentifier: "SearchViewController") as? SearchViewController else { return }
-        let nav = UINavigationController(rootViewController: vc)
-        nav.modalPresentationStyle = .overFullScreen
-        self.present(nav, animated: false, completion: nil)
-    }
-    
-    @objc func mapButtonClicked() {
-        guard let vc = UIStoryboard(name: "Map", bundle: nil).instantiateViewController(withIdentifier: "MapViewController") as? MapViewController else { return }
-        let nav = UINavigationController(rootViewController: vc)
-        nav.modalPresentationStyle = .overFullScreen
-        self.present(nav, animated: false, completion: nil)
-    }
-    
-    @objc func mypageButtonClicked() {
-        guard let vc = UIStoryboard(name: "ListUp", bundle: nil).instantiateViewController(withIdentifier: "ListUpViewController") as? ListUpViewController else { return }
-        let nav = UINavigationController(rootViewController: vc)
-        nav.modalPresentationStyle = .overFullScreen
-        self.present(nav, animated: false, completion: nil)
-    }
-    
-    func setBarButton(_ target: TabBarButton, _ image: String){
-        target.tabBarButton.setImage(UIImage(systemName: image), for: .normal)
-        target.tabBarButton.imageEdgeInsets = UIEdgeInsets(top: 16, left: 36, bottom: 28, right: 36)
-        target.tabBarButton.contentMode = .scaleToFill
-        target.tabBarButton.setTitle("", for: .normal)
-        target.tabBarButton.contentVerticalAlignment = .fill
-        target.tabBarButton.contentHorizontalAlignment = .fill
-        listBarButton.tabBarActiveView.backgroundColor = .customBlue
-    }
 }

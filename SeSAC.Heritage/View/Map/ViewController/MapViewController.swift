@@ -11,11 +11,6 @@ class MapViewController: UIViewController {
     @IBOutlet weak var heritageFilter: UIButton!
     @IBOutlet weak var locationFilter: UIButton!
     
-    @IBOutlet weak var listBarButton: TabBarButton!
-    @IBOutlet weak var SearchBarButton: TabBarButton!
-    @IBOutlet weak var mapBarButton: TabBarButton!
-    @IBOutlet weak var myBarButton: TabBarButton!
-    
     @IBOutlet weak var conteinerViewHeight: NSLayoutConstraint!
     @IBOutlet weak var pinConteinerViewHeight: NSLayoutConstraint!
     
@@ -37,8 +32,6 @@ class MapViewController: UIViewController {
         setMyLocationButton()
         setFilterButton(heritageFilter, .customYellow!, "종류별")
         setFilterButton(locationFilter, .customBlue!, "지역별")
-        
-        setTabBarButtons()
         
         mapView.delegate = self
         locationManager.delegate = self
@@ -306,59 +299,4 @@ extension MapViewController: MKMapViewDelegate {
             self.view.layoutIfNeeded()
         }
     }
-}
-
-extension MapViewController {
-    func setTabBarButtons() {
-        setBarButton(listBarButton, "list.dash")
-        listBarButton.tabBarButton.addTarget(self, action: #selector(listButtonClicked), for: .touchUpInside)
-        
-        setBarButton(SearchBarButton, "magnifyingglass")
-        SearchBarButton.tabBarButton.addTarget(self, action: #selector(searchButtonClicked), for: .touchUpInside)
-        
-        setBarButton(mapBarButton, "map")
-        mapBarButton.tabBarButton.addTarget(self, action: #selector(mapButtonClicked), for: .touchUpInside)
-        
-        setBarButton(myBarButton, "person")
-        myBarButton.tabBarButton.addTarget(self, action: #selector(mypageButtonClicked), for: .touchUpInside)
-    }
-    
-    @objc func listButtonClicked() {
-        guard let vc = UIStoryboard(name: "List", bundle: nil).instantiateViewController(withIdentifier: "ListViewController") as? ListViewController else { return }
-        let nav = UINavigationController(rootViewController: vc)
-        nav.modalPresentationStyle = .overFullScreen
-        self.present(nav, animated: false, completion: nil)
-    }
-    
-    @objc func searchButtonClicked() {
-        guard let vc = UIStoryboard(name: "Search", bundle: nil).instantiateViewController(withIdentifier: "SearchViewController") as? SearchViewController else { return }
-        let nav = UINavigationController(rootViewController: vc)
-        nav.modalPresentationStyle = .overFullScreen
-        self.present(nav, animated: false, completion: nil)
-    }
-    
-    @objc func mapButtonClicked() {
-        guard let vc = UIStoryboard(name: "Map", bundle: nil).instantiateViewController(withIdentifier: "MapViewController") as? MapViewController else { return }
-        let nav = UINavigationController(rootViewController: vc)
-        nav.modalPresentationStyle = .overFullScreen
-        self.present(nav, animated: false, completion: nil)
-    }
-    
-    @objc func mypageButtonClicked() {
-        guard let vc = UIStoryboard(name: "ListUp", bundle: nil).instantiateViewController(withIdentifier: "ListUpViewController") as? ListUpViewController else { return }
-        let nav = UINavigationController(rootViewController: vc)
-        nav.modalPresentationStyle = .overFullScreen
-        self.present(nav, animated: false, completion: nil)
-    }
-    
-    func setBarButton(_ target: TabBarButton, _ image: String){
-        target.tabBarButton.setImage(UIImage(systemName: image), for: .normal)
-        target.tabBarButton.imageEdgeInsets = UIEdgeInsets(top: 16, left: 36, bottom: 28, right: 36)
-        target.tabBarButton.contentMode = .scaleToFill
-        target.tabBarButton.setTitle("", for: .normal)
-        target.tabBarButton.contentVerticalAlignment = .fill
-        target.tabBarButton.contentHorizontalAlignment = .fill
-        mapBarButton.tabBarActiveView.backgroundColor = .customBlue
-    }
-    
 }
