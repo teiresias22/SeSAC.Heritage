@@ -20,11 +20,9 @@ class ListView: UIView, ViewRepresentable {
         return view
     }()
     
-    let leftView = UIView()
-    
-    let leftButton: UIButton = {
+    let stockCodeButton: UIButton = {
         let button = UIButton()
-        button.setTitle("종류별 문화유산", for: .normal)
+        button.setTitle("종류별 문화유산".localized(), for: .normal)
         button.setTitleColor(.customWhite, for: .normal)
         button.titleLabel?.font = .MapoFlowerIsland16
         button.backgroundColor = .customBlack
@@ -32,18 +30,9 @@ class ListView: UIView, ViewRepresentable {
         return button
     }()
     
-    let leftUnderLine: UIView = {
-        let view = UIView()
-        view.backgroundColor = .customBlue
-        
-        return view
-    }()
-    
-    let rightView = UIView()
-    
-    let rightButton: UIButton = {
+    let cityButton: UIButton = {
         let button = UIButton()
-        button.setTitle("지역별 문화유산", for: .normal)
+        button.setTitle("지역별 문화유산".localized(), for: .normal)
         button.setTitleColor(.customBlack, for: .normal)
         button.titleLabel?.font = .MapoFlowerIsland14
         button.backgroundColor = .customWhite
@@ -51,18 +40,10 @@ class ListView: UIView, ViewRepresentable {
         return button
     }()
     
-    let rightUnderLine: UIView = {
-        let view = UIView()
-        view.backgroundColor = .customBlack
-        
-        return view
-    }()
-    
     let contentCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.collectionViewLayout = CollectionViewLeftAlignFlowLayout()
         view.backgroundColor = .clear
         
         if let flowLayout = view.collectionViewLayout as? UICollectionViewFlowLayout {
@@ -84,71 +65,22 @@ class ListView: UIView, ViewRepresentable {
     
     func setupView() {
         addSubview(topStatickView)
-        topStatickView.addArrangedSubview(leftView)
-        leftView.addSubview(leftButton)
-        leftView.addSubview(leftUnderLine)
-        
-        topStatickView.addArrangedSubview(rightView)
-        rightView.addSubview(rightButton)
-        rightView.addSubview(rightUnderLine)
+        topStatickView.addArrangedSubview(stockCodeButton)
+        topStatickView.addArrangedSubview(cityButton)
         
         addSubview(contentCollectionView)
     }
     
     func setupConstraints() {
         topStatickView.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(120)
-            make.leading.trailing.equalToSuperview()
-            make.height.equalTo(49)
-        }
-        
-        leftButton.snp.makeConstraints { make in
-            make.top.leading.trailing.equalToSuperview()
+            make.top.equalToSuperview().inset(100)
+            make.leading.trailing.equalToSuperview().inset(16)
             make.height.equalTo(48)
-        }
-        
-        leftUnderLine.snp.makeConstraints { make in
-            make.top.equalTo(leftButton.snp.bottom)
-            make.leading.trailing.equalToSuperview()
-            make.height.equalTo(1)
-        }
-        
-        rightButton.snp.makeConstraints { make in
-            make.top.leading.trailing.equalToSuperview()
-            make.height.equalTo(48)
-        }
-        
-        leftUnderLine.snp.makeConstraints { make in
-            make.top.equalTo(rightButton.snp.bottom)
-            make.leading.trailing.equalToSuperview()
-            make.height.equalTo(1)
         }
         
         contentCollectionView.snp.makeConstraints { make in
             make.top.equalTo(topStatickView.snp.bottom)
-            make.leading.trailing.bottom.equalToSuperview().inset(8)
+            make.leading.trailing.bottom.equalToSuperview().inset(20)
         }
-    }
-}
-
-class CollectionViewLeftAlignFlowLayout: UICollectionViewFlowLayout {
-    let cellSpacing: CGFloat = 8
-    
-    override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
-        self.minimumLineSpacing = 8.0
-        self.sectionInset = UIEdgeInsets(top: 5.0, left: 16.0, bottom: 5.0, right: 16.0)
-        let attributes = super.layoutAttributesForElements(in: rect)
- 
-        var leftMargin = sectionInset.left
-        var maxY: CGFloat = -1.0
-        attributes?.forEach { layoutAttribute in
-            if layoutAttribute.frame.origin.y >= maxY {
-                leftMargin = sectionInset.left
-            }
-            layoutAttribute.frame.origin.x = leftMargin
-            leftMargin += layoutAttribute.frame.width + cellSpacing
-            maxY = max(layoutAttribute.frame.maxY, maxY)
-        }
-        return attributes
     }
 }

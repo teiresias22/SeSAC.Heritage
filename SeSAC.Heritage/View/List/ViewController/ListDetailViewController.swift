@@ -1,28 +1,14 @@
+// todo
+// contentView 높이 자동 조절
+// 지도 좌표가 표시되지 않는다면 맵버튼 비활성화 & TostMessage 띄우기
+
 import UIKit
 import RealmSwift
 import Kingfisher
 
-class ListDetailViewController: UIViewController {
-    
-    @IBOutlet weak var scrollView: UIView!
-    @IBOutlet weak var heritageTypeLabel: UILabel!
-    @IBOutlet weak var heritageTitleLabel: UILabel!
-    @IBOutlet weak var heritageCityLabel: UILabel!
-    @IBOutlet weak var detailImage: UIImageView!
-    
-    @IBOutlet weak var visitedView: UIView!
-    @IBOutlet weak var visitedCheckButton: UIButton!
-    @IBOutlet weak var visitedCheckLabel: UILabel!
-    
-    @IBOutlet weak var wannavisitView: UIView!
-    @IBOutlet weak var wannavisitCheckButton: UIButton!
-    @IBOutlet weak var wannavisitCheckLabel: UILabel!
-    
-    @IBOutlet weak var findWayView: UIView!
-    @IBOutlet weak var findWayButton: UIButton!
-    @IBOutlet weak var findWayLabel: UILabel!
-    
-    @IBOutlet weak var heritageContentLabel: UILabel!
+class ListDetailViewController: BaseViewController {
+    let mainView = ListDetailView()
+    var viewModel: ListViewModel?
     
     let localRealm = try! Realm()
     var tasks: Results<Heritage_List>!
@@ -33,61 +19,22 @@ class ListDetailViewController: UIViewController {
     var key: String!
     var ct: Int = 0
     
+    override func loadView() {
+        super.loadView()
+        self.view = mainView
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "문화유산 상세".localized()
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "MapoFlowerIsland", size: 20)!]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "MapoFlowerIsland", size: 18)!]
         
-        scrollView.backgroundColor = .clear
-        visitedView.backgroundColor = .clear
-        wannavisitView.backgroundColor = .clear
-        findWayView.backgroundColor = .clear
-        
-        defaultPageSetup()
         fetcHeritageData()
-        // Do any additional setup after loading the view.
-    }
-    
-    func defaultPageSetup() {
-        setButton(visitedCheckButton, "landmark")
-        setVisitedButtonColor()
+        checkButtonActive()
         
-        setButton(wannavisitCheckButton, "plus")
-        setWannavisitButtonColor()
-        
-        setButton(findWayButton, "hiking")
-        findWayButton.tintColor = .customBlack
-        
-        setLabel(visitedCheckLabel, "방문")
-        visitedCheckLabel.textAlignment = .center
-        
-        setLabel(wannavisitCheckLabel, "즐겨찾기")
-        wannavisitCheckLabel.textAlignment = .center
-        
-        setLabel(findWayLabel, "지도")
-        findWayLabel.textAlignment = .center
-    }
-    
-    func setButton( _ target: UIButton, _ name: String){
-        target.setImage(UIImage(named: name), for: .normal)
-        target.imageEdgeInsets = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
-        target.contentMode = .scaleToFill
-        target.setTitle("", for: .normal)
-        target.contentVerticalAlignment = .fill
-        target.contentHorizontalAlignment = .fill
-    }
-    
-    func setTitle(_ target: UILabel, _ text: String) {
-        target.text = text.localized()
-        target.font = UIFont(name: "MapoFlowerIsland", size: 20)!
-        target.adjustsFontSizeToFitWidth = true
-        target.textAlignment = .center
-    }
-    
-    func setLabel(_ target: UILabel, _ text: String){
-        target.text = text.localized()
-        target.font = .MapoFlowerIsland14
-        target.textAlignment = .center
+        mainView.visitedButton.addTarget(self, action: #selector(visitedButtonClicked), for: .touchUpInside)
+        mainView.wannaVistButton.addTarget(self, action: #selector(wannaVisitButtonClicked), for: .touchUpInside)
+        mainView.mapButton.addTarget(self, action: #selector(mapButtonClicked), for: .touchUpInside)
     }
     
     func fetcHeritageData() {
@@ -99,35 +46,48 @@ class ListDetailViewController: UIViewController {
         parser?.parse()
     }
     
-    func setVisitedButtonColor() {
-        if items.visited == false {
-            visitedCheckButton.tintColor = .customBlack
-        } else {
-            visitedCheckButton.tintColor = .customBlue
+    func checkButtonActive(){
+        if items.visited {
+            mainView.visitedButton.tintColor = .customBlue
+        }
+        
+        if items.wantvisit {
+            mainView.visitedButton.tintColor = .customYellow
         }
     }
     
-    func setWannavisitButtonColor() {
-        if items.wantvisit == false {
-            wannavisitCheckButton.tintColor = .customBlack
-        } else {
-            wannavisitCheckButton.tintColor = .customYellow
-        }
-    }
-    
-    @IBAction func visitedButtonClicked(_ sender: UIButton) {
+    @objc func visitedButtonClicked() {
         try! localRealm.write{
             items.visited = !items.visited
         }
-        setVisitedButtonColor()
+        
+        if items.visited {
+            mainView.visitedButton.tintColor = .customBlue
+        } else {
+            mainView.visitedButton.tintColor = .customBlack
+        }
     }
     
-    @IBAction func wannaVisitedButtonClicked(_ sender: UIButton) {
+    @objc func wannaVisitButtonClicked() {
         try! localRealm.write{
             items.wantvisit = !items.wantvisit
         }
-        setWannavisitButtonColor()
+        
+        if items.wantvisit {
+            mainView.wannaVistButton.tintColor = .customYellow
+        } else {
+            mainView.wannaVistButton.tintColor = .customBlack
+        }
     }
+    
+    @objc func mapButtonClicked() {
+        
+        let vc = ListMapViewController()
+        vc.viewModel = viewModel
+        
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
 }
 extension ListDetailViewController: XMLParserDelegate {
     //XMLParser가 시작 태그를 만나면 호출됨
@@ -157,17 +117,13 @@ extension ListDetailViewController: XMLParserDelegate {
     
     func parserDidEndDocument(_ parser: XMLParser) {
         let row = item[0]
-        setTitle(heritageTitleLabel, row["ccbaMnm1"]!)
-        setLabel(heritageTypeLabel, "\(row["ccmaName"]!) 제\(items.sn)호")
-        setLabel(heritageCityLabel, "\(row["ccbaCtcdNm"]!) \(row["ccsiName"]!)")
+        
+        mainView.heritageTitleLabel.text = row["ccbaMnm1"]
+        mainView.heritageTypeLabel.text = "\(row["ccmaName"]!) 제\(items.sn)호"
+        mainView.heritageCityLabel.text = "\(row["ccbaCtcdNm"]!) \(row["ccsiName"]!)"
         
         let url = URL(string: row["imageUrl"] ?? "")
-        detailImage.kf.setImage(with: url)
-        detailImage.backgroundColor = .customBlack
-        detailImage.contentMode = .scaleAspectFill
-        
-        heritageContentLabel.text = row["content"]!
-        heritageContentLabel.font = .MapoFlowerIsland14
-        heritageContentLabel.addInterlineSpacing(spacingValue: 2)
+        mainView.detailImage.kf.setImage(with: url)
+        mainView.heritageContentText.text = row["content"]!
     }
 }

@@ -1,5 +1,5 @@
 //
-//  FistViewController.swift
+//  FirstViewController.swift
 //  SeSAC.Heritage
 //
 //  Created by Joonhwan Jeon on 2021/11/29.
@@ -11,10 +11,8 @@ import Kingfisher
 import Firebase
 import FirebaseAnalytics
 
-class FistViewController: UIViewController {
-    @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var noticeLabel: UILabel!
+class FirstViewController: BaseViewController {
+    let mainView = FirstView()
     
     let localRealm = try! Realm()
     var tasks: Results<Heritage_List>!
@@ -24,39 +22,24 @@ class FistViewController: UIViewController {
     var key: String!
     var ct: Int = 0
     
+    override func loadView() {
+        super.loadView()
+        self.view = mainView
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        titleLabel.text = "JHeritage".localized()
-        titleLabel.textAlignment = .center
-        titleLabel.font = UIFont(name: "MapoFlowerIsland", size: 40)!
-        titleLabel.textColor = .customYellow
-        
-        noticeLabel.text = "앱을 설정중에 있습니다.\n앱을 종료하지 마시고 잠시만 기다려주세요.".localized()
-        noticeLabel.numberOfLines = 0
-        noticeLabel.font = .MapoFlowerIsland16
-        noticeLabel.textColor = .customRed
-        
-        //print("Realm is located at:", localRealm.configuration.fileURL!)
-        // Do any additional setup after loading the view.
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(true)
-        
         let heritage = localRealm.objects(Heritage_List.self).count
+        
         if heritage == 0 {
             fetcHeritageData()
             presentNextPage()
             //totalCnt와 맞지 않으면 행동이 필요함.
-        }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+        } else {
             self.presentNextPage()
         }
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
+        
         /*
         Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
           AnalyticsParameterItemID: "id-\(title!)",
@@ -81,10 +64,11 @@ class FistViewController: UIViewController {
     }
     
     func presentNextPage() {
-        guard let vc = UIStoryboard(name: "List", bundle: nil).instantiateViewController(withIdentifier: "ListViewController") as? ListViewController else { return }
-        let nav = UINavigationController(rootViewController: vc)
-        nav.modalPresentationStyle = .overFullScreen
-        self.present(nav, animated: true, completion: nil)
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
+            guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }
+            windowScene.windows.first?.rootViewController = TabBarViewController()
+            windowScene.windows.first?.makeKeyAndVisible()
+        }
     }
     
     func fetcHeritageData() {
@@ -95,7 +79,7 @@ class FistViewController: UIViewController {
     }
 }
 
-extension FistViewController: XMLParserDelegate {
+extension FirstViewController: XMLParserDelegate {
     
     //XMLParser가 시작 태그를 만나면 호출됨
     func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String] = [:]) {

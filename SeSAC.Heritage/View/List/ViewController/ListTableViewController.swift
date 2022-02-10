@@ -1,8 +1,9 @@
 import UIKit
 import RealmSwift
 
-class ListTableViewController: UIViewController {
-    @IBOutlet weak var listTable: UITableView!
+class ListTableViewController: BaseViewController {
+    let mainView = ListTableView()
+    var viewModel: ListViewModel?
     
     let localRealm = try! Realm()
     var tasks: Results<Heritage_List>!
@@ -12,6 +13,11 @@ class ListTableViewController: UIViewController {
     var cityData: City?
     var category: String = ""
     
+    override func loadView() {
+        super.loadView()
+        self.view = mainView
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         if listInformation == "StockCode" {
@@ -19,13 +25,16 @@ class ListTableViewController: UIViewController {
         } else {
             self.title = "지역별 문화유산".localized()
         }
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "MapoFlowerIsland", size: 20)!]
-        listTable.separatorStyle = UITableViewCell.SeparatorStyle.none
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "MapoFlowerIsland", size: 18)!]
         
-        listTable.delegate = self
-        listTable.dataSource = self
-        
-        // Do any additional setup after loading the view.
+        setupView()
+    }
+    
+    func setupView() {
+        mainView.listTableView.delegate = self
+        mainView.listTableView.dataSource = self
+        mainView.listTableView.register(ListTableViewCell.self, forCellReuseIdentifier: ListTableViewCell.identifier)
+        mainView.listTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
     }
 }
 
@@ -112,10 +121,10 @@ extension ListTableViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let sb = UIStoryboard(name: "ListDetail", bundle: nil)
-        let vc = sb.instantiateViewController(withIdentifier: "ListDetailViewController") as! ListDetailViewController
+        let vc = ListDetailViewController()
         let row = tasks[indexPath.row]        
         vc.items = row
+        vc.viewModel = viewModel
         
         self.navigationController?.pushViewController(vc, animated: true)
     }

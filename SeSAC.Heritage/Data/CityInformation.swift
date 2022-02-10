@@ -28,7 +28,7 @@ struct CityInformation {
         City(code: "37", city: "경북", image: "http://www.cha.go.kr/unisearch/images/national_treasure/1612612.jpg", category: "ccbaCtcd"),
         City(code: "38", city: "경남", image: "http://www.cha.go.kr/unisearch/images/national_treasure/1612968.jpg", category: "ccbaCtcd"),
         City(code: "50", city: "제주", image: "http://www.cha.go.kr/unisearch/images/treasure/1623059.jpg", category: "ccbaCtcd"),
-        City(code: "ZZ", city: "전국일원", image: "http://www.cha.go.kr/unisearch/images/national_treasure/2685609.jpg", category: "ccbaCtcd"),
+        City(code: "ZZ", city: "기타", image: "http://www.cha.go.kr/unisearch/images/national_treasure/2685609.jpg", category: "ccbaCtcd"),
         City(code: "00", city: "모두", image: "http://www.cha.go.kr/unisearch/images/national_treasure/2685609.jpg", category: "ccbaCtcd")
         
     ]

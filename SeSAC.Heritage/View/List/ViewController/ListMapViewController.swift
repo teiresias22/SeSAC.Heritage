@@ -13,6 +13,9 @@ import RealmSwift
 
 
 class ListMapViewController: UIViewController {
+    let mainView = ListDetailView()
+    var viewModel: ListViewModel?
+    
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var heritageLocation: UIButton!
     @IBOutlet weak var myLocation: UIButton!
@@ -24,6 +27,11 @@ class ListMapViewController: UIViewController {
     
     var item = Heritage_List()
     var items = Heritage_List()
+    
+    override func loadView() {
+        super.loadView()
+        self.view = mainView
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

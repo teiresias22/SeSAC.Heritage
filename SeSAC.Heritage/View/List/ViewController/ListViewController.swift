@@ -1,3 +1,6 @@
+// Todo
+// ViewModel 분리하기
+
 import UIKit
 import RealmSwift
 import FirebaseInstallations
@@ -21,18 +24,16 @@ class ListViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "JHeritage".localized()
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "MapoFlowerIsland", size: 20)!]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "MapoFlowerIsland", size: 18)!]
         
         setCollectionView()
-        //print(">>\(UserDefaults.standard.object(forKey: "AppleLanguages"))<<")
         
-        mainView.rightButton.addTarget(self, action: #selector(rightButtonClicked), for: .touchUpInside)
-        mainView.leftButton.addTarget(self, action: #selector(leftButtonClicked), for: .touchUpInside)
+        mainView.cityButton.addTarget(self, action: #selector(cityButtonClicked), for: .touchUpInside)
+        mainView.stockCodeButton.addTarget(self, action: #selector(stockCodeButtonClicked), for: .touchUpInside)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        
         Installations.installations().delete { error in
             if let error = error {
                 print("Error deleting installations: \(error)")
@@ -49,32 +50,30 @@ class ListViewController: BaseViewController {
         mainView.contentCollectionView.register(ListViewCell.self, forCellWithReuseIdentifier: ListViewCellId)
     }
     
-    @objc func rightButtonClicked(){
-        setButtonActive(mainView.rightButton, mainView.rightUnderLine)
-        setButtonDeActive(mainView.leftButton, mainView.leftUnderLine)
+    @objc func cityButtonClicked(){
+        setButtonActive(mainView.cityButton)
+        setButtonDeActive(mainView.stockCodeButton)
         target = "City"
         mainView.contentCollectionView.reloadData()
     }
     
-    @objc func leftButtonClicked(){
-        setButtonActive(mainView.leftButton, mainView.leftUnderLine)
-        setButtonDeActive(mainView.rightButton, mainView.rightUnderLine)
+    @objc func stockCodeButtonClicked(){
+        setButtonActive(mainView.stockCodeButton)
+        setButtonDeActive(mainView.cityButton)
         target = "StockCode"
         mainView.contentCollectionView.reloadData()
     }
     
-    func setButtonActive(_ target: UIButton, _ line: UIView){
+    func setButtonActive(_ target: UIButton){
         target.titleLabel?.font = .MapoFlowerIsland16
         target.setTitleColor(.customWhite, for: .normal)
         target.backgroundColor = .customBlack
-        line.backgroundColor = .customBlue
     }
     
-    func setButtonDeActive(_ target: UIButton, _ line: UIView){
+    func setButtonDeActive(_ target: UIButton){
         target.titleLabel?.font = .MapoFlowerIsland14
         target.setTitleColor(.customBlack, for: .normal)
         target.backgroundColor = .customWhite
-        line.backgroundColor = .customBlack
     }
 }
 
@@ -109,7 +108,6 @@ extension ListViewController: UICollectionViewDelegate, UICollectionViewDataSour
                 item.imageView.backgroundColor = .customBlue
             }
             item.label.text = cityInformation.city[indexPath.row].city.lowercased()
-            
         }
         item.backgroundColor = .clear
         
@@ -117,8 +115,7 @@ extension ListViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let sb = UIStoryboard(name: "ListTable", bundle: nil)
-        let vc = sb.instantiateViewController(withIdentifier: "ListTableViewController") as! ListTableViewController
+        let vc = ListTableViewController()
         
         if target == "StockCode" {
             let row = stockCodeInformation.stockCode[indexPath.row]
@@ -127,13 +124,13 @@ extension ListViewController: UICollectionViewDelegate, UICollectionViewDataSour
             let row = cityInformation.city[indexPath.row]
             vc.cityData = row
         }
-        
+        vc.viewModel = viewModel
         vc.listInformation = target
          self.navigationController?.pushViewController(vc, animated: true)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 8
+        return 16
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
