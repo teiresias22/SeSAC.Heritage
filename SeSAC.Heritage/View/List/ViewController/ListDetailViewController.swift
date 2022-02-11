@@ -11,7 +11,6 @@ class ListDetailViewController: BaseViewController {
     var viewModel: ListViewModel?
     
     let localRealm = try! Realm()
-    var tasks: Results<Heritage_List>!
     var items = Heritage_List()
     
     var elementName = ""
@@ -63,8 +62,10 @@ class ListDetailViewController: BaseViewController {
         
         if items.visited {
             mainView.visitedButton.tintColor = .customBlue
+            toastMessage(message: "방문 목록에 추가했습니다.")
         } else {
             mainView.visitedButton.tintColor = .customBlack
+            toastMessage(message: "방문 목록에서 제거했습니다.")
         }
     }
     
@@ -75,20 +76,25 @@ class ListDetailViewController: BaseViewController {
         
         if items.wantvisit {
             mainView.wannaVistButton.tintColor = .customYellow
+            toastMessage(message: "즐겨찾기 목록에 추가했습니다.")
         } else {
             mainView.wannaVistButton.tintColor = .customBlack
+            toastMessage(message: "즐겨찾기 목록에서 제거했습니다.")
         }
     }
     
     @objc func mapButtonClicked() {
-        
-        let vc = ListMapViewController()
-        vc.viewModel = viewModel
-        
-        self.navigationController?.pushViewController(vc, animated: true)
+        if items.latitude == "0" {
+            toastMessage(message: "해당 문화유산의 위치 정보를 지원하지 않습니다.")
+        } else {
+            let vc = ListMapViewController()
+            vc.viewModel = viewModel
+            vc.items = items
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
     }
-    
 }
+
 extension ListDetailViewController: XMLParserDelegate {
     //XMLParser가 시작 태그를 만나면 호출됨
     func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String] = [:]) {

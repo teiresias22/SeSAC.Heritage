@@ -8,28 +8,36 @@
 import UIKit
 import RealmSwift
 
-class SearchViewController: UIViewController {
-    @IBOutlet weak var searchTableView: UITableView!
+class SearchViewController: BaseViewController {
+    let mainView = SearchView()
+    var viewModel: ListViewModel?
     
     let localRealm = try! Realm()
     
     var tasks: Results<Heritage_List>!
     var searchHeritage: Results<Heritage_List>!{
         didSet {
-            searchTableView.reloadData()
+            mainView.searchTableView.reloadData()
         }
     }
     
     var searchController: UISearchController!
     
+    override func loadView() {
+        super.loadView()
+        self.view = mainView
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "문화유산 검색".localized()
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "MapoFlowerIsland", size: 20)!]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "MapoFlowerIsland", size: 18)!]
         
-        searchTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
-        searchTableView.delegate = self
-        searchTableView.dataSource = self
+        mainView.searchTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
+        mainView.searchTableView.delegate = self
+        mainView.searchTableView.dataSource = self
+        mainView.searchTableView.register(ListTableViewCell.self, forCellReuseIdentifier: ListTableViewCell.identifier)
+        mainView.searchTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         
         tasks = localRealm.objects(Heritage_List.self)
         
@@ -58,7 +66,7 @@ class SearchViewController: UIViewController {
 
 extension SearchViewController: UISearchResultsUpdating, UISearchBarDelegate {
     func updateSearchResults(for searchController: UISearchController) {
-        let predicate = NSPredicate(format: "ccbaMnm1 CONTAINS[c] %@ OR ccbaMnm2 CONTAINS[c]  %@",searchController.searchBar.text!,searchController.searchBar.text as! CVarArg)
+        let predicate = NSPredicate(format: "ccbaMnm1 CONTAINS[c] %@ OR ccbaMnm2 CONTAINS[c]  %@",searchController.searchBar.text!, searchController.searchBar.text as! CVarArg)
         searchHeritage = localRealm.objects(Heritage_List.self).filter(predicate)
     }
 }
@@ -73,7 +81,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: SearchTableViewCell.identifier, for: indexPath) as? SearchTableViewCell else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: ListTableViewCell.identifier, for: indexPath) as? ListTableViewCell else { return UITableViewCell() }
         
         let row = self.searchHeritage[indexPath.row]
         cell.selectionStyle = .none
@@ -90,11 +98,10 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let sb = UIStoryboard(name: "ListDetail", bundle: nil)
-        let vc = sb.instantiateViewController(withIdentifier: "ListDetailViewController") as! ListDetailViewController
-        
+        let vc = ListDetailViewController()
         let row = self.searchHeritage[indexPath.row]
         vc.items = row
+        vc.viewModel = viewModel
         
         self.navigationController?.pushViewController(vc, animated: true)
     }

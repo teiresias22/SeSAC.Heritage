@@ -13,85 +13,66 @@ import RealmSwift
 
 
 class ListMapViewController: UIViewController {
-    let mainView = ListDetailView()
+    let mainView = ListMapView()
     var viewModel: ListViewModel?
-    
-    @IBOutlet weak var mapView: MKMapView!
-    @IBOutlet weak var heritageLocation: UIButton!
-    @IBOutlet weak var myLocation: UIButton!
     
     let localRealm = try! Realm()
     var tasks: Results<Heritage_List>!
     
     var locationManager = CLLocationManager()
     
-    var item = Heritage_List()
     var items = Heritage_List()
     
     override func loadView() {
         super.loadView()
         self.view = mainView
     }
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = item.ccbaMnm1.localized()
-        
-        setTopButton(heritageLocation, "landmark")
-        heritageLocation.backgroundColor = .customYellow
-        setTopButton(myLocation, "street")
-        myLocation.backgroundColor = .customBlue
+        self.title = items.ccbaMnm1.localized()
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "MapoFlowerIsland", size: 18)!]
+        self.view.backgroundColor = .customWhite
+
         
         //위치정보 사용권한 요청 - 실행중일때만 권한을 사용
         locationManager.requestWhenInUseAuthorization()
         //현재 위치를 지도에 표시하도록 설정
-        mapView.showsUserLocation = true
+        mainView.mapView.showsUserLocation = true
         
         locationManager.delegate = self
+        
+        mainView.heritageLocationButton.addTarget(self, action: #selector(heritageLocationClicked), for: .touchUpInside)
+        mainView.userLocationButton.addTarget(self, action: #selector(myLocationClicked), for: .touchUpInside)
+                
         defaultLocation()
         // Do any additional setup after loading the view.
     }
     
-    func setTopButton( _ target: UIButton, _ name: String){
-        target.setImage(UIImage(named: name), for: .normal)
-        target.imageEdgeInsets = UIEdgeInsets(top: 12, left: 12, bottom: 12, right: 12)
-        target.contentMode = .scaleToFill
-        target.setTitle("", for: .normal)
-        target.contentVerticalAlignment = .fill
-        target.contentHorizontalAlignment = .fill
-        target.layer.cornerRadius = 20
-        target.tintColor = .customBlack
-    }
-    
-    @IBAction func heritageLocationClicked(_ sender: UIButton) {
+    @objc func heritageLocationClicked() {
         defaultLocation()
     }
     
-    @IBAction func myLocationClicked(_ sender: UIButton) {
+    @objc func myLocationClicked() {
         checkUserLocationServicesAithorization()
     }
     
     //권한 비허용시 기본화면
     func defaultLocation() {
-        let latitude = Double(item.latitude)!
-        let longitude = Double(item.longitude)!
+        let latitude = Double(items.latitude)!
+        let longitude = Double(items.longitude)!
         var location = CLLocationCoordinate2D()
         let annotation = MKPointAnnotation()
         let span = MKCoordinateSpan(latitudeDelta: 0.03, longitudeDelta: 0.03)
         
-        if latitude == 0.0 && longitude == 0.0 {
-            location = CLLocationCoordinate2D(latitude: 37.57606059397734, longitude: 126.9766761117934)
-            annotation.title = "위치가 기록되지 않았습니다."
-        } else {
-            location = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-            annotation.title = item.ccbaMnm1.localized()
-        }
+        location = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+        annotation.title = items.ccbaMnm1.localized()
         
         let region = MKCoordinateRegion(center: location, span: span)
         
-        mapView.setRegion(region, animated: true)
+        mainView.mapView.setRegion(region, animated: true)
         annotation.coordinate = location
-        mapView.addAnnotation(annotation)
+        mainView.mapView.addAnnotation(annotation)
     }
     
     //위치 권한 허용 확인
@@ -110,11 +91,11 @@ class ListMapViewController: UIViewController {
         switch authorizationStatus {
         case .authorizedAlways, .authorizedWhenInUse:
             //현재 위치 가져오기
-            let userLocation = mapView.userLocation
+            let userLocation = mainView.mapView.userLocation
             //현재 위치 기준으로 영역을 설정
             let region = MKCoordinateRegion(center: userLocation.location!.coordinate, latitudinalMeters: 1000, longitudinalMeters: 1000)
             //맵 뷰의 영역을 설정
-            mapView.setRegion(region, animated: true)
+            mainView.mapView.setRegion(region, animated: true)
         case .notDetermined:
             print("GPS 권한 설정되지 않음")
         case .denied, .restricted:
@@ -154,7 +135,7 @@ extension ListMapViewController: CLLocationManagerDelegate{
         let center = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
         let region = MKCoordinateRegion.init(center: center, latitudinalMeters: 10000, longitudinalMeters: 10000)
         
-        mapView.setRegion(region, animated: true)
+        mainView.mapView.setRegion(region, animated: true)
     }
     
     //5. 위치 접근이 실패했을 경우

@@ -86,6 +86,7 @@ class ListDetailView: UIView, ViewRepresentable {
     let visitedButton: UIButton = {
         let button = UIButton.init(type: .system)
         button.setImage(UIImage(named: "landmark"), for: .normal)
+        button.imageEdgeInsets = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
         button.tintColor = .customBlue
         button.contentVerticalAlignment = .center
         button.contentHorizontalAlignment = .leading
@@ -113,6 +114,7 @@ class ListDetailView: UIView, ViewRepresentable {
     let wannaVistButton: UIButton = {
         let button = UIButton.init(type: .system)
         button.setImage(UIImage(named: "plus"), for: .normal)
+        button.imageEdgeInsets = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
         button.contentMode = .scaleToFill
         button.contentVerticalAlignment = .center
         button.contentHorizontalAlignment = .leading
@@ -140,6 +142,7 @@ class ListDetailView: UIView, ViewRepresentable {
     let mapButton: UIButton = {
         let button = UIButton.init(type: .system)
         button.setImage(UIImage(named: "hiking"), for: .normal)
+        button.imageEdgeInsets = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
         button.contentMode = .scaleToFill
         button.contentVerticalAlignment = .center
         button.contentHorizontalAlignment = .leading
