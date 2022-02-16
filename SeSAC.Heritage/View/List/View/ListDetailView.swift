@@ -15,6 +15,7 @@ class ListDetailView: UIView, ViewRepresentable {
         
         return view
     }()
+    
     let contentView = UIView()
     
     let heritageTitleLabel: UILabel = {
@@ -158,14 +159,14 @@ class ListDetailView: UIView, ViewRepresentable {
         
         return label
     }()
+
     
-    let heritageContentText: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.MapoFlowerIsland14
-        label.addInterlineSpacing(spacingValue: 2)
-        label.numberOfLines = 0
+    let heritageContentText: UITextView = {
+        let view = UITextView()
+        view.font = UIFont.MapoFlowerIsland14
+        view.textColor = .customBlack
         
-        return label
+        return view
     }()
     
     override init(frame: CGRect) {
@@ -214,7 +215,7 @@ class ListDetailView: UIView, ViewRepresentable {
         contentView.snp.makeConstraints { make in
             make.edges.equalTo(0)
             make.width.equalTo(self.snp.width)
-            make.height.equalTo(self.snp.height)
+            make.height.equalTo(self.snp.height).multipliedBy(1.5)
         }
         
         heritageTitleLabel.snp.makeConstraints { make in

@@ -30,10 +30,17 @@ class ListDetailViewController: BaseViewController {
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "MapoFlowerIsland", size: 18)!]
         
         fetcHeritageData()
+        setTextView()
         
         mainView.visitedButton.addTarget(self, action: #selector(visitedButtonClicked), for: .touchUpInside)
         mainView.wannaVistButton.addTarget(self, action: #selector(wannaVisitButtonClicked), for: .touchUpInside)
         mainView.mapButton.addTarget(self, action: #selector(mapButtonClicked), for: .touchUpInside)
+    }
+    
+    func setTextView() {
+        mainView.heritageContentText.delegate = self
+        
+        textViewDidChange(mainView.heritageContentText)
     }
     
     func fetcHeritageData() {
@@ -131,5 +138,20 @@ extension ListDetailViewController: XMLParserDelegate {
         let url = URL(string: row["imageUrl"] ?? "")
         mainView.detailImage.kf.setImage(with: url)
         mainView.heritageContentText.text = row["content"]!
+    }
+}
+
+extension ListDetailViewController: UITextViewDelegate {
+    func textViewDidChange(_ textView: UITextView) {
+        let size = CGSize(width: view.frame.width, height: .infinity)
+        let estimatedSize = textView.sizeThatFits(size)
+        print("height", estimatedSize)
+        
+        textView.constraints.forEach { (constraint) in
+            if constraint.firstAttribute == .height {
+                constraint.constant = estimatedSize.height
+                print("height", constraint.constant)
+            }
+        }
     }
 }
