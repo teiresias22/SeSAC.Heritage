@@ -24,16 +24,13 @@ class ListUpViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "나의 문화유산".localized()
+        self.title = "내목록".localized()
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "MapoFlowerIsland", size: 18)!]
+        
+        setTableView()
         tasks = localRealm.objects(Heritage_List.self).filter("visited=true")
         
-        mainView.tableView.delegate = self
-        mainView.tableView.dataSource = self
-        mainView.tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
-        mainView.tableView.register(ListTableViewCell.self, forCellReuseIdentifier: ListTableViewCell.identifier)
-        
-        mainView.segmentControl.addTarget(self, action: #selector(segmentControlClicked), for: .touchUpInside)
+        mainView.segmentControl.addTarget(self, action: #selector(segmentControlClicked(_:)), for: .valueChanged)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -41,15 +38,21 @@ class ListUpViewController: BaseViewController {
         mainView.tableView.reloadData()
     }
     
-    @objc func segmentControlClicked(){
-        switch mainView.segmentControl.selectedSegmentIndex {
+    func setTableView(){
+        mainView.tableView.delegate = self
+        mainView.tableView.dataSource = self
+        mainView.tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
+        mainView.tableView.register(ListTableViewCell.self, forCellReuseIdentifier: ListTableViewCell.identifier)
+    }
+    
+    @objc func segmentControlClicked(_ target: UISegmentedControl){
+        switch target.selectedSegmentIndex {
         case 0 : segmentValue = true
             tasks = localRealm.objects(Heritage_List.self).filter("visited=true")
             mainView.tableView.reloadData()
-        case 1 : segmentValue = false
+        default : segmentValue = false
             tasks = localRealm.objects(Heritage_List.self).filter("wantvisit=true")
             mainView.tableView.reloadData()
-        default : break
         }
     }
 }
@@ -57,7 +60,6 @@ class ListUpViewController: BaseViewController {
 extension ListUpViewController: UITableViewDelegate, UITableViewDataSource {
         
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         if tasks.count == 0 {
             return 1
         } else {
@@ -68,7 +70,6 @@ extension ListUpViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ListTableViewCell.identifier, for: indexPath) as? ListTableViewCell else { return UITableViewCell() }
         cell.selectionStyle = .none
-        
         if tasks.count == 0 {
             cell.titleLabel.text = "선택된 문화유산 목록이 없습니다."
             cell.cityLabel.text = ""
@@ -87,10 +88,9 @@ extension ListUpViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         if tasks.count == 0 {
-            let vc = ListViewController()
-            
+            let vc = TabBarViewController()
+            vc.modalPresentationStyle = .fullScreen
             self.present(vc, animated: true, completion: nil)
         } else {
             let vc = ListDetailViewController()

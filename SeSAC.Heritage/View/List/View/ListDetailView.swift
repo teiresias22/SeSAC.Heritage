@@ -87,10 +87,9 @@ class ListDetailView: UIView, ViewRepresentable {
         let button = UIButton.init(type: .system)
         button.setImage(UIImage(named: "landmark"), for: .normal)
         button.imageEdgeInsets = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
-        button.tintColor = .customBlue
+        button.tintColor = .customBlack
         button.contentVerticalAlignment = .center
         button.contentHorizontalAlignment = .leading
-        button.tintColor = .customBlack
         
         return button
     }()

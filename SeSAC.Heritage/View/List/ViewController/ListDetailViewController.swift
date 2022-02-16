@@ -21,6 +21,7 @@ class ListDetailViewController: BaseViewController {
     override func loadView() {
         super.loadView()
         self.view = mainView
+        checkButtonActive()
     }
     
     override func viewDidLoad() {
@@ -29,7 +30,6 @@ class ListDetailViewController: BaseViewController {
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "MapoFlowerIsland", size: 18)!]
         
         fetcHeritageData()
-        checkButtonActive()
         
         mainView.visitedButton.addTarget(self, action: #selector(visitedButtonClicked), for: .touchUpInside)
         mainView.wannaVistButton.addTarget(self, action: #selector(wannaVisitButtonClicked), for: .touchUpInside)
@@ -51,7 +51,7 @@ class ListDetailViewController: BaseViewController {
         }
         
         if items.wantvisit {
-            mainView.visitedButton.tintColor = .customYellow
+            mainView.wannaVistButton.tintColor = .customYellow
         }
     }
     

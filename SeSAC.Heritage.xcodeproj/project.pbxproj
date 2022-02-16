@@ -161,8 +161,8 @@
 				7590986E27B625290063E31B /* Others */,
 				7590983A27B214310063E31B /* List */,
 				7590983B27B2143C0063E31B /* Search */,
-				7590983C27B214430063E31B /* ListUp */,
 				7590983D27B2149E0063E31B /* Map */,
+				7590983C27B214430063E31B /* ListUp */,
 			);
 			path = View;
 			sourceTree = "<group>";

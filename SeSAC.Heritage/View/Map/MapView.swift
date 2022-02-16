@@ -36,7 +36,7 @@ class MapView: UIView, ViewRepresentable {
     
     let filterButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(named: "loader.gif"), for: .normal)
+        button.setImage(UIImage(named: "plus"), for: .normal)
         button.imageEdgeInsets = UIEdgeInsets(top: 12, left: 12, bottom: 12, right: 12)
         button.contentMode = .scaleToFill
         button.setTitle("", for: .normal)

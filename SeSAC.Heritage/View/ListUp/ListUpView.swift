@@ -9,14 +9,12 @@ import UIKit
 import SnapKit
 
 class ListUpView: UIView, ViewRepresentable {
-    @IBOutlet weak var listUpTable: UITableView!
-
+    
     let segmentControl: UISegmentedControl = {
-        let control = UISegmentedControl()
+        let array: [String] = ["방문함", "즐겨찾기"]
+        let control = UISegmentedControl(items: array)
         control.selectedSegmentTintColor = .customRed
         control.backgroundColor = .clear
-        control.setTitle("방문", forSegmentAt: 0)
-        control.setTitle("즐겨찾기", forSegmentAt: 1)
         
         return control
     }()
@@ -41,11 +39,12 @@ class ListUpView: UIView, ViewRepresentable {
     func setupConstraints() {
         segmentControl.snp.makeConstraints { make in
             make.top.equalToSuperview().inset(100)
+            make.height.equalTo(24)
             make.leading.trailing.equalToSuperview().inset(16)
         }
-        
+         
         tableView.snp.makeConstraints { make in
-            make.top.equalTo(segmentControl.snp.bottom).inset(20)
+            make.top.equalTo(segmentControl.snp.bottom).offset(20)
             make.leading.trailing.bottom.equalToSuperview()
         }
     }
