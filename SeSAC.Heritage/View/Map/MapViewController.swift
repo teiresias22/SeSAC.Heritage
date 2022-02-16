@@ -5,42 +5,73 @@ import CoreLocationUI
 import RealmSwift
 import SwiftUI
 
-class MapViewController: UIViewController {
-    @IBOutlet weak var mapView: MKMapView!
-    @IBOutlet weak var myLocation: UIButton!
-    @IBOutlet weak var heritageFilter: UIButton!
-    @IBOutlet weak var locationFilter: UIButton!
-    
-    @IBOutlet weak var conteinerViewHeight: NSLayoutConstraint!
-    @IBOutlet weak var pinConteinerViewHeight: NSLayoutConstraint!
+class MapViewController: BaseViewController {
+    let mainView = MapView()
+    var viewModel = ListViewModel()
     
     let localRealm = try! Realm()
     var tasks: Results<Heritage_List>!
     var locationManager = CLLocationManager()
-    
-    var heightStatus = false
-    var city: String?
-    var code: Int?
+        
+    let stockCodeInformation = StockCodeInformation()
+    let cityInformation = CityInformation()
     
     var runTimeInterval: TimeInterval?
     let mTimer: Selector = #selector(Tick_TimeConsole)
-        
+    
+    override func loadView() {
+        super.loadView()
+        self.view = mainView
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "MapoFlowerIsland", size: 14)!]
+        self.title = "지도".lowercased()
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "MapoFlowerIsland", size: 18)!]
         
-        setMyLocationButton()
-        setFilterButton(heritageFilter, .customYellow!, "종류별")
-        setFilterButton(locationFilter, .customBlue!, "지역별")
+        setMapView()
+        createPickerView()
         
-        mapView.delegate = self
+        mainView.userLocationButton.addTarget(self, action: #selector(myLocationClicked), for: .touchUpInside)
+        mainView.filterButton.addTarget(self, action: #selector(filterButtonClicked), for: .touchUpInside)
+    }
+    
+    func setMapView(){
+        mainView.mapView.delegate = self
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
-        mapView.showsUserLocation = true
-        
+        mainView.mapView.showsUserLocation = true
         Timer.scheduledTimer(timeInterval: 0.25, target: self, selector: mTimer, userInfo: nil, repeats: true)
+    }
+    
+    func createPickerView() {
+        let pickerView = UIPickerView()
+        pickerView.delegate = self
+        pickerView.dataSource = self
+                
+        // 피커뷰 확인 취소 버튼 세팅
+        let toolBar = UIToolbar()
+        toolBar.sizeToFit()
+        
+        let btnDone = UIBarButtonItem(title: "확인", style: .done, target: self, action: #selector(onPickDone(_:)))
+        let space = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
+        let btnCancel = UIBarButtonItem(title: "취소", style: .done, target: self, action: #selector(onPickCancel))
+        toolBar.setItems([btnCancel , space , btnDone], animated: true)
+        toolBar.isUserInteractionEnabled = true
+            
+        // 텍스트필드 입력 수단 연결
+        mainView.textField.inputView = pickerView
+        mainView.textField.inputAccessoryView = toolBar
+    }
+     
+    @objc func onPickDone(_ sender: UIDatePicker) {
+        filerAnnotations()
+        mainView.textField.resignFirstResponder()
+    }
+    @objc func onPickCancel() {
+        mainView.textField.resignFirstResponder()
     }
     
     override func viewWillLayoutSubviews() {
@@ -48,47 +79,28 @@ class MapViewController: UIViewController {
         filerAnnotations()
     }
     
-    //Map Pin Setting
+    @objc func myLocationClicked() {
+        checkUserLocationServicesAithorization()
+    }
+    
+    @objc func filterButtonClicked() {
+        mainView.textField.becomeFirstResponder()
+    }
+    
     // MARK: - Conditional code cleanup required
     func filerAnnotations(){
-        //case 0 : 필터를 선택하지 않은 경우 > 둘다 nil인 경우
-        if code == nil && city == nil {
-            tasks = localRealm.objects(Heritage_List.self).filter("ccbaCtcd='11'")
+        //MapPin Filter
+        if viewModel.cityCode.value != "00" && viewModel.stockCode.value != 0 {
+            let firstTesk =  localRealm.objects(Heritage_List.self).filter("ccbaKdcd='\(viewModel.stockCode.value)'")
+            tasks = firstTesk.filter("ccbaCtcd='\(viewModel.cityCode.value)'")
+        } else if viewModel.cityCode.value == "00" && viewModel.stockCode.value != 0 {
+            tasks = localRealm.objects(Heritage_List.self).filter("ccbaKdcd='\(viewModel.stockCode.value)'")
+        } else if viewModel.cityCode.value != "00" && viewModel.stockCode.value == 0 {
+            tasks = localRealm.objects(Heritage_List.self).filter("ccbaCtcd='\(viewModel.cityCode.value)'")
         }
         
-        //case 1 : 한종류의 필터만 선택한 경우 > 둘중 하나가 nil인 경우?
-        else if code != nil && city == nil {
-            if code! == 0 {
-                tasks = localRealm.objects(Heritage_List.self).filter("ccbaCtcd='11'")
-            } else {
-                tasks = localRealm.objects(Heritage_List.self).filter("ccbaKdcd='\(code!)'")
-            }
-        }
-        //case 1 : 한종류의 필터만 선택한 경우 > 둘중 하나가 nil인 경우?
-        else if code == nil && city != nil {
-            if city! == "00" {
-                tasks = localRealm.objects(Heritage_List.self).filter("ccbaKdcd='11'")
-            } else {
-                tasks = localRealm.objects(Heritage_List.self).filter("ccbaCtcd='\(city!)'")
-            }
-        }
-        
-        //case 2 : 두종류의 필터를 선택한 경우 > 둘다 nil이 아닌 경우
-        else if code != nil && city != nil {
-            if code! == 0 && city! == "00" {
-                tasks = localRealm.objects(Heritage_List.self)
-            } else if code! != 0 && city! == "00" {
-                tasks = localRealm.objects(Heritage_List.self).filter("ccbaKdcd='\(code!)'")
-            } else if code! == 0 && city! != "00" {
-                tasks = localRealm.objects(Heritage_List.self).filter("ccbaCtcd='\(city!)'")
-            } else {
-                let firstTesk =  localRealm.objects(Heritage_List.self).filter("ccbaKdcd='\(code!)'")
-                tasks = firstTesk.filter("ccbaCtcd='\(city!)'")
-            }
-        }
-        
-        let annotiations = mapView.annotations
-        mapView.removeAnnotations(annotiations)
+        let annotiations = mainView.mapView.annotations
+        mainView.mapView.removeAnnotations(annotiations)
         
         for location in tasks {
             let heritageLatitude = Double(location.latitude)!
@@ -99,57 +111,7 @@ class MapViewController: UIViewController {
             
             heritageAnnotaion.title = location.ccbaMnm1
             heritageAnnotaion.coordinate = heritageCoordinate
-            mapView.addAnnotation(heritageAnnotaion)
-        }
-    }
-    
-    //Setting My Location Button
-    func setMyLocationButton() {
-        myLocation.setImage(UIImage(named: "street"), for: .normal)
-        myLocation.imageEdgeInsets = UIEdgeInsets(top: 12, left: 12, bottom: 12, right: 12)
-        myLocation.contentMode = .scaleToFill
-        myLocation.setTitle("", for: .normal)
-        myLocation.contentVerticalAlignment = .fill
-        myLocation.contentHorizontalAlignment = .fill
-        myLocation.layer.cornerRadius = 20
-        myLocation.tintColor = .customBlack
-        myLocation.backgroundColor = .customWhite
-    }
-    
-    //Setting Filter Button
-    func setFilterButton(_ target: UIButton, _ color: UIColor, _ title: String) {
-        target.setTitle(title, for: .normal)
-        target.setImage(UIImage(systemName: "text.chevron.right"), for: .normal)
-        target.imageEdgeInsets = UIEdgeInsets(top: 12, left: 12, bottom: 12, right: 12)
-        target.contentVerticalAlignment = .center
-        target.contentHorizontalAlignment = .center
-        target.layer.cornerRadius = 20
-        target.tintColor = .customBlack
-        target.backgroundColor = color
-    }
-    
-    //My Location Button Clicked
-    @IBAction func myLocationClicked(_ sender: UIButton) {
-        checkUserLocationServicesAithorization()
-    }
-    
-    @IBAction func heritageFilterClicked(_ sender: UIButton) {
-        let vc = children.first as! PickerViewController
-        vc.filterTag = "heritage"
-        setContenierView()
-    }
-    
-    @IBAction func locationFilterClicked(_ sender: UIButton) {
-        let vc = children.first as! PickerViewController
-        vc.filterTag = "city"
-        setContenierView()
-    }
-    
-    func setContenierView() {
-        heightStatus = !heightStatus
-        conteinerViewHeight.constant = heightStatus ? UIScreen.main.bounds.height * 0.2 : 0
-        UIView.animate(withDuration: 0.3) {
-            self.view.layoutIfNeeded()
+            mainView.mapView.addAnnotation(heritageAnnotaion)
         }
     }
     
@@ -161,9 +123,9 @@ class MapViewController: UIViewController {
         location = CLLocationCoordinate2D(latitude: 37.52413651649104, longitude: 126.98001340101837)
         annotation.title = "사용자의 위치를 확인할수 없습니다."
         let region = MKCoordinateRegion(center: location, span: span)
-        mapView.setRegion(region, animated: true)
+        mainView.mapView.setRegion(region, animated: true)
         annotation.coordinate = location
-        mapView.addAnnotation(annotation)
+        mainView.mapView.addAnnotation(annotation)
     }
     
     //위치 권한 허용 확인
@@ -182,11 +144,11 @@ class MapViewController: UIViewController {
         switch authorizationStatus {
         case .authorizedAlways, .authorizedWhenInUse:
             //현재 위치 가져오기
-            let userLocation = mapView.userLocation
+            let userLocation = mainView.mapView.userLocation
             //현재 위치 기준으로 영역을 설정
             let region = MKCoordinateRegion(center: userLocation.location!.coordinate, latitudinalMeters: 1000, longitudinalMeters: 1000)
             //맵 뷰의 영역을 설정
-            mapView.setRegion(region, animated: true)
+            mainView.mapView.setRegion(region, animated: true)
         case .notDetermined:
             print("GPS 권한 설정되지 않음")
         case .denied, .restricted:
@@ -235,10 +197,10 @@ extension MapViewController: CLLocationManagerDelegate{
     }
     
     func moveLocation(latitudeValue: CLLocationDegrees, longtudeValue: CLLocationDegrees, delta span: Double) {
-         let pLocation = CLLocationCoordinate2DMake(latitudeValue, longtudeValue)
-         let pSpanValue = MKCoordinateSpan(latitudeDelta: span, longitudeDelta: span)
-         let pRegion = MKCoordinateRegion(center: pLocation, span: pSpanValue)
-         mapView.setRegion(pRegion, animated: true)
+        let pLocation = CLLocationCoordinate2DMake(latitudeValue, longtudeValue)
+        let pSpanValue = MKCoordinateSpan(latitudeDelta: span, longitudeDelta: span)
+        let pRegion = MKCoordinateRegion(center: pLocation, span: pSpanValue)
+        mainView.mapView.setRegion(pRegion, animated: true)
      }
     
     //5. 위치 접근이 실패했을 경우
@@ -267,36 +229,62 @@ extension MapViewController: MKMapViewDelegate {
         guard let timeInterval = runTimeInterval else { return }
         let interval = Date().timeIntervalSinceReferenceDate - timeInterval
         if interval < 0.25 { return }
-        let coordinate = mapView.centerCoordinate
+        let coordinate = mainView.mapView.centerCoordinate
         let location = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
 
         // 지정된 위치의 지오 코드 요청
         CLGeocoder().reverseGeocodeLocation(location) { (placemarks, error) in
             if let pm: CLPlacemark = placemarks?.first {
                 let address: String = "\(pm.country ?? "") \(pm.administrativeArea ?? "") \(pm.locality ?? "") \(pm.subLocality ?? "") \(pm.name ?? "")"
-                self.title = address.localized()
+                //self.title = address.localized()
             }
         }
         runTimeInterval = nil
-        
-        //지도 중앙 좌표
-        //var latitude = coordinate.latitude
-        //var longitude = coordinate.longitude
     }
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         print(#function)
-        pinConteinerViewHeight.constant = UIScreen.main.bounds.height * 0.2
-        UIView.animate(withDuration: 0.3) {
-            self.view.layoutIfNeeded()
-        }
     }
     
     func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
         print(#function)
-        pinConteinerViewHeight.constant = 0
-        UIView.animate(withDuration: 0.3) {
-            self.view.layoutIfNeeded()
+    }
+}
+
+// MARK: PickerViewSetting
+extension MapViewController : UIPickerViewDelegate, UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 2
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        if component == 0 {
+            return cityInformation.city.count
+        } else if component == 1 {
+            return stockCodeInformation.stockCode.count
+        } else {
+            return 1
         }
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        if component == 0 {
+            return "\(cityInformation.city[row].city)"
+        } else if component == 1 {
+            return "\(stockCodeInformation.stockCode[row].text)"
+        } else {
+            return "이 메세지를 봤다면 개발자에게 알려주세요!"
+        }
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        if component == 0 {
+            viewModel.cityCode.value = cityInformation.city[row].code
+        } else if component == 1 {
+            viewModel.stockCode.value = stockCodeInformation.stockCode[row].code
+        } else {
+            print("이거 보면 망한거임")
+        }
+        filerAnnotations()
     }
 }

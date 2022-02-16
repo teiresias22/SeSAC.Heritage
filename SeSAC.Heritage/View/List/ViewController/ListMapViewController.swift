@@ -12,7 +12,7 @@ import CoreLocationUI
 import RealmSwift
 
 
-class ListMapViewController: UIViewController {
+class ListMapViewController: BaseViewController {
     let mainView = ListMapView()
     var viewModel: ListViewModel?
     
@@ -32,8 +32,6 @@ class ListMapViewController: UIViewController {
         super.viewDidLoad()
         self.title = items.ccbaMnm1.localized()
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "MapoFlowerIsland", size: 18)!]
-        self.view.backgroundColor = .customWhite
-
         
         //위치정보 사용권한 요청 - 실행중일때만 권한을 사용
         locationManager.requestWhenInUseAuthorization()

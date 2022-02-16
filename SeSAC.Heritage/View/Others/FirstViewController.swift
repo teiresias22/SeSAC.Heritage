@@ -15,7 +15,7 @@ class FirstViewController: BaseViewController {
     let mainView = FirstView()
     
     let localRealm = try! Realm()
-    var tasks: Results<Heritage_List>!
+    var tasks: Results<Heritage_List>?
     
     var elementName = ""
     var items: Array = [[String: String]]()

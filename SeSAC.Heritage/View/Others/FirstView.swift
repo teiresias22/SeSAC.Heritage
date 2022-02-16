@@ -61,7 +61,7 @@ class FirstView: UIView, ViewRepresentable {
         
         titleLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.centerY.equalToSuperview().inset(100)
+            make.centerY.equalToSuperview().multipliedBy(1.4)
         }
         
         noticeLabel.snp.makeConstraints { make in

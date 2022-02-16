@@ -27,12 +27,12 @@ class TabBarViewController: UITabBarController {
         
         let MapVC = UINavigationController(rootViewController: MapViewController())
         MapVC.tabBarItem.image = UIImage(systemName: "map")
-        MapVC.tabBarItem.title = "기록"
-        
+        MapVC.tabBarItem.title = "지도"
+        /*
         let ListUpVC = UINavigationController(rootViewController: ListUpViewController())
         ListUpVC.tabBarItem.image = UIImage(systemName: "person")
         ListUpVC.tabBarItem.title = "지도"
-        
-        viewControllers = [ListVC, SearchVC, MapVC, ListUpVC]
+        */
+        viewControllers = [ListVC, SearchVC, MapVC]//, ListUpVC]
     }
 }

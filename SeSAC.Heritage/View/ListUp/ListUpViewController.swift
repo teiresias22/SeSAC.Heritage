@@ -8,45 +8,47 @@
 import UIKit
 import RealmSwift
 
-class ListUpViewController: UIViewController {
-    @IBOutlet weak var segmentedControl: UISegmentedControl!
-    @IBOutlet weak var listUpTable: UITableView!
+class ListUpViewController: BaseViewController {
+    let mainView = ListUpView()
+    var viewModel = ListViewModel()
     
     let localRealm = try! Realm()
     var tasks: Results<Heritage_List>!
     
     var segmentValue: Bool = true
     
+    override func loadView() {
+        super.loadView()
+        self.view = mainView
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "나의 문화유산".localized()
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "MapoFlowerIsland", size: 20)!]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "MapoFlowerIsland", size: 18)!]
         tasks = localRealm.objects(Heritage_List.self).filter("visited=true")
         
-        segmentedControl.selectedSegmentTintColor = .customRed
-        segmentedControl.backgroundColor = .clear
-        segmentedControl.setTitle("방문", forSegmentAt: 0)
-        segmentedControl.setTitle("즐겨찾기", forSegmentAt: 1)
+        mainView.tableView.delegate = self
+        mainView.tableView.dataSource = self
+        mainView.tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
+        mainView.tableView.register(ListTableViewCell.self, forCellReuseIdentifier: ListTableViewCell.identifier)
         
-        listUpTable.separatorStyle = UITableViewCell.SeparatorStyle.none
-        listUpTable.delegate = self
-        listUpTable.dataSource = self
-        // Do any additional setup after loading the view.
+        mainView.segmentControl.addTarget(self, action: #selector(segmentControlClicked), for: .touchUpInside)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        listUpTable.reloadData()
+        mainView.tableView.reloadData()
     }
     
-    @IBAction func segmentControlClicked(_ sender: Any) {
-        switch segmentedControl.selectedSegmentIndex {
+    @objc func segmentControlClicked(){
+        switch mainView.segmentControl.selectedSegmentIndex {
         case 0 : segmentValue = true
-                 tasks = localRealm.objects(Heritage_List.self).filter("visited=true")
-                 listUpTable.reloadData()
+            tasks = localRealm.objects(Heritage_List.self).filter("visited=true")
+            mainView.tableView.reloadData()
         case 1 : segmentValue = false
-                 tasks = localRealm.objects(Heritage_List.self).filter("wantvisit=true")
-                 listUpTable.reloadData()
+            tasks = localRealm.objects(Heritage_List.self).filter("wantvisit=true")
+            mainView.tableView.reloadData()
         default : break
         }
     }
@@ -64,12 +66,11 @@ extension ListUpViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: ListUpTableViewCell.identifier, for: indexPath) as? ListUpTableViewCell else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: ListTableViewCell.identifier, for: indexPath) as? ListTableViewCell else { return UITableViewCell() }
         cell.selectionStyle = .none
         
         if tasks.count == 0 {
             cell.titleLabel.text = "선택된 문화유산 목록이 없습니다."
-            cell.titleLabel.numberOfLines = 0
             cell.cityLabel.text = ""
             cell.locationLabel.text = ""
         } else {
@@ -88,16 +89,15 @@ extension ListUpViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if tasks.count == 0 {
-            let sb = UIStoryboard(name: "List", bundle: nil)
-            guard let vc = sb.instantiateViewController(withIdentifier: "ListViewController") as? ListViewController else { return }
-            let nav = UINavigationController(rootViewController: vc)
-            nav.modalPresentationStyle = .overCurrentContext
-            self.present(nav, animated: true, completion: nil)
+            let vc = ListViewController()
+            
+            self.present(vc, animated: true, completion: nil)
         } else {
-            let sb = UIStoryboard(name: "ListDetail", bundle: nil)
-            let vc = sb.instantiateViewController(withIdentifier: "ListDetailViewController") as! ListDetailViewController
-            let row = tasks[indexPath.row]
+            let vc = ListDetailViewController()
+            let row = self.tasks[indexPath.row]
             vc.items = row
+            vc.viewModel = viewModel
+            
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }

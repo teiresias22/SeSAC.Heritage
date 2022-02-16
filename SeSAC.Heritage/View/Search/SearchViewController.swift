@@ -10,7 +10,7 @@ import RealmSwift
 
 class SearchViewController: BaseViewController {
     let mainView = SearchView()
-    var viewModel: ListViewModel?
+    var viewModel = ListViewModel()
     
     let localRealm = try! Realm()
     
@@ -30,7 +30,7 @@ class SearchViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "문화유산 검색".localized()
+        self.title = "검색".localized()
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "MapoFlowerIsland", size: 18)!]
         
         mainView.searchTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
@@ -66,7 +66,7 @@ class SearchViewController: BaseViewController {
 
 extension SearchViewController: UISearchResultsUpdating, UISearchBarDelegate {
     func updateSearchResults(for searchController: UISearchController) {
-        let predicate = NSPredicate(format: "ccbaMnm1 CONTAINS[c] %@ OR ccbaMnm2 CONTAINS[c]  %@",searchController.searchBar.text!, searchController.searchBar.text as! CVarArg)
+        let predicate = NSPredicate(format: "ccbaMnm1 CONTAINS[c] %@ OR ccbaMnm2 CONTAINS[c]  %@",searchController.searchBar.text!, searchController.searchBar.text!)
         searchHeritage = localRealm.objects(Heritage_List.self).filter(predicate)
     }
 }
@@ -74,7 +74,7 @@ extension SearchViewController: UISearchResultsUpdating, UISearchBarDelegate {
 extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if isFiltering() {
-            return searchHeritage.count ?? 0
+            return searchHeritage.count
         } else {
             return 0
         }
