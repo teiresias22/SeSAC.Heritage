@@ -29,6 +29,7 @@ class ListUpViewController: BaseViewController {
         
         setTableView()
         tasks = localRealm.objects(Heritage_List.self).filter("visited=true")
+        mainView.segmentControl.selectedSegmentIndex = 0
         
         mainView.segmentControl.addTarget(self, action: #selector(segmentControlClicked(_:)), for: .valueChanged)
     }
