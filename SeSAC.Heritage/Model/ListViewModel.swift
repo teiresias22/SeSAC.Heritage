@@ -11,9 +11,7 @@ import RealmSwift
 
 class ListViewModel {
     
-    
     var cityCode: Observable<String> = Observable("11")
     var stockCode: Observable<Int> = Observable(11)
-    
     
 }

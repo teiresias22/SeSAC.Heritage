@@ -14,7 +14,7 @@ class TabBarViewController: UITabBarController {
         super.viewDidLoad()
         
         tabBar.tintColor = .customBlack
-        tabBar.unselectedItemTintColor = .customBlue
+        tabBar.unselectedItemTintColor = .customGray
         tabBar.backgroundColor = .customWhite
         
         let ListVC = UINavigationController(rootViewController: ListViewController())

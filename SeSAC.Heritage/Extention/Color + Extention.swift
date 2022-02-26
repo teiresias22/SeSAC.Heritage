@@ -6,4 +6,5 @@ extension UIColor {
     class var customYellow:UIColor? {return UIColor(named: "customYellow")}
     class var customBlack:UIColor? {return UIColor(named: "customBlack")}
     class var customWhite:UIColor? {return UIColor(named: "customWhite")}
+    class var customGray:UIColor? {return UIColor(named: "customGray")}
 }
