@@ -1,9 +1,8 @@
 import UIKit
 import MapKit
 import CoreLocation
-import CoreLocationUI
 import RealmSwift
-import SwiftUI
+import SnapKit
 
 class MapViewController: BaseViewController {
     let mainView = MapView()
@@ -35,6 +34,21 @@ class MapViewController: BaseViewController {
         mainView.userLocationButton.addTarget(self, action: #selector(myLocationClicked), for: .touchUpInside)
         mainView.filterButton.addTarget(self, action: #selector(filterButtonClicked), for: .touchUpInside)
     }
+    
+    override func addChild(_ childController: UIViewController) {
+        
+    }
+    
+    func setAddChild(){
+        let child = AnnotaionViewController()
+        addChild(child)
+        view.addSubview(child.view)
+        child.didMove(toParent: self)
+    }
+    
+    
+    
+    
     
     func setMapView(){
         mainView.mapView.delegate = self
