@@ -36,7 +36,7 @@ class MapViewController: BaseViewController {
     }
     
     override func addChild(_ childController: UIViewController) {
-        
+        setAddChild()
     }
     
     func setAddChild(){
@@ -45,10 +45,6 @@ class MapViewController: BaseViewController {
         view.addSubview(child.view)
         child.didMove(toParent: self)
     }
-    
-    
-    
-    
     
     func setMapView(){
         mainView.mapView.delegate = self
@@ -250,7 +246,7 @@ extension MapViewController: MKMapViewDelegate {
         CLGeocoder().reverseGeocodeLocation(location) { (placemarks, error) in
             if let pm: CLPlacemark = placemarks?.first {
                 let address: String = "\(pm.country ?? "") \(pm.administrativeArea ?? "") \(pm.locality ?? "") \(pm.subLocality ?? "") \(pm.name ?? "")"
-                //self.title = address.localized()
+                print("address", address)
             }
         }
         runTimeInterval = nil

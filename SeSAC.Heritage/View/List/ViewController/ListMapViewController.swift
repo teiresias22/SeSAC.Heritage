@@ -8,7 +8,6 @@
 import UIKit
 import MapKit
 import CoreLocation
-import CoreLocationUI
 import RealmSwift
 
 
