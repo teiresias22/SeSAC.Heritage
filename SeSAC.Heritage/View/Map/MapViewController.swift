@@ -18,6 +18,8 @@ class MapViewController: BaseViewController {
     var runTimeInterval: TimeInterval?
     let mTimer: Selector = #selector(Tick_TimeConsole)
     
+    var nowAddress = ""
+    
     override func loadView() {
         super.loadView()
         self.view = mainView
@@ -33,6 +35,11 @@ class MapViewController: BaseViewController {
         
         mainView.userLocationButton.addTarget(self, action: #selector(myLocationClicked), for: .touchUpInside)
         mainView.filterButton.addTarget(self, action: #selector(filterButtonClicked), for: .touchUpInside)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        print("nowAddress",nowAddress)
     }
     
     override func addChild(_ childController: UIViewController) {
@@ -246,7 +253,7 @@ extension MapViewController: MKMapViewDelegate {
         CLGeocoder().reverseGeocodeLocation(location) { (placemarks, error) in
             if let pm: CLPlacemark = placemarks?.first {
                 let address: String = "\(pm.country ?? "") \(pm.administrativeArea ?? "") \(pm.locality ?? "") \(pm.subLocality ?? "") \(pm.name ?? "")"
-                print("address", address)
+                self.nowAddress = address
             }
         }
         runTimeInterval = nil

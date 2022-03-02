@@ -57,6 +57,7 @@
 		75B40B77276C23C20046266D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 75B40B76276C23C20046266D /* GoogleService-Info.plist */; };
 		75BB0498275646FC005F4A44 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75BB0497275646FC005F4A44 /* SearchViewController.swift */; };
 		75BB049A27564706005F4A44 /* ListUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75BB049927564706005F4A44 /* ListUpViewController.swift */; };
+		75C09B8B27CE6B2F00DE71C2 /* Enum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C09B8A27CE6B2F00DE71C2 /* Enum.swift */; };
 		75C11167274FFC0200ADFA78 /* StockCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C11166274FFC0200ADFA78 /* StockCode.swift */; };
 		75C11169274FFFAA00ADFA78 /* StockCodeInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C11168274FFFAA00ADFA78 /* StockCodeInformation.swift */; };
 		75C1116B275001B300ADFA78 /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C1116A275001B300ADFA78 /* City.swift */; };
@@ -114,6 +115,7 @@
 		75B40B76276C23C20046266D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		75BB0497275646FC005F4A44 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		75BB049927564706005F4A44 /* ListUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListUpViewController.swift; sourceTree = "<group>"; };
+		75C09B8A27CE6B2F00DE71C2 /* Enum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enum.swift; sourceTree = "<group>"; };
 		75C11166274FFC0200ADFA78 /* StockCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockCode.swift; sourceTree = "<group>"; };
 		75C11168274FFFAA00ADFA78 /* StockCodeInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockCodeInformation.swift; sourceTree = "<group>"; };
 		75C1116A275001B300ADFA78 /* City.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
@@ -332,6 +334,7 @@
 				75C11168274FFFAA00ADFA78 /* StockCodeInformation.swift */,
 				75C1116A275001B300ADFA78 /* City.swift */,
 				75C1116C275001DF00ADFA78 /* CityInformation.swift */,
+				75C09B8A27CE6B2F00DE71C2 /* Enum.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -466,6 +469,7 @@
 				7528416427CA9D9A00D2F17A /* AnnotaionViewController.swift in Sources */,
 				7590985627B3811B0063E31B /* ListView.swift in Sources */,
 				753E85322747B2C9007469D2 /* Constance.swift in Sources */,
+				75C09B8B27CE6B2F00DE71C2 /* Enum.swift in Sources */,
 				7590984E27B219EC0063E31B /* TabBarViewController.swift in Sources */,
 				75FB9849274942B200A3A28C /* ListTableViewCell.swift in Sources */,
 				75AEBF9E2746395E00A5661D /* MapViewController.swift in Sources */,
