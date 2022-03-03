@@ -18,7 +18,9 @@ class MapViewController: BaseViewController {
     var runTimeInterval: TimeInterval?
     let mTimer: Selector = #selector(Tick_TimeConsole)
     
-    var nowAddress = ""
+    var vcShowed = false
+    let annotationVC = AnnotaionViewController()
+    
     
     override func loadView() {
         super.loadView()
@@ -35,15 +37,6 @@ class MapViewController: BaseViewController {
         
         mainView.userLocationButton.addTarget(self, action: #selector(myLocationClicked), for: .touchUpInside)
         mainView.filterButton.addTarget(self, action: #selector(filterButtonClicked), for: .touchUpInside)
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        print("nowAddress",nowAddress)
-    }
-    
-    override func addChild(_ childController: UIViewController) {
-        setAddChild()
     }
     
     func setAddChild(){
@@ -206,8 +199,47 @@ extension MapViewController: CLLocationManagerDelegate{
         
         CLGeocoder().reverseGeocodeLocation(location, completionHandler: { (placemarks, error) -> Void in
             if let pm: CLPlacemark = placemarks?.first {
-                let address: String = "\(pm.locality ?? "") \(pm.name ?? "")"
-                //print("locationManager", address)
+                let address: String = "\(pm.administrativeArea ?? "")"
+                
+                switch address {
+                case CityCase.seoul.rawValue:
+                    self.viewModel.cityCode.value = "11"
+                case CityCase.busan.rawValue:
+                    self.viewModel.cityCode.value = "21"
+                case CityCase.daegu.rawValue:
+                    self.viewModel.cityCode.value = "22"
+                case CityCase.incheon.rawValue:
+                    self.viewModel.cityCode.value = "23"
+                case CityCase.gwangju.rawValue:
+                    self.viewModel.cityCode.value = "24"
+                case CityCase.daejeon.rawValue:
+                    self.viewModel.cityCode.value = "25"
+                case CityCase.ulsan.rawValue:
+                    self.viewModel.cityCode.value = "26"
+                case CityCase.sejong.rawValue:
+                    self.viewModel.cityCode.value = "45"
+                case CityCase.gyeonggi.rawValue:
+                    self.viewModel.cityCode.value = "31"
+                case CityCase.gangwon.rawValue:
+                    self.viewModel.cityCode.value = "32"
+                case CityCase.chungbuk.rawValue:
+                    self.viewModel.cityCode.value = "33"
+                case CityCase.chungnam.rawValue:
+                    self.viewModel.cityCode.value = "34"
+                case CityCase.jeonbuk.rawValue:
+                    self.viewModel.cityCode.value = "35"
+                case CityCase.jeonnam.rawValue:
+                    self.viewModel.cityCode.value = "36"
+                case CityCase.gyeongbuk.rawValue:
+                    self.viewModel.cityCode.value = "37"
+                case CityCase.gyeongnam.rawValue:
+                    self.viewModel.cityCode.value = "38"
+                case CityCase.jeju.rawValue:
+                    self.viewModel.cityCode.value = "50"
+                default:
+                    self.viewModel.cityCode.value = "ZZ"
+                }
+                self.filerAnnotations()
             }
         })
         locationManager.stopUpdatingLocation()
@@ -253,14 +285,18 @@ extension MapViewController: MKMapViewDelegate {
         CLGeocoder().reverseGeocodeLocation(location) { (placemarks, error) in
             if let pm: CLPlacemark = placemarks?.first {
                 let address: String = "\(pm.country ?? "") \(pm.administrativeArea ?? "") \(pm.locality ?? "") \(pm.subLocality ?? "") \(pm.name ?? "")"
-                self.nowAddress = address
+                //print("address", address)
             }
         }
         runTimeInterval = nil
     }
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        print(#function)
+        guard !vcShowed else {
+            
+            vcShowed = false
+            return
+        }
     }
     
     func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
