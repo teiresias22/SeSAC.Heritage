@@ -199,45 +199,51 @@ extension MapViewController: CLLocationManagerDelegate{
         
         CLGeocoder().reverseGeocodeLocation(location, completionHandler: { (placemarks, error) -> Void in
             if let pm: CLPlacemark = placemarks?.first {
-                let address: String = "\(pm.administrativeArea ?? "")"
+                let country: String = "\(pm.country ?? "")"
+                let cityCode: String = "\(pm.administrativeArea ?? "")"
                 
-                switch address {
-                case CityCase.seoul.rawValue:
+                //대한민국에서 접속하면 시도구분을하고, 해외에서 접속했다면 서울만 띄워줌
+                if country == "대한민국" {
+                    switch cityCode {
+                    case CityCase.seoul.rawValue:
+                        self.viewModel.cityCode.value = "11"
+                    case CityCase.busan.rawValue:
+                        self.viewModel.cityCode.value = "21"
+                    case CityCase.daegu.rawValue:
+                        self.viewModel.cityCode.value = "22"
+                    case CityCase.incheon.rawValue:
+                        self.viewModel.cityCode.value = "23"
+                    case CityCase.gwangju.rawValue:
+                        self.viewModel.cityCode.value = "24"
+                    case CityCase.daejeon.rawValue:
+                        self.viewModel.cityCode.value = "25"
+                    case CityCase.ulsan.rawValue:
+                        self.viewModel.cityCode.value = "26"
+                    case CityCase.sejong.rawValue:
+                        self.viewModel.cityCode.value = "45"
+                    case CityCase.gyeonggi.rawValue:
+                        self.viewModel.cityCode.value = "31"
+                    case CityCase.gangwon.rawValue:
+                        self.viewModel.cityCode.value = "32"
+                    case CityCase.chungbuk.rawValue:
+                        self.viewModel.cityCode.value = "33"
+                    case CityCase.chungnam.rawValue:
+                        self.viewModel.cityCode.value = "34"
+                    case CityCase.jeonbuk.rawValue:
+                        self.viewModel.cityCode.value = "35"
+                    case CityCase.jeonnam.rawValue:
+                        self.viewModel.cityCode.value = "36"
+                    case CityCase.gyeongbuk.rawValue:
+                        self.viewModel.cityCode.value = "37"
+                    case CityCase.gyeongnam.rawValue:
+                        self.viewModel.cityCode.value = "38"
+                    case CityCase.jeju.rawValue:
+                        self.viewModel.cityCode.value = "50"
+                    default:
+                        self.viewModel.cityCode.value = "ZZ"
+                    }
+                } else {
                     self.viewModel.cityCode.value = "11"
-                case CityCase.busan.rawValue:
-                    self.viewModel.cityCode.value = "21"
-                case CityCase.daegu.rawValue:
-                    self.viewModel.cityCode.value = "22"
-                case CityCase.incheon.rawValue:
-                    self.viewModel.cityCode.value = "23"
-                case CityCase.gwangju.rawValue:
-                    self.viewModel.cityCode.value = "24"
-                case CityCase.daejeon.rawValue:
-                    self.viewModel.cityCode.value = "25"
-                case CityCase.ulsan.rawValue:
-                    self.viewModel.cityCode.value = "26"
-                case CityCase.sejong.rawValue:
-                    self.viewModel.cityCode.value = "45"
-                case CityCase.gyeonggi.rawValue:
-                    self.viewModel.cityCode.value = "31"
-                case CityCase.gangwon.rawValue:
-                    self.viewModel.cityCode.value = "32"
-                case CityCase.chungbuk.rawValue:
-                    self.viewModel.cityCode.value = "33"
-                case CityCase.chungnam.rawValue:
-                    self.viewModel.cityCode.value = "34"
-                case CityCase.jeonbuk.rawValue:
-                    self.viewModel.cityCode.value = "35"
-                case CityCase.jeonnam.rawValue:
-                    self.viewModel.cityCode.value = "36"
-                case CityCase.gyeongbuk.rawValue:
-                    self.viewModel.cityCode.value = "37"
-                case CityCase.gyeongnam.rawValue:
-                    self.viewModel.cityCode.value = "38"
-                case CityCase.jeju.rawValue:
-                    self.viewModel.cityCode.value = "50"
-                default:
-                    self.viewModel.cityCode.value = "ZZ"
                 }
                 self.filerAnnotations()
             }
@@ -292,14 +298,15 @@ extension MapViewController: MKMapViewDelegate {
     }
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        //addChild 활성화
         guard !vcShowed else {
-            
             vcShowed = false
             return
         }
     }
     
     func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
+        //addChild 비활성화
         print(#function)
     }
 }
