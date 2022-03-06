@@ -299,10 +299,7 @@ extension MapViewController: MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         //addChild 활성화
-        guard !vcShowed else {
-            vcShowed = false
-            return
-        }
+        print(#function)
     }
     
     func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
@@ -330,20 +327,16 @@ extension MapViewController : UIPickerViewDelegate, UIPickerViewDataSource {
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         if component == 0 {
             return "\(cityInformation.city[row].city)"
-        } else if component == 1 {
-            return "\(stockCodeInformation.stockCode[row].text)"
         } else {
-            return "이 메세지를 봤다면 개발자에게 알려주세요!"
+            return "\(stockCodeInformation.stockCode[row].text)"
         }
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if component == 0 {
             viewModel.cityCode.value = cityInformation.city[row].code
-        } else if component == 1 {
-            viewModel.stockCode.value = stockCodeInformation.stockCode[row].code
         } else {
-            print("이거 보면 망한거임")
+            viewModel.stockCode.value = stockCodeInformation.stockCode[row].code
         }
         filerAnnotations()
     }
