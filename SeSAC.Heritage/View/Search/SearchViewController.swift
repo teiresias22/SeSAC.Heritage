@@ -64,7 +64,7 @@ class SearchViewController: BaseViewController {
     }
 }
 
-extension SearchViewController: UISearchResultsUpdating, UISearchBarDelegate {
+extension SearchViewController: UISearchResultsUpdating{
     func updateSearchResults(for searchController: UISearchController) {
         let predicate = NSPredicate(format: "ccbaMnm1 CONTAINS[c] %@ OR ccbaMnm2 CONTAINS[c]  %@",searchController.searchBar.text!, searchController.searchBar.text!)
         searchHeritage = localRealm.objects(Heritage_List.self).filter(predicate)

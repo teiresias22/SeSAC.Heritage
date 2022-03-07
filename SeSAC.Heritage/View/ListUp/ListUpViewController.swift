@@ -15,8 +15,6 @@ class ListUpViewController: BaseViewController {
     let localRealm = try! Realm()
     var tasks: Results<Heritage_List>!
     
-    var segmentValue: Bool = true
-    
     override func loadView() {
         super.loadView()
         self.view = mainView
@@ -48,10 +46,10 @@ class ListUpViewController: BaseViewController {
     
     @objc func segmentControlClicked(_ target: UISegmentedControl){
         switch target.selectedSegmentIndex {
-        case 0 : segmentValue = true
+        case 0:
             tasks = localRealm.objects(Heritage_List.self).filter("visited=true")
             mainView.tableView.reloadData()
-        default : segmentValue = false
+        default:
             tasks = localRealm.objects(Heritage_List.self).filter("wantvisit=true")
             mainView.tableView.reloadData()
         }
