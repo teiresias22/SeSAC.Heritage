@@ -55,6 +55,40 @@ class MapView: UIView, ViewRepresentable {
         return textfield
     }()
     
+    let annotationView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .customWhite
+        
+        return view
+    }()
+    
+    let annotationViewTitle: UILabel = {
+        let label = UILabel()
+        label.font = .MapoFlowerIsland16
+        label.textColor = .customBlack
+        
+        return label
+    }()
+    
+    let annotationViewSubTitlte: UILabel = {
+        let label = UILabel()
+        label.font = .MapoFlowerIsland14
+        label.textColor = .customBlack
+        
+        return label
+    }()
+    
+    let annotationViewButton: UIButton = {
+        let button = UIButton()
+        button.backgroundColor = .customBlue
+        button.setTitleColor(.customBlack, for: .normal)
+        button.setTitle("상세보기", for: .normal)
+        button.titleLabel?.font = .MapoFlowerIsland14
+        button.layer.cornerRadius = 8
+        
+        return button
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()

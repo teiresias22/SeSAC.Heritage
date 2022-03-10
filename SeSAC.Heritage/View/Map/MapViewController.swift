@@ -18,10 +18,6 @@ class MapViewController: BaseViewController {
     var runTimeInterval: TimeInterval?
     let mTimer: Selector = #selector(Tick_TimeConsole)
     
-    var vcShowed = false
-    let annotationVC = AnnotaionViewController()
-    
-    
     override func loadView() {
         super.loadView()
         self.view = mainView
@@ -37,13 +33,6 @@ class MapViewController: BaseViewController {
         
         mainView.userLocationButton.addTarget(self, action: #selector(myLocationClicked), for: .touchUpInside)
         mainView.filterButton.addTarget(self, action: #selector(filterButtonClicked), for: .touchUpInside)
-    }
-    
-    func setAddChild(){
-        let child = AnnotaionViewController()
-        addChild(child)
-        view.addSubview(child.view)
-        child.didMove(toParent: self)
     }
     
     func setMapView(){
@@ -298,14 +287,13 @@ extension MapViewController: MKMapViewDelegate {
     }
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        //addChild 활성화
         print(#function)
     }
     
     func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
-        //addChild 비활성화
         print(#function)
     }
+    
 }
 
 // MARK: PickerViewSetting

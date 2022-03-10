@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7528416227CA9CBC00D2F17A /* AnnotaionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7528416127CA9CBC00D2F17A /* AnnotaionView.swift */; };
-		7528416427CA9D9A00D2F17A /* AnnotaionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7528416327CA9D9A00D2F17A /* AnnotaionViewController.swift */; };
 		752A5E562750E3A20059114B /* SwiftyXMLParser in Frameworks */ = {isa = PBXBuildFile; productRef = 752A5E552750E3A20059114B /* SwiftyXMLParser */; };
 		7532D4B3276A4810000FB585 /* ListMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7532D4B2276A4810000FB585 /* ListMapViewController.swift */; };
 		753E85282747AF85007469D2 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 753E852A2747AF85007469D2 /* Localizable.strings */; };
@@ -68,8 +66,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		7528416127CA9CBC00D2F17A /* AnnotaionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotaionView.swift; sourceTree = "<group>"; };
-		7528416327CA9D9A00D2F17A /* AnnotaionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotaionViewController.swift; sourceTree = "<group>"; };
 		7532D4B2276A4810000FB585 /* ListMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListMapViewController.swift; sourceTree = "<group>"; };
 		753E85292747AF85007469D2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		753E852B2747AF99007469D2 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -206,8 +202,6 @@
 			children = (
 				7590986C27B624EC0063E31B /* MapView.swift */,
 				75AEBF9D2746395E00A5661D /* MapViewController.swift */,
-				7528416127CA9CBC00D2F17A /* AnnotaionView.swift */,
-				7528416327CA9D9A00D2F17A /* AnnotaionViewController.swift */,
 			);
 			path = Map;
 			sourceTree = "<group>";
@@ -466,7 +460,6 @@
 				75AEBFBD2746D91900A5661D /* List.swift in Sources */,
 				75C11167274FFC0200ADFA78 /* StockCode.swift in Sources */,
 				75AEBF5E274631E900A5661D /* AppDelegate.swift in Sources */,
-				7528416427CA9D9A00D2F17A /* AnnotaionViewController.swift in Sources */,
 				7590985627B3811B0063E31B /* ListView.swift in Sources */,
 				753E85322747B2C9007469D2 /* Constance.swift in Sources */,
 				75C09B8B27CE6B2F00DE71C2 /* Enum.swift in Sources */,
@@ -480,7 +473,6 @@
 				7590985D27B3A2190063E31B /* ListViewCell.swift in Sources */,
 				7590986D27B624EC0063E31B /* MapView.swift in Sources */,
 				75649718274CAD14000AD0CB /* HeritageListModel.swift in Sources */,
-				7528416227CA9CBC00D2F17A /* AnnotaionView.swift in Sources */,
 				7590986327B516400063E31B /* FirstView.swift in Sources */,
 				7532D4B3276A4810000FB585 /* ListMapViewController.swift in Sources */,
 				75E1110A27645CFE00BA2C8D /* Label + Extention.swift in Sources */,
