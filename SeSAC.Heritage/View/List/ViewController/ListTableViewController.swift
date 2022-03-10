@@ -1,17 +1,8 @@
 import UIKit
-import RealmSwift
 
 class ListTableViewController: BaseViewController {
     let mainView = ListTableView()
     var viewModel: ListViewModel?
-    
-    let localRealm = try! Realm()
-    var tasks: Results<Heritage_List>!
-
-    var listInformation: String = ""
-    var stockCodeData: StockCode?
-    var cityData: City?
-    var category: String = ""
     
     override func loadView() {
         super.loadView()
@@ -20,7 +11,7 @@ class ListTableViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if listInformation == "StockCode" {
+        if viewModel?.target == "StockCode" {
             self.title = "종류별 문화유산".localized()
         } else {
             self.title = "지역별 문화유산".localized()
@@ -41,39 +32,40 @@ class ListTableViewController: BaseViewController {
 extension ListTableViewController: UITableViewDelegate, UITableViewDataSource {
         
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if stockCodeData != nil {
-            if stockCodeData!.code == 0 {
-                tasks = localRealm.objects(Heritage_List.self)
+        
+        if viewModel?.target == "StockCode" {
+            if viewModel?.stockCodeData!.code == 0 {
+                viewModel!.tasks = viewModel!.localRealm.objects(Heritage_List.self)
             } else {
-                tasks = localRealm.objects(Heritage_List.self).filter("ccbaKdcd='\(stockCodeData!.code)'")
+                viewModel!.tasks = viewModel!.localRealm.objects(Heritage_List.self).filter("ccbaKdcd='\(viewModel!.stockCodeData!.code)'")
             }
-        }else if cityData != nil {
-            if cityData!.code == "00" {
-                tasks = localRealm.objects(Heritage_List.self)
+        } else if viewModel?.cityData != nil {
+            if viewModel?.cityData!.code == "00" {
+                viewModel!.tasks = viewModel!.localRealm.objects(Heritage_List.self)
             } else {
-                tasks = localRealm.objects(Heritage_List.self).filter("ccbaCtcd='\(cityData!.code)'")
+                viewModel!.tasks = viewModel!.localRealm.objects(Heritage_List.self).filter("ccbaCtcd='\(viewModel!.cityData!.code)'")
             }
         }
-        return tasks.count
+        return viewModel!.tasks.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ListTableViewCell.identifier, for: indexPath) as? ListTableViewCell else { return UITableViewCell() }
         
-        if stockCodeData != nil {
-            if stockCodeData!.code == 0 {
-                tasks = localRealm.objects(Heritage_List.self)
+        if viewModel?.target == "StockCode" {
+            if viewModel?.stockCodeData!.code == 0 {
+                viewModel!.tasks = viewModel!.localRealm.objects(Heritage_List.self)
             } else {
-                tasks = localRealm.objects(Heritage_List.self).filter("ccbaKdcd='\(stockCodeData!.code)'")
+                viewModel!.tasks = viewModel!.localRealm.objects(Heritage_List.self).filter("ccbaKdcd='\(viewModel!.stockCodeData!.code)'")
             }
-        } else if cityData != nil {
-            if cityData!.code == "00" {
-                tasks = localRealm.objects(Heritage_List.self)
+        } else if viewModel?.cityData != nil {
+            if viewModel?.cityData!.code == "00" {
+                viewModel!.tasks = viewModel!.localRealm.objects(Heritage_List.self)
             } else {
-                tasks = localRealm.objects(Heritage_List.self).filter("ccbaCtcd='\(cityData!.code)'")
+                viewModel!.tasks = viewModel!.localRealm.objects(Heritage_List.self).filter("ccbaCtcd='\(viewModel!.cityData!.code)'")
             }
         }
-        let row = tasks[indexPath.row]
+        let row = viewModel!.tasks[indexPath.row]
         cell.selectionStyle = .none
         
         cell.titleLabel.text = row.ccbaMnm1.localized()
@@ -93,8 +85,13 @@ extension ListTableViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let wanavisit = UIContextualAction(style: .destructive, title: "WanaVist") { (UIContextualAction, UIView, success:@escaping (Bool) -> Void) in
-            let taskToUpdate = self.tasks[indexPath.row]
-            try! self.localRealm.write {
+            let taskToUpdate = self.viewModel!.tasks[indexPath.row]
+            try! self.viewModel!.localRealm.write {
+                if taskToUpdate.wantvisit {
+                    self.toastMessage(message: "즐겨찾기 목록에서 제거했습니다.")
+                } else {
+                    self.toastMessage(message: "즐겨찾기 목록에 추가했습니다.")
+                }
                 taskToUpdate.wantvisit = !taskToUpdate.wantvisit
             }
             tableView.reloadData()
@@ -106,8 +103,13 @@ extension ListTableViewController: UITableViewDelegate, UITableViewDataSource {
         wanavisit.backgroundColor = .customBlue
         
         let visit = UIContextualAction(style: .destructive, title: "Visited") { (UIContextualAction, UIView, success:@escaping (Bool) -> Void) in
-            let taskToUpdate = self.tasks[indexPath.row]
-            try! self.localRealm.write {
+            let taskToUpdate = self.viewModel!.tasks[indexPath.row]
+            try! self.viewModel!.localRealm.write {
+                if taskToUpdate.visited {
+                    self.toastMessage(message: "방문 목록에서 제거했습니다.")
+                } else {
+                    self.toastMessage(message: "방문 목록에 추가했습니다.")
+                }
                 taskToUpdate.visited = !taskToUpdate.visited
             }
             tableView.reloadData()
@@ -121,9 +123,8 @@ extension ListTableViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        viewModel!.items = viewModel!.tasks[indexPath.row]
         let vc = ListDetailViewController()
-        let row = tasks[indexPath.row]        
-        vc.items = row
         vc.viewModel = viewModel
         
         self.navigationController?.pushViewController(vc, animated: true)

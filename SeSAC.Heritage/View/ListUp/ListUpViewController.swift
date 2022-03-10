@@ -12,9 +12,6 @@ class ListUpViewController: BaseViewController {
     let mainView = ListUpView()
     var viewModel = ListViewModel()
     
-    let localRealm = try! Realm()
-    var tasks: Results<Heritage_List>!
-    
     override func loadView() {
         super.loadView()
         self.view = mainView
@@ -26,7 +23,7 @@ class ListUpViewController: BaseViewController {
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "MapoFlowerIsland", size: 18)!]
         
         setTableView()
-        tasks = localRealm.objects(Heritage_List.self).filter("visited=true")
+        viewModel.tasks = viewModel.localRealm.objects(Heritage_List.self).filter("visited=true")
         mainView.segmentControl.selectedSegmentIndex = 0
         
         mainView.segmentControl.addTarget(self, action: #selector(segmentControlClicked(_:)), for: .valueChanged)
@@ -47,10 +44,10 @@ class ListUpViewController: BaseViewController {
     @objc func segmentControlClicked(_ target: UISegmentedControl){
         switch target.selectedSegmentIndex {
         case 0:
-            tasks = localRealm.objects(Heritage_List.self).filter("visited=true")
+            viewModel.tasks = viewModel.localRealm.objects(Heritage_List.self).filter("visited=true")
             mainView.tableView.reloadData()
         default:
-            tasks = localRealm.objects(Heritage_List.self).filter("wantvisit=true")
+            viewModel.tasks = viewModel.localRealm.objects(Heritage_List.self).filter("wantvisit=true")
             mainView.tableView.reloadData()
         }
     }
@@ -59,22 +56,22 @@ class ListUpViewController: BaseViewController {
 extension ListUpViewController: UITableViewDelegate, UITableViewDataSource {
         
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if tasks.count == 0 {
+        if viewModel.tasks.count == 0 {
             return 1
         } else {
-            return tasks.count
+            return viewModel.tasks.count
         }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ListTableViewCell.identifier, for: indexPath) as? ListTableViewCell else { return UITableViewCell() }
         cell.selectionStyle = .none
-        if tasks.count == 0 {
+        if viewModel.tasks.count == 0 {
             cell.titleLabel.text = "선택된 문화유산 목록이 없습니다."
             cell.cityLabel.text = ""
             cell.locationLabel.text = ""
         } else {
-            let row = self.tasks[indexPath.row]
+            let row = self.viewModel.tasks[indexPath.row]
             cell.titleLabel.text = row.ccbaMnm1.localized()
             cell.cityLabel.text = row.ccbaCtcdNm.localized()
             cell.locationLabel.text = row.ccsiName.localized()
@@ -87,14 +84,14 @@ extension ListUpViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if tasks.count == 0 {
+        if viewModel.tasks.count == 0 {
             let vc = TabBarViewController()
             vc.modalPresentationStyle = .fullScreen
             self.present(vc, animated: true, completion: nil)
         } else {
             let vc = ListDetailViewController()
-            let row = self.tasks[indexPath.row]
-            vc.items = row
+            let row = self.viewModel.tasks[indexPath.row]
+            viewModel.items = row
             vc.viewModel = viewModel
             
             self.navigationController?.pushViewController(vc, animated: true)
@@ -107,8 +104,8 @@ extension ListUpViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let wanavisit = UIContextualAction(style: .destructive, title: "WanaVist") { (UIContextualAction, UIView, success:@escaping (Bool) -> Void) in
-            let taskToUpdate = self.tasks[indexPath.row]
-            try! self.localRealm.write {
+            let taskToUpdate = self.viewModel.tasks[indexPath.row]
+            try! self.viewModel.localRealm.write {
                 taskToUpdate.wantvisit = !taskToUpdate.wantvisit
             }
             tableView.reloadData()
@@ -120,8 +117,8 @@ extension ListUpViewController: UITableViewDelegate, UITableViewDataSource {
         wanavisit.backgroundColor = .customBlue
         
         let visit = UIContextualAction(style: .destructive, title: "Visited") { (UIContextualAction, UIView, success:@escaping (Bool) -> Void) in
-            let taskToUpdate = self.tasks[indexPath.row]
-            try! self.localRealm.write {
+            let taskToUpdate = self.viewModel.tasks[indexPath.row]
+            try! self.viewModel.localRealm.write {
                 taskToUpdate.visited = !taskToUpdate.visited
             }
             tableView.reloadData()

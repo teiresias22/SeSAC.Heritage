@@ -3,15 +3,11 @@
 // 지도 좌표가 표시되지 않는다면 맵버튼 비활성화 & TostMessage 띄우기
 
 import UIKit
-import RealmSwift
 import Kingfisher
 
 class ListDetailViewController: BaseViewController {
     let mainView = ListDetailView()
     var viewModel: ListViewModel?
-    
-    let localRealm = try! Realm()
-    var items = Heritage_List()
     
     var elementName = ""
     var item = [[String:String]]()
@@ -21,7 +17,6 @@ class ListDetailViewController: BaseViewController {
     override func loadView() {
         super.loadView()
         self.view = mainView
-        checkButtonActive()
     }
     
     override func viewDidLoad() {
@@ -31,6 +26,7 @@ class ListDetailViewController: BaseViewController {
         
         fetcHeritageData()
         setTextView()
+        checkButtonActive()
         
         mainView.visitedButton.addTarget(self, action: #selector(visitedButtonClicked), for: .touchUpInside)
         mainView.wannaVistButton.addTarget(self, action: #selector(wannaVisitButtonClicked), for: .touchUpInside)
@@ -45,7 +41,7 @@ class ListDetailViewController: BaseViewController {
     
     func fetcHeritageData() {
         //필수 파라미터 ccbaKdcd: 종목코드, ccbaAsno: 지정번호, ccbaCtcd: 시도코드
-        let url = "\(Endpoint.Heritage_Detail)ccbaKdcd=\(items.ccbaKdcd)&ccbaAsno=\(items.ccbaAsno)&ccbaCtcd=\(items.ccbaCtcd)"
+        let url = "\(Endpoint.Heritage_Detail)ccbaKdcd=\(viewModel!.items.ccbaKdcd)&ccbaAsno=\(viewModel!.items.ccbaAsno)&ccbaCtcd=\(viewModel!.items.ccbaCtcd)"
         
         let parser = XMLParser(contentsOf: URL(string: url)!)
         parser?.delegate = self
@@ -53,50 +49,49 @@ class ListDetailViewController: BaseViewController {
     }
     
     func checkButtonActive(){
-        if items.visited {
+        if viewModel!.items.visited {
             mainView.visitedButton.tintColor = .customBlue
         }
         
-        if items.wantvisit {
+        if viewModel!.items.wantvisit {
             mainView.wannaVistButton.tintColor = .customYellow
         }
     }
     
     @objc func visitedButtonClicked() {
-        try! localRealm.write{
-            items.visited = !items.visited
-        }
-        
-        if items.visited {
-            mainView.visitedButton.tintColor = .customBlue
-            toastMessage(message: "방문 목록에 추가했습니다.")
-        } else {
-            mainView.visitedButton.tintColor = .customBlack
-            toastMessage(message: "방문 목록에서 제거했습니다.")
+        try! viewModel!.localRealm.write{
+            if viewModel!.items.visited {
+                viewModel!.items.visited = false
+                mainView.visitedButton.tintColor = .customBlack
+                toastMessage(message: "방문 목록에서 제거했습니다.")
+            } else {
+                viewModel!.items.visited = true
+                mainView.visitedButton.tintColor = .customBlue
+                toastMessage(message: "방문 목록에 추가했습니다.")
+            }
         }
     }
     
     @objc func wannaVisitButtonClicked() {
-        try! localRealm.write{
-            items.wantvisit = !items.wantvisit
-        }
-        
-        if items.wantvisit {
-            mainView.wannaVistButton.tintColor = .customYellow
-            toastMessage(message: "즐겨찾기 목록에 추가했습니다.")
-        } else {
-            mainView.wannaVistButton.tintColor = .customBlack
-            toastMessage(message: "즐겨찾기 목록에서 제거했습니다.")
+        try! viewModel!.localRealm.write{
+            if viewModel!.items.wantvisit {
+                viewModel!.items.wantvisit = false
+                mainView.wannaVistButton.tintColor = .customBlack
+                toastMessage(message: "즐겨찾기 목록에서 제거했습니다.")
+            } else {
+                viewModel!.items.wantvisit = true
+                mainView.wannaVistButton.tintColor = .customYellow
+                toastMessage(message: "즐겨찾기 목록에 추가했습니다.")
+            }
         }
     }
     
     @objc func mapButtonClicked() {
-        if items.latitude == "0" {
+        if viewModel!.items.latitude == "0" {
             toastMessage(message: "해당 문화유산의 위치 정보를 지원하지 않습니다.")
         } else {
             let vc = ListMapViewController()
             vc.viewModel = viewModel
-            vc.items = items
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }
@@ -132,7 +127,7 @@ extension ListDetailViewController: XMLParserDelegate {
         let row = item[0]
         
         mainView.heritageTitleLabel.text = row["ccbaMnm1"]
-        mainView.heritageTypeLabel.text = "\(row["ccmaName"]!) 제\(items.sn)호"
+        mainView.heritageTypeLabel.text = "\(row["ccmaName"]!) 제\(viewModel!.items.sn)호"
         mainView.heritageCityLabel.text = "\(row["ccbaCtcdNm"]!) \(row["ccsiName"]!)"
         
         let url = URL(string: row["imageUrl"] ?? "")

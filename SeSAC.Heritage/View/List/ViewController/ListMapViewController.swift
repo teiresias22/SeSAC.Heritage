@@ -8,19 +8,13 @@
 import UIKit
 import MapKit
 import CoreLocation
-import RealmSwift
 
 
 class ListMapViewController: BaseViewController {
     let mainView = ListMapView()
     var viewModel: ListViewModel?
     
-    let localRealm = try! Realm()
-    var tasks: Results<Heritage_List>!
-    
     var locationManager = CLLocationManager()
-    
-    var items = Heritage_List()
     
     override func loadView() {
         super.loadView()
@@ -29,7 +23,7 @@ class ListMapViewController: BaseViewController {
         
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = items.ccbaMnm1.localized()
+        self.title = viewModel!.items.ccbaMnm1.localized()
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "MapoFlowerIsland", size: 18)!]
         
         //위치정보 사용권한 요청 - 실행중일때만 권한을 사용
@@ -56,14 +50,14 @@ class ListMapViewController: BaseViewController {
     
     //권한 비허용시 기본화면
     func defaultLocation() {
-        let latitude = Double(items.latitude)!
-        let longitude = Double(items.longitude)!
+        let latitude = Double(viewModel!.items.latitude)!
+        let longitude = Double(viewModel!.items.longitude)!
         var location = CLLocationCoordinate2D()
         let annotation = MKPointAnnotation()
         let span = MKCoordinateSpan(latitudeDelta: 0.03, longitudeDelta: 0.03)
         
         location = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-        annotation.title = items.ccbaMnm1.localized()
+        annotation.title = viewModel!.items.ccbaMnm1.localized()
         
         let region = MKCoordinateRegion(center: location, span: span)
         

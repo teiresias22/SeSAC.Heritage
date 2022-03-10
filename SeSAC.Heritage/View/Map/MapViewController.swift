@@ -1,20 +1,13 @@
 import UIKit
 import MapKit
 import CoreLocation
-import RealmSwift
 import SnapKit
 
 class MapViewController: BaseViewController {
     let mainView = MapView()
     var viewModel = ListViewModel()
     
-    let localRealm = try! Realm()
-    var tasks: Results<Heritage_List>!
     var locationManager = CLLocationManager()
-        
-    let stockCodeInformation = StockCodeInformation()
-    let cityInformation = CityInformation()
-    
     var runTimeInterval: TimeInterval?
     let mTimer: Selector = #selector(Tick_TimeConsole)
     
@@ -90,18 +83,18 @@ class MapViewController: BaseViewController {
     func filerAnnotations(){
         //MapPin Filter
         if viewModel.cityCode.value != "00" && viewModel.stockCode.value != 0 {
-            let firstTesk =  localRealm.objects(Heritage_List.self).filter("ccbaKdcd='\(viewModel.stockCode.value)'")
-            tasks = firstTesk.filter("ccbaCtcd='\(viewModel.cityCode.value)'")
+            let firstTesk =  viewModel.localRealm.objects(Heritage_List.self).filter("ccbaKdcd='\(viewModel.stockCode.value)'")
+            viewModel.tasks = firstTesk.filter("ccbaCtcd='\(viewModel.cityCode.value)'")
         } else if viewModel.cityCode.value == "00" && viewModel.stockCode.value != 0 {
-            tasks = localRealm.objects(Heritage_List.self).filter("ccbaKdcd='\(viewModel.stockCode.value)'")
+            viewModel.tasks = viewModel.localRealm.objects(Heritage_List.self).filter("ccbaKdcd='\(viewModel.stockCode.value)'")
         } else if viewModel.cityCode.value != "00" && viewModel.stockCode.value == 0 {
-            tasks = localRealm.objects(Heritage_List.self).filter("ccbaCtcd='\(viewModel.cityCode.value)'")
+            viewModel.tasks = viewModel.localRealm.objects(Heritage_List.self).filter("ccbaCtcd='\(viewModel.cityCode.value)'")
         }
         
         let annotiations = mainView.mapView.annotations
         mainView.mapView.removeAnnotations(annotiations)
         
-        for location in tasks {
+        for location in viewModel.tasks {
             let heritageLatitude = Double(location.latitude)!
             let heritageLongitude = Double(location.longitude)!
             
@@ -304,9 +297,9 @@ extension MapViewController : UIPickerViewDelegate, UIPickerViewDataSource {
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         if component == 0 {
-            return cityInformation.city.count
+            return viewModel.cityInformation.city.count
         } else if component == 1 {
-            return stockCodeInformation.stockCode.count
+            return viewModel.stockCodeInformation.stockCode.count
         } else {
             return 1
         }
@@ -314,17 +307,17 @@ extension MapViewController : UIPickerViewDelegate, UIPickerViewDataSource {
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         if component == 0 {
-            return "\(cityInformation.city[row].city)"
+            return "\(viewModel.cityInformation.city[row].city)"
         } else {
-            return "\(stockCodeInformation.stockCode[row].text)"
+            return "\(viewModel.stockCodeInformation.stockCode[row].text)"
         }
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if component == 0 {
-            viewModel.cityCode.value = cityInformation.city[row].code
+            viewModel.cityCode.value = viewModel.cityInformation.city[row].code
         } else {
-            viewModel.stockCode.value = stockCodeInformation.stockCode[row].code
+            viewModel.stockCode.value = viewModel.stockCodeInformation.stockCode[row].code
         }
         filerAnnotations()
     }

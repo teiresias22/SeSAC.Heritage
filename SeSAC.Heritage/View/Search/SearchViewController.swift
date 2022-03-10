@@ -12,9 +12,6 @@ class SearchViewController: BaseViewController {
     let mainView = SearchView()
     var viewModel = ListViewModel()
     
-    let localRealm = try! Realm()
-    
-    var tasks: Results<Heritage_List>!
     var searchHeritage: Results<Heritage_List>!{
         didSet {
             mainView.searchTableView.reloadData()
@@ -39,10 +36,7 @@ class SearchViewController: BaseViewController {
         mainView.searchTableView.register(ListTableViewCell.self, forCellReuseIdentifier: ListTableViewCell.identifier)
         mainView.searchTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         
-        tasks = localRealm.objects(Heritage_List.self)
-        
         setSearchBar()
-        // Do any additional setup after loading the view.
     }
     
     func setSearchBar() {
@@ -67,7 +61,7 @@ class SearchViewController: BaseViewController {
 extension SearchViewController: UISearchResultsUpdating{
     func updateSearchResults(for searchController: UISearchController) {
         let predicate = NSPredicate(format: "ccbaMnm1 CONTAINS[c] %@ OR ccbaMnm2 CONTAINS[c]  %@",searchController.searchBar.text!, searchController.searchBar.text!)
-        searchHeritage = localRealm.objects(Heritage_List.self).filter(predicate)
+        searchHeritage = viewModel.localRealm.objects(Heritage_List.self).filter(predicate)
     }
 }
 
@@ -98,9 +92,8 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        viewModel.items = self.searchHeritage[indexPath.row]
         let vc = ListDetailViewController()
-        let row = self.searchHeritage[indexPath.row]
-        vc.items = row
         vc.viewModel = viewModel
         
         self.navigationController?.pushViewController(vc, animated: true)
@@ -112,8 +105,13 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let wanavisit = UIContextualAction(style: .destructive, title: "WanaVist") { (UIContextualAction, UIView, success:@escaping (Bool) -> Void) in
-            let taskToUpdate = self.tasks[indexPath.row]
-            try! self.localRealm.write {
+            let taskToUpdate = self.searchHeritage[indexPath.row]
+            try! self.viewModel.localRealm.write {
+                if taskToUpdate.wantvisit {
+                    self.toastMessage(message: "즐겨찾기 목록에서 제거했습니다.")
+                } else {
+                    self.toastMessage(message: "즐겨찾기 목록에 추가했습니다.")
+                }
                 taskToUpdate.wantvisit = !taskToUpdate.wantvisit
             }
             tableView.reloadData()
@@ -125,8 +123,13 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         wanavisit.backgroundColor = .customBlue
         
         let visit = UIContextualAction(style: .destructive, title: "Visited") { (UIContextualAction, UIView, success:@escaping (Bool) -> Void) in
-            let taskToUpdate = self.tasks[indexPath.row]
-            try! self.localRealm.write {
+            let taskToUpdate = self.searchHeritage[indexPath.row]
+            try! self.viewModel.localRealm.write {
+                if taskToUpdate.visited {
+                    self.toastMessage(message: "방문 목록에서 제거했습니다.")
+                } else {
+                    self.toastMessage(message: "방문 목록에 추가했습니다.")
+                }
                 taskToUpdate.visited = !taskToUpdate.visited
             }
             tableView.reloadData()

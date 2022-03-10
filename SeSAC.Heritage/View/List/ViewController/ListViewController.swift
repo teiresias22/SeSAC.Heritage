@@ -1,18 +1,9 @@
-// Todo
-// ViewModel 분리하기
-
 import UIKit
-import RealmSwift
 import FirebaseInstallations
 
 class ListViewController: BaseViewController {
     let mainView = ListView()
     var viewModel = ListViewModel()
-    
-    let listInformation = ListInformation()
-    let stockCodeInformation = StockCodeInformation()
-    let cityInformation = CityInformation()
-    var target: String = "StockCode"
     
     private let ListViewCellId = "ListViewCellId"
     
@@ -53,14 +44,14 @@ class ListViewController: BaseViewController {
     @objc func cityButtonClicked(){
         setButtonActive(mainView.cityButton)
         setButtonDeActive(mainView.stockCodeButton)
-        target = "City"
+        viewModel.target = "City"
         mainView.contentCollectionView.reloadData()
     }
     
     @objc func stockCodeButtonClicked(){
         setButtonActive(mainView.stockCodeButton)
         setButtonDeActive(mainView.cityButton)
-        target = "StockCode"
+        viewModel.target = "StockCode"
         mainView.contentCollectionView.reloadData()
     }
     
@@ -79,35 +70,35 @@ class ListViewController: BaseViewController {
 
 extension ListViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if target == "StockCode" {
-            return stockCodeInformation.stockCode.count
+        if viewModel.target == "StockCode" {
+            return viewModel.stockCodeInformation.stockCode.count
         }else {
-            return cityInformation.city.count
+            return viewModel.cityInformation.city.count
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let item = mainView.contentCollectionView.dequeueReusableCell(withReuseIdentifier: ListViewCellId, for: indexPath) as? ListViewCell else { return UICollectionViewCell() }
         
-        if target == "StockCode" {
+        if viewModel.target == "StockCode" {
             
-            if let url = URL(string: stockCodeInformation.stockCode[indexPath.row].image){
+            if let url = URL(string: viewModel.stockCodeInformation.stockCode[indexPath.row].image){
                 item.imageView.kf.setImage(with: url)
             } else {
                 item.imageView.image = UIImage(systemName: "star")
                 item.imageView.backgroundColor = .customYellow
             }
-            item.label.text = stockCodeInformation.stockCode[indexPath.row].text.lowercased()
+            item.label.text = viewModel.stockCodeInformation.stockCode[indexPath.row].text.lowercased()
             
-        } else if target == "City" {
+        } else if viewModel.target == "City" {
             
-            if let url = URL(string: cityInformation.city[indexPath.row].image){
+            if let url = URL(string: viewModel.cityInformation.city[indexPath.row].image){
                 item.imageView.kf.setImage(with: url)
             } else {
                 item.imageView.image = UIImage(systemName: "star")
                 item.imageView.backgroundColor = .customBlue
             }
-            item.label.text = cityInformation.city[indexPath.row].city.lowercased()
+            item.label.text = viewModel.cityInformation.city[indexPath.row].city.lowercased()
         }
         item.backgroundColor = .clear
         
@@ -115,22 +106,18 @@ extension ListViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let vc = ListTableViewController()
-        
-        if target == "StockCode" {
-            let row = stockCodeInformation.stockCode[indexPath.row]
-            vc.stockCodeData = row
+        if viewModel.target == "StockCode" {
+            viewModel.stockCodeData = viewModel.stockCodeInformation.stockCode[indexPath.row]
         } else {
-            let row = cityInformation.city[indexPath.row]
-            vc.cityData = row
+            viewModel.cityData = viewModel.cityInformation.city[indexPath.row]
         }
+        let vc = ListTableViewController()
         vc.viewModel = viewModel
-        vc.listInformation = target
-         self.navigationController?.pushViewController(vc, animated: true)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 16
+        return 8
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
