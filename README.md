@@ -34,7 +34,7 @@
 ### Firebase 연동
   * P8인증서를 활용한 Firebase 연동
   * Analytics와 Crashlytics를 활용하여 사용자의 이용 패턴을 확인 업데이트에 적극 활용
-  * Cloud Messaging을 활용한 알람 발송 환경 구축
+  * Cloud Messaging을 활용한 전송 환경 구축
 
 ### 위치정보 활용
   * CLPlacemark 활용하여 사용자의 접속 위치 확인
