@@ -27,9 +27,9 @@
 ### Update
   * 출시 이후 정기적인 업데이트 관리를 통한 리팩토링 진행 
   * 1.0.5버전 업데이트
-  ** 지도텝 진입시 사용자의 위치에 맞게 지역 필터 자동 설정
+  *** 지도텝 진입시 사용자의 위치에 맞게 지역 필터 자동 설정
   * 1.0.4 업데이트 
-  ** Storyboard를 활용한 MVC패턴 사용에서 Codebase를 활용한 MVVM패턴 사용으로 변경
+  *** Storyboard를 활용한 MVC패턴 사용에서 Codebase를 활용한 MVVM패턴 사용으로 변경
 
 ### Firebase 연동
   * P8인증서를 활용한 Firebase 연동
@@ -37,12 +37,10 @@
   * Cloud Messaging을 활용한 전송 환경 구축
 
 ### 위치정보 활용
-  * CLPlacemark 활용하여 사용자의 접속 위치 확인
-  * 접속자의 위치를 확인하고 지도의 필터링 지역 자동 설정
+  * CLPlacemark 활용하여 사용자의 접속 위치 확인하고 지도의 지역 필터링 자동 설정
 
 ### XMLParser 활용
-  * JSON형식이 아닌 XML 형식식의 데이터를 활용
-  * 
+  * XML 데이터를 Parsing하여 Realm에 저장하여 활용 
 
 ## Link
  * [앱스토어](https://apps.apple.com/kr/app/우리동네-문화유산/id1596845419)
