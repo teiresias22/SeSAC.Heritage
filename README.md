@@ -45,6 +45,6 @@
   * 
 
 ## Link
-[앱스토어](https://apps.apple.com/kr/app/우리동네-문화유산/id1596845419)
-[지원페이지](https://foamy-cloche-5c7.notion.site/1574978a39894f489ffdd4af591c9a32)
+[앱스토어](https://apps.apple.com/kr/app/우리동네-문화유산/id1596845419)  
+[지원페이지](https://foamy-cloche-5c7.notion.site/1574978a39894f489ffdd4af591c9a32)  
 [블로그](https://teiresias.tistory.com/4)
