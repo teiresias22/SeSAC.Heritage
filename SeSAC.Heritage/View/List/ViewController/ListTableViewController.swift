@@ -12,9 +12,9 @@ class ListTableViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         if viewModel?.target == "StockCode" {
-            self.title = "종류별 문화유산".localized()
+            self.title = viewModel?.stockCodeData?.text.localized()
         } else {
-            self.title = "지역별 문화유산".localized()
+            self.title = viewModel?.cityData?.city.localized()
         }
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "MapoFlowerIsland", size: 18)!]
         

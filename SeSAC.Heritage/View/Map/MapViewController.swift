@@ -273,7 +273,7 @@ extension MapViewController: MKMapViewDelegate {
         CLGeocoder().reverseGeocodeLocation(location) { (placemarks, error) in
             if let pm: CLPlacemark = placemarks?.first {
                 let address: String = "\(pm.country ?? "") \(pm.administrativeArea ?? "") \(pm.locality ?? "") \(pm.subLocality ?? "") \(pm.name ?? "")"
-                //print("address", address)
+                print("address", address)
             }
         }
         runTimeInterval = nil
