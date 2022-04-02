@@ -35,7 +35,6 @@ class FirstViewController: BaseViewController {
         if heritage == 0 {
             fetcHeritageData()
             presentNextPage()
-            //totalCnt와 맞지 않으면 행동이 필요함.
         } else {
             self.presentNextPage()
         }
@@ -80,7 +79,6 @@ class FirstViewController: BaseViewController {
 }
 
 extension FirstViewController: XMLParserDelegate {
-    
     //XMLParser가 시작 태그를 만나면 호출됨
     func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String] = [:]) {
         
