@@ -103,6 +103,7 @@ class MapViewController: BaseViewController {
             
             heritageAnnotaion.title = location.ccbaMnm1
             heritageAnnotaion.coordinate = heritageCoordinate
+            heritageAnnotaion.subtitle = location.no
             mainView.mapView.addAnnotation(heritageAnnotaion)
         }
     }
@@ -280,6 +281,9 @@ extension MapViewController: MKMapViewDelegate {
     }
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        print("title", view.annotation?.title)
+        print("subtitle", view.annotation?.subtitle)
+        print("coordinate", view.annotation?.coordinate)
         print(#function)
     }
     

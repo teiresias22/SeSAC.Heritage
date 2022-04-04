@@ -44,8 +44,7 @@ class FirstViewController: BaseViewController {
           AnalyticsParameterItemID: "id-\(title!)",
           AnalyticsParameterItemName: title!,
           AnalyticsParameterContentType: "cont",
-        ])
-        */
+        ])*/
         
         Analytics.logEvent("share_image", parameters: [
           "name": "Joon" as NSObject,
