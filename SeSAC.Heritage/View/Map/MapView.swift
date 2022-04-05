@@ -55,6 +55,33 @@ class MapView: UIView, ViewRepresentable {
         return textfield
     }()
     
+    let heritageView: UIView = {
+        let view = UIView()
+        view.layer.cornerRadius = 8
+        view.backgroundColor = .customWhite
+        
+        return view
+    }()
+    
+    let heritageTitle: UILabel = {
+        let label = UILabel()
+        label.text = "".localized()
+        label.font = .MapoFlowerIsland14
+        label.textColor = .customBlack
+        label.adjustsFontSizeToFitWidth = true
+        
+        return label
+    }()
+    
+    let heritageButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("".localized(), for: .normal)
+        button.setTitleColor(.customBlue, for: .normal)
+        button.titleLabel?.font = .MapoFlowerIsland14
+        
+        return button
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
@@ -70,6 +97,9 @@ class MapView: UIView, ViewRepresentable {
         addSubview(userLocationButton)
         addSubview(filterButton)
         addSubview(textField)
+        addSubview(heritageView)
+        heritageView.addSubview(heritageTitle)
+        heritageView.addSubview(heritageButton)
         
     }
     
@@ -95,5 +125,26 @@ class MapView: UIView, ViewRepresentable {
             make.bottom.equalToSuperview()
             make.width.height.equalTo(0)
         }
+        
+        heritageView.snp.makeConstraints { make in
+            make.trailing.leading.equalToSuperview().inset(20)
+            make.bottom.equalToSuperview().inset(40)
+            make.height.equalTo(0)
+        }
+        
+        heritageTitle.snp.makeConstraints { make in
+            make.top.equalToSuperview().inset(8)
+            make.leading.equalToSuperview().inset(8)
+            make.height.equalTo(24)
+            make.trailing.equalToSuperview().inset(96)
+        }
+        
+        heritageButton.snp.makeConstraints { make in
+            make.top.equalToSuperview().inset(8)
+            make.trailing.equalToSuperview().inset(8)
+            make.height.equalTo(24)
+            make.width.equalTo(80)
+        }
+        
     }
 }

@@ -26,6 +26,7 @@ class MapViewController: BaseViewController {
         
         mainView.userLocationButton.addTarget(self, action: #selector(myLocationClicked), for: .touchUpInside)
         mainView.filterButton.addTarget(self, action: #selector(filterButtonClicked), for: .touchUpInside)
+        mainView.heritageButton.addTarget(self, action: #selector(heritageButtonClicked), for: .touchUpInside)
     }
     
     func setMapView(){
@@ -79,9 +80,18 @@ class MapViewController: BaseViewController {
         mainView.textField.becomeFirstResponder()
     }
     
+    @objc func heritageButtonClicked() {
+        print("no", viewModel.targetHeritageNo.value)
+        setTargetHeritage()
+    }
+    
+    func setTargetHeritage(){
+        let filtered = viewModel.localRealm.objects(Heritage_List.self).filter("no=\(viewModel.targetHeritageNo.value)")
+        print("filtered",filtered)
+    }
+    
     // MARK: - Conditional code cleanup required
     func filerAnnotations(){
-        //MapPin Filter
         if viewModel.cityCode.value != "00" && viewModel.stockCode.value != 0 {
             let firstTesk =  viewModel.localRealm.objects(Heritage_List.self).filter("ccbaKdcd='\(viewModel.stockCode.value)'")
             viewModel.tasks = firstTesk.filter("ccbaCtcd='\(viewModel.cityCode.value)'")
@@ -101,8 +111,8 @@ class MapViewController: BaseViewController {
             let heritageCoordinate = CLLocationCoordinate2D(latitude: heritageLatitude, longitude: heritageLongitude)
             let heritageAnnotaion = MKPointAnnotation()
             
-            heritageAnnotaion.title = location.ccbaMnm1
             heritageAnnotaion.coordinate = heritageCoordinate
+            heritageAnnotaion.title = location.ccbaMnm1
             heritageAnnotaion.subtitle = location.no
             mainView.mapView.addAnnotation(heritageAnnotaion)
         }
@@ -281,10 +291,14 @@ extension MapViewController: MKMapViewDelegate {
     }
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        print("title", view.annotation?.title)
-        print("subtitle", view.annotation?.subtitle)
-        print("coordinate", view.annotation?.coordinate)
-        print(#function)
+        DispatchQueue.main.async {
+            self.mainView.heritageView.snp.updateConstraints { make in
+                make.height.equalTo(60)
+            }
+        }        
+        mainView.heritageTitle.text = view.annotation?.title ?? "이름을 불러올수 없습니다."
+        viewModel.targetHeritageNo.value = view.annotation?.subtitle! ?? ""
+        mainView.heritageButton.setTitle("자세히 보기", for: .normal)
     }
     
     func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
