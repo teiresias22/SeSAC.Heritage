@@ -81,13 +81,16 @@ class MapViewController: BaseViewController {
     }
     
     @objc func heritageButtonClicked() {
-        print("no", viewModel.targetHeritageNo.value)
-        setTargetHeritage()
-    }
-    
-    func setTargetHeritage(){
-        let filtered = viewModel.localRealm.objects(Heritage_List.self).filter("no=\(viewModel.targetHeritageNo.value)")
-        print("filtered",filtered)
+        //MARK: - 왜 'no'는 필터링이 안되는걸까??
+        if let filter = viewModel.tasks {
+            let filtered = filter.filter("sn = '\(viewModel.targetHeritageNo.value)'")
+            viewModel.items = filtered[0]
+            let vc = ListDetailViewController()
+            vc.viewModel = viewModel
+            self.navigationController?.pushViewController(vc, animated: true)
+        } else {
+            print("filter is nil")
+        }
     }
     
     // MARK: - Conditional code cleanup required
@@ -113,7 +116,7 @@ class MapViewController: BaseViewController {
             
             heritageAnnotaion.coordinate = heritageCoordinate
             heritageAnnotaion.title = location.ccbaMnm1
-            heritageAnnotaion.subtitle = location.no
+            heritageAnnotaion.subtitle = location.sn
             mainView.mapView.addAnnotation(heritageAnnotaion)
         }
     }
@@ -295,7 +298,7 @@ extension MapViewController: MKMapViewDelegate {
             self.mainView.heritageView.snp.updateConstraints { make in
                 make.height.equalTo(60)
             }
-        }        
+        }
         mainView.heritageTitle.text = view.annotation?.title ?? "이름을 불러올수 없습니다."
         viewModel.targetHeritageNo.value = view.annotation?.subtitle! ?? ""
         mainView.heritageButton.setTitle("자세히 보기", for: .normal)
