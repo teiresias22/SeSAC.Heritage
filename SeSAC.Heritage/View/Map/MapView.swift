@@ -23,10 +23,7 @@ class MapView: UIView, ViewRepresentable {
         let button = UIButton()
         button.setImage(UIImage(named: "street"), for: .normal)
         button.imageEdgeInsets = UIEdgeInsets(top: 12, left: 12, bottom: 12, right: 12)
-        button.contentMode = .scaleToFill
         button.setTitle("", for: .normal)
-        button.contentVerticalAlignment = .fill
-        button.contentHorizontalAlignment = .fill
         button.layer.cornerRadius = 20
         button.tintColor = .customBlack
         button.backgroundColor = .customBlue
@@ -38,10 +35,7 @@ class MapView: UIView, ViewRepresentable {
         let button = UIButton()
         button.setImage(UIImage(named: "plus"), for: .normal)
         button.imageEdgeInsets = UIEdgeInsets(top: 12, left: 12, bottom: 12, right: 12)
-        button.contentMode = .scaleToFill
         button.setTitle("", for: .normal)
-        button.contentVerticalAlignment = .fill
-        button.contentHorizontalAlignment = .fill
         button.layer.cornerRadius = 20
         button.tintColor = .customBlack
         button.backgroundColor = .customYellow
@@ -58,7 +52,7 @@ class MapView: UIView, ViewRepresentable {
     let heritageView: UIView = {
         let view = UIView()
         view.layer.cornerRadius = 8
-        view.backgroundColor = .customWhite
+        view.backgroundColor = .customGray
         
         return view
     }()

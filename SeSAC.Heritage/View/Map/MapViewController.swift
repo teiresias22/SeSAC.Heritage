@@ -9,7 +9,7 @@ class MapViewController: BaseViewController {
     
     var locationManager = CLLocationManager()
     var runTimeInterval: TimeInterval?
-    let mTimer: Selector = #selector(Tick_TimeConsole)
+    let mTimer: Selector = #selector(checkMapGeocoder)
     
     override func loadView() {
         super.loadView()
@@ -36,7 +36,7 @@ class MapViewController: BaseViewController {
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
         mainView.mapView.showsUserLocation = true
-        Timer.scheduledTimer(timeInterval: 0.25, target: self, selector: mTimer, userInfo: nil, repeats: true)
+        Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: mTimer, userInfo: nil, repeats: true)
     }
     
     func createPickerView() {
@@ -58,11 +58,12 @@ class MapViewController: BaseViewController {
         mainView.textField.inputView = pickerView
         mainView.textField.inputAccessoryView = toolBar
     }
-     
+    
     @objc func onPickDone(_ sender: UIDatePicker) {
         filerAnnotations()
         mainView.textField.resignFirstResponder()
     }
+    
     @objc func onPickCancel() {
         mainView.textField.resignFirstResponder()
     }
@@ -102,6 +103,8 @@ class MapViewController: BaseViewController {
             viewModel.tasks = viewModel.localRealm.objects(Heritage_List.self).filter("ccbaKdcd='\(viewModel.stockCode.value)'")
         } else if viewModel.cityCode.value != "00" && viewModel.stockCode.value == 0 {
             viewModel.tasks = viewModel.localRealm.objects(Heritage_List.self).filter("ccbaCtcd='\(viewModel.cityCode.value)'")
+        } else {
+            viewModel.tasks = viewModel.localRealm.objects(Heritage_List.self)
         }
         
         let annotiations = mainView.mapView.annotations
@@ -276,10 +279,10 @@ extension MapViewController: MKMapViewDelegate {
         runTimeInterval = Date().timeIntervalSinceReferenceDate
     }
     
-    @objc func Tick_TimeConsole() {
+    @objc func checkMapGeocoder() {
         guard let timeInterval = runTimeInterval else { return }
         let interval = Date().timeIntervalSinceReferenceDate - timeInterval
-        if interval < 0.25 { return }
+        if interval < 0.5 { return }
         let coordinate = mainView.mapView.centerCoordinate
         let location = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
 
@@ -288,6 +291,8 @@ extension MapViewController: MKMapViewDelegate {
             if let pm: CLPlacemark = placemarks?.first {
                 let address: String = "\(pm.country ?? "") \(pm.administrativeArea ?? "") \(pm.locality ?? "") \(pm.subLocality ?? "") \(pm.name ?? "")"
                 print("address", address)
+            } else {
+                print("checkMapGeocoder, Error")
             }
         }
         runTimeInterval = nil
@@ -299,15 +304,18 @@ extension MapViewController: MKMapViewDelegate {
                 make.height.equalTo(60)
             }
         }
-        mainView.heritageTitle.text = view.annotation?.title ?? "이름을 불러올수 없습니다."
-        viewModel.targetHeritageNo.value = view.annotation?.subtitle! ?? ""
+        if let title = view.annotation?.title {
+            mainView.heritageTitle.text = title
+        }
+        if let subTitle = view.annotation?.subtitle {
+            viewModel.targetHeritageNo.value = subTitle!
+        }
         mainView.heritageButton.setTitle("자세히 보기", for: .normal)
     }
     
     func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
         print(#function)
     }
-    
 }
 
 // MARK: PickerViewSetting
