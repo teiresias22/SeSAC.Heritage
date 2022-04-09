@@ -9,7 +9,6 @@ import UIKit
 import SnapKit
 
 class ListDetailView: UIView, ViewRepresentable {
-    
     let scrollView: UIScrollView = {
         let view = UIScrollView()
         

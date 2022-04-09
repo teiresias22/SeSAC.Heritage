@@ -122,7 +122,7 @@ class MapView: UIView, ViewRepresentable {
         
         heritageView.snp.makeConstraints { make in
             make.trailing.leading.equalToSuperview().inset(20)
-            make.bottom.equalToSuperview().inset(40)
+            make.bottom.equalTo(mapView.snp.bottom).inset(70)
             make.height.equalTo(0)
         }
         

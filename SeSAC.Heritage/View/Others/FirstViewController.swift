@@ -129,12 +129,9 @@ extension FirstViewController: XMLParserDelegate {
         var ccbaMnm2: String = "" //문화재명(영문)
         var ccbaCtcdNm: String = "" //시도명
         var ccsiName: String = "" //시군구명
-        var ccbaAdmin : String = "" //관리자
         var ccbaKdcd: String = "" //종목코드(필수)
         var ccbaCtcd: String = "" //시도코드(필수)
         var ccbaAsno: String = "" //지정번호(필수)
-        var ccbaCncl: String = "" //지정해제여부
-        var ccbaCpno: String = "" //문화재연계번호
         var longitude: String = "" //경도
         var latitude: String = "" //위도
         
@@ -156,25 +153,20 @@ extension FirstViewController: XMLParserDelegate {
                     ccbaCtcdNm = value
                 } else if key == "ccsiName" {
                     ccsiName = value
-                } else if key == "ccbaAdmin" {
-                    ccbaAdmin = value
                 } else if key == "ccbaKdcd" {
                     ccbaKdcd = value
                 } else if key == "ccbaCtcd" {
                     ccbaCtcd = value
                 } else if key == "ccbaAsno" {
                     ccbaAsno = value
-                } else if key == "ccbaCncl" {
-                    ccbaCncl = value
-                } else if key == "ccbaCpno" {
-                    ccbaCpno = value
                 } else if key == "longitude" {
                     longitude = value
                 } else if key == "latitude" {
                     latitude = value
                 }
             }
-            let heritage = Heritage_List(sn: sn, no: no, ccmaName: ccmaName, crltsnoNm: crltsnoNm, ccbaMnm1: ccbaMnm1, ccbaMnm2: ccbaMnm2, ccbaCtcdNm: ccbaCtcdNm, ccsiName: ccsiName, ccbaAdmin: ccbaAdmin, ccbaKdcd: ccbaKdcd, ccbaCtcd: ccbaCtcd, ccbaAsno: ccbaAsno, ccbaCncl: ccbaCncl, ccbaCpno: ccbaCpno, longitude: longitude, latitude: latitude)
+            let heritage = Heritage_List(sn: sn, no: no, ccmaName: ccmaName, crltsnoNm: crltsnoNm, ccbaMnm1: ccbaMnm1, ccbaMnm2: ccbaMnm2, ccbaCtcdNm: ccbaCtcdNm, ccsiName: ccsiName, ccbaKdcd: ccbaKdcd, ccbaCtcd: ccbaCtcd, ccbaAsno: ccbaAsno, longitude: longitude, latitude: latitude)
+            
             try! localRealm.write {
                 localRealm.add(heritage)
             }
