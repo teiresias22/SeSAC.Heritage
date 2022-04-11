@@ -7,7 +7,9 @@ class ListTableViewCell: UITableViewCell {
     let contentViewCell: UIView = {
         let view = UIView()
         view.layer.cornerRadius = 8
-        view.backgroundColor = .customYellow
+        view.layer.borderColor = UIColor.customGray?.cgColor
+        view.layer.borderWidth = 1
+        view.backgroundColor = .customWhite
         
         return view
     }()
