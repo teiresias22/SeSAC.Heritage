@@ -39,18 +39,6 @@ class FirstViewController: BaseViewController {
             self.presentNextPage()
         }
         
-        /*
-        Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
-          AnalyticsParameterItemID: "id-\(title!)",
-          AnalyticsParameterItemName: title!,
-          AnalyticsParameterContentType: "cont",
-        ])*/
-        
-        Analytics.logEvent("share_image", parameters: [
-          "name": "Joon" as NSObject,
-          "full_text": "Test" as NSObject,
-        ])
-        
         //사용자의 토큰값 삭제
         Installations.installations().delete { error in
           if let error = error {
