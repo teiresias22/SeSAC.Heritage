@@ -28,8 +28,8 @@ struct CityInformation {
         City(code: "37", city: "경상북도", image: "http://www.cha.go.kr/unisearch/images/national_treasure/1612612.jpg", category: "ccbaCtcd"),
         City(code: "38", city: "경상남도", image: "http://www.cha.go.kr/unisearch/images/national_treasure/1612968.jpg", category: "ccbaCtcd"),
         City(code: "50", city: "제주도", image: "http://www.cha.go.kr/unisearch/images/treasure/1623059.jpg", category: "ccbaCtcd"),
-        City(code: "ZZ", city: "기타", image: "http://www.cha.go.kr/unisearch/images/national_treasure/2685609.jpg", category: "ccbaCtcd"),
-        City(code: "00", city: "모두", image: "http://www.cha.go.kr/unisearch/images/national_treasure/2685609.jpg", category: "ccbaCtcd")
+        City(code: "ZZ", city: "기타", image: "https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fcrf4Hm%2FbtrzAVSgioA%2FGLJPKJflehuBSCysQXMxNk%2Fimg.jpg" , category: "ccbaCtcd"),
+        City(code: "00", city: "모두", image: "https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Ftgcyi%2FbtrzDwc6ql1%2FOXpDK4XMX2rBidgvX8kufk%2Fimg.jpg", category: "ccbaCtcd")
         
     ]
 

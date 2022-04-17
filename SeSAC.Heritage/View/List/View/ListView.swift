@@ -73,7 +73,7 @@ class ListView: UIView, ViewRepresentable {
     
     func setupConstraints() {
         topStatickView.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(100)
+            make.top.equalToSuperview().inset(90)
             make.leading.trailing.equalToSuperview().inset(16)
             make.height.equalTo(48)
         }

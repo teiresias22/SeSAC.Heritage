@@ -22,12 +22,8 @@ class ListMapView: UIView, ViewRepresentable {
     
     let heritageLocationButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(named: "landmark"), for: .normal)
-        button.imageEdgeInsets = UIEdgeInsets(top: 12, left: 12, bottom: 12, right: 12)
-        button.contentMode = .scaleToFill
+        button.setImage(UIImage(systemName: "building.columns.fill"), for: .normal)
         button.setTitle("", for: .normal)
-        button.contentVerticalAlignment = .fill
-        button.contentHorizontalAlignment = .fill
         button.layer.cornerRadius = 20
         button.tintColor = .customBlack
         button.backgroundColor = .customYellow
@@ -37,12 +33,8 @@ class ListMapView: UIView, ViewRepresentable {
     
     let userLocationButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(named: "street"), for: .normal)
-        button.imageEdgeInsets = UIEdgeInsets(top: 12, left: 12, bottom: 12, right: 12)
-        button.contentMode = .scaleToFill
+        button.setImage(UIImage(systemName: "location.fill"), for: .normal)
         button.setTitle("", for: .normal)
-        button.contentVerticalAlignment = .fill
-        button.contentHorizontalAlignment = .fill
         button.layer.cornerRadius = 20
         button.tintColor = .customBlack
         button.backgroundColor = .customBlue

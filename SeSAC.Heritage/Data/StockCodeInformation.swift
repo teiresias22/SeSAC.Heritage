@@ -27,7 +27,7 @@ struct StockCodeInformation {
         StockCode(code: 31, text: "문화재자료", image: "http://www.cha.go.kr/unisearch/images/cultural_material/1659294.jpg", category: "ccbaKdcd"),
         StockCode(code: 79, text: "국가등록문화재", image: "http://www.cha.go.kr/unisearch/images/register/1666866.jpg", category: "ccbaKdcd"),
         StockCode(code: 80, text: "이북5도 무형문화재", image: "http://www.cha.go.kr/unisearch/images/nondesignated_cult_prop/2716897.jpg", category: "ccbaKdcd"),
-        StockCode(code: 00, text: "모두", image: "http://www.cha.go.kr/unisearch/images/national_treasure/2685609.jpg", category: "ccbaKdcd")
+        StockCode(code: 00, text: "모두", image: "https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Ftgcyi%2FbtrzDwc6ql1%2FOXpDK4XMX2rBidgvX8kufk%2Fimg.jpg", category: "ccbaKdcd")
         
     ]
 

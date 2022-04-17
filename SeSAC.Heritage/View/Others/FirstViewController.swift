@@ -30,9 +30,7 @@ class FirstViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let heritage = localRealm.objects(Heritage_List.self).count
-        
-        if heritage == 0 {
+        if localRealm.objects(Heritage_List.self).count == 0 {
             fetcHeritageData()
             presentNextPage()
         } else {

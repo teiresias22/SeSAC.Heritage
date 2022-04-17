@@ -21,8 +21,7 @@ class MapView: UIView, ViewRepresentable {
     
     let userLocationButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(named: "street"), for: .normal)
-        button.imageEdgeInsets = UIEdgeInsets(top: 12, left: 12, bottom: 12, right: 12)
+        button.setImage(UIImage(systemName: "location.fill"), for: .normal)
         button.setTitle("", for: .normal)
         button.layer.cornerRadius = 20
         button.tintColor = .customBlack
@@ -33,8 +32,7 @@ class MapView: UIView, ViewRepresentable {
     
     let filterButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(named: "plus"), for: .normal)
-        button.imageEdgeInsets = UIEdgeInsets(top: 12, left: 12, bottom: 12, right: 12)
+        button.setImage(UIImage(systemName: "line.3.horizontal.decrease"), for: .normal)
         button.setTitle("", for: .normal)
         button.layer.cornerRadius = 20
         button.tintColor = .customBlack

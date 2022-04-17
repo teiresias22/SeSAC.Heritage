@@ -26,3 +26,21 @@ enum CityCase: String {
     case gyeongnam = "경상남도"
     case jeju = "제주도"
 }
+
+enum XMLKey: String {
+    case sn = "sn"
+    case no = "no"
+    case ccmaName = "ccmaName"
+    case crltsnoNm = "crltsnoNm"
+    case ccbaMnm1 = "ccbaMnm1"
+    case ccbaMnm2 = "ccbaMnm2"
+    case ccbaCtcdNm = "ccbaCtcdNm"
+    case ccsiName = "ccsiName"
+    case ccbaKdcd = "ccbaKdcd"
+    case ccbaCtcd = "ccbaCtcd"
+    case ccbaAsno = "ccbaAsno"
+    case longitude = "longitude"
+    case latitude = "latitude"
+    
+    
+}
