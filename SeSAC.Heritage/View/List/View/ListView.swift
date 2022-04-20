@@ -26,6 +26,9 @@ class ListView: UIView, ViewRepresentable {
         button.setTitleColor(.customWhite, for: .normal)
         button.titleLabel?.font = .MapoFlowerIsland16
         button.backgroundColor = .customBlack
+        button.layer.cornerRadius = 24
+        button.layer.borderWidth = 1
+        button.layer.borderColor = UIColor.customGray?.cgColor
         
         return button
     }()

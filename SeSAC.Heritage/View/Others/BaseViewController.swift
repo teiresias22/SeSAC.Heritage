@@ -30,7 +30,7 @@ class BaseViewController: UIViewController {
     //토스트 메세지 출력
     func toastMessage(message: String, font: UIFont = .Montserrat14 ?? UIFont.systemFont(ofSize: 14.0)) {
         let toastLabel = UILabel(frame: CGRect(x: self.view.frame.size.width/2-150, y: self.view.frame.size.height-150, width: 300, height: 35))
-        toastLabel.backgroundColor = UIColor.black.withAlphaComponent(0.6)
+        toastLabel.backgroundColor = .customGray
         toastLabel.textColor = .customWhite
         toastLabel.font = font
         toastLabel.textAlignment = .center

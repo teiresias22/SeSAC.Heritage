@@ -29,10 +29,8 @@ class ListDetailView: UIView, ViewRepresentable {
     
     let heritageStackView: UIStackView = {
         let view = UIStackView()
-        view.translatesAutoresizingMaskIntoConstraints = false
         view.axis = .horizontal
         view.spacing = 8
-        view.alignment = .fill
         view.distribution = .fillEqually
         
         return view
@@ -67,18 +65,17 @@ class ListDetailView: UIView, ViewRepresentable {
     
     let buttonStackView: UIStackView = {
         let view = UIStackView()
-        view.translatesAutoresizingMaskIntoConstraints = false
         view.axis = .horizontal
         view.spacing = 80
-        view.alignment = .fill
         view.distribution = .fillEqually
+        view.backgroundColor = .customWhite
         
         return view
     }()
     
     let visitedView: UIView = {
         let view = UIView()
-        view.backgroundColor = .clear
+        view.backgroundColor = .customWhite
         
         return view
     }()
@@ -87,9 +84,7 @@ class ListDetailView: UIView, ViewRepresentable {
         let button = UIButton.init(type: .system)
         button.setImage(UIImage(named: "landmark"), for: .normal)
         button.imageEdgeInsets = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
-        button.tintColor = .customBlack
-        button.contentVerticalAlignment = .center
-        button.contentHorizontalAlignment = .leading
+        button.tintColor = .disabledButton
         
         return button
     }()
@@ -99,6 +94,8 @@ class ListDetailView: UIView, ViewRepresentable {
         label.text = "방문".localized()
         label.textAlignment = .center
         label.font = .MapoFlowerIsland14
+        label.sizeToFit()
+        label.textColor = .customBlack
         
         return label
     }()
@@ -114,10 +111,7 @@ class ListDetailView: UIView, ViewRepresentable {
         let button = UIButton.init(type: .system)
         button.setImage(UIImage(named: "plus"), for: .normal)
         button.imageEdgeInsets = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
-        button.contentMode = .scaleToFill
-        button.contentVerticalAlignment = .center
-        button.contentHorizontalAlignment = .leading
-        button.tintColor = .customBlack
+        button.tintColor = .disabledButton
         
         return button
     }()
@@ -127,25 +121,18 @@ class ListDetailView: UIView, ViewRepresentable {
         label.text = "즐겨찾기".localized()
         label.textAlignment = .center
         label.font = .MapoFlowerIsland14
+        label.textColor = .customBlack
         
         return label
     }()
     
-    let mapView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .clear
-        
-        return view
-    }()
+    let mapView = UIView()
     
     let mapButton: UIButton = {
         let button = UIButton.init(type: .system)
         button.setImage(UIImage(named: "hiking"), for: .normal)
         button.imageEdgeInsets = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
-        button.contentMode = .scaleToFill
-        button.contentVerticalAlignment = .center
-        button.contentHorizontalAlignment = .leading
-        button.tintColor = .customBlack
+        button.tintColor = .mapButtonActivate
         
         return button
     }()
@@ -155,6 +142,7 @@ class ListDetailView: UIView, ViewRepresentable {
         label.text = "지도".localized()
         label.textAlignment = .center
         label.font = .MapoFlowerIsland14
+        label.textColor = .customBlack
         
         return label
     }()
@@ -220,13 +208,13 @@ class ListDetailView: UIView, ViewRepresentable {
         heritageTitleLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().inset(16)
             make.leading.trailing.equalToSuperview().inset(16)
-            make.height.equalTo(32)
+            make.height.equalTo(24)
         }
         
         heritageStackView.snp.makeConstraints { make in
             make.top.equalTo(heritageTitleLabel.snp.bottom).offset(8)
             make.leading.trailing.equalToSuperview().inset(16)
-            make.height.equalTo(24)
+            make.height.equalTo(16)
         }
         
         detailImage.snp.makeConstraints { make in
@@ -236,7 +224,7 @@ class ListDetailView: UIView, ViewRepresentable {
         }
         
         buttonStackView.snp.makeConstraints { make in
-            make.top.equalTo(detailImage.snp.bottom).offset(20)
+            make.top.equalTo(detailImage.snp.bottom).offset(8)
             make.centerX.equalToSuperview()
             make.width.equalTo(280)
             make.height.equalTo(64)
@@ -276,7 +264,7 @@ class ListDetailView: UIView, ViewRepresentable {
         }
         
         heritageContentText.snp.makeConstraints { make in
-            make.top.equalTo(buttonStackView.snp.bottom).offset(20)
+            make.top.equalTo(buttonStackView.snp.bottom).offset(8)
             make.leading.trailing.bottom.equalToSuperview()
         }
         

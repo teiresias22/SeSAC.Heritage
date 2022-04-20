@@ -25,8 +25,8 @@ class ListDetailViewController: BaseViewController {
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "MapoFlowerIsland", size: 18)!]
         
         fetcHeritageData()
+        activateButtonCheck()
         setTextView()
-        checkButtonActive()
         
         mainView.visitedButton.addTarget(self, action: #selector(visitedButtonClicked), for: .touchUpInside)
         mainView.wannaVistButton.addTarget(self, action: #selector(wannaVisitButtonClicked), for: .touchUpInside)
@@ -35,8 +35,17 @@ class ListDetailViewController: BaseViewController {
     
     func setTextView() {
         mainView.heritageContentText.delegate = self
-        
         textViewDidChange(mainView.heritageContentText)
+    }
+    
+    func activateButtonCheck() {
+        if viewModel!.items.visited {
+            mainView.visitedButton.tintColor = .customBlue
+        }
+        
+        if viewModel!.items.wantvisit {
+            mainView.wannaVistButton.tintColor = .customYellow
+        }
     }
     
     func fetcHeritageData() {
@@ -48,25 +57,15 @@ class ListDetailViewController: BaseViewController {
         parser?.parse()
     }
     
-    func checkButtonActive(){
-        if viewModel!.items.visited {
-            mainView.visitedButton.tintColor = .customBlue
-        }
-        
-        if viewModel!.items.wantvisit {
-            mainView.wannaVistButton.tintColor = .customYellow
-        }
-    }
-    
     @objc func visitedButtonClicked() {
         try! viewModel!.localRealm.write{
             if viewModel!.items.visited {
                 viewModel!.items.visited = false
-                mainView.visitedButton.tintColor = .customBlack
+                mainView.visitedButton.tintColor = .disabledButton
                 toastMessage(message: "방문 목록에서 제거했습니다.")
             } else {
                 viewModel!.items.visited = true
-                mainView.visitedButton.tintColor = .customBlue
+                mainView.visitedButton.tintColor = .visitButtonActivate
                 toastMessage(message: "방문 목록에 추가했습니다.")
             }
         }
@@ -76,11 +75,11 @@ class ListDetailViewController: BaseViewController {
         try! viewModel!.localRealm.write{
             if viewModel!.items.wantvisit {
                 viewModel!.items.wantvisit = false
-                mainView.wannaVistButton.tintColor = .customBlack
+                mainView.wannaVistButton.tintColor = .disabledButton
                 toastMessage(message: "즐겨찾기 목록에서 제거했습니다.")
             } else {
                 viewModel!.items.wantvisit = true
-                mainView.wannaVistButton.tintColor = .customYellow
+                mainView.wannaVistButton.tintColor = .wantVisitButtonActivate
                 toastMessage(message: "즐겨찾기 목록에 추가했습니다.")
             }
         }

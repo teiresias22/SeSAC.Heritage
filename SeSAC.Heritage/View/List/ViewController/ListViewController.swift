@@ -58,12 +58,18 @@ class ListViewController: BaseViewController {
     func setButtonActive(_ target: UIButton){
         target.titleLabel?.font = .MapoFlowerIsland16
         target.setTitleColor(.customWhite, for: .normal)
+        target.layer.cornerRadius = 24
+        target.layer.borderWidth = 1
+        target.layer.borderColor = UIColor.customGray?.cgColor
         target.backgroundColor = .customBlack
     }
     
     func setButtonDeActive(_ target: UIButton){
         target.titleLabel?.font = .MapoFlowerIsland14
         target.setTitleColor(.customBlack, for: .normal)
+        target.layer.cornerRadius = 0
+        target.layer.borderWidth = 0
+        target.layer.borderColor = UIColor.customWhite?.cgColor
         target.backgroundColor = .customWhite
     }
 }
