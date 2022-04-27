@@ -2,8 +2,8 @@ import UIKit
 import FirebaseInstallations
 
 class ListViewController: BaseViewController {
-    let mainView = ListView()
-    var viewModel = ListViewModel()
+    private let mainView = ListView()
+    private var viewModel = ListViewModel()
     
     private let ListViewCellId = "ListViewCellId"
     
@@ -34,7 +34,7 @@ class ListViewController: BaseViewController {
         }
     }
     
-    func setCollectionView(){
+    private func setCollectionView(){
         mainView.contentCollectionView.delegate = self
         mainView.contentCollectionView.dataSource = self
         
@@ -55,7 +55,7 @@ class ListViewController: BaseViewController {
         mainView.contentCollectionView.reloadData()
     }
     
-    func setButtonActive(_ target: UIButton){
+    private func setButtonActive(_ target: UIButton){
         target.titleLabel?.font = .MapoFlowerIsland16
         target.setTitleColor(.customWhite, for: .normal)
         target.layer.cornerRadius = 24
@@ -64,7 +64,7 @@ class ListViewController: BaseViewController {
         target.backgroundColor = .customBlack
     }
     
-    func setButtonDeActive(_ target: UIButton){
+    private func setButtonDeActive(_ target: UIButton){
         target.titleLabel?.font = .MapoFlowerIsland14
         target.setTitleColor(.customBlack, for: .normal)
         target.layer.cornerRadius = 0
