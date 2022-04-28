@@ -1,8 +1,8 @@
 import UIKit
 
 class ListTableViewController: BaseViewController {
-    let mainView = ListTableView()
-    var viewModel: ListViewModel?
+    private let mainView = ListTableView()
+    private var viewModel: ListViewModel?
     
     override func loadView() {
         super.loadView()
@@ -21,7 +21,7 @@ class ListTableViewController: BaseViewController {
         setupView()
     }
     
-    func setupView() {
+    private func setupView() {
         mainView.listTableView.delegate = self
         mainView.listTableView.dataSource = self
         mainView.listTableView.register(ListTableViewCell.self, forCellReuseIdentifier: ListTableViewCell.identifier)
@@ -30,7 +30,6 @@ class ListTableViewController: BaseViewController {
 }
 
 extension ListTableViewController: UITableViewDelegate, UITableViewDataSource {
-        
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if viewModel?.target == "StockCode" {
