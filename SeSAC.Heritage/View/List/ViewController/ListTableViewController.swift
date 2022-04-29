@@ -1,8 +1,8 @@
 import UIKit
 
 class ListTableViewController: BaseViewController {
-    private let mainView = ListTableView()
-    private var viewModel: ListViewModel?
+    let mainView = ListTableView()
+    var viewModel: ListViewModel?
     
     override func loadView() {
         super.loadView()

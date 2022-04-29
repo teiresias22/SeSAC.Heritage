@@ -2,8 +2,8 @@ import UIKit
 import FirebaseInstallations
 
 class ListViewController: BaseViewController {
-    private let mainView = ListView()
-    private var viewModel = ListViewModel()
+    let mainView = ListView()
+    var viewModel = ListViewModel()
     
     private let ListViewCellId = "ListViewCellId"
     

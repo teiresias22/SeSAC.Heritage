@@ -74,7 +74,6 @@ extension FirstViewController: XMLParserDelegate {
     
     // 태그의 Data가 String으로 들어옴
     func parser(_ parser: XMLParser, foundCharacters string: String) {
-        
         if self.key != nil {
             if self.key == "sn" {
                 self.items.append([key: string])
