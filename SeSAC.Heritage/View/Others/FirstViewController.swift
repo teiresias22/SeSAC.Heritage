@@ -101,7 +101,9 @@ extension FirstViewController: XMLParserDelegate {
     
     //XMLParser가 종료되면 호출됨
     func parserDidEndDocument(_ parser: XMLParser) {
-        saveRealm()
+        DispatchQueue.global().async {
+            self.saveRealm()
+        }
     }
     
     //items의 값을 Realm에 저장함

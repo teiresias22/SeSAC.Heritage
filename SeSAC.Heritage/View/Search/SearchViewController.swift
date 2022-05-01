@@ -41,7 +41,7 @@ class SearchViewController: BaseViewController {
     
     func setSearchBar() {
         searchController = UISearchController(searchResultsController: nil)
-        searchController.searchBar.placeholder = "숭례문"
+        searchController.searchBar.placeholder = "문화유산 이름을 입력해주세요."
         searchController.hidesNavigationBarDuringPresentation = false
         searchController.searchResultsUpdater = self
         
