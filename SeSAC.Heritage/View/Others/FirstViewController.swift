@@ -101,7 +101,7 @@ extension FirstViewController: XMLParserDelegate {
     
     //XMLParser가 종료되면 호출됨
     func parserDidEndDocument(_ parser: XMLParser) {
-        DispatchQueue.global().async {
+        DispatchQueue(label: "com.SSAC.SeSAC-Heritage").sync {
             self.saveRealm()
         }
     }
